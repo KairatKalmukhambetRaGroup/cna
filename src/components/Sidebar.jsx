@@ -1,0 +1,32 @@
+import '@/styles/sidebar.scss';
+
+const Sidebar = () => {
+    return (
+        <div className="sidebar">
+            <div className="content">
+                <div className="banner large">
+                    <div className="text">
+                        <div className="medium-24-28 text-black">Названия Сайта</div>
+                        <div className="medium-16-20 text-black">Сайт объявлений недвижимости</div>
+                    </div>
+                    <div className="action">
+                        <a href="" className='btn'><i></i> +7 705 562 1546</a>            
+                        <div className="regular-14-16">Подать объявление</div>             
+                    </div>
+                </div>
+                <div className="banner small">
+                    <div className="text">
+                        <div className="medium-24-28 text-black">Названия Сайта</div>
+                        <div className="medium-16-20 text-black">Сайт объявлений недвижимости</div>
+                    </div>
+                    <div className="action">
+                        <a href="" className='btn'><i></i> +7 705 562 1546</a>            
+                        <div className="regular-14-16">Подать объявление</div>             
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default Sidebar;

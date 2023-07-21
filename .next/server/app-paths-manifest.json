@@ -1,0 +1,17 @@
+{
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/(client)/page": "app/(client)/page.js",
+  "/api/housings/route": "app/api/housings/route.js",
+  "/api/posts/route": "app/api/posts/route.js",
+  "/api/login/route": "app/api/login/route.js",
+  "/api/users/route": "app/api/users/route.js",
+  "/api/regions/route": "app/api/regions/route.js",
+  "/(client)/posts/page": "app/(client)/posts/page.js",
+  "/(admin)/admin/page": "app/(admin)/admin/page.js",
+  "/api/posts/[id]/route": "app/api/posts/[id]/route.js",
+  "/(admin)/admin/regions/page": "app/(admin)/admin/regions/page.js",
+  "/(admin)/admin/posts/page": "app/(admin)/admin/posts/page.js",
+  "/(client)/posts/[id]/page": "app/(client)/posts/[id]/page.js",
+  "/(admin)/admin/posts/new/page": "app/(admin)/admin/posts/new/page.js",
+  "/(admin)/admin/posts/[id]/page": "app/(admin)/admin/posts/[id]/page.js"
+}

@@ -1,0 +1,31 @@
+@use '../variables' as v;
+@import '../adaptive';
+
+#sidebar{
+    width: 300px;
+    min-width: 300px;
+    background: v.$dark_blue;
+    display: flex;
+    flex-direction: column;
+    padding: 24px;
+    gap: 24px;
+    justify-content: space-between;
+    nav{
+        display: flex;
+        flex-direction: column;
+        padding: 0;
+        margin: 0;
+        gap: 16px;
+        width: 100%;
+        a{
+            width: 100%;
+            padding: 8px 0;
+            border-bottom: 1px solid v.$light_grey;
+            text-decoration: none;
+            color: v.$white;
+        }
+    }
+    .logout{
+        color: v.$light_grey;
+    }
+}

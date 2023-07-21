@@ -1,0 +1,485 @@
+@use './variables' as v;
+@import './adaptive';
+
+.input{
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    color: v.$black;
+    input{
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 16px;
+        color: v.$black;
+    }
+    &.select{
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        .select{
+            width: 140px;
+            position: relative;
+            cursor: pointer;
+            .selected{
+                width: 100%;
+                padding: 4px 16px;
+                height: 30px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                .val{
+                    overflow: hidden;
+                    white-space: nowrap;
+                }
+        
+                background: v.$white;
+                border: .5px solid v.$light_grey;
+                border-radius: 8px;
+                i{
+                    content: url('../assets/svg/arrow-down.svg');
+                }
+            }
+            .options{
+                display: none;
+                &.active{
+                    display: flex;
+                }
+                flex-direction: column;
+                position: absolute;
+                min-width: 100%;
+                top: 100%;
+                z-index: 100;
+
+                background: v.$white;
+                border: .5px solid v.$light_grey;
+                border-radius: 8px;
+        
+                .option{
+                    height: 30px;
+                    white-space: nowrap;
+                    padding: 4px 16px;
+                    display: flex;
+                    align-items: center;
+    
+                    &.active, &:hover{
+                        background-color: rgba($color: v.$light_grey, $alpha: .6);
+                    }
+                }
+            }
+        }
+
+        &.labeled{
+            justify-content: space-between;
+            width: 100%;
+            label{
+                width: 160px;
+                text-align: left;
+            }
+            .select{
+                width: 160px;
+            }
+        }
+    }
+    &.multiselect{
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        .select{
+            width: 140px;
+            position: relative;
+            cursor: pointer;
+            .selected{
+                width: 100%;
+                padding: 4px 16px;
+                height: 30px;
+                gap: 4px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                
+                
+                background: v.$white;
+                border: .5px solid v.$light_grey;
+                border-radius: 8px;
+                .val{
+                    overflow: hidden;
+                    white-space: nowrap;
+                }
+                i{
+                    content: url('../assets/svg/arrow-down.svg');
+                }
+            }
+            .options{
+                display: none;
+                &.active{
+                    display: flex;
+                }
+                flex-direction: column;
+                position: absolute;
+                min-width: 100%;
+                top: 100%;
+                right: 0;
+                z-index: 100;
+
+                background: v.$white;
+                border: .5px solid v.$light_grey;
+                border-radius: 8px;
+        
+                .option{
+                    height: 30px;
+                    padding: 4px 16px;
+                    display: flex;
+                    align-items: center;
+                    gap: 4px;
+                    white-space: nowrap;
+
+                    .checkbox{
+                        width: 16px;
+                        height: 16px;
+                        content: url('../assets/svg/square-regular.svg');
+                    }
+                    &.active{
+                        .checkbox{
+                            content: url('../assets/svg/square-check-solid.svg');
+                        }
+                        background-color: rgba($color: v.$light_grey, $alpha: .4);
+                    }
+                    &:hover{
+                        background-color: rgba($color: v.$light_grey, $alpha: .4);
+                    }
+                }
+            }
+        }
+
+        &.labeled{
+            
+            justify-content: space-between;
+            width: 100%;
+            label{
+                width: 160px;
+                // text-align: right;
+                text-align: left;
+            }
+            .select{
+                width: 160px;
+            }
+        }
+    }
+    
+    &.multinumber{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 8px;
+        
+        .numbers{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            background: v.$white;
+            overflow: hidden;
+            border-radius: 8px;
+            height: 30px;
+            border: .5px solid v.$light_grey;
+            .number{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                cursor: pointer;
+
+                height: 100%;
+                width: 30px;
+                border-right: .5px solid v.$light_grey;
+                &.active, &:hover{
+                    background: rgba($color: v.$light_grey, $alpha: .6);   
+                }
+            }
+        }
+    }
+    &.number-range{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 8px;
+        input{
+            width: 100px;
+            height: 30px;
+            padding: 4px;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            background: v.$white;
+            border: .5px solid v.$light_grey;
+            border-radius: 8px;
+        }
+        .hl{
+            height: 1px;
+            width: 10px;
+            background: v.$black;
+        }
+
+        &.labeled{
+            width: 100%;
+            label{
+                width: 160px;
+                text-align: left;
+                margin-right: auto;
+                &.last{
+                    margin-right: 0;
+                    width: auto;
+                    height: 100%;
+                    text-align: left;
+                }
+            }
+            input{
+                width: 60px;
+            }
+        }
+    }
+
+    @include _lg{
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 16px;
+        color: v.$black;
+        input{
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 16px;
+            color: v.$black;
+        }
+        &.select{
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            .select{
+                width: 140px;
+                position: relative;
+                cursor: pointer;
+                .selected{
+                    width: 100%;
+                    padding: 4px 16px;
+                    height: 30px;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    .val{
+                        overflow: hidden;
+                        white-space: nowrap;
+                    }
+            
+                    background: v.$white;
+                    border: .5px solid v.$light_grey;
+                    border-radius: 8px;
+                    i{
+                        content: url('../assets/svg/arrow-down.svg');
+                    }
+                }
+                .options{
+                    display: none;
+                    &.active{
+                        display: flex;
+                    }
+                    flex-direction: column;
+                    position: absolute;
+                    min-width: 100%;
+                    top: 100%;
+                    z-index: 100;
+    
+                    background: v.$white;
+                    border: .5px solid v.$light_grey;
+                    border-radius: 8px;
+            
+                    .option{
+                        height: 30px;
+                        white-space: nowrap;
+                        padding: 4px 16px;
+                        display: flex;
+                        align-items: center;
+        
+                        &.active, &:hover{
+                            background-color: rgba($color: v.$light_grey, $alpha: .6);
+                        }
+                    }
+                }
+            }
+    
+            &.labeled{
+                label{
+                    width: 160px;
+                    text-align: right;
+                }
+                .select{
+                    width: 160px;
+                }
+            }
+        }
+        &.multiselect{
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            .select{
+                width: 140px;
+                position: relative;
+                cursor: pointer;
+                .selected{
+                    width: 100%;
+                    padding: 4px 16px;
+                    height: 30px;
+                    gap: 4px;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    
+                    
+                    background: v.$white;
+                    border: .5px solid v.$light_grey;
+                    border-radius: 8px;
+                    .val{
+                        overflow: hidden;
+                        white-space: nowrap;
+                    }
+                    i{
+                        content: url('../assets/svg/arrow-down.svg');
+                    }
+                }
+                .options{
+                    display: none;
+                    &.active{
+                        display: flex;
+                    }
+                    flex-direction: column;
+                    position: absolute;
+                    min-width: 100%;
+                    top: 100%;
+                    z-index: 100;
+    
+                    background: v.$white;
+                    border: .5px solid v.$light_grey;
+                    border-radius: 8px;
+            
+                    .option{
+                        height: 30px;
+                        padding: 4px 16px;
+                        display: flex;
+                        align-items: center;
+                        gap: 4px;
+                        white-space: nowrap;
+    
+                        .checkbox{
+                            width: 16px;
+                            height: 16px;
+                            content: url('../assets/svg/square-regular.svg');
+                        }
+                        &.active{
+                            .checkbox{
+                                content: url('../assets/svg/square-check-solid.svg');
+                            }
+                            background-color: rgba($color: v.$light_grey, $alpha: .4);
+                        }
+                        &:hover{
+                            background-color: rgba($color: v.$light_grey, $alpha: .4);
+                        }
+                    }
+                }
+            }
+    
+            &.labeled{
+                label{
+                    width: 160px;
+                    text-align: right;
+                }
+                .select{
+                    width: 160px;
+                }
+            }
+        }
+        
+        &.multinumber{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 8px;
+            
+            .numbers{
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                background: v.$white;
+                overflow: hidden;
+                border-radius: 8px;
+                height: 30px;
+                border: .5px solid v.$light_grey;
+                .number{
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+    
+                    cursor: pointer;
+    
+                    height: 100%;
+                    width: 30px;
+                    border-right: .5px solid v.$light_grey;
+                    &.active, &:hover{
+                        background: rgba($color: v.$light_grey, $alpha: .6);   
+                    }
+                }
+            }
+        }
+        &.number-range{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 8px;
+            input{
+                width: 100px;
+                height: 30px;
+                padding: 4px;
+                display: flex;
+                align-items: center;
+                text-align: center;
+                background: v.$white;
+                border: .5px solid v.$light_grey;
+                border-radius: 8px;
+            }
+            .hl{
+                height: 1px;
+                width: 10px;
+                background: v.$black;
+            }
+    
+            &.labeled{
+                label{
+                    width: 160px;
+                    text-align: right;
+                    &.last{
+                        width: auto;
+                        height: 100%;
+                        text-align: left;
+                    }
+                }
+                input{
+                    width: 60px;
+                }
+            }
+        }  
+    }
+}
+
+.textarea{
+    .wrapper-class{
+        border: 1px solid v.$black;
+        border-radius: 4px;
+        overflow: hidden;
+    }
+    .toolbar-class{
+        padding: 6px 5px;
+        margin: 0;
+    }
+    .editor-class{
+        border-top: 1px solid v.$black;
+        background: v.$white;
+        padding: 16px;
+    }
+}

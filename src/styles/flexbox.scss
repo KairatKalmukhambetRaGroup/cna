@@ -1,0 +1,10 @@
+@use './variables' as v;
+@import './adaptive';
+
+.container{
+    width: 100%;
+    max-width: 1080px;
+    margin: 0 auto;
+    display: flex;
+    padding: 0 16px;
+}

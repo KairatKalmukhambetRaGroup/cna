@@ -1,0 +1,268 @@
+@use './variables' as v;
+@import './adaptive';
+
+
+#filter{
+    background: v.$yellow;
+    .content{
+        width: 100%;
+        padding: 20px 0;
+    }
+    &.simple{
+        form{
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 16px;
+            .input{
+                display: none;
+                &.mobile{
+                    display: flex;
+                }
+            }
+            .submit-btn{
+                height: 30px;
+                width: 100px;
+                text-align: center;
+                font-weight: 400;
+                font-size: 14px;
+                line-height: 16px;
+                color: v.$white;
+                background: v.$blue;
+                border: none;
+                border-radius: 8px;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+            }
+        }
+    }
+    &.apartment, &.house, &.commercial{
+        display: flex;
+        flex-direction: column;
+        background: none;
+        .navbar{
+            display: none;
+            background: rgba($color: v.$blue, $alpha: .1);
+            .nav{
+                padding: 8px 0;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                gap: 24px;
+                div{
+                    cursor: pointer;
+                    font-weight: 400;
+                    font-size: 14px;
+                    line-height: 16px;
+                    color: v.$blue;
+                    &.active{
+                        color: v.$red;
+                    }
+                }
+            }
+        }
+        form{
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            background: rgba($color: v.$yellow, $alpha: .8);
+            .top{
+                background: v.$yellow;
+                .content{
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    gap: 24px;
+                    padding: 20px 0;
+                }
+            }
+            .middle{
+                .content{
+                    display: flex;
+                    flex-direction: column;
+                    gap: 16px;
+                    padding: 20px 0;
+                    .col{
+                        width: 100%;
+                        // width: calc(100% / 3);
+                        display: flex;
+                        flex-direction: column;
+                        gap: 16px;
+                    }
+                }
+            }
+            .bottom{
+                border-top: v.$yellow solid 2px;
+                .content{
+                    position: relative;
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 24px;
+                    padding: 20px 0;
+                    .clear{
+                        display: none;
+                        position: absolute;
+                        left: 0;
+                        font-weight: 400;
+                        font-size: 14px;
+                        line-height: 16px;
+                        color: v.$dark_grey;
+                        cursor: pointer;
+                    }
+                    .submit-btn{
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        justify-content: center;
+                        text-align: center;
+                        font-weight: 400;
+                        font-size: 14px;
+                        line-height: 16px;
+                        color: v.$white;
+                        background: v.$blue;
+                        border: none;
+                        border-radius: 8px;
+                        cursor: pointer;
+                        padding: 8px 16px;
+                        gap: 10px;
+                    }
+                }
+            }
+        }
+    }
+
+    @include _lg{
+        .content{
+            width: 100%;
+            padding: 20px 0;
+        }
+        &.simple{
+            form{
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                gap: 24px;
+                .input{
+                    display: flex;
+                }
+                .submit-btn{
+                    height: 30px;
+                    width: 100px;
+                    text-align: center;
+                    font-weight: 400;
+                    font-size: 14px;
+                    line-height: 16px;
+                    color: v.$white;
+                    background: v.$blue;
+                    border: none;
+                    border-radius: 8px;
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    justify-content: center;
+                    cursor: pointer;
+                }
+            }
+        }
+        &.apartment, &.house, &.commercial{
+            display: flex;
+            flex-direction: column;
+            background: none;
+            .navbar{
+                display: block;
+                background: rgba($color: v.$blue, $alpha: .1);
+                .nav{
+                    padding: 8px 0;
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    gap: 24px;
+                    div{
+                        cursor: pointer;
+                        font-weight: 400;
+                        font-size: 14px;
+                        line-height: 16px;
+                        color: v.$blue;
+                        &.active{
+                            color: v.$red;
+                        }
+                    }
+                }
+            }
+            form{
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                background: rgba($color: v.$yellow, $alpha: .8);
+                .top{
+                    background: v.$yellow;
+                    .content{
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        gap: 24px;
+                        padding: 20px 0;
+                    }
+                }
+                .middle{
+                    .content{
+                        display: flex;
+                        flex-direction: row;
+                        gap: 0;
+                        padding: 20px 0;
+                        .col{
+                            width: calc(100% / 3);
+                            display: flex;
+                            flex-direction: column;
+                            gap: 16px;
+                        }
+                    }
+                }
+                .bottom{
+                    border-top: v.$yellow solid 2px;
+                    .content{
+                        position: relative;
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        justify-content: center;
+                        gap: 24px;
+                        padding: 20px 0;
+                        .clear{
+                            position: absolute;
+                            left: 0;
+                            font-weight: 400;
+                            font-size: 14px;
+                            line-height: 16px;
+                            color: v.$dark_grey;
+                            cursor: pointer;
+                        }
+                        .submit-btn{
+                            display: flex;
+                            flex-direction: row;
+                            align-items: center;
+                            justify-content: center;
+                            text-align: center;
+                            font-weight: 400;
+                            font-size: 14px;
+                            line-height: 16px;
+                            color: v.$white;
+                            background: v.$blue;
+                            border: none;
+                            border-radius: 8px;
+                            cursor: pointer;
+                            padding: 8px 16px;
+                            gap: 10px;
+                        }
+                    }
+                }
+            }
+        }   
+    }
+}

@@ -1,0 +1,92 @@
+@use './variables' as v;
+@import './adaptive';
+
+header{
+    height: 64px;
+    .container{
+        height: 100%;
+        .navbar{
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            .logo{
+                font-weight: 600;
+                font-size: 24px;
+                line-height: 28px;
+                color: v.$black;
+            }
+            .nav{
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                padding: 0px;
+                gap: 24px;
+                a{
+                    display: none;
+                    color: v.$blue;
+                    font-weight: 400;
+                    font-size: 14px;
+                    line-height: 16px;
+                    &.btn{
+                        background: v.$white;
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: center;
+                        align-items: center;
+                        padding: 4px 8px;
+                        gap: 8px;
+                        border: 1px solid v.$blue;
+                        border-radius: 8px;
+                    }
+                }
+            }
+        }
+    }
+
+    @include _lg{
+        height: 80px;
+        .container{
+            height: 100%;
+            .navbar{
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+                .logo{
+                    font-weight: 600;
+                    font-size: 36px;
+                    line-height: 44px;
+                    color: v.$black;
+                }
+                .nav{
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    padding: 0px;
+                    gap: 24px;
+                    a{
+                        display: block;
+                        color: v.$blue;
+                        font-weight: 400;
+                        font-size: 16px;
+                        line-height: 20px;
+                        &.btn{
+                            background: v.$white;
+                            display: flex;
+                            flex-direction: row;
+                            justify-content: center;
+                            align-items: center;
+                            padding: 8px 16px;
+                            gap: 8px;
+                            border: 1px solid v.$blue;
+                            border-radius: 8px;
+                        }
+                    }
+                }
+            }
+        }   
+    }
+}

@@ -1,0 +1,186 @@
+@use './variables' as v;
+@import './adaptive';
+
+#slideshow{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    .current{
+        width: calc(100% + 32px);
+        aspect-ratio: 16 / 9;
+        margin: 0 -16px;
+        overflow: hidden;
+        border-radius: 0;
+        background: v.$light_grey;
+
+        img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+
+        }
+    }
+    .previews{
+        display: none;
+    }
+
+
+    #modalSlideshow{
+        position: fixed;
+        inset: 0;
+        background: v.$black;
+        
+        display: flex;
+
+        .content{
+            -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+            position: relative;
+            width: 100%;
+            // height: 100%;
+            aspect-ratio: 16 / 9;
+            background: rgba($color: v.$black, $alpha: .5);
+            img{
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+                object-position: center;
+            }
+
+            i{
+                position: absolute;
+                cursor: pointer;
+                width: 32px;
+                height: 32px;
+                background: rgba($color: v.$black, $alpha: .5);
+                border-radius: 50%;
+                overflow: hidden;
+                padding: 8px;
+                border: 1px solid v.$white;
+                &.prev{
+                    top: 50%;
+                    left: 24px;
+                    transform: translateY(-50%);
+                    content: url('../assets/svg/chevron-left-solid.svg');
+                }
+                &.next{
+                    top: 50%;
+                    right: 24px;
+                    transform: translateY(-50%);
+                    content: url('../assets/svg/chevron-right-solid.svg');
+                }
+                &.close{
+                    top: 24px;
+                    right: 24px;
+                    content: url('../assets/svg/xmark-solid.svg');
+                }
+            }
+
+        }
+    }
+
+    @include _md{
+        display: flex;
+    flex-direction: column;
+    gap: 16px;
+    .current{
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        margin: 0;
+        overflow: hidden;
+        border-radius: 4px;
+        background: v.$light_grey;
+
+        img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+
+        }
+    }
+    .previews{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 16px;
+
+        .preview{
+            width: calc((100% - 144px) / 10);
+            aspect-ratio: 1/1;
+            overflow: hidden;
+            border-radius: 4px;
+            cursor: pointer;
+            img{
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: center;
+            }
+            &.active{
+                border: 2px solid v.$yellow;
+            }
+        }
+
+    }
+
+
+    #modalSlideshow{
+        position: fixed;
+        inset: 0;
+        background: rgba($color: v.$black, $alpha: .5);
+        
+        display: flex;
+        padding: 96px;
+
+        .content{
+            -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+            position: relative;
+            width: 100%;
+            // height: 100%;
+            aspect-ratio: 16 / 9;
+            background: rgba($color: v.$black, $alpha: .5);
+            img{
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+                object-position: center;
+            }
+
+            i{
+                position: absolute;
+                cursor: pointer;
+                width: 32px;
+                height: 32px;
+                background: rgba($color: v.$black, $alpha: .5);
+                border-radius: 50%;
+                overflow: hidden;
+                padding: 8px;
+                border: 1px solid v.$white;
+                &.prev{
+                    top: 50%;
+                    left: 24px;
+                    transform: translateY(-50%);
+                    content: url('../assets/svg/chevron-left-solid.svg');
+                }
+                &.next{
+                    top: 50%;
+                    right: 24px;
+                    transform: translateY(-50%);
+                    content: url('../assets/svg/chevron-right-solid.svg');
+                }
+                &.close{
+                    top: 24px;
+                    right: 24px;
+                    content: url('../assets/svg/xmark-solid.svg');
+                }
+            }
+
+        }
+    }
+    }
+}
