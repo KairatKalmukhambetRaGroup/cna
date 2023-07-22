@@ -12,38 +12,17 @@ module.exports = require("mongoose");
 
 /***/ }),
 
-/***/ 97783:
-/***/ ((module) => {
-
-module.exports = require("next/dist/compiled/@edge-runtime/cookies");
-
-/***/ }),
-
-/***/ 28530:
-/***/ ((module) => {
-
-module.exports = require("next/dist/compiled/@opentelemetry/api");
-
-/***/ }),
-
-/***/ 54426:
-/***/ ((module) => {
-
-module.exports = require("next/dist/compiled/chalk");
-
-/***/ }),
-
-/***/ 40252:
-/***/ ((module) => {
-
-module.exports = require("next/dist/compiled/cookie");
-
-/***/ }),
-
 /***/ 73292:
 /***/ ((module) => {
 
 module.exports = require("fs/promises");
+
+/***/ }),
+
+/***/ 22037:
+/***/ ((module) => {
+
+module.exports = require("os");
 
 /***/ }),
 
@@ -54,7 +33,7 @@ module.exports = require("path");
 
 /***/ }),
 
-/***/ 41803:
+/***/ 32710:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 // ESM COMPAT FLAG
@@ -81,33 +60,33 @@ __webpack_require__.d(route_namespaceObject, {
 });
 
 // EXTERNAL MODULE: ./node_modules/next/dist/server/node-polyfill-headers.js
-var node_polyfill_headers = __webpack_require__(35387);
+var node_polyfill_headers = __webpack_require__(42394);
 // EXTERNAL MODULE: ./node_modules/next/dist/server/future/route-modules/app-route/module.js
-var app_route_module = __webpack_require__(29267);
+var app_route_module = __webpack_require__(69692);
 var module_default = /*#__PURE__*/__webpack_require__.n(app_route_module);
 // EXTERNAL MODULE: external "mongoose"
 var external_mongoose_ = __webpack_require__(11185);
 // EXTERNAL MODULE: ./src/database/connect.js
-var connect = __webpack_require__(4082);
+var connect = __webpack_require__(8000);
 // EXTERNAL MODULE: ./src/database/models/post.js
-var models_post = __webpack_require__(59340);
+var models_post = __webpack_require__(96784);
 // EXTERNAL MODULE: ./node_modules/next/dist/server/web/exports/next-response.js
-var next_response = __webpack_require__(32413);
+var next_response = __webpack_require__(89335);
 // EXTERNAL MODULE: ./node_modules/regenerator-runtime/runtime-module.js
-var runtime_module = __webpack_require__(78938);
+var runtime_module = __webpack_require__(39769);
 // EXTERNAL MODULE: ./src/app/api/posts/route.js + 1 modules
-var route = __webpack_require__(78392);
+var route = __webpack_require__(13849);
 // EXTERNAL MODULE: external "fs/promises"
 var promises_ = __webpack_require__(73292);
 // EXTERNAL MODULE: external "path"
 var external_path_ = __webpack_require__(71017);
 // EXTERNAL MODULE: ./node_modules/mime/index.js
-var mime = __webpack_require__(32679);
+var mime = __webpack_require__(99402);
 var mime_default = /*#__PURE__*/__webpack_require__.n(mime);
 // EXTERNAL MODULE: ./src/database/models/region.js
-var models_region = __webpack_require__(91635);
+var models_region = __webpack_require__(37245);
 // EXTERNAL MODULE: ./src/database/models/housing.js
-var models_housing = __webpack_require__(60249);
+var models_housing = __webpack_require__(60113);
 ;// CONCATENATED MODULE: ./src/app/api/posts/[id]/route.js
 
 
@@ -274,7 +253,7 @@ async function PATCH(request, context) {
 var __webpack_require__ = require("../../../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [381,625,581,938,63,392], () => (__webpack_exec__(41803)));
+var __webpack_exports__ = __webpack_require__.X(0, [697,501,335,402,769,966,849], () => (__webpack_exec__(32710)));
 module.exports = __webpack_exports__;
 
 })();

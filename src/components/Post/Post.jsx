@@ -33,13 +33,13 @@ const Post = ({post}) => {
                                         <div className="agent">
                                         Специалист
                                         </div>
-                                        <a href={`tel:${post.realtor.phone.replace(' ', '')}`} className='btn'><i></i>{post.realtor.phone}</a>
+                                        <a href={`tel:${post.realtor.phone.replace(' ', '')}`} target='_blank' className='btn'><i></i>{post.realtor.phone}</a>
                                     </div>
                                 )}
                             </div>
                         </div>
                         {post.realtor && post.realtor.phone && (
-                            <a className='mobile-phone' href={`tel:${post.realtor.phone}`}>Позвонить</a>
+                            <a className='mobile-phone' target='_blank' href={`tel:${post.realtor.phone}`}>Позвонить</a>
                         )}
                         <div className="post-content">
                             <Slideshow images={post.images} />

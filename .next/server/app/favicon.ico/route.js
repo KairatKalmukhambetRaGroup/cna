@@ -5,41 +5,6 @@ exports.id = 155;
 exports.ids = [155];
 exports.modules = {
 
-/***/ 97783:
-/***/ ((module) => {
-
-module.exports = require("next/dist/compiled/@edge-runtime/cookies");
-
-/***/ }),
-
-/***/ 28530:
-/***/ ((module) => {
-
-module.exports = require("next/dist/compiled/@opentelemetry/api");
-
-/***/ }),
-
-/***/ 54426:
-/***/ ((module) => {
-
-module.exports = require("next/dist/compiled/chalk");
-
-/***/ }),
-
-/***/ 40252:
-/***/ ((module) => {
-
-module.exports = require("next/dist/compiled/cookie");
-
-/***/ }),
-
-/***/ 32196:
-/***/ ((module) => {
-
-module.exports = require("next/dist/compiled/ua-parser-js");
-
-/***/ }),
-
 /***/ 14021:
 /***/ ((module) => {
 
@@ -47,7 +12,14 @@ module.exports = import("next/dist/compiled/@vercel/og/index.node.js");;
 
 /***/ }),
 
-/***/ 41970:
+/***/ 22037:
+/***/ ((module) => {
+
+module.exports = require("os");
+
+/***/ }),
+
+/***/ 51369:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 // ESM COMPAT FLAG
@@ -64,22 +36,22 @@ __webpack_require__.d(__webpack_exports__, {
   staticGenerationBailout: () => (/* binding */ staticGenerationBailout)
 });
 
-// NAMESPACE OBJECT: ./node_modules/next/dist/build/webpack/loaders/next-metadata-route-loader.js?page=%2Ffavicon.ico%2Froute&pageExtensions=tsx&pageExtensions=ts&pageExtensions=jsx&pageExtensions=js!./src/app/favicon.ico?__next_metadata__
-var favicon_next_metadata_namespaceObject = {};
-__webpack_require__.r(favicon_next_metadata_namespaceObject);
-__webpack_require__.d(favicon_next_metadata_namespaceObject, {
+// NAMESPACE OBJECT: ./node_modules/next/dist/build/webpack/loaders/next-metadata-route-loader.js?page=%2Ffavicon.ico%2Froute&isDynamic=0!./src/app/favicon.ico?__next_metadata_route__
+var favicon_next_metadata_route_namespaceObject = {};
+__webpack_require__.r(favicon_next_metadata_route_namespaceObject);
+__webpack_require__.d(favicon_next_metadata_route_namespaceObject, {
   GET: () => (GET),
   dynamic: () => (dynamic)
 });
 
 // EXTERNAL MODULE: ./node_modules/next/dist/server/node-polyfill-headers.js
-var node_polyfill_headers = __webpack_require__(35387);
+var node_polyfill_headers = __webpack_require__(42394);
 // EXTERNAL MODULE: ./node_modules/next/dist/server/future/route-modules/app-route/module.js
-var app_route_module = __webpack_require__(29267);
+var app_route_module = __webpack_require__(69692);
 var module_default = /*#__PURE__*/__webpack_require__.n(app_route_module);
 // EXTERNAL MODULE: ./node_modules/next/server.js
-var server = __webpack_require__(14664);
-;// CONCATENATED MODULE: ./node_modules/next/dist/build/webpack/loaders/next-metadata-route-loader.js?page=%2Ffavicon.ico%2Froute&pageExtensions=tsx&pageExtensions=ts&pageExtensions=jsx&pageExtensions=js!./src/app/favicon.ico?__next_metadata__
+var server = __webpack_require__(20514);
+;// CONCATENATED MODULE: ./node_modules/next/dist/build/webpack/loaders/next-metadata-route-loader.js?page=%2Ffavicon.ico%2Froute&isDynamic=0!./src/app/favicon.ico?__next_metadata_route__
 
 
 const contentType = "image/x-icon"
@@ -105,10 +77,10 @@ const dynamic = 'force-static'
 
     
 
-    const options = {"definition":{"kind":"APP_ROUTE","page":"/favicon.ico/route","pathname":"/favicon.ico","filename":"favicon","bundlePath":"app/favicon.ico/route"},"resolvedPagePath":"next-metadata-route-loader?page=%2Ffavicon.ico%2Froute&pageExtensions=tsx&pageExtensions=ts&pageExtensions=jsx&pageExtensions=js!D:\\personal projects\\krisha-next\\src\\app\\favicon.ico?__next_metadata__","nextConfigOutput":""}
+    const options = {"definition":{"kind":"APP_ROUTE","page":"/favicon.ico/route","pathname":"/favicon.ico","filename":"favicon","bundlePath":"app/favicon.ico/route"},"resolvedPagePath":"next-metadata-route-loader?page=%2Ffavicon.ico%2Froute&isDynamic=0!D:\\personal projects\\krisha-next\\src\\app\\favicon.ico?__next_metadata_route__","nextConfigOutput":""}
     const routeModule = new (module_default())({
       ...options,
-      userland: favicon_next_metadata_namespaceObject,
+      userland: favicon_next_metadata_route_namespaceObject,
     })
 
     // Pull out the exports that we need to expose from the module. This should
@@ -135,7 +107,7 @@ const dynamic = 'force-static'
 var __webpack_require__ = require("../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [381,625,664], () => (__webpack_exec__(41970)));
+var __webpack_exports__ = __webpack_require__.X(0, [697,501,514], () => (__webpack_exec__(51369)));
 module.exports = __webpack_exports__;
 
 })();

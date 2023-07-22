@@ -1,10 +1,8 @@
 import { BALCONY, BATHROOMS, ELECTRICITY, FURNISHED, GAS, HEATINGS, INTERNET, MATERIALS, PLACEMENTS, PURPOSES, SEWERAGES, STATES, TELEPHONE, WATER } from '@/constants';
 import '@/styles/admin/postform.scss';
 import axios from 'axios';
-import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import RichText from '../Inputs/RichText';
-import { useRouter } from 'next/navigation';
 
 const initFormData = {
     housing: 'apartment',
@@ -65,12 +63,12 @@ const modalFail = {
 }
 
 const PostForm = ({post=null}) => {
-    const router = useRouter();
     const [formData, setFormData] = useState(initFormData);
     const [regions, setRegions] = useState(null);
     const [previews, setPreviews] = useState([]);
 
     const [modalText, setModalText] = useState(null);
+
 
     const getRegions = async () => {
         const {data} = await axios.get(`/api/regions`, {validateStatus: function (status) { return true }, headers: {"Access-Control-Allow-Origin": "*", "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"}});
@@ -153,7 +151,7 @@ const PostForm = ({post=null}) => {
 
 
         if(post && post._id){
-            const {data, status} = await axios.patch(`/api/posts/${post._id}`, fd, {validateStatus: function (status) { return true }, headers: {"Content-Type": "multipart/form-data" }});
+            const {data, status} = await axios.patch(`/api/posts/${post._id}`, fd, {validateStatus: function (status) { return true }, headers: {"Content-Type": "multift/form-data" }});
             if(status === 200){
                 setFormData({...formData,...data, region: data.region.name, housing: data.housing.slug});
                 setModalText(modalSuccessEdit)
@@ -166,7 +164,7 @@ const PostForm = ({post=null}) => {
             if(status === 200){
                 setModalText(modalSuccessCreation)
                 await delay(3000);
-                router.push(`/admin/posts/${data._id}`);
+                // router.push(`/admin/posts/${data._id}`);
             }else{
                 setModalText(modalFail)
             }
@@ -477,7 +475,7 @@ const PostForm = ({post=null}) => {
                         </div>
                     )}
 
-                    <RichText value={formData.description} handleChange={handleDescriptionChange} />
+                    <RichText key='rich1' value={formData.description} handleChange={handleDescriptionChange} />
 
                 </div>
                 <div className="btns">

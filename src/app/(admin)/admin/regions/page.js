@@ -3,10 +3,10 @@
 import RegionForm from '@/components/Admin/RegionForm';
 import Loading from '@/components/Loading';
 import '@/styles/admin/regions.scss';
-import Link from 'next/link';
 
-const { default: axios } = require("axios");
-const { useState, useEffect } = require("react");
+import { useState, useEffect } from 'react';
+
+import axios from 'axios';
 
 const initFormData = {
     name: '',

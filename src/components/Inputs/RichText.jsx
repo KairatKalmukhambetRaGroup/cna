@@ -1,30 +1,26 @@
-import React, { useEffect } from 'react';
-import ReactDOM from 'react-dom';
+'use client'
+import React, { useEffect, useState } from 'react';
 import {ContentState, EditorState, convertFromHTML, convertFromRaw, convertToRaw} from 'draft-js';
-import { Editor } from 'react-draft-wysiwyg';
-
+// import { Editor } from 'react-draft-wysiwyg';
+import dynamic from 'next/dynamic';
 import '@/styles/inputs.scss';
 
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
-const RichText = ({value, handleChange}) => {
-    const [editorState, setEditorState] = React.useState(
-        () => {
-            console.log(value)
-            if(isJSON(value)){
-                return EditorState.createWithContent(convertFromRaw(JSON.parse(value)))
-            }else{
-                return EditorState.createWithContent(
-                    ContentState.createFromBlockArray(
-                      convertFromHTML(`<p>${value}</p>`)
-                    )
-                );
-            }
-        },
-    );
+const DynamicEditor = dynamic(
+    () => import('react-draft-wysiwyg').then((module) => module.Editor),
+    { ssr: false }
+  );
+
+const RichText = ({value=null, handleChange}) => {
+    const [val, setVal] = useState('');
+    const [editorState, setEditorState] = React.useState(() => {
+        EditorState.createEmpty();
+    });
 
     useEffect(()=>{
-        if(value){
+        if(value && !val){
+            setVal(value);
             if(isJSON(value)){
                 setEditorState(EditorState.createWithContent(convertFromRaw(JSON.parse(value))))
             }else{
@@ -46,15 +42,15 @@ const RichText = ({value, handleChange}) => {
         }
     }
 
-    const updateTextDescription = async (state) => {
+    const updateTextDescription = (state) => {
         setEditorState(state);
-        const contentState = editorState.getCurrentContent();        
+        const contentState = state.getCurrentContent();        
         handleChange(JSON.stringify(convertToRaw(contentState)));
     };
 
     return (
         <div className="textarea">
-            <Editor 
+            <DynamicEditor 
                 locale='ru'
                 editorState={editorState} 
                 onEditorStateChange={updateTextDescription} 

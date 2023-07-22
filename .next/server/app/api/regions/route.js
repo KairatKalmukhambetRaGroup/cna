@@ -12,35 +12,14 @@ module.exports = require("mongoose");
 
 /***/ }),
 
-/***/ 97783:
+/***/ 22037:
 /***/ ((module) => {
 
-module.exports = require("next/dist/compiled/@edge-runtime/cookies");
+module.exports = require("os");
 
 /***/ }),
 
-/***/ 28530:
-/***/ ((module) => {
-
-module.exports = require("next/dist/compiled/@opentelemetry/api");
-
-/***/ }),
-
-/***/ 54426:
-/***/ ((module) => {
-
-module.exports = require("next/dist/compiled/chalk");
-
-/***/ }),
-
-/***/ 40252:
-/***/ ((module) => {
-
-module.exports = require("next/dist/compiled/cookie");
-
-/***/ }),
-
-/***/ 67277:
+/***/ 50086:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 // ESM COMPAT FLAG
@@ -67,16 +46,16 @@ __webpack_require__.d(route_namespaceObject, {
 });
 
 // EXTERNAL MODULE: ./node_modules/next/dist/server/node-polyfill-headers.js
-var node_polyfill_headers = __webpack_require__(35387);
+var node_polyfill_headers = __webpack_require__(42394);
 // EXTERNAL MODULE: ./node_modules/next/dist/server/future/route-modules/app-route/module.js
-var app_route_module = __webpack_require__(29267);
+var app_route_module = __webpack_require__(69692);
 var module_default = /*#__PURE__*/__webpack_require__.n(app_route_module);
 // EXTERNAL MODULE: ./src/database/connect.js
-var connect = __webpack_require__(4082);
+var connect = __webpack_require__(8000);
 // EXTERNAL MODULE: ./src/database/models/region.js
-var region = __webpack_require__(91635);
+var region = __webpack_require__(37245);
 // EXTERNAL MODULE: ./node_modules/next/dist/server/web/exports/next-response.js
-var next_response = __webpack_require__(32413);
+var next_response = __webpack_require__(89335);
 ;// CONCATENATED MODULE: ./src/app/api/regions/route.js
 
 
@@ -151,26 +130,6 @@ async function PATCH(request) {
 
     
 
-/***/ }),
-
-/***/ 32413:
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-var __webpack_unused_export__;
-// This file is for modularized imports for next/server to get fully-treeshaking.
-
-__webpack_unused_export__ = ({
-    value: true
-});
-Object.defineProperty(exports, "Z", ({
-    enumerable: true,
-    get: function() {
-        return _response.NextResponse;
-    }
-}));
-const _response = __webpack_require__(72917); //# sourceMappingURL=next-response.js.map
-
-
 /***/ })
 
 };
@@ -180,7 +139,7 @@ const _response = __webpack_require__(72917); //# sourceMappingURL=next-response
 var __webpack_require__ = require("../../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [381,625,63], () => (__webpack_exec__(67277)));
+var __webpack_exports__ = __webpack_require__.X(0, [697,501,335,966], () => (__webpack_exec__(50086)));
 module.exports = __webpack_exports__;
 
 })();

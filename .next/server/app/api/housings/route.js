@@ -12,35 +12,14 @@ module.exports = require("mongoose");
 
 /***/ }),
 
-/***/ 97783:
+/***/ 22037:
 /***/ ((module) => {
 
-module.exports = require("next/dist/compiled/@edge-runtime/cookies");
+module.exports = require("os");
 
 /***/ }),
 
-/***/ 28530:
-/***/ ((module) => {
-
-module.exports = require("next/dist/compiled/@opentelemetry/api");
-
-/***/ }),
-
-/***/ 54426:
-/***/ ((module) => {
-
-module.exports = require("next/dist/compiled/chalk");
-
-/***/ }),
-
-/***/ 40252:
-/***/ ((module) => {
-
-module.exports = require("next/dist/compiled/cookie");
-
-/***/ }),
-
-/***/ 99792:
+/***/ 1275:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 // ESM COMPAT FLAG
@@ -66,18 +45,18 @@ __webpack_require__.d(route_namespaceObject, {
 });
 
 // EXTERNAL MODULE: ./node_modules/next/dist/server/node-polyfill-headers.js
-var node_polyfill_headers = __webpack_require__(35387);
+var node_polyfill_headers = __webpack_require__(42394);
 // EXTERNAL MODULE: ./node_modules/next/dist/server/future/route-modules/app-route/module.js
-var app_route_module = __webpack_require__(29267);
+var app_route_module = __webpack_require__(69692);
 var module_default = /*#__PURE__*/__webpack_require__.n(app_route_module);
 // EXTERNAL MODULE: external "mongoose"
 var external_mongoose_ = __webpack_require__(11185);
 // EXTERNAL MODULE: ./src/database/connect.js
-var connect = __webpack_require__(4082);
+var connect = __webpack_require__(8000);
 // EXTERNAL MODULE: ./src/database/models/housing.js
-var models_housing = __webpack_require__(60249);
+var models_housing = __webpack_require__(60113);
 // EXTERNAL MODULE: ./node_modules/next/dist/server/web/exports/next-response.js
-var next_response = __webpack_require__(32413);
+var next_response = __webpack_require__(89335);
 ;// CONCATENATED MODULE: ./src/app/api/housings/route.js
 
 
@@ -138,27 +117,7 @@ async function POST(request) {
 
 /***/ }),
 
-/***/ 32413:
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-var __webpack_unused_export__;
-// This file is for modularized imports for next/server to get fully-treeshaking.
-
-__webpack_unused_export__ = ({
-    value: true
-});
-Object.defineProperty(exports, "Z", ({
-    enumerable: true,
-    get: function() {
-        return _response.NextResponse;
-    }
-}));
-const _response = __webpack_require__(72917); //# sourceMappingURL=next-response.js.map
-
-
-/***/ }),
-
-/***/ 4082:
+/***/ 8000:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
@@ -173,7 +132,7 @@ const connectMongo = async ()=>mongoose__WEBPACK_IMPORTED_MODULE_0___default().c
 
 /***/ }),
 
-/***/ 60249:
+/***/ 60113:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
@@ -209,7 +168,7 @@ const Housing = (mongoose__WEBPACK_IMPORTED_MODULE_0___default().models).Housing
 var __webpack_require__ = require("../../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [381,625], () => (__webpack_exec__(99792)));
+var __webpack_exports__ = __webpack_require__.X(0, [697,501,335], () => (__webpack_exec__(1275)));
 module.exports = __webpack_exports__;
 
 })();

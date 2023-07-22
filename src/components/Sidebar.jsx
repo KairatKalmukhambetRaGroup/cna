@@ -10,7 +10,7 @@ const Sidebar = () => {
                         <div className="medium-16-20 text-black">Сайт объявлений недвижимости</div>
                     </div>
                     <div className="action">
-                        <a href="" className='btn'><i></i> +7 705 562 1546</a>            
+                        <a href="tel:+77055621546" target='_blank' className='btn'><i></i> +7 705 562 1546</a>            
                         <div className="regular-14-16">Подать объявление</div>             
                     </div>
                 </div>
@@ -20,7 +20,7 @@ const Sidebar = () => {
                         <div className="medium-16-20 text-black">Сайт объявлений недвижимости</div>
                     </div>
                     <div className="action">
-                        <a href="" className='btn'><i></i> +7 705 562 1546</a>            
+                        <a href="+77055621546" target='_blank' className='btn'><i></i> +7 705 562 1546</a>            
                         <div className="regular-14-16">Подать объявление</div>             
                     </div>
                 </div>

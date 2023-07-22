@@ -12,34 +12,6 @@ module.exports = require("mongoose");
 
 /***/ }),
 
-/***/ 97783:
-/***/ ((module) => {
-
-module.exports = require("next/dist/compiled/@edge-runtime/cookies");
-
-/***/ }),
-
-/***/ 28530:
-/***/ ((module) => {
-
-module.exports = require("next/dist/compiled/@opentelemetry/api");
-
-/***/ }),
-
-/***/ 54426:
-/***/ ((module) => {
-
-module.exports = require("next/dist/compiled/chalk");
-
-/***/ }),
-
-/***/ 40252:
-/***/ ((module) => {
-
-module.exports = require("next/dist/compiled/cookie");
-
-/***/ }),
-
 /***/ 6113:
 /***/ ((module) => {
 
@@ -47,7 +19,14 @@ module.exports = require("crypto");
 
 /***/ }),
 
-/***/ 16339:
+/***/ 22037:
+/***/ ((module) => {
+
+module.exports = require("os");
+
+/***/ }),
+
+/***/ 31687:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 // ESM COMPAT FLAG
@@ -72,18 +51,18 @@ __webpack_require__.d(route_namespaceObject, {
 });
 
 // EXTERNAL MODULE: ./node_modules/next/dist/server/node-polyfill-headers.js
-var node_polyfill_headers = __webpack_require__(35387);
+var node_polyfill_headers = __webpack_require__(42394);
 // EXTERNAL MODULE: ./node_modules/next/dist/server/future/route-modules/app-route/module.js
-var app_route_module = __webpack_require__(29267);
+var app_route_module = __webpack_require__(69692);
 var module_default = /*#__PURE__*/__webpack_require__.n(app_route_module);
 // EXTERNAL MODULE: ./src/database/connect.js
-var connect = __webpack_require__(4082);
+var connect = __webpack_require__(8000);
 // EXTERNAL MODULE: ./src/database/models/user.js
-var models_user = __webpack_require__(77001);
+var models_user = __webpack_require__(3535);
 // EXTERNAL MODULE: ./node_modules/next/dist/server/web/exports/next-response.js
-var next_response = __webpack_require__(32413);
+var next_response = __webpack_require__(89335);
 // EXTERNAL MODULE: ./node_modules/bcryptjs/index.js
-var bcryptjs = __webpack_require__(12305);
+var bcryptjs = __webpack_require__(54989);
 var bcryptjs_default = /*#__PURE__*/__webpack_require__.n(bcryptjs);
 ;// CONCATENATED MODULE: ./src/app/api/users/route.js
 
@@ -148,7 +127,7 @@ async function POST(request) {
 
 /***/ }),
 
-/***/ 4082:
+/***/ 8000:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
@@ -163,7 +142,7 @@ const connectMongo = async ()=>mongoose__WEBPACK_IMPORTED_MODULE_0___default().c
 
 /***/ }),
 
-/***/ 77001:
+/***/ 3535:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
@@ -193,7 +172,7 @@ const User = (mongoose__WEBPACK_IMPORTED_MODULE_0___default().models).User || mo
 var __webpack_require__ = require("../../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [381,625,38], () => (__webpack_exec__(16339)));
+var __webpack_exports__ = __webpack_require__.X(0, [697,501,335,989], () => (__webpack_exec__(31687)));
 module.exports = __webpack_exports__;
 
 })();

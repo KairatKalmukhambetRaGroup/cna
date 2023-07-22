@@ -2,9 +2,10 @@
 
 import '@/styles/admin/createpost.scss';
 
-const { default: PostForm } = require("@/components/Admin/PostForm");
+import PostForm from '@/components/Admin/PostForm';
 
 const CreatePost = () => {
+
     return (
         <div id="create-post">
             <div className="heading">
