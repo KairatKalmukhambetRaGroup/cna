@@ -8,6 +8,7 @@ exports.modules = {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   ce: () => (/* binding */ dateConvert),
+/* harmony export */   eS: () => (/* binding */ numberRearange),
 /* harmony export */   i2: () => (/* binding */ createTitle),
 /* harmony export */   pQ: () => (/* binding */ queryToData),
 /* harmony export */   rW: () => (/* binding */ dataToQuery),
@@ -43,6 +44,15 @@ const priceToMils = (price)=>{
         return newPrice + " млн.";
     }
     return price;
+};
+const numberRearange = (num)=>{
+    if (num) {
+        var parts = num.toString().split(".");
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+        num = parts.join(".");
+        return num;
+    }
+    return num;
 };
 const dataToQuery = (data)=>{
     let str = "?";

@@ -8,6 +8,20 @@ const Slideshow = ({images=null}) => {
     const changeCurrent = (index) =>{
         setCurrentImage(index);
     }
+    const next = (e) => {
+        e.preventDefault();
+        let nextIndex = currentImage + 1;
+        if(nextIndex >= images.length)
+            nextIndex = 0;
+        setCurrentImage(nextIndex);
+    }
+    const prev = (e) => {
+        e.preventDefault();
+        let prevIndex = currentImage - 1;
+        if(prevIndex < 0)
+            prevIndex = images.length - 1;
+        setCurrentImage(prevIndex);
+    }
 
     if(!images || images.length == 0)
         return ;
@@ -16,8 +30,13 @@ const Slideshow = ({images=null}) => {
             <ModalSlideshow images={images} current={currentModal} setCurrent={setCurrentModal} />
             <div className="current">
                 {images && images.length>0 && (
-                    <img src={`/public/uploads/${images[currentImage]}`} alt="currentimage" 
+                    <img src={`https://cna.kz/public/uploads/${images[currentImage]}`} alt="currentimage" 
                     onClick={(e)=>{e.preventDefault(); setCurrentModal(currentImage)}} />
+                )}
+                <i className="crnt-left" onClick={prev}></i>
+                <i className="crnt-right" onClick={next}></i>
+                {images && images.length>0 && (
+                    <div className="crnt-count">{(Number(currentImage)+1)} / {Number(images.length)-1}</div>
                 )}
             </div>
             {images && images.length>0 && (
@@ -26,7 +45,7 @@ const Slideshow = ({images=null}) => {
                         <div className={`preview ${currentImage===key ? 'active': ''}`} key={key} 
                             onMouseEnter={(e)=>{e.preventDefault(); changeCurrent(key);}} 
                             onClick={(e)=>{e.preventDefault(); setCurrentModal(key)}}>
-                            <img src={`/public/uploads/${img}`} alt={`imgpreview-${key}`}/>
+                            <img src={`https://cna.kz/public/uploads/${img}`} alt={`imgpreview-${key}`}/>
                         </div>
                     ))}
                 </div>
@@ -66,7 +85,7 @@ const ModalSlideshow = ({images, current, setCurrent}) =>{
             <div className="content">
                 <i className="close" onClick={close}></i>
                 <i className="prev" onClick={prev}></i>
-                <img src={`/uploads/${images[current]}`} alt="" />
+                <img src={`https://cna.kz/public/uploads/${images[current]}`} alt="" />
                 <i className="next" onClick={next}></i>
             </div>
         </div>

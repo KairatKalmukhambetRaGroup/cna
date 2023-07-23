@@ -3,7 +3,7 @@
 import Loading from '@/components/Loading';
 import PostCard from '@/components/Post/PostCard';
 import '@/styles/admin/posts.scss';
-import { dateConvert } from '@/utilFunctions/dateConvert';
+import { dateConvert, numberRearange } from '@/utilFunctions/dateConvert';
 import axios from 'axios';
 import draftToHtml from 'draftjs-to-html';
 import Link from 'next/link';
@@ -84,7 +84,7 @@ const Posts = () => {
                                 <div className='post' key={key}>
                                     <div className='image'>
                                         {(post.images && post.images.length>0) && (
-                                            <img src={`/uploads/${post.images[0]}`} alt=""/>
+                                            <img src={`https://cna.kz/public/uploads/${post.images[0]}`} alt=""/>
                                         )}
                                     </div>
                                     <div className='info'>
@@ -92,7 +92,7 @@ const Posts = () => {
                                             {post.housing.slug === 'apartment' && (
                                                 <div className="title">{post.rooms}-комнатная квартира{post.area && post.area.total && <>, {post.area.total} м<sup>2</sup></>}{post.floor && `, ${post.floor}/${post.floors} этаж`}</div>
                                             )}
-                                            <div className="price">{post.price} 〒</div>
+                                            <div className="price">{numberRearange(post.price)} 〒</div>
                                         </div>
                                         <div className="addres">
                                             {post.region.name}, {post.adress}

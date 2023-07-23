@@ -68,7 +68,7 @@ const PostCard = ({ post })=>{
             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                 className: "postimage",
                 children: post.images && post.images.length > 0 ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("img", {
-                    src: `/public/uploads/${post.images[0]}`,
+                    src: `https://cna.kz/public/uploads/${post.images[0]}`,
                     alt: "preview"
                 }) : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("img", {
                     src: `/noimage.png`,
@@ -88,7 +88,7 @@ const PostCard = ({ post })=>{
                             /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                                 className: "price",
                                 children: [
-                                    post.price,
+                                    (0,_utilFunctions_dateConvert__WEBPACK_IMPORTED_MODULE_3__/* .numberRearange */ .eS)(post.price),
                                     " 〒"
                                 ]
                             })

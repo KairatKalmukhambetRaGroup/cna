@@ -57,6 +57,15 @@ const priceToMils = (price)=>{
     }
     return price;
 };
+const numberRearange = (num)=>{
+    if (num) {
+        var parts = num.toString().split(".");
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+        num = parts.join(".");
+        return num;
+    }
+    return num;
+};
 const dataToQuery = (data)=>{
     let str = "?";
     for(const key in data){

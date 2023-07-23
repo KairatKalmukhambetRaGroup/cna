@@ -412,6 +412,18 @@ const Slideshow = ({ images = null })=>{
     const changeCurrent = (index)=>{
         setCurrentImage(index);
     };
+    const next = (e)=>{
+        e.preventDefault();
+        let nextIndex = currentImage + 1;
+        if (nextIndex >= images.length) nextIndex = 0;
+        setCurrentImage(nextIndex);
+    };
+    const prev = (e)=>{
+        e.preventDefault();
+        let prevIndex = currentImage - 1;
+        if (prevIndex < 0) prevIndex = images.length - 1;
+        setCurrentImage(prevIndex);
+    };
     if (!images || images.length == 0) return;
     return /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
         id: "slideshow",
@@ -421,16 +433,34 @@ const Slideshow = ({ images = null })=>{
                 current: currentModal,
                 setCurrent: setCurrentModal
             }),
-            /*#__PURE__*/ jsx_runtime_.jsx("div", {
+            /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
                 className: "current",
-                children: images && images.length > 0 && /*#__PURE__*/ jsx_runtime_.jsx("img", {
-                    src: `/public/uploads/${images[currentImage]}`,
-                    alt: "currentimage",
-                    onClick: (e)=>{
-                        e.preventDefault();
-                        setCurrentModal(currentImage);
-                    }
-                })
+                children: [
+                    images && images.length > 0 && /*#__PURE__*/ jsx_runtime_.jsx("img", {
+                        src: `https://cna.kz/public/uploads/${images[currentImage]}`,
+                        alt: "currentimage",
+                        onClick: (e)=>{
+                            e.preventDefault();
+                            setCurrentModal(currentImage);
+                        }
+                    }),
+                    /*#__PURE__*/ jsx_runtime_.jsx("i", {
+                        className: "crnt-left",
+                        onClick: prev
+                    }),
+                    /*#__PURE__*/ jsx_runtime_.jsx("i", {
+                        className: "crnt-right",
+                        onClick: next
+                    }),
+                    images && images.length > 0 && /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                        className: "crnt-count",
+                        children: [
+                            Number(currentImage) + 1,
+                            " / ",
+                            Number(images.length) - 1
+                        ]
+                    })
+                ]
             }),
             images && images.length > 0 && /*#__PURE__*/ jsx_runtime_.jsx("div", {
                 className: "previews",
@@ -445,7 +475,7 @@ const Slideshow = ({ images = null })=>{
                             setCurrentModal(key);
                         },
                         children: /*#__PURE__*/ jsx_runtime_.jsx("img", {
-                            src: `/public/uploads/${img}`,
+                            src: `https://cna.kz/public/uploads/${img}`,
                             alt: `imgpreview-${key}`
                         })
                     }, key))
@@ -486,7 +516,7 @@ const ModalSlideshow = ({ images, current, setCurrent })=>{
                     onClick: prev
                 }),
                 /*#__PURE__*/ jsx_runtime_.jsx("img", {
-                    src: `/uploads/${images[current]}`,
+                    src: `https://cna.kz/public/uploads/${images[current]}`,
                     alt: ""
                 }),
                 /*#__PURE__*/ jsx_runtime_.jsx("i", {
@@ -533,7 +563,7 @@ const Post = ({ post })=>{
                                         /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
                                             className: "price",
                                             children: [
-                                                post.price,
+                                                (0,dateConvert/* numberRearange */.eS)(post.price),
                                                 " 〒"
                                             ]
                                         }),

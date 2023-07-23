@@ -552,7 +552,7 @@ const PostSmall = ({ post })=>{
                 className: "postimage",
                 children: [
                     post.images && post.images.length > 0 ? /*#__PURE__*/ jsx_runtime_.jsx("img", {
-                        src: `/public/uploads/${post.images[0]}`,
+                        src: `https://cna.kz/public/uploads/${post.images[0]}`,
                         alt: ""
                     }) : /*#__PURE__*/ jsx_runtime_.jsx("img", {
                         src: `/noimage.png`,

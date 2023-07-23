@@ -2,7 +2,7 @@ import '@/styles/post.scss';
 import Slideshow from '../Slideshow';
 import draftToHtml from 'draftjs-to-html';
 import { useEffect } from 'react';
-import { createTitle } from '@/utilFunctions/dateConvert';
+import { createTitle, numberRearange } from '@/utilFunctions/dateConvert';
 
 const Post = ({post}) => {
     return post && (
@@ -15,7 +15,7 @@ const Post = ({post}) => {
                     <div className="info">
                         <div className="sidebar">
                             <div className="sidebar-content">
-                                <div className="price">{post.price} 〒</div>
+                                <div className="price">{numberRearange(post.price)} 〒</div>
                                 <div className="parameters">
                                     {post.region && <SidebarParam label="Район" value={post.region.name} />}
                                     {post.year && <SidebarParam label="Год постройки" value={post.year} />}
