@@ -16,7 +16,7 @@ const Slideshow = ({images=null}) => {
             <ModalSlideshow images={images} current={currentModal} setCurrent={setCurrentModal} />
             <div className="current">
                 {images && images.length>0 && (
-                    <img src={`/uploads/${images[currentImage]}`} alt="currentimage" 
+                    <img src={`/public/uploads/${images[currentImage]}`} alt="currentimage" 
                     onClick={(e)=>{e.preventDefault(); setCurrentModal(currentImage)}} />
                 )}
             </div>
@@ -26,7 +26,7 @@ const Slideshow = ({images=null}) => {
                         <div className={`preview ${currentImage===key ? 'active': ''}`} key={key} 
                             onMouseEnter={(e)=>{e.preventDefault(); changeCurrent(key);}} 
                             onClick={(e)=>{e.preventDefault(); setCurrentModal(key)}}>
-                            <img src={`/uploads/${img}`} alt={`imgpreview-${key}`}/>
+                            <img src={`/public/uploads/${img}`} alt={`imgpreview-${key}`}/>
                         </div>
                     ))}
                 </div>

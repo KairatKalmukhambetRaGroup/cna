@@ -123,7 +123,7 @@ async function getAllPosts() {
         .populate({
             path: 'housing',
             select: 'slug'
-        });
+        }).limit(8).sort('-createdAt');
     const houses = await Post.find({housing: house._id})
         .populate({
             path: 'region',
@@ -132,7 +132,7 @@ async function getAllPosts() {
         .populate({
             path: 'housing',
             select: 'slug'
-        });
+        }).limit(8).sort('-createdAt');
     const commercials = await Post.find({housing: commercial._id})
         .populate({
             path: 'region',
@@ -141,7 +141,7 @@ async function getAllPosts() {
         .populate({
             path: 'housing',
             select: 'slug'
-        });
+        }).limit(8).sort('-createdAt');
     return NextResponse.json({apartments: apartments, houses: houses, commercials: commercials});
 }
 
