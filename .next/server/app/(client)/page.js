@@ -567,7 +567,7 @@ const PostSmall = ({ post })=>{
                     })
                 ]
             }),
-            post.housing.slug === "apartment" && /*#__PURE__*/ jsx_runtime_.jsx("div", {
+            /*#__PURE__*/ jsx_runtime_.jsx("div", {
                 className: "title",
                 children: (0,dateConvert/* createTitle */.i2)(post)
             })
@@ -594,13 +594,33 @@ var PostCard = __webpack_require__(69476);
 
 
 
+function useWindowSize() {
+    const [size, setSize] = (0,react_.useState)([
+        0,
+        0
+    ]);
+    (0,react_.useLayoutEffect)(()=>{
+        function updateSize() {
+            setSize([
+                window.innerWidth,
+                window.innerHeight
+            ]);
+        }
+        window.addEventListener("resize", updateSize);
+        updateSize();
+        return ()=>window.removeEventListener("resize", updateSize);
+    }, []);
+    return size;
+}
 const Home = ()=>{
+    const [width, height] = useWindowSize();
     // const {posts} = useSelector((state) => state.posts);
     // const dispatch = useDispatch();
+    const [size, setSize] = (0,react_.useState)("sm");
     const router = (0,navigation.useRouter)();
     const [posts, setPosts] = (0,react_.useState)(null);
     const getPosts = async ()=>{
-        const { data } = await axios/* default */.Z.get("/api/posts", {
+        const { data } = await axios/* default */.Z.get(`/api/posts?size=${size}`, {
             validateStatus: function(status) {
                 return true;
             },
@@ -609,12 +629,27 @@ const Home = ()=>{
                 "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
             }
         });
+        console.log(data);
         setPosts(data);
     };
     (0,react_.useEffect)(()=>{
         if (!posts) getPosts();
     }, [
         posts
+    ]);
+    (0,react_.useEffect)(()=>{
+        if (width) {
+            if (width < 992) setSize("sm");
+            else setSize("lg");
+        }
+    }, [
+        width
+    ]);
+    (0,react_.useEffect)(()=>{
+        console.log(size);
+        if (size) getPosts();
+    }, [
+        size
     ]);
     const handleSubmit = async (formData)=>{
         // e.preventDefault();
@@ -649,77 +684,75 @@ const Home = ()=>{
                         className: "medium-24-28 text-black",
                         children: "Последние предложения недвижимости"
                     }),
-                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-                        className: "smallposts",
-                        children: [
-                            /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-                                className: "apartments",
-                                children: [
-                                    /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                                        className: "medium-24-28 text-black",
-                                        children: "Квартиры"
-                                    }),
-                                    /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                                        className: "row",
-                                        children: posts && posts.apartments ? posts.apartments.map((post, key)=>/*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-                                                className: "col",
-                                                children: [
-                                                    /*#__PURE__*/ jsx_runtime_.jsx(Post_PostSmall, {
-                                                        post: post
-                                                    }),
-                                                    /*#__PURE__*/ jsx_runtime_.jsx(PostCard/* default */.Z, {
+                    size === "lg" && /*#__PURE__*/ jsx_runtime_.jsx(jsx_runtime_.Fragment, {
+                        children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                            className: "smallposts",
+                            children: [
+                                /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                                    className: "apartments",
+                                    children: [
+                                        /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                                            className: "medium-24-28 text-black",
+                                            children: "Квартиры"
+                                        }),
+                                        /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                                            className: "row",
+                                            children: posts && posts.apartments ? posts.apartments.map((post, key)=>/*#__PURE__*/ jsx_runtime_.jsx("div", {
+                                                    className: "col",
+                                                    children: /*#__PURE__*/ jsx_runtime_.jsx(Post_PostSmall, {
                                                         post: post
                                                     })
-                                                ]
-                                            }, key)) : /*#__PURE__*/ jsx_runtime_.jsx(Loading/* default */.Z, {})
-                                    })
-                                ]
-                            }),
-                            /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-                                className: "houses",
-                                children: [
-                                    /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                                        className: "medium-24-28 text-black",
-                                        children: "Дома"
-                                    }),
-                                    /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                                        className: "row",
-                                        children: posts && posts.houses ? posts.houses.map((post, key)=>/*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-                                                className: "col",
-                                                children: [
-                                                    /*#__PURE__*/ jsx_runtime_.jsx(Post_PostSmall, {
-                                                        post: post
-                                                    }),
-                                                    /*#__PURE__*/ jsx_runtime_.jsx(PostCard/* default */.Z, {
+                                                }, key)) : /*#__PURE__*/ jsx_runtime_.jsx(Loading/* default */.Z, {})
+                                        })
+                                    ]
+                                }),
+                                /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                                    className: "houses",
+                                    children: [
+                                        /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                                            className: "medium-24-28 text-black",
+                                            children: "Дома"
+                                        }),
+                                        /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                                            className: "row",
+                                            children: posts && posts.houses ? posts.houses.map((post, key)=>/*#__PURE__*/ jsx_runtime_.jsx("div", {
+                                                    className: "col",
+                                                    children: /*#__PURE__*/ jsx_runtime_.jsx(Post_PostSmall, {
                                                         post: post
                                                     })
-                                                ]
-                                            }, key)) : /*#__PURE__*/ jsx_runtime_.jsx(Loading/* default */.Z, {})
-                                    })
-                                ]
-                            })
-                        ]
+                                                }, key)) : /*#__PURE__*/ jsx_runtime_.jsx(Loading/* default */.Z, {})
+                                        })
+                                    ]
+                                }),
+                                /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                                    className: "commercials",
+                                    children: [
+                                        /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                                            className: "medium-24-28 text-black",
+                                            children: "Коммерческие недвижимости"
+                                        }),
+                                        /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                                            className: "row",
+                                            children: posts && posts.commercials ? posts.commercials.map((post, key)=>/*#__PURE__*/ jsx_runtime_.jsx("div", {
+                                                    className: "col",
+                                                    children: /*#__PURE__*/ jsx_runtime_.jsx(Post_PostSmall, {
+                                                        post: post
+                                                    })
+                                                }, key)) : /*#__PURE__*/ jsx_runtime_.jsx(Loading/* default */.Z, {})
+                                        })
+                                    ]
+                                })
+                            ]
+                        })
                     }),
-                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-                        id: "about",
-                        children: [
-                            /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                                className: "medium-24-28 text-black",
-                                children: "О нас"
-                            }),
-                            /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-                                className: "regular-16-20 text-black",
-                                children: [
-                                    "Lorem ipsum dolor sit amet. Et nobis placeat qui perspiciatis voluptas qui consequatur voluptas est quisquam veniam est nemo natus non delectus nemo. Ut galisum voluptatem ab voluptatem quisquam a dicta nemo 33 blanditiis tenetur id odio saepe ut autem facere hic facere culpa. Ut dolorem nesciunt ut repudiandae itaque qui temporibus assumenda ut aliquid iusto et quod deleniti et harum soluta?",
-                                    /*#__PURE__*/ jsx_runtime_.jsx("br", {}),
-                                    /*#__PURE__*/ jsx_runtime_.jsx("br", {}),
-                                    "Eum voluptatem dolorem et doloribus nesciunt aut excepturi ipsa ut sequi reiciendis aut ullam quidem aut labore laborum sed possimus voluptates! Et ratione quam qui omnis tempore quo dolores repellat ea exercitationem suscipit. Et fugit quis vel quaerat laborum et tenetur officia.",
-                                    /*#__PURE__*/ jsx_runtime_.jsx("br", {}),
-                                    /*#__PURE__*/ jsx_runtime_.jsx("br", {}),
-                                    "Est sunt natus aut corrupti pariatur et odit quis nam perspiciatis tempora aut quia quia sed quam commodi. Et magni aliquam quo galisum autem aut veritatis nostrum et perferendis facilis rem illo fugiat ut amet dolores."
-                                ]
-                            })
-                        ]
+                    size === "sm" && /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                        className: "mobileposts",
+                        children: posts && posts.length > 0 ? posts.map((post, key)=>/*#__PURE__*/ jsx_runtime_.jsx("div", {
+                                className: "col",
+                                children: /*#__PURE__*/ jsx_runtime_.jsx(PostCard/* default */.Z, {
+                                    post: post
+                                })
+                            }, key)) : /*#__PURE__*/ jsx_runtime_.jsx(Loading/* default */.Z, {})
                     })
                 ]
             })

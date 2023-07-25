@@ -395,7 +395,7 @@ __webpack_require__.r(__webpack_exports__);
 const Admin = ()=>{
     const [posts, setPosts] = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)();
     const getPosts = async ()=>{
-        const { data } = await axios__WEBPACK_IMPORTED_MODULE_4__/* ["default"] */ .Z.get(`/api/posts`, {
+        const { data } = await axios__WEBPACK_IMPORTED_MODULE_4__/* ["default"] */ .Z.get(`/api/posts?count=true`, {
             validateStatus: function(status) {
                 return true;
             },
@@ -425,7 +425,7 @@ const Admin = ()=>{
                         }),
                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                             className: "number",
-                            children: posts && posts.apartments ? posts.apartments.length : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Loading__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .Z, {})
+                            children: posts && posts.apartments ? posts.apartments : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Loading__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .Z, {})
                         })
                     ]
                 }),
@@ -438,7 +438,7 @@ const Admin = ()=>{
                         }),
                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                             className: "number",
-                            children: posts && posts.houses ? posts.houses.length : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Loading__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .Z, {})
+                            children: posts && posts.houses ? posts.houses : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Loading__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .Z, {})
                         })
                     ]
                 }),
@@ -451,7 +451,7 @@ const Admin = ()=>{
                         }),
                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                             className: "number",
-                            children: posts && posts.commercials ? posts.commercials.length : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Loading__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .Z, {})
+                            children: posts && posts.commercials ? posts.commercials : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Loading__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .Z, {})
                         })
                     ]
                 })

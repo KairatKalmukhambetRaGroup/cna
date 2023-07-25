@@ -33,7 +33,8 @@ Promise.resolve(/* import() eager */).then(__webpack_require__.t.bind(__webpack_
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ RootLayout)
+/* harmony export */   "default": () => (/* binding */ RootLayout),
+/* harmony export */   metadata: () => (/* binding */ metadata)
 /* harmony export */ });
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(56786);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
@@ -41,6 +42,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var next_font_google_target_css_path_src_app_layout_js_import_Montserrat_arguments_subsets_latin_variableName_montserrat___WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(next_font_google_target_css_path_src_app_layout_js_import_Montserrat_arguments_subsets_latin_variableName_montserrat___WEBPACK_IMPORTED_MODULE_1__);
 
 
+const metadata = {
+    title: "CNA - Центр Недвижимости Аркалык"
+};
 function RootLayout({ children }) {
     return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("html", {
         lang: "ru",
@@ -60,15 +64,11 @@ function RootLayout({ children }) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ Template),
-/* harmony export */   metadata: () => (/* binding */ metadata)
+/* harmony export */   "default": () => (/* binding */ Template)
 /* harmony export */ });
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(56786);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
 
-const metadata = {
-    title: "CNA - Центр Недвижимости Аркалык"
-};
 function Template({ children }) {
     return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
         children: children

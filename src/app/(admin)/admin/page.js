@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react';
 const Admin = () => {
     const [posts, setPosts] = useState();
     const getPosts = async () => {
-        const {data} = await axios.get(`/api/posts`, {validateStatus: function (status) { return true }, headers: {"Access-Control-Allow-Origin": "*", "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"}});
+        const {data} = await axios.get(`/api/posts?count=true`, {validateStatus: function (status) { return true }, headers: {"Access-Control-Allow-Origin": "*", "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"}});
         setPosts(data);
     }
     useEffect(()=>{
@@ -23,7 +23,7 @@ const Admin = () => {
                         Квартиры
                     </div>
                     <div className='number'>
-                        {(posts && posts.apartments) ? posts.apartments.length : (<Loading />)}                    
+                        {(posts && posts.apartments) ? posts.apartments : (<Loading />)}                    
                     </div>
                 </div>
                 <div className='card'>
@@ -31,7 +31,7 @@ const Admin = () => {
                         Дома
                     </div>
                     <div className='number'>
-                        {(posts && posts.houses) ? posts.houses.length : (<Loading />)}
+                        {(posts && posts.houses) ? posts.houses : (<Loading />)}
                     </div>
                 </div>
                 <div className='card'>
@@ -39,7 +39,7 @@ const Admin = () => {
                         Коммерческие недвижимости
                     </div>
                     <div className='number'>                    
-                        {(posts && posts.commercials) ? posts.commercials.length : (<Loading />)}
+                        {(posts && posts.commercials) ? posts.commercials : (<Loading />)}
                     </div>
                 </div>
             </div>

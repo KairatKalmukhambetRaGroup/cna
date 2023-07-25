@@ -14,6 +14,10 @@ export const useUserContext = () => {
     return useContext(UserContext);
 }
 
+export const metadata = {
+    title: 'CNA - Панель Администратора'
+};
+
 const AdminLayout = ({children}) => {
     const router = useRouter();
 

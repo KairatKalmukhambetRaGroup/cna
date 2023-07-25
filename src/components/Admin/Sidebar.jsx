@@ -8,7 +8,7 @@ const AdminSidebar = () => {
         <div id="sidebar">
             <nav>
                 <Link href="/" className='logo'>
-                    LOGO
+                    CNA
                 </Link>
                 <Link href="/admin">
                     Панель администратора

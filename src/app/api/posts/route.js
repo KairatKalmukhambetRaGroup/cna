@@ -15,11 +15,12 @@ export async function GET(request) {
     try {
         await connectMongo();
 
-        if(Object.keys(data).length > 0){
+        if(data.count)
+            return getPostCounts();
+        if(data.size)
+            return getAllPosts(request);
+        else
             return getPostsByHousing(request);
-        }else{
-            return getAllPosts();
-        }
     } catch (error) {
         console.log(error);
         return NextResponse.json(null, {status: 500});
@@ -109,40 +110,64 @@ export async function POST(request) {
     }
 }
 
-
-
-async function getAllPosts() {
+async function getPostCounts() {
     const apartment = await Housing.findOne({slug: 'apartment'});
     const house = await Housing.findOne({slug: 'house'});
     const commercial = await Housing.findOne({slug: 'commercial'});
-    const apartments = await Post.find({housing: apartment._id})
-        .populate({
-            path: 'region',
-            select: 'name'
-        })
-        .populate({
-            path: 'housing',
-            select: 'slug'
-        }).limit(8).sort('-createdAt');
-    const houses = await Post.find({housing: house._id})
-        .populate({
-            path: 'region',
-            select: 'name'
-        })
-        .populate({
-            path: 'housing',
-            select: 'slug'
-        }).limit(8).sort('-createdAt');
-    const commercials = await Post.find({housing: commercial._id})
-        .populate({
-            path: 'region',
-            select: 'name'
-        })
-        .populate({
-            path: 'housing',
-            select: 'slug'
-        }).limit(8).sort('-createdAt');
-    return NextResponse.json({apartments: apartments, houses: houses, commercials: commercials});
+    const apartments = await Post.countDocuments({housing: apartment._id});
+    const houses = await Post.countDocuments({housing: house._id});
+    const commercials = await Post.countDocuments({housing: commercial._id});
+    return NextResponse.json({apartments, houses, commercials});
+}
+
+async function getAllPosts(request) {
+    const params = request.nextUrl.searchParams.toString();
+    const data = queryToMongoose(params);
+    if(data.size && data.size === 'sm'){
+        const posts = await Post.find()
+            .populate({
+                path: 'region',
+                select: 'name'
+            })
+            .populate({
+                path: 'housing',
+                select: 'slug'
+            }).sort('-createdAt');
+        return NextResponse.json(posts);
+    }else{
+        let limit = 8;
+        const apartment = await Housing.findOne({slug: 'apartment'});
+        const house = await Housing.findOne({slug: 'house'});
+        const commercial = await Housing.findOne({slug: 'commercial'});
+        const apartments = await Post.find({housing: apartment._id})
+            .populate({
+                path: 'region',
+                select: 'name'
+            })
+            .populate({
+                path: 'housing',
+                select: 'slug'
+            }).limit(limit).sort('-createdAt');
+        const houses = await Post.find({housing: house._id})
+            .populate({
+                path: 'region',
+                select: 'name'
+            })
+            .populate({
+                path: 'housing',
+                select: 'slug'
+            }).limit(limit).sort('-createdAt');
+        const commercials = await Post.find({housing: commercial._id})
+            .populate({
+                path: 'region',
+                select: 'name'
+            })
+            .populate({
+                path: 'housing',
+                select: 'slug'
+            }).limit(limit).sort('-createdAt');
+        return NextResponse.json({apartments: apartments, houses: houses, commercials: commercials});
+    }
 }
 
 export async function getPostsByHousing(request) {

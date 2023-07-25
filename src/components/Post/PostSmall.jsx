@@ -16,11 +16,9 @@ const PostSmall = ({post}) => {
                     {priceToMils(post.price) } 〒
                 </div>
             </div>
-            {post.housing.slug === 'apartment' && (
-                <div className="title">
-                    {createTitle(post)}
-                </div>
-            )}
+            <div className="title">
+                {createTitle(post)}
+            </div>
         </div>
     )
 };

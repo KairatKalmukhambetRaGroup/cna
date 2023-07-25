@@ -194,11 +194,9 @@ async function GET(request) {
     const data = queryToMongoose(params);
     try {
         await (0,connect/* default */.Z)();
-        if (Object.keys(data).length > 0) {
-            return getPostsByHousing(request);
-        } else {
-            return getAllPosts();
-        }
+        if (data.count) return getPostCounts();
+        if (data.size) return getAllPosts(request);
+        else return getPostsByHousing(request);
     } catch (error) {
         console.log(error);
         return next_response/* default */.Z.json(null, {
@@ -286,7 +284,7 @@ async function POST(request) {
         });
     }
 }
-async function getAllPosts() {
+async function getPostCounts() {
     const apartment = await models_housing/* default */.Z.findOne({
         slug: "apartment"
     });
@@ -296,38 +294,77 @@ async function getAllPosts() {
     const commercial = await models_housing/* default */.Z.findOne({
         slug: "commercial"
     });
-    const apartments = await models_post/* default */.Z.find({
+    const apartments = await models_post/* default */.Z.countDocuments({
         housing: apartment._id
-    }).populate({
-        path: "region",
-        select: "name"
-    }).populate({
-        path: "housing",
-        select: "slug"
-    }).limit(8).sort("-createdAt");
-    const houses = await models_post/* default */.Z.find({
-        housing: house._id
-    }).populate({
-        path: "region",
-        select: "name"
-    }).populate({
-        path: "housing",
-        select: "slug"
-    }).limit(8).sort("-createdAt");
-    const commercials = await models_post/* default */.Z.find({
-        housing: commercial._id
-    }).populate({
-        path: "region",
-        select: "name"
-    }).populate({
-        path: "housing",
-        select: "slug"
-    }).limit(8).sort("-createdAt");
-    return next_response/* default */.Z.json({
-        apartments: apartments,
-        houses: houses,
-        commercials: commercials
     });
+    const houses = await models_post/* default */.Z.countDocuments({
+        housing: house._id
+    });
+    const commercials = await models_post/* default */.Z.countDocuments({
+        housing: commercial._id
+    });
+    return next_response/* default */.Z.json({
+        apartments,
+        houses,
+        commercials
+    });
+}
+async function getAllPosts(request) {
+    const params = request.nextUrl.searchParams.toString();
+    const data = queryToMongoose(params);
+    if (data.size && data.size === "sm") {
+        const posts = await models_post/* default */.Z.find().populate({
+            path: "region",
+            select: "name"
+        }).populate({
+            path: "housing",
+            select: "slug"
+        }).sort("-createdAt");
+        return next_response/* default */.Z.json(posts);
+    } else {
+        let limit = 8;
+        const apartment = await models_housing/* default */.Z.findOne({
+            slug: "apartment"
+        });
+        const house = await models_housing/* default */.Z.findOne({
+            slug: "house"
+        });
+        const commercial = await models_housing/* default */.Z.findOne({
+            slug: "commercial"
+        });
+        const apartments = await models_post/* default */.Z.find({
+            housing: apartment._id
+        }).populate({
+            path: "region",
+            select: "name"
+        }).populate({
+            path: "housing",
+            select: "slug"
+        }).limit(limit).sort("-createdAt");
+        const houses = await models_post/* default */.Z.find({
+            housing: house._id
+        }).populate({
+            path: "region",
+            select: "name"
+        }).populate({
+            path: "housing",
+            select: "slug"
+        }).limit(limit).sort("-createdAt");
+        const commercials = await models_post/* default */.Z.find({
+            housing: commercial._id
+        }).populate({
+            path: "region",
+            select: "name"
+        }).populate({
+            path: "housing",
+            select: "slug"
+        }).limit(limit).sort("-createdAt");
+        return next_response/* default */.Z.json({
+            apartments: apartments,
+            houses: houses,
+            commercials: commercials
+        });
+    }
 }
 async function getPostsByHousing(request) {
     const params = request.nextUrl.searchParams.toString();

@@ -20,6 +20,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.d(__webpack_exports__, {
   UserContext: () => (/* binding */ UserContext),
   "default": () => (/* binding */ layout),
+  metadata: () => (/* binding */ metadata),
   useUserContext: () => (/* binding */ useUserContext)
 });
 
@@ -45,7 +46,7 @@ const AdminSidebar = ()=>{
                     /*#__PURE__*/ jsx_runtime_.jsx((link_default()), {
                         href: "/",
                         className: "logo",
-                        children: "LOGO"
+                        children: "CNA"
                     }),
                     /*#__PURE__*/ jsx_runtime_.jsx((link_default()), {
                         href: "/admin",
@@ -196,7 +197,7 @@ const Login = ()=>{
 /* harmony default export */ const Admin_Login = (Login);
 
 ;// CONCATENATED MODULE: ./src/app/(admin)/admin/layout.js
-/* __next_internal_client_entry_do_not_use__ UserContext,useUserContext,default auto */ 
+/* __next_internal_client_entry_do_not_use__ UserContext,useUserContext,metadata,default auto */ 
 
 
 
@@ -206,6 +207,9 @@ const Login = ()=>{
 const UserContext = /*#__PURE__*/ react_default().createContext();
 const useUserContext = ()=>{
     return (0,react_.useContext)(UserContext);
+};
+const metadata = {
+    title: "CNA - Панель Администратора"
 };
 const AdminLayout = ({ children })=>{
     const router = (0,navigation.useRouter)();
@@ -258,6 +262,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   UserContext: () => (/* binding */ e0),
 /* harmony export */   __esModule: () => (/* binding */ __esModule),
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
+/* harmony export */   metadata: () => (/* binding */ e2),
 /* harmony export */   useUserContext: () => (/* binding */ e1)
 /* harmony export */ });
 /* harmony import */ var next_dist_build_webpack_loaders_next_flight_loader_module_proxy__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(61363);
@@ -274,6 +279,8 @@ const __default__ = proxy.default;
 const e0 = proxy["UserContext"];
 
 const e1 = proxy["useUserContext"];
+
+const e2 = proxy["metadata"];
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__default__);
