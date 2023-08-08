@@ -646,9 +646,9 @@ const Regions = ()=>{
 /* harmony import */ var _styles_loading_scss__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_styles_loading_scss__WEBPACK_IMPORTED_MODULE_1__);
 
 
-const Loading = ()=>{
+const Loading = ({ small = false })=>{
     return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-        className: "loading",
+        className: `loading ${small ? "small" : ""}`,
         children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
             className: "lds-roller",
             children: [

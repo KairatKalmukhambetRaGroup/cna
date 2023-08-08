@@ -1,8 +1,8 @@
 import '@/styles/loading.scss';
 
-const Loading = () => {
+const Loading = ({small = false}) => {
     return (
-        <div className="loading">
+        <div className={`loading ${small ? 'small' : ''}`}>
             <div className="lds-roller">
                 <div></div>
                 <div></div>

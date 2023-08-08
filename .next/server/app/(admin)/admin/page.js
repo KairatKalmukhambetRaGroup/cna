@@ -381,21 +381,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(56786);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _components_Loading__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2769);
-/* harmony import */ var _styles_admin_admin_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(95139);
-/* harmony import */ var _styles_admin_admin_scss__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_styles_admin_admin_scss__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(93258);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(18038);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _components_Inputs_RichText__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(15863);
+/* harmony import */ var _components_Loading__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(2769);
+/* harmony import */ var _styles_admin_admin_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(95139);
+/* harmony import */ var _styles_admin_admin_scss__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_styles_admin_admin_scss__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(93258);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(18038);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_4__);
 /* __next_internal_client_entry_do_not_use__ default auto */ 
 
 
 
 
+
 const Admin = ()=>{
-    const [posts, setPosts] = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)();
+    const [posts, setPosts] = (0,react__WEBPACK_IMPORTED_MODULE_4__.useState)();
     const getPosts = async ()=>{
-        const { data } = await axios__WEBPACK_IMPORTED_MODULE_4__/* ["default"] */ .Z.get(`/api/posts?count=true`, {
+        const { data } = await axios__WEBPACK_IMPORTED_MODULE_5__/* ["default"] */ .Z.get(`/api/posts?count=true`, {
             validateStatus: function(status) {
                 return true;
             },
@@ -406,57 +408,137 @@ const Admin = ()=>{
         });
         setPosts(data);
     };
-    (0,react__WEBPACK_IMPORTED_MODULE_3__.useEffect)(()=>{
-        if (!posts) getPosts();
+    const getAbout = async ()=>{
+        const { data } = await axios__WEBPACK_IMPORTED_MODULE_5__/* ["default"] */ .Z.get("/api/about", {
+            validateStatus: function(status) {
+                return true;
+            },
+            headers: {
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
+            }
+        });
+        setAbout(data);
+    };
+    (0,react__WEBPACK_IMPORTED_MODULE_4__.useEffect)(()=>{
+        if (!posts) {
+            getPosts();
+            getAbout();
+        }
     }, [
         posts
     ]);
-    return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+    const [about, setAbout] = (0,react__WEBPACK_IMPORTED_MODULE_4__.useState)("");
+    const handleChange = (value)=>{
+        setAbout(value);
+    };
+    const handleSubmit = async (e)=>{
+        e.preventDefault();
+        const { data, status } = await axios__WEBPACK_IMPORTED_MODULE_5__/* ["default"] */ .Z.post(`/api/about`, {
+            text: about
+        }, {
+            validateStatus: function(status) {
+                return true;
+            },
+            headers: {
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
+            }
+        });
+        setAbout(data);
+    // if(status === 200){
+    //     setModalText(modalSuccessCreation)
+    //     await delay(3000);
+    //     // router.push(`/admin/posts/${data._id}`);
+    // }else{
+    //     setModalText(modalFail)
+    // }
+    };
+    return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
         id: "admin",
-        children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-            className: "cards",
-            children: [
-                /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                    className: "card",
-                    children: [
-                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                            className: "title",
-                            children: "Квартиры"
-                        }),
-                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                            className: "number",
-                            children: posts && posts.apartments ? posts.apartments : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Loading__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .Z, {})
-                        })
-                    ]
-                }),
-                /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                    className: "card",
-                    children: [
-                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                            className: "title",
-                            children: "Дома"
-                        }),
-                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                            className: "number",
-                            children: posts && posts.houses ? posts.houses : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Loading__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .Z, {})
-                        })
-                    ]
-                }),
-                /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                    className: "card",
-                    children: [
-                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                            className: "title",
-                            children: "Коммерческие недвижимости"
-                        }),
-                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                            className: "number",
-                            children: posts && posts.commercials ? posts.commercials : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Loading__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .Z, {})
-                        })
-                    ]
-                })
-            ]
-        })
+        children: [
+            /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                className: "cards",
+                children: [
+                    /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                        className: "card",
+                        children: [
+                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                                className: "title",
+                                children: "Квартиры"
+                            }),
+                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                                className: "number",
+                                children: posts ? posts.apartments > 0 ? posts.apartments : 0 : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Loading__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .Z, {
+                                    small: true
+                                })
+                            })
+                        ]
+                    }),
+                    /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                        className: "card",
+                        children: [
+                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                                className: "title",
+                                children: "Дома"
+                            }),
+                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                                className: "number",
+                                children: posts ? posts.houses > 0 ? posts.houses : 0 : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Loading__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .Z, {
+                                    small: true
+                                })
+                            })
+                        ]
+                    }),
+                    /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                        className: "card",
+                        children: [
+                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                                className: "title",
+                                children: "Коммерческие недвижимости"
+                            }),
+                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                                className: "number",
+                                children: posts ? posts.commercials > 0 ? posts.commercials : 0 : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Loading__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .Z, {
+                                    small: true
+                                })
+                            })
+                        ]
+                    })
+                ]
+            }),
+            /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                className: "about-content",
+                children: [
+                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                        className: "heading",
+                        children: "О нас"
+                    }),
+                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Inputs_RichText__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .Z, {
+                        value: about,
+                        handleChange: handleChange
+                    }, "rich1"),
+                    /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                        className: "btns",
+                        children: [
+                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                                className: "btn reset",
+                                onClick: (e)=>{
+                                    e.preventDefault();
+                                    getAbout();
+                                },
+                                children: "Сбросить изменения"
+                            }),
+                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                                className: "btn save",
+                                onClick: handleSubmit,
+                                children: "Сохранить"
+                            })
+                        ]
+                    })
+                ]
+            })
+        ]
     });
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Admin);
@@ -477,9 +559,9 @@ const Admin = ()=>{
 /* harmony import */ var _styles_loading_scss__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_styles_loading_scss__WEBPACK_IMPORTED_MODULE_1__);
 
 
-const Loading = ()=>{
+const Loading = ({ small = false })=>{
     return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-        className: "loading",
+        className: `loading ${small ? "small" : ""}`,
         children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
             className: "lds-roller",
             children: [
@@ -533,25 +615,16 @@ const __default__ = proxy.default;
 
 /***/ }),
 
-/***/ 82787:
+/***/ 7847:
 /***/ (() => {
 
 
 
 /***/ }),
 
-/***/ 11440:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+/***/ 82787:
+/***/ (() => {
 
-module.exports = __webpack_require__(50954)
-
-
-/***/ }),
-
-/***/ 57114:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-module.exports = __webpack_require__(90696)
 
 
 /***/ })
@@ -563,7 +636,7 @@ module.exports = __webpack_require__(90696)
 var __webpack_require__ = require("../../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [697,21,329,527], () => (__webpack_exec__(56287)));
+var __webpack_exports__ = __webpack_require__.X(0, [697,21,61,329,527,863], () => (__webpack_exec__(56287)));
 module.exports = __webpack_exports__;
 
 })();

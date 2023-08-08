@@ -317,10 +317,10 @@ const PostForm = ({post=null}) => {
                                 </div>
                             </>
                         )}
-                        {formData.housing === 'house' && (
+                        {formData.housing !== 'apartment' && (
                             <div className="form-group number">
                                 <label>Участок (сот.):</label>
-                                <input type="text" name="plot" inputMode="decimal" pattern="[0-9]*[.,]?[0-9]*" value={formData.area.kitchen} onChange={handleChange}/>
+                                <input type="text" name="plot" inputMode="decimal" pattern="[0-9]*[.,]?[0-9]*" value={formData.plot} onChange={handleChange}/>
                             </div>
                         )}
                     </div>

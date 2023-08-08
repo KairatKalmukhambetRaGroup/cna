@@ -7,6 +7,10 @@
     justify-content: center;
     align-items: center;
     width: 100%;
+    &.small{
+      padding: 16px 0;
+      transform: scale(.8);
+    }
 }
 
 .lds-roller {

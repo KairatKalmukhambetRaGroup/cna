@@ -13,6 +13,7 @@ import { dataToQuery } from '@/utilFunctions/dateConvert';
 import Loading from "@/components/Loading";
 import PostCard from "@/components/Post/PostCard";
 import '@/styles/post.scss';
+import draftToHtml from "draftjs-to-html";
 
 function useWindowSize() {
     const [size, setSize] = useState([0, 0]);
@@ -34,10 +35,12 @@ const Home = () => {
     const [size, setSize] = useState('sm');
     const router = useRouter();
     const [posts, setPosts] = useState(null);
+    const [about,setAbout] = useState(null);
     const getPosts = async () => {
         const {data} = await axios.get(`/api/posts?size=${size}`, {validateStatus: function (status) { return true }, headers: {"Access-Control-Allow-Origin": "*", "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"}});
-        console.log(data)
         setPosts(data);
+        const {data: aboutText} = await axios.get(`/api/about`, {validateStatus: function (status) { return true }, headers: {"Access-Control-Allow-Origin": "*", "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"}});
+        setAbout(aboutText);
     }
     useEffect(()=> {
         if(!posts)
@@ -54,7 +57,6 @@ const Home = () => {
         }
     }, [width])
     useEffect(()=>{
-        console.log(size)
         if(size)
             getPosts();
     }, [size])
@@ -133,20 +135,14 @@ const Home = () => {
                                 </div>
                             </div>
                         </div>
-                        {/* <div id="about">
-                            <div className="medium-24-28 text-black">
-                                О нас
+                        {about && (
+                            <div id="about">
+                                <div className="medium-24-28 text-black">
+                                    О нас
+                                </div>
+                                <div className="regular-16-20 text-black" dangerouslySetInnerHTML={{__html: draftToHtml(JSON?.parse(about))}} />
                             </div>
-                            <div className="regular-16-20 text-black">
-                                Lorem ipsum dolor sit amet. Et nobis placeat qui perspiciatis voluptas qui consequatur voluptas est quisquam veniam est nemo natus non delectus nemo. Ut galisum voluptatem ab voluptatem quisquam a dicta nemo 33 blanditiis tenetur id odio saepe ut autem facere hic facere culpa. Ut dolorem nesciunt ut repudiandae itaque qui temporibus assumenda ut aliquid iusto et quod deleniti et harum soluta?
-                                <br></br>
-                                <br></br>
-                                Eum voluptatem dolorem et doloribus nesciunt aut excepturi ipsa ut sequi reiciendis aut ullam quidem aut labore laborum sed possimus voluptates! Et ratione quam qui omnis tempore quo dolores repellat ea exercitationem suscipit. Et fugit quis vel quaerat laborum et tenetur officia.
-                                <br></br>
-                                <br></br>
-                                Est sunt natus aut corrupti pariatur et odit quis nam perspiciatis tempora aut quia quia sed quam commodi. Et magni aliquam quo galisum autem aut veritatis nostrum et perferendis facilis rem illo fugiat ut amet dolores.
-                            </div>
-                        </div> */}
+                        )}
                     </>
                 )}
                 {size === 'sm' && (
