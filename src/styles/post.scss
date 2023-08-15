@@ -107,18 +107,18 @@
         }
     }
 
-    @include _sm{
-        .posts{
-            .postcard{
-                flex-direction: row;
-                .postimage{
-                    min-width: 280px;
-                }
-            }
-        }
-    }
+    // @include _sm{
+    //     .posts{
+    //         .postcard{
+    //             flex-direction: row;
+    //             .postimage{
+    //                 min-width: 280px;
+    //             }
+    //         }
+    //     }
+    // }
 
-    @include _lg{
+    @include _sm{
         display: flex;
     flex-direction: column;
     gap: 24px;

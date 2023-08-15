@@ -1,7 +1,7 @@
 (() => {
 var exports = {};
-exports.id = 504;
-exports.ids = [504];
+exports.id = 1504;
+exports.ids = [1504];
 exports.modules = {
 
 /***/ 18038:
@@ -324,7 +324,7 @@ __webpack_require__.r(__webpack_exports__);
       ]
       },
         {
-          'layout': [() => Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 43238)), "D:\\personal projects\\krisha-next\\src\\app\\(client)\\layout.js"],
+          'layout': [() => Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 30726)), "D:\\personal projects\\krisha-next\\src\\app\\(client)\\layout.js"],
           metadata: {
     icon: [(async (props) => (await Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 73881))).default(props))],
     apple: [],
@@ -922,6 +922,13 @@ const __default__ = proxy.default;
 
 /***/ }),
 
+/***/ 1978:
+/***/ (() => {
+
+
+
+/***/ }),
+
 /***/ 87332:
 /***/ (() => {
 
@@ -936,7 +943,7 @@ const __default__ = proxy.default;
 var __webpack_require__ = require("../../../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [697,21,512,329,62,787], () => (__webpack_exec__(2157)));
+var __webpack_exports__ = __webpack_require__.X(0, [2697,9021,1512,5329,5415,2062], () => (__webpack_exec__(2157)));
 module.exports = __webpack_exports__;
 
 })();

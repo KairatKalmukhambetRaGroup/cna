@@ -4,9 +4,27 @@ import Select from "../Inputs/Select";
 import NumberRange from "../Inputs/NumberRange";
 import { PLACEMENTS, PURPOSES } from '@/constants';
 import MultiSelect from '../Inputs/MultiSelect';
+const housings = [
+    'Кватиры',
+    'Дома',
+    'Коммерческие недвижимости'
+]
+
 
 const ComercialFilter = ({formData, handleChange, regions, handleSubmit}) => {
-    
+    const handleHousingChange = (name, value) =>{
+        switch(value){
+            case 'Кватиры':
+                handleChange('housing', 'apartment');
+                break;
+            case 'Дома':
+                handleChange('housing', 'house');
+                break;
+            case 'Коммерческие недвижимости':
+                handleChange('housing', 'commercial');
+                break;
+        }
+    }
     return (
         <div id="filter" className="commercial">
             <div className="navbar">
@@ -28,6 +46,9 @@ const ComercialFilter = ({formData, handleChange, regions, handleSubmit}) => {
                 <div className="top">
                     <div className="container">
                         <div className="content">
+                            <span className='mobile'>
+                                <Select name="housing" options={housings} value={'Коммерческие недвижимости'} handleChange={handleHousingChange} />
+                            </span>
                             <MultiSelect name="purpose" placeholder='Не важно' label='Назначение' options={PURPOSES} value={formData.purpose} handleChange={handleChange} />
                             <Select name="region" placeholder='Не важно' options={regions} value={formData.region} handleChange={handleChange} />
                             <NumberRange name="price" label="Цена" param="тг" value={formData.price} handleChange={handleChange} />

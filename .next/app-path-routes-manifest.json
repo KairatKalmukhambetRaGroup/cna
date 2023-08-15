@@ -1,18 +1,24 @@
 {
   "/favicon.ico/route": "/favicon.ico",
   "/api/about/route": "/api/about",
+  "/api/advertisements/route": "/api/advertisements",
   "/api/housings/route": "/api/housings",
-  "/api/login/route": "/api/login",
   "/api/posts/route": "/api/posts",
   "/api/regions/route": "/api/regions",
+  "/api/login/route": "/api/login",
   "/api/users/route": "/api/users",
   "/(client)/page": "/",
   "/(client)/posts/page": "/posts",
+  "/(client)/about/page": "/about",
+  "/api/advertisements/[id]/route": "/api/advertisements/[id]",
   "/(admin)/admin/page": "/admin",
   "/api/posts/[id]/route": "/api/posts/[id]",
   "/(admin)/admin/regions/page": "/admin/regions",
-  "/(admin)/admin/posts/page": "/admin/posts",
   "/(client)/posts/[id]/page": "/posts/[id]",
-  "/(admin)/admin/posts/[id]/page": "/admin/posts/[id]",
-  "/(admin)/admin/posts/new/page": "/admin/posts/new"
+  "/(admin)/admin/posts/page": "/admin/posts",
+  "/(admin)/admin/advertisements/page": "/admin/advertisements",
+  "/(admin)/admin/advertisements/[id]/page": "/admin/advertisements/[id]",
+  "/(admin)/admin/advertisements/new/page": "/admin/advertisements/new",
+  "/(admin)/admin/posts/new/page": "/admin/posts/new",
+  "/(admin)/admin/posts/[id]/page": "/admin/posts/[id]"
 }

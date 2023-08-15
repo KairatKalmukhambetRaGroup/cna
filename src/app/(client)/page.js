@@ -14,6 +14,8 @@ import Loading from "@/components/Loading";
 import PostCard from "@/components/Post/PostCard";
 import '@/styles/post.scss';
 import draftToHtml from "draftjs-to-html";
+import { async } from "regenerator-runtime";
+import AdvertisementCard from "@/components/AdvertisementCard";
 
 function useWindowSize() {
     const [size, setSize] = useState([0, 0]);
@@ -33,6 +35,7 @@ const Home = () => {
     // const {posts} = useSelector((state) => state.posts);
     // const dispatch = useDispatch();
     const [size, setSize] = useState('sm');
+    const [ads, setAds] = useState(null);
     const router = useRouter();
     const [posts, setPosts] = useState(null);
     const [about,setAbout] = useState(null);
@@ -45,15 +48,24 @@ const Home = () => {
     useEffect(()=> {
         if(!posts)
             getPosts();
+        if(!ads)
+            getAds();
     }, [posts]);
+
+    const getAds = async () => {
+        const {data} = await axios.get(`/api/advertisements`,{validateStatus: function (status) { return true }, headers: {"Access-Control-Allow-Origin": "*", "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"}});
+        setAds(data);
+    }
 
 
     useEffect(()=>{
         if(width){
-            if(width < 992)
+            if(width < 992){
                 setSize('sm');
-            else    
+            }
+            else{
                 setSize('lg');
+            }    
         }
     }, [width])
     useEffect(()=>{
@@ -79,7 +91,6 @@ const Home = () => {
         const query = dataToQuery({...formData, housing: housing});
         router.push(`/posts${query}`);
     }
-
 
 
     return (
@@ -148,9 +159,16 @@ const Home = () => {
                 {size === 'sm' && (
                     <div className="mobileposts">                    
                         {(posts && posts.length > 0) ? posts.map((post,key) => (
-                            <div className="col" key={key}>
-                                <PostCard post={post} />
-                            </div>
+                            <>
+                                <div className="col" key={key}>
+                                    <PostCard post={post} />
+                                </div>
+                                {(Number(key+1) % 5 === 0 && ads && ads.length > 0) && (
+                                    <div className="col" key={`ad${Number(key+1)/5}`}>
+                                        <AdvertisementCard ad={ads[(Number(key+1)/5-1) % ads.length]} />
+                                    </div>                                    
+                                )}
+                            </>
                         )) : (
                             <Loading />
                         )}

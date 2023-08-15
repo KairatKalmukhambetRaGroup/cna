@@ -6,11 +6,13 @@
         display: flex;
         flex-direction: column!important;
         gap: 24px;
-        position: sticky;
+        position: relative;
         top: 20px;
         height: auto;
         .banner{
-            background: v.$yellow;
+            position: sticky;
+            top: 20px;
+            // background: v.$yellow;
             padding: 20px;
             border-radius: 8px;
             flex-direction: column;
@@ -19,7 +21,7 @@
             .text{
                 display: flex;
                 flex-direction: column;
-                gap: 16px;
+                gap: 8px;
             }
             .action{
                 display: flex;
@@ -30,14 +32,14 @@
                     background: v.$blue;
                     color: v.$white;
                     font-weight: 400;
-                    font-size: 14px;
-                    line-height: 16px;
+                    // font-size: 14px;
+                    // line-height: 16px;
 
                     display: flex;
                     flex-direction: row;
                     align-items: center;
                     gap: 4px;
-                    padding: 4px 8px;
+                    padding: 8px;
                     border-radius: 8px;
                     i{
                         content: url('../assets/svg/phone.svg');
@@ -46,9 +48,15 @@
             }
 
             &.large{
-                padding: 40px 20px ;
+                // padding: 40px 20px ;
                 width: 100%;
-                aspect-ratio: 3 /4;
+                aspect-ratio: 9 /16;
+                background-image:linear-gradient(to bottom, rgba($color: v.$yellow, $alpha: 0),rgba($color: v.$yellow, $alpha: 0),rgba($color: v.$yellow, $alpha: 0.1),rgba($color: v.$yellow, $alpha: .8), rgba($color: v.$yellow, $alpha: 1), rgba($color: v.$yellow, $alpha: 1)),
+    url('../assets/image/banner-image2.jpg');
+                background-position: center;
+                background-size: cover;
+                justify-content: flex-end;
+                gap: 16px;
             }
             &.small{
                 width: 100%;

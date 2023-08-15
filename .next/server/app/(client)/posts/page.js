@@ -1,7 +1,7 @@
 (() => {
 var exports = {};
-exports.id = 289;
-exports.ids = [289];
+exports.id = 5289;
+exports.ids = [5289];
 exports.modules = {
 
 /***/ 18038:
@@ -315,7 +315,7 @@ __webpack_require__.r(__webpack_exports__);
       ]
       },
         {
-          'layout': [() => Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 43238)), "D:\\personal projects\\krisha-next\\src\\app\\(client)\\layout.js"],
+          'layout': [() => Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 30726)), "D:\\personal projects\\krisha-next\\src\\app\\(client)\\layout.js"],
           metadata: {
     icon: [(async (props) => (await Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 73881))).default(props))],
     apple: [],
@@ -490,7 +490,25 @@ const MultiSelect = ({ name = "", placeholder = null, label = "", value = [], op
 
 
 
+const housings = [
+    "Кватиры",
+    "Дома",
+    "Коммерческие недвижимости"
+];
 const ApartmentFilter = ({ formData, handleChange, handleSubmit, regions })=>{
+    const handleHousingChange = (name, value)=>{
+        switch(value){
+            case "Кватиры":
+                handleChange("housing", "apartment");
+                break;
+            case "Дома":
+                handleChange("housing", "house");
+                break;
+            case "Коммерческие недвижимости":
+                handleChange("housing", "commercial");
+                break;
+        }
+    };
     return /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
         id: "filter",
         className: "apartment",
@@ -535,8 +553,17 @@ const ApartmentFilter = ({ formData, handleChange, handleSubmit, regions })=>{
                                 className: "content",
                                 children: [
                                     /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                                        className: "regular-14-16",
+                                        className: "regular-14-16 not-mobile",
                                         children: "Квартиры"
+                                    }),
+                                    /*#__PURE__*/ jsx_runtime_.jsx("span", {
+                                        className: "mobile",
+                                        children: /*#__PURE__*/ jsx_runtime_.jsx(Select/* default */.Z, {
+                                            name: "housing",
+                                            options: housings,
+                                            value: "Квартиры",
+                                            handleChange: handleHousingChange
+                                        })
                                     }),
                                     /*#__PURE__*/ jsx_runtime_.jsx(Select/* default */.Z, {
                                         name: "region",
@@ -688,7 +715,25 @@ const ApartmentFilter = ({ formData, handleChange, handleSubmit, regions })=>{
 
 
 
+const ComercialFilter_housings = [
+    "Кватиры",
+    "Дома",
+    "Коммерческие недвижимости"
+];
 const ComercialFilter = ({ formData, handleChange, regions, handleSubmit })=>{
+    const handleHousingChange = (name, value)=>{
+        switch(value){
+            case "Кватиры":
+                handleChange("housing", "apartment");
+                break;
+            case "Дома":
+                handleChange("housing", "house");
+                break;
+            case "Коммерческие недвижимости":
+                handleChange("housing", "commercial");
+                break;
+        }
+    };
     return /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
         id: "filter",
         className: "commercial",
@@ -732,6 +777,15 @@ const ComercialFilter = ({ formData, handleChange, regions, handleSubmit })=>{
                             children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
                                 className: "content",
                                 children: [
+                                    /*#__PURE__*/ jsx_runtime_.jsx("span", {
+                                        className: "mobile",
+                                        children: /*#__PURE__*/ jsx_runtime_.jsx(Select/* default */.Z, {
+                                            name: "housing",
+                                            options: ComercialFilter_housings,
+                                            value: "Коммерческие недвижимости",
+                                            handleChange: handleHousingChange
+                                        })
+                                    }),
                                     /*#__PURE__*/ jsx_runtime_.jsx(Inputs_MultiSelect, {
                                         name: "purpose",
                                         placeholder: "Не важно",
@@ -833,7 +887,25 @@ const ComercialFilter = ({ formData, handleChange, regions, handleSubmit })=>{
 
 
 
+const HouseFilter_housings = [
+    "Кватиры",
+    "Дома",
+    "Коммерческие недвижимости"
+];
 const HouseFilter = ({ formData, handleChange, regions, handleSubmit })=>{
+    const handleHousingChange = (name, value)=>{
+        switch(value){
+            case "Кватиры":
+                handleChange("housing", "apartment");
+                break;
+            case "Дома":
+                handleChange("housing", "house");
+                break;
+            case "Коммерческие недвижимости":
+                handleChange("housing", "commercial");
+                break;
+        }
+    };
     return /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
         id: "filter",
         className: "house",
@@ -878,8 +950,17 @@ const HouseFilter = ({ formData, handleChange, regions, handleSubmit })=>{
                                 className: "content",
                                 children: [
                                     /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                                        className: "regular-14-16",
+                                        className: "regular-14-16 not-mobile",
                                         children: "Дома"
+                                    }),
+                                    /*#__PURE__*/ jsx_runtime_.jsx("span", {
+                                        className: "mobile",
+                                        children: /*#__PURE__*/ jsx_runtime_.jsx(Select/* default */.Z, {
+                                            name: "housing",
+                                            options: HouseFilter_housings,
+                                            value: "Дома",
+                                            handleChange: handleHousingChange
+                                        })
                                     }),
                                     /*#__PURE__*/ jsx_runtime_.jsx(Select/* default */.Z, {
                                         name: "region",
@@ -1075,6 +1156,10 @@ const Sort = ({ formData, handleChange })=>{
 
 // EXTERNAL MODULE: ./src/components/Loading.jsx
 var Loading = __webpack_require__(2769);
+// EXTERNAL MODULE: ./node_modules/axios/lib/axios.js + 46 modules
+var axios = __webpack_require__(93258);
+// EXTERNAL MODULE: ./src/components/AdvertisementCard.jsx
+var AdvertisementCard = __webpack_require__(11728);
 ;// CONCATENATED MODULE: ./src/components/Post/Posts.jsx
 
 
@@ -1082,7 +1167,27 @@ var Loading = __webpack_require__(2769);
 
 
 
+
+
 const Posts = ({ posts, title = "", total = 0, formData, handleChange })=>{
+    const [ads, setAds] = (0,react_.useState)(null);
+    const getAds = async ()=>{
+        const { data } = await axios/* default */.Z.get(`/api/advertisements`, {
+            validateStatus: function(status) {
+                return true;
+            },
+            headers: {
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
+            }
+        });
+        setAds(data);
+    };
+    (0,react_.useEffect)(()=>{
+        if (!ads) getAds();
+    }, [
+        ads
+    ]);
     return /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
         id: "posts",
         children: [
@@ -1113,9 +1218,16 @@ const Posts = ({ posts, title = "", total = 0, formData, handleChange })=>{
                         formData: formData,
                         handleChange: handleChange
                     }),
-                    posts ? posts.length > 0 ? posts.map((post, key)=>/*#__PURE__*/ jsx_runtime_.jsx(PostCard/* default */.Z, {
-                            post: post
-                        }, key)) : /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                    posts ? posts.length > 0 ? posts.map((post, key)=>/*#__PURE__*/ (0,jsx_runtime_.jsxs)(jsx_runtime_.Fragment, {
+                            children: [
+                                /*#__PURE__*/ jsx_runtime_.jsx(PostCard/* default */.Z, {
+                                    post: post
+                                }, key),
+                                Number(key + 1) % 5 === 0 && ads && ads.length > 0 && /*#__PURE__*/ jsx_runtime_.jsx(AdvertisementCard/* default */.Z, {
+                                    ad: ads[(Number(key + 1) / 5 - 1) % ads.length]
+                                }, `ad${Number(key + 1) / 5}`)
+                            ]
+                        })) : /*#__PURE__*/ jsx_runtime_.jsx("div", {
                         className: "none",
                         children: "По вашему запросу ничего не найдено"
                     }) : /*#__PURE__*/ jsx_runtime_.jsx(Loading/* default */.Z, {})
@@ -1134,82 +1246,38 @@ var sidebar = __webpack_require__(75385);
 const Sidebar = ()=>{
     return /*#__PURE__*/ jsx_runtime_.jsx("div", {
         className: "sidebar",
-        children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+        children: /*#__PURE__*/ jsx_runtime_.jsx("div", {
             className: "content",
-            children: [
-                /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-                    className: "banner large",
-                    children: [
-                        /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-                            className: "text",
+            children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                className: "banner large",
+                children: [
+                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                        className: "text",
+                        children: [
+                            /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                                className: "medium-24-28 text-black",
+                                children: "Ищешь покупателя для квартиры?"
+                            }),
+                            /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                                className: "regular-16-20 text-black",
+                                children: "Доверь продажу профессионалам на CNA.KZ! Максимум выгоды, минимум хлопот."
+                            })
+                        ]
+                    }),
+                    /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                        className: "action",
+                        children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)("a", {
+                            href: "tel:+77055621546",
+                            target: "_blank",
+                            className: "btn",
                             children: [
-                                /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                                    className: "medium-24-28 text-black",
-                                    children: "Названия Сайта"
-                                }),
-                                /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                                    className: "medium-16-20 text-black",
-                                    children: "Сайт объявлений недвижимости"
-                                })
-                            ]
-                        }),
-                        /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-                            className: "action",
-                            children: [
-                                /*#__PURE__*/ (0,jsx_runtime_.jsxs)("a", {
-                                    href: "tel:+77055621546",
-                                    target: "_blank",
-                                    className: "btn",
-                                    children: [
-                                        /*#__PURE__*/ jsx_runtime_.jsx("i", {}),
-                                        " +7 705 562 1546"
-                                    ]
-                                }),
-                                /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                                    className: "regular-14-16",
-                                    children: "Подать объявление"
-                                })
+                                /*#__PURE__*/ jsx_runtime_.jsx("i", {}),
+                                " +7 705 562 1546"
                             ]
                         })
-                    ]
-                }),
-                /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-                    className: "banner small",
-                    children: [
-                        /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-                            className: "text",
-                            children: [
-                                /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                                    className: "medium-24-28 text-black",
-                                    children: "Названия Сайта"
-                                }),
-                                /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                                    className: "medium-16-20 text-black",
-                                    children: "Сайт объявлений недвижимости"
-                                })
-                            ]
-                        }),
-                        /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-                            className: "action",
-                            children: [
-                                /*#__PURE__*/ (0,jsx_runtime_.jsxs)("a", {
-                                    href: "+77055621546",
-                                    target: "_blank",
-                                    className: "btn",
-                                    children: [
-                                        /*#__PURE__*/ jsx_runtime_.jsx("i", {}),
-                                        " +7 705 562 1546"
-                                    ]
-                                }),
-                                /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                                    className: "regular-14-16",
-                                    children: "Подать объявление"
-                                })
-                            ]
-                        })
-                    ]
-                })
-            ]
+                    })
+                ]
+            })
         })
     });
 };
@@ -1219,8 +1287,6 @@ const Sidebar = ()=>{
 var home = __webpack_require__(81118);
 // EXTERNAL MODULE: ./src/utilFunctions/dateConvert.js
 var dateConvert = __webpack_require__(42062);
-// EXTERNAL MODULE: ./node_modules/axios/lib/axios.js + 46 modules
-var axios = __webpack_require__(93258);
 // EXTERNAL MODULE: ./node_modules/next/navigation.js
 var navigation = __webpack_require__(57114);
 ;// CONCATENATED MODULE: ./src/app/(client)/posts/page.js
@@ -1433,6 +1499,14 @@ const __default__ = proxy.default;
 
 
 
+/***/ }),
+
+/***/ 57114:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__(90696)
+
+
 /***/ })
 
 };
@@ -1442,7 +1516,7 @@ const __default__ = proxy.default;
 var __webpack_require__ = require("../../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [697,21,512,329,62,787,682,663,356], () => (__webpack_exec__(78774)));
+var __webpack_exports__ = __webpack_require__.X(0, [2697,9021,1512,5329,5415,2062,4682,3663,2851], () => (__webpack_exec__(78774)));
 module.exports = __webpack_exports__;
 
 })();

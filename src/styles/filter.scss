@@ -78,6 +78,9 @@
                     align-items: center;
                     gap: 24px;
                     padding: 20px 0;
+                    .not-mobile{
+                        display: none;
+                    }
                 }
             }
             .middle{
@@ -208,6 +211,12 @@
                         align-items: center;
                         gap: 24px;
                         padding: 20px 0;
+                        .not-mobile{
+                            display: block;
+                        }
+                        .mobile{
+                            display: none;
+                        }
                     }
                 }
                 .middle{

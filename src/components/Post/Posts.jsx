@@ -2,10 +2,21 @@ import PostCard from "./PostCard";
 
 import '@/styles/post.scss';
 import Sort from "./Sort";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Loading from "../Loading";
+import axios from "axios";
+import AdvertisementCard from "../AdvertisementCard";
 
 const Posts = ({posts, title='', total=0, formData, handleChange}) => {
+    const [ads, setAds] = useState(null);
+    const getAds = async () => {
+        const {data} = await axios.get(`/api/advertisements`,{validateStatus: function (status) { return true }, headers: {"Access-Control-Allow-Origin": "*", "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"}});
+        setAds(data);
+    }
+    useEffect(()=>{
+        if(!ads)
+            getAds();
+    }, [ads])
     return (
         <div id="posts">
             <div className="heading">
@@ -21,7 +32,12 @@ const Posts = ({posts, title='', total=0, formData, handleChange}) => {
                 {posts ? 
                     posts.length>0 ? 
                         posts.map((post, key)=>(
-                            <PostCard post={post} key={key} />
+                            <>
+                                <PostCard post={post} key={key} />
+                                {(Number(key+1) % 5 === 0 && ads && ads.length > 0) && (
+                                    <AdvertisementCard ad={ads[(Number(key+1)/5-1) % ads.length]} key={`ad${Number(key+1)/5}`} />
+                                )}
+                            </>
                         ))
                         : (
                             <div className="none">

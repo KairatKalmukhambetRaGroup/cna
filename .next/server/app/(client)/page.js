@@ -1,7 +1,7 @@
 (() => {
 var exports = {};
-exports.id = 766;
-exports.ids = [766];
+exports.id = 9766;
+exports.ids = [9766];
 exports.modules = {
 
 /***/ 18038:
@@ -306,7 +306,7 @@ __webpack_require__.r(__webpack_exports__);
         }]
       },
         {
-          'layout': [() => Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 43238)), "D:\\personal projects\\krisha-next\\src\\app\\(client)\\layout.js"],
+          'layout': [() => Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 30726)), "D:\\personal projects\\krisha-next\\src\\app\\(client)\\layout.js"],
           metadata: {
     icon: [(async (props) => (await Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 73881))).default(props))],
     apple: [],
@@ -583,12 +583,18 @@ var PostCard = __webpack_require__(69476);
 // EXTERNAL MODULE: ./node_modules/draftjs-to-html/lib/draftjs-to-html.js
 var draftjs_to_html = __webpack_require__(21512);
 var draftjs_to_html_default = /*#__PURE__*/__webpack_require__.n(draftjs_to_html);
+// EXTERNAL MODULE: ./node_modules/regenerator-runtime/runtime-module.js
+var runtime_module = __webpack_require__(28216);
+// EXTERNAL MODULE: ./src/components/AdvertisementCard.jsx
+var AdvertisementCard = __webpack_require__(11728);
 ;// CONCATENATED MODULE: ./src/app/(client)/page.js
 /* __next_internal_client_entry_do_not_use__ default auto */ 
 
 // import {useDispatch, useSelector} from 'react-redux';
 
 // import { getPosts } from "../actions/post";
+
+
 
 
 
@@ -621,6 +627,7 @@ const Home = ()=>{
     // const {posts} = useSelector((state) => state.posts);
     // const dispatch = useDispatch();
     const [size, setSize] = (0,react_.useState)("sm");
+    const [ads, setAds] = (0,react_.useState)(null);
     const router = (0,navigation.useRouter)();
     const [posts, setPosts] = (0,react_.useState)(null);
     const [about, setAbout] = (0,react_.useState)(null);
@@ -648,13 +655,29 @@ const Home = ()=>{
     };
     (0,react_.useEffect)(()=>{
         if (!posts) getPosts();
+        if (!ads) getAds();
     }, [
         posts
     ]);
+    const getAds = async ()=>{
+        const { data } = await axios/* default */.Z.get(`/api/advertisements`, {
+            validateStatus: function(status) {
+                return true;
+            },
+            headers: {
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
+            }
+        });
+        setAds(data);
+    };
     (0,react_.useEffect)(()=>{
         if (width) {
-            if (width < 992) setSize("sm");
-            else setSize("lg");
+            if (width < 992) {
+                setSize("sm");
+            } else {
+                setSize("lg");
+            }
         }
     }, [
         width
@@ -777,12 +800,22 @@ const Home = ()=>{
                     }),
                     size === "sm" && /*#__PURE__*/ jsx_runtime_.jsx("div", {
                         className: "mobileposts",
-                        children: posts && posts.length > 0 ? posts.map((post, key)=>/*#__PURE__*/ jsx_runtime_.jsx("div", {
-                                className: "col",
-                                children: /*#__PURE__*/ jsx_runtime_.jsx(PostCard/* default */.Z, {
-                                    post: post
-                                })
-                            }, key)) : /*#__PURE__*/ jsx_runtime_.jsx(Loading/* default */.Z, {})
+                        children: posts && posts.length > 0 ? posts.map((post, key)=>/*#__PURE__*/ (0,jsx_runtime_.jsxs)(jsx_runtime_.Fragment, {
+                                children: [
+                                    /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                                        className: "col",
+                                        children: /*#__PURE__*/ jsx_runtime_.jsx(PostCard/* default */.Z, {
+                                            post: post
+                                        })
+                                    }, key),
+                                    Number(key + 1) % 5 === 0 && ads && ads.length > 0 && /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                                        className: "col",
+                                        children: /*#__PURE__*/ jsx_runtime_.jsx(AdvertisementCard/* default */.Z, {
+                                            ad: ads[(Number(key + 1) / 5 - 1) % ads.length]
+                                        })
+                                    }, `ad${Number(key + 1) / 5}`)
+                                ]
+                            })) : /*#__PURE__*/ jsx_runtime_.jsx(Loading/* default */.Z, {})
                     })
                 ]
             })
@@ -834,7 +867,7 @@ const __default__ = proxy.default;
 var __webpack_require__ = require("../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [697,21,512,329,62,787,682,356], () => (__webpack_exec__(54936)));
+var __webpack_exports__ = __webpack_require__.X(0, [2697,9021,1512,8613,5329,5415,2062,4682,2851], () => (__webpack_exec__(54936)));
 module.exports = __webpack_exports__;
 
 })();
