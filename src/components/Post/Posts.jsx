@@ -33,9 +33,9 @@ const Posts = ({posts, title='', total=0, formData, handleChange}) => {
                     posts.length>0 ? 
                         posts.map((post, key)=>(
                             <div key={key}>
-                                <PostCard post={post} key={key} />
+                                <PostCard post={post}/>
                                 {(Number(key+1) % 5 === 0 && ads && ads.length > 0) && (
-                                    <AdvertisementCard ad={ads[(Number(key+1)/5-1) % ads.length]} key={`${ads[(Number(key+1)/5-1) % ads.length]._id}-${key}`} />
+                                    <AdvertisementCard ad={ads[(Number(key+1)/5-1) % ads.length]}/>
                                 )}
                             </div>
                         ))

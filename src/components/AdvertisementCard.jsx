@@ -2,7 +2,7 @@ import '@/styles/advertisements.scss';
 
 const AdvertisementCard = ({ad}) => {
     return (
-        <a className="adcard" href={ad.link}>
+        <a className="advertcard" href={ad.link}>
             <div className="adimage">
                 {ad.image ? (
                     <img src={`https://cna.kz/public/uploads/${ad.image}`} alt="preview" />
