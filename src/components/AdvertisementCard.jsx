@@ -1,7 +1,6 @@
 import '@/styles/advertisements.scss';
 
 const AdvertisementCard = ({ad}) => {
-    console.log(ad);
     return (
         <a className="adcard" href={ad.link}>
             <div className="adimage">

@@ -1218,16 +1218,16 @@ const Posts = ({ posts, title = "", total = 0, formData, handleChange })=>{
                         formData: formData,
                         handleChange: handleChange
                     }),
-                    posts ? posts.length > 0 ? posts.map((post, key)=>/*#__PURE__*/ (0,jsx_runtime_.jsxs)(jsx_runtime_.Fragment, {
+                    posts ? posts.length > 0 ? posts.map((post, key)=>/*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
                             children: [
                                 /*#__PURE__*/ jsx_runtime_.jsx(PostCard/* default */.Z, {
                                     post: post
                                 }, key),
                                 Number(key + 1) % 5 === 0 && ads && ads.length > 0 && /*#__PURE__*/ jsx_runtime_.jsx(AdvertisementCard/* default */.Z, {
                                     ad: ads[(Number(key + 1) / 5 - 1) % ads.length]
-                                }, `ad${Number(key + 1) / 5}`)
+                                }, `${ads[(Number(key + 1) / 5 - 1) % ads.length]._id}-${key}`)
                             ]
-                        })) : /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                        }, key)) : /*#__PURE__*/ jsx_runtime_.jsx("div", {
                         className: "none",
                         children: "По вашему запросу ничего не найдено"
                     }) : /*#__PURE__*/ jsx_runtime_.jsx(Loading/* default */.Z, {})
@@ -1516,7 +1516,7 @@ module.exports = __webpack_require__(90696)
 var __webpack_require__ = require("../../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [2697,9021,1512,5329,5415,2062,4682,3663,2851], () => (__webpack_exec__(78774)));
+var __webpack_exports__ = __webpack_require__.X(0, [2697,9021,1512,5329,8130,2062,4682,3663,2851], () => (__webpack_exec__(78774)));
 module.exports = __webpack_exports__;
 
 })();

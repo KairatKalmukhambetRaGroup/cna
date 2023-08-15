@@ -159,16 +159,12 @@ const Home = () => {
                 {size === 'sm' && (
                     <div className="mobileposts">                    
                         {(posts && posts.length > 0) ? posts.map((post,key) => (
-                            <>
                                 <div className="col" key={key}>
                                     <PostCard post={post} />
-                                </div>
-                                {(Number(key+1) % 5 === 0 && ads && ads.length > 0) && (
-                                    <div className="col" key={`ad${Number(key+1)/5}`}>
+                                    {(Number(key+1) % 5 === 0 && ads && ads.length > 0) && (
                                         <AdvertisementCard ad={ads[(Number(key+1)/5-1) % ads.length]} />
-                                    </div>                                    
-                                )}
-                            </>
+                                    )}
+                                </div>
                         )) : (
                             <Loading />
                         )}
