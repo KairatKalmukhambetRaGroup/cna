@@ -1222,10 +1222,10 @@ const Posts = ({ posts, title = "", total = 0, formData, handleChange })=>{
                             children: [
                                 /*#__PURE__*/ jsx_runtime_.jsx(PostCard/* default */.Z, {
                                     post: post
-                                }, key),
+                                }),
                                 Number(key + 1) % 5 === 0 && ads && ads.length > 0 && /*#__PURE__*/ jsx_runtime_.jsx(AdvertisementCard/* default */.Z, {
                                     ad: ads[(Number(key + 1) / 5 - 1) % ads.length]
-                                }, `${ads[(Number(key + 1) / 5 - 1) % ads.length]._id}-${key}`)
+                                })
                             ]
                         }, key)) : /*#__PURE__*/ jsx_runtime_.jsx("div", {
                         className: "none",
