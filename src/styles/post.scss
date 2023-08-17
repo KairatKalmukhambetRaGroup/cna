@@ -2,6 +2,7 @@
 @import './adaptive';
 
 #posts{
+    min-height: 500px;
     display: flex;
     flex-direction: column;
     gap: 24px;
@@ -97,8 +98,12 @@
                     -webkit-box-orient: vertical;
                 }
                 .date{
+                    padding-top: 20px;
+                    width: 100%;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
                     margin-top: auto;
-                    margin-left: auto;
                     font-weight: 400;
                     font-size: 13px;
                     line-height: 14px;
@@ -213,8 +218,8 @@
                     -webkit-box-orient: vertical;
                 }
                 .date{
+                    padding-top: 0;
                     margin-top: auto;
-                    margin-left: auto;
                     font-weight: 400;
                     font-size: 13px;
                     line-height: 14px;

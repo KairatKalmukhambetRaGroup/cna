@@ -535,6 +535,7 @@ const Posts = ()=>{
                                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                                         className: "image",
                                         children: post.images && post.images.length > 0 && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("img", {
+                                            loading: "lazy",
                                             src: `https://cna.kz/public/uploads/${post.images[0]}`,
                                             alt: ""
                                         })

@@ -26,6 +26,7 @@ exports.modules = {
 
 const initFormData = {
     housing: "apartment",
+    city: "",
     region: "",
     rooms: 0,
     price: 0,
@@ -82,24 +83,16 @@ const modalFail = {
 const PostForm = ({ post = null })=>{
     const [formData, setFormData] = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(initFormData);
     const [regions, setRegions] = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(null);
+    const [cities, setCities] = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(null);
+    const [cityObjects, setCityObjects] = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(null);
     const [previews, setPreviews] = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)([]);
     const [modalText, setModalText] = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(null);
-    const getRegions = async ()=>{
-        const { data } = await axios__WEBPACK_IMPORTED_MODULE_4__/* ["default"] */ .Z.get(`/api/regions`, {
-            validateStatus: function(status) {
-                return true;
-            },
-            headers: {
-                "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
-            }
-        });
-        setRegions(data);
-    };
+    // const getRegions = async () => {
+    //     const {data} = await axios.get(`/api/regions`, {validateStatus: function (status) { return true }, headers: {"Access-Control-Allow-Origin": "*", "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"}});
+    //     setRegions(data);
+    // }
     (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(()=>{
-        if (!regions) {
-            getRegions();
-        } else {
+        if (regions) {
             if (!post || !post._id) {
                 setFormData({
                     ...formData,
@@ -110,14 +103,42 @@ const PostForm = ({ post = null })=>{
     }, [
         regions
     ]);
+    const getCities = async ()=>{
+        const { data } = await axios__WEBPACK_IMPORTED_MODULE_4__/* ["default"] */ .Z.get("/api/cities", {
+            validateStatus: function(status) {
+                return true;
+            },
+            headers: {
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
+            }
+        });
+        setCityObjects(data);
+        setCities(data);
+    };
+    (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(()=>{
+        if (!cities) getCities();
+        else {
+            setFormData({
+                ...formData,
+                city: cities[0].name
+            });
+            setRegions(cityObjects[0].regions);
+        }
+    }, [
+        cities
+    ]);
     (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(()=>{
         if (post && post._id) {
+            console.log(post.city);
             setFormData({
                 ...formData,
                 ...post,
                 region: post.region.name,
                 housing: post.housing.slug
             });
+            console.log(post.city);
+            // setFormData({...formData,...post, city: post.city.name, region: post.region.name, housing: post.housing.slug});
             let prevs = [];
             for(let i = 0; i < post.images.length; i++){
                 prevs.push("/uploads/" + post.images[i]);
@@ -131,7 +152,20 @@ const PostForm = ({ post = null })=>{
     ]);
     const handleChange = (e)=>{
         const { name, value } = e.currentTarget;
-        if (name.includes("_")) {
+        if (name === "city" && formData.city !== value) {
+            for(let i = 0; i < cityObjects.length; i++){
+                const city = cityObjects[i];
+                if (city.name === value) {
+                    setRegions(city.regions);
+                }
+            }
+            console.log(name, value);
+            setFormData({
+                ...formData,
+                [name]: value,
+                region: null
+            });
+        } else if (name.includes("_")) {
             let f = name.split("_");
             let f1 = f[0];
             let f2 = f[1];
@@ -161,6 +195,7 @@ const PostForm = ({ post = null })=>{
             setFormData({
                 ...initFormData,
                 ...post,
+                city: post.city.name,
                 region: post.region.name,
                 housing: post.housing.slug
             });
@@ -421,6 +456,24 @@ const PostForm = ({ post = null })=>{
                                                                 children: "Коммерческая недвижимость"
                                                             })
                                                         ]
+                                                    })
+                                                ]
+                                            }),
+                                            /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                                                className: "form-group",
+                                                children: [
+                                                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("label", {
+                                                        children: "Город"
+                                                    }),
+                                                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("select", {
+                                                        name: "city",
+                                                        value: formData.city,
+                                                        onChange: handleChange,
+                                                        required: true,
+                                                        children: cities && cities.map((city, key)=>/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("option", {
+                                                                value: city.name,
+                                                                children: city.name
+                                                            }, key))
                                                     })
                                                 ]
                                             }),

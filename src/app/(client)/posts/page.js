@@ -3,6 +3,7 @@
 import ApartmentFilter from '@/components/Filter/ApartmentFilter';
 import ComercialFilter from '@/components/Filter/ComercialFilter';
 import HouseFilter from '@/components/Filter/HouseFilter';
+import Menu from '@/components/Menu';
 import Posts from '@/components/Post/Posts';
 import Sidebar from '@/components/Sidebar';
 import '@/styles/home.scss';
@@ -17,6 +18,7 @@ const initFormData = {
     rooms: [],
     purpose: [],
     placement: [],
+    city: '',
     region: '',
     price: {
         from: '',
@@ -62,8 +64,21 @@ const AllPosts = () => {
     const search = useSearchParams();
     const [formData, setFormData] = useState(initFormData);
     const [regions, setRegions] = useState();
+    const [cities, setCities] = useState();
+    const [cityObjects, setCityObjects] = useState(null);
     const handleChange = (name, value) => {
         setFormData({...formData, [name]: value});
+        if(name === 'city' && formData.city !== value){
+            if(!value)
+                setRegions([]);
+            for (let i = 0; i < cityObjects.length; i++) {
+                const city = cityObjects[i];
+                if(city.name === value){
+                    setRegions(city.regions.map((region)=>region.short));
+                }
+            }
+        }
+        
         if(name === 'housing'){
             setFormData({...initFormData, [name]: value});
             const query = dataToQuery({[name]: value});
@@ -82,14 +97,37 @@ const AllPosts = () => {
         const {data} = await axios.get(`/api/posts${query.includes('?') ? query : '?' + query}`, {validateStatus: function (status) { return true }, headers: {"Access-Control-Allow-Origin": "*", "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"}});
         setPosts(data);
     }
-    const getRegions = async () => {
-        const {data} = await axios.get('/api/regions', {validateStatus: function (status) { return true }, headers: {"Access-Control-Allow-Origin": "*", "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"}});
-        setRegions(data.map((region)=>region.short));
+    const getCities = async () => {
+        const {data} = await axios.get('/api/cities', {validateStatus: function (status) { return true }, headers: {"Access-Control-Allow-Origin": "*", "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"}});
+        setCityObjects(data);
+        setCities(data.map((region)=>region.name));
     }
+    // const getRegions = async (city) => {
+    //     const {data} = await axios.get(`/api/regions/${city}`, {validateStatus: function (status) { return true }, headers: {"Access-Control-Allow-Origin": "*", "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"}});
+    //     if(data)
+    //         setRegions(data.map((region)=>region.short));
+    //     else 
+    //         setRegions([]);
+    // }
+    // useEffect(()=>{
+    //     if(!regions)
+    //         getRegions();
+    // }, [regions]);
+
     useEffect(()=>{
-        if(!regions)
-            getRegions();
-    }, [regions]);
+        if(!cities)
+            getCities();
+        else{
+            if(formData.city){
+                for (let i = 0; i < cityObjects.length; i++) {
+                    const city = cityObjects[i];
+                    if(city.name === formData.city){
+                        setRegions(city.regions.map((region)=>region.short));
+                    }
+                }
+            }
+        }
+    }, [cities])
 
     useEffect(()=>{
         const query = search.toString();
@@ -97,6 +135,9 @@ const AllPosts = () => {
         if(!data.housing)
             data.housing = 'apartment'
         setFormData({...formData, ...data});
+        // if(data.city){
+        //     getRegions(data.city);
+        // }
         getPosts(query);
     }, [search])
 
@@ -109,14 +150,15 @@ const AllPosts = () => {
 
     return (
         <div id="allposts">
+            <Menu />
             {formData.housing === 'apartment' && (
-                <ApartmentFilter regions={regions} formData={formData} handleChange={handleChange} handleSubmit={handdleSubmit} />
+                <ApartmentFilter cities={cities} regions={regions} formData={formData} handleChange={handleChange} handleSubmit={handdleSubmit} />
             )}
             {formData.housing === 'house' && (
-                <HouseFilter regions={regions} formData={formData} handleChange={handleChange} handleSubmit={handdleSubmit} />
+                <HouseFilter cities={cities} regions={regions} formData={formData} handleChange={handleChange} handleSubmit={handdleSubmit} />
             )}
             {formData.housing === 'commercial' && (
-                <ComercialFilter regions={regions} formData={formData} handleChange={handleChange} handleSubmit={handdleSubmit} />
+                <ComercialFilter cities={cities} regions={regions} formData={formData} handleChange={handleChange} handleSubmit={handdleSubmit} />
             )}
             <div className='container'>   
                 <div className='content'>                

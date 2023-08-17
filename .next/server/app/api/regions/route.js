@@ -66,6 +66,7 @@ async function GET() {
         const regions = await region/* default */.Z.find().sort("name");
         return next_response/* default */.Z.json(regions);
     } catch (error) {
+        console.log(error);
         return next_response/* default */.Z.json(null, {
             status: 500
         });
@@ -76,7 +77,9 @@ async function POST(request) {
     try {
         await (0,connect/* default */.Z)();
         await region/* default */.Z.create(data);
-        const regions = await region/* default */.Z.find().sort("name");
+        const regions = await region/* default */.Z.find({
+            city: data.city
+        }).sort("name");
         return next_response/* default */.Z.json(regions);
     } catch (error) {
         return next_response/* default */.Z.json(null, {
@@ -91,10 +94,11 @@ async function PATCH(request) {
         await region/* default */.Z.findByIdAndUpdate(data._id, {
             ...data
         });
-        const regions = await region/* default */.Z.find().sort("name");
+        const regions = await region/* default */.Z.find({
+            city: data.city
+        }).sort("name");
         return next_response/* default */.Z.json(regions);
     } catch (error) {
-        console.log(error);
         return next_response/* default */.Z.json(null, {
             status: 500
         });
@@ -130,6 +134,74 @@ async function PATCH(request) {
 
     
 
+/***/ }),
+
+/***/ 8000:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Z: () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var mongoose__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(11185);
+/* harmony import */ var mongoose__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(mongoose__WEBPACK_IMPORTED_MODULE_0__);
+
+const connectMongo = async ()=>mongoose__WEBPACK_IMPORTED_MODULE_0___default().connect(process.env.MONGO_URI);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (connectMongo);
+
+
+/***/ }),
+
+/***/ 62159:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Z: () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var mongoose__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(11185);
+/* harmony import */ var mongoose__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(mongoose__WEBPACK_IMPORTED_MODULE_0__);
+
+const citySchema = mongoose__WEBPACK_IMPORTED_MODULE_0___default().Schema({
+    name: String
+}, {
+    timestamps: true
+});
+const City = (mongoose__WEBPACK_IMPORTED_MODULE_0___default().models).City || mongoose__WEBPACK_IMPORTED_MODULE_0___default().model("City", citySchema);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (City);
+
+
+/***/ }),
+
+/***/ 37245:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Z: () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var mongoose__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(11185);
+/* harmony import */ var mongoose__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(mongoose__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _city__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(62159);
+
+
+const regionSchema = mongoose__WEBPACK_IMPORTED_MODULE_0___default().Schema({
+    short: {
+        type: String,
+        required: true
+    },
+    city: {
+        type: (mongoose__WEBPACK_IMPORTED_MODULE_0___default().Schema).Types.ObjectId,
+        ref: _city__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .Z
+    },
+    name: {
+        type: String,
+        required: true
+    }
+}, {
+    timestamps: true
+});
+const Region = (mongoose__WEBPACK_IMPORTED_MODULE_0___default().models).Region || mongoose__WEBPACK_IMPORTED_MODULE_0___default().model("Region", regionSchema);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Region);
+
+
 /***/ })
 
 };
@@ -139,7 +211,7 @@ async function PATCH(request) {
 var __webpack_require__ = require("../../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [2697,5501,9335,7966], () => (__webpack_exec__(50086)));
+var __webpack_exports__ = __webpack_require__.X(0, [2697,5501,9335], () => (__webpack_exec__(50086)));
 module.exports = __webpack_exports__;
 
 })();

@@ -8,6 +8,7 @@ export async function GET() {
         const regions = await Region.find().sort('name');
         return NextResponse.json(regions);
     } catch (error) {
+        console.log(error);
         return NextResponse.json(null, {status: 500})
     }
 }
@@ -17,9 +18,8 @@ export async function POST(request) {
     try {
         await connectMongo();
 
-
         await Region.create(data);        
-        const regions = await Region.find().sort('name');
+        const regions = await Region.find({city: data.city}).sort('name');
         return NextResponse.json(regions);
     } catch (error) {
         return NextResponse.json(null, {status: 500})
@@ -30,12 +30,10 @@ export async function PATCH(request) {
     const data = await request.json();
     try {
         await connectMongo();
-
         await Region.findByIdAndUpdate(data._id, {...data});        
-        const regions = await Region.find().sort('name');
+        const regions = await Region.find({city: data.city}).sort('name');
         return NextResponse.json(regions);
     } catch (error) {
-        console.log(error)
         return NextResponse.json(null, {status: 500})
     }
 }

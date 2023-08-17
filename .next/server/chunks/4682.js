@@ -68,9 +68,11 @@ const PostCard = ({ post })=>{
             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                 className: "postimage",
                 children: post.images && post.images.length > 0 ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("img", {
+                    loading: "lazy",
                     src: `https://cna.kz/public/uploads/${post.images[0]}`,
                     alt: "preview"
                 }) : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("img", {
+                    loading: "lazy",
                     src: `/noimage.png`,
                     alt: "noimage"
                 })
@@ -108,9 +110,14 @@ const PostCard = ({ post })=>{
                             __html: draftjs_to_html__WEBPACK_IMPORTED_MODULE_1___default()(JSON?.parse(post?.description))
                         }
                     }),
-                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                    /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                         className: "date",
-                        children: (0,_utilFunctions_dateConvert__WEBPACK_IMPORTED_MODULE_3__/* .dateConvert */ .ce)(post.createdAt)
+                        children: [
+                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("span", {
+                                children: post.city.name
+                            }),
+                            (0,_utilFunctions_dateConvert__WEBPACK_IMPORTED_MODULE_3__/* .dateConvert */ .ce)(post.createdAt)
+                        ]
                     })
                 ]
             })

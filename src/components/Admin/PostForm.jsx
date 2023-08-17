@@ -6,6 +6,7 @@ import RichText from '../Inputs/RichText';
 
 const initFormData = {
     housing: 'apartment',
+    city: '',
     region: '',
     rooms: 0,
     price: 0,
@@ -65,28 +66,44 @@ const modalFail = {
 const PostForm = ({post=null}) => {
     const [formData, setFormData] = useState(initFormData);
     const [regions, setRegions] = useState(null);
+    const [cities, setCities] = useState(null);
+    const [cityObjects, setCityObjects] = useState(null);
     const [previews, setPreviews] = useState([]);
 
     const [modalText, setModalText] = useState(null);
 
 
-    const getRegions = async () => {
-        const {data} = await axios.get(`/api/regions`, {validateStatus: function (status) { return true }, headers: {"Access-Control-Allow-Origin": "*", "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"}});
-        setRegions(data);
-    }
+    // const getRegions = async () => {
+    //     const {data} = await axios.get(`/api/regions`, {validateStatus: function (status) { return true }, headers: {"Access-Control-Allow-Origin": "*", "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"}});
+    //     setRegions(data);
+    // }
     useEffect(()=>{
-        if(!regions){
-            getRegions();
-        }else{
+        if(regions){
             if(!post || !post._id){
                 setFormData({...formData, region: regions[0].name});
             }
         }
     }, [regions]);
+    const getCities = async () => {
+        const {data} = await axios.get('/api/cities', {validateStatus: function (status) { return true }, headers: {"Access-Control-Allow-Origin": "*", "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"}});
+        setCityObjects(data);
+        setCities(data);
+    }
+    useEffect(()=>{
+        if(!cities)
+            getCities();
+        else{
+            setFormData({...formData, city: cities[0].name})
+            setRegions(cityObjects[0].regions);
+        }
+    }, [cities])
     
     useEffect(() => {
         if(post && post._id){
+            console.log(post.city);
             setFormData({...formData,...post, region: post.region.name, housing: post.housing.slug});
+            console.log(post.city)
+            // setFormData({...formData,...post, city: post.city.name, region: post.region.name, housing: post.housing.slug});
             let prevs = [];
             for (let i = 0; i < post.images.length; i++) {
                 prevs.push('/uploads/'+post.images[i]);
@@ -98,7 +115,17 @@ const PostForm = ({post=null}) => {
 
     const handleChange = (e) => {
         const {name, value} = e.currentTarget;
-        if(name.includes('_')){
+        if(name === 'city' && formData.city !== value){
+            for (let i = 0; i < cityObjects.length; i++) {
+                const city = cityObjects[i];
+                if(city.name === value){
+                    setRegions(city.regions);
+                }
+            }
+            console.log(name, value);
+            setFormData({...formData, [name]: value, region: null});
+        }
+        else if(name.includes('_')){
             let f = name.split('_');
             let f1 = f[0];
             let f2 = f[1];
@@ -113,7 +140,7 @@ const PostForm = ({post=null}) => {
     const clear = (e)=>{
         e.preventDefault();
         if(post && post._id){
-            setFormData({...initFormData, ...post, region: post.region.name, housing: post.housing.slug});
+            setFormData({...initFormData, ...post, city: post.city.name, region: post.region.name, housing: post.housing.slug});
         }else{
             setFormData(initFormData);
         }
@@ -264,6 +291,14 @@ const PostForm = ({post=null}) => {
                                     <option value="apartment">Квартира</option>
                                     <option value="house">Дом</option>
                                     <option value="commercial">Коммерческая недвижимость</option>
+                                </select>
+                            </div>
+                            <div className="form-group">
+                                <label>Город</label>
+                                <select name="city" value={formData.city} onChange={handleChange} required >
+                                    {cities && cities.map((city, key) => (
+                                        <option key={key} value={city.name}>{city.name}</option>
+                                    ))}
                                 </select>
                             </div>
                             <div className="form-group">

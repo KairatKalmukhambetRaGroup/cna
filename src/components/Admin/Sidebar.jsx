@@ -19,8 +19,8 @@ const AdminSidebar = () => {
                 <Link href="/admin/posts">
                     Объявления
                 </Link>
-                <Link href="/admin/regions">
-                    Районы
+                <Link href="/admin/cities">
+                    Города
                 </Link>
             </nav>
             <div className="logout" onClick={logout}>

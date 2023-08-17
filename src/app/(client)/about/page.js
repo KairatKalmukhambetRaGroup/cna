@@ -1,4 +1,5 @@
 'use client'
+import Menu from "@/components/Menu";
 import axios from "axios";
 import draftToHtml from "draftjs-to-html";
 import { useState, useEffect } from "react";
@@ -16,6 +17,7 @@ const AboutPage = () => {
     }, [about]);
     return (
         <div id="aboutpage">
+            <Menu />
             <div className="container">
                 <div className="content">
                     <div className="medium-24-28 text-black">

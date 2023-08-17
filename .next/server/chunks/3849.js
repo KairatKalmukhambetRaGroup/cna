@@ -178,7 +178,10 @@ var external_path_ = __webpack_require__(71017);
 // EXTERNAL MODULE: ./node_modules/mime/index.js
 var mime = __webpack_require__(99402);
 var mime_default = /*#__PURE__*/__webpack_require__.n(mime);
+// EXTERNAL MODULE: ./src/database/models/city.js
+var models_city = __webpack_require__(62159);
 ;// CONCATENATED MODULE: ./src/app/api/posts/route.js
+
 
 
 
@@ -218,16 +221,20 @@ async function POST(request) {
             data[key] = value;
         }
     });
+    console.log(data);
     if (!data.housing) {
         return next_response/* default */.Z.json("housing", {
             status: 401
         });
     }
-    if (!data.region) {
-        return next_response/* default */.Z.json("region", {
+    if (!data.city) {
+        return next_response/* default */.Z.json("city", {
             status: 401
         });
     }
+    // if(!data.region){
+    //     return NextResponse.json("region", {status: 401});
+    // }
     // upload Images
     const images = await formData.getAll("images");
     let imgUrls = [];
@@ -271,10 +278,16 @@ async function POST(request) {
             slug: data.housing
         });
         data.housing = housing._id;
-        const region = await models_region/* default */.Z.findOne({
-            name: data.region
+        const city = await models_city/* default */.Z.findOne({
+            name: data.city
         });
-        data.region = region._id;
+        data.city = city._id;
+        if (data.region) {
+            const region = await models_region/* default */.Z.findOne({
+                name: data.region
+            });
+            data.region = region._id;
+        }
         const post = await models_post/* default */.Z.create(data);
         return next_response/* default */.Z.json(post);
     } catch (error) {
@@ -310,10 +323,16 @@ async function getPostCounts() {
     });
 }
 async function getAllPosts(request) {
+    const city = await models_city/* default */.Z.findById("64db879cb7ba2c6cf87eaae2");
     const params = request.nextUrl.searchParams.toString();
     const data = queryToMongoose(params);
     if (data.size && data.size === "sm") {
-        const posts = await models_post/* default */.Z.find().populate({
+        const posts = await models_post/* default */.Z.find({
+            city: city._id
+        }).populate({
+            path: "city",
+            select: "name"
+        }).populate({
             path: "region",
             select: "name"
         }).populate({
@@ -333,7 +352,11 @@ async function getAllPosts(request) {
             slug: "commercial"
         });
         const apartments = await models_post/* default */.Z.find({
-            housing: apartment._id
+            housing: apartment._id,
+            city: city._id
+        }).populate({
+            path: "city",
+            select: "name"
         }).populate({
             path: "region",
             select: "name"
@@ -342,7 +365,11 @@ async function getAllPosts(request) {
             select: "slug"
         }).limit(limit).sort("-createdAt");
         const houses = await models_post/* default */.Z.find({
-            housing: house._id
+            housing: house._id,
+            city: city._id
+        }).populate({
+            path: "city",
+            select: "name"
         }).populate({
             path: "region",
             select: "name"
@@ -351,7 +378,11 @@ async function getAllPosts(request) {
             select: "slug"
         }).limit(limit).sort("-createdAt");
         const commercials = await models_post/* default */.Z.find({
-            housing: commercial._id
+            housing: commercial._id,
+            city: city._id
+        }).populate({
+            path: "city",
+            select: "name"
         }).populate({
             path: "region",
             select: "name"
@@ -375,6 +406,12 @@ async function getPostsByHousing(request) {
         });
         data.housing = housing._id;
     }
+    if (data.city) {
+        const city = await models_city/* default */.Z.findOne({
+            name: data.city
+        });
+        data.city = city._id;
+    }
     if (data.region) {
         const region = await models_region/* default */.Z.findOne({
             short: data.region
@@ -395,6 +432,9 @@ async function getPostsByHousing(request) {
     }
     delete data.sort;
     const post = await models_post/* default */.Z.find(data).populate({
+        path: "city",
+        select: "name"
+    }).populate({
         path: "region",
         select: "name"
     }).populate({
@@ -403,6 +443,70 @@ async function getPostsByHousing(request) {
     }).sort(sort);
     return next_response/* default */.Z.json(post);
 }
+
+
+/***/ }),
+
+/***/ 8000:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Z: () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var mongoose__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(11185);
+/* harmony import */ var mongoose__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(mongoose__WEBPACK_IMPORTED_MODULE_0__);
+
+const connectMongo = async ()=>mongoose__WEBPACK_IMPORTED_MODULE_0___default().connect(process.env.MONGO_URI);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (connectMongo);
+
+
+/***/ }),
+
+/***/ 62159:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Z: () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var mongoose__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(11185);
+/* harmony import */ var mongoose__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(mongoose__WEBPACK_IMPORTED_MODULE_0__);
+
+const citySchema = mongoose__WEBPACK_IMPORTED_MODULE_0___default().Schema({
+    name: String
+}, {
+    timestamps: true
+});
+const City = (mongoose__WEBPACK_IMPORTED_MODULE_0___default().models).City || mongoose__WEBPACK_IMPORTED_MODULE_0___default().model("City", citySchema);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (City);
+
+
+/***/ }),
+
+/***/ 60113:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Z: () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var mongoose__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(11185);
+/* harmony import */ var mongoose__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(mongoose__WEBPACK_IMPORTED_MODULE_0__);
+
+const housingSchema = mongoose__WEBPACK_IMPORTED_MODULE_0___default().Schema({
+    slug: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    name: {
+        type: String,
+        required: true,
+        unique: true
+    }
+}, {
+    timestamps: true
+});
+const Housing = (mongoose__WEBPACK_IMPORTED_MODULE_0___default().models).Housing || mongoose__WEBPACK_IMPORTED_MODULE_0___default().model("Housing", housingSchema);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Housing);
 
 
 /***/ }),
@@ -417,6 +521,8 @@ async function getPostsByHousing(request) {
 /* harmony import */ var mongoose__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(mongoose__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _region__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(37245);
 /* harmony import */ var _housing__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(60113);
+/* harmony import */ var _city__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(62159);
+
 
 
 
@@ -426,10 +532,14 @@ const postSchema = mongoose__WEBPACK_IMPORTED_MODULE_0___default().Schema({
         ref: _housing__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .Z,
         required: true
     },
+    city: {
+        type: (mongoose__WEBPACK_IMPORTED_MODULE_0___default().Schema).Types.ObjectId,
+        ref: _city__WEBPACK_IMPORTED_MODULE_3__/* ["default"] */ .Z,
+        required: true
+    },
     region: {
         type: (mongoose__WEBPACK_IMPORTED_MODULE_0___default().Schema).Types.ObjectId,
-        ref: _region__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .Z,
-        required: true
+        ref: _region__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .Z
     },
     images: [
         String
@@ -486,6 +596,39 @@ const postSchema = mongoose__WEBPACK_IMPORTED_MODULE_0___default().Schema({
 });
 const Post = (mongoose__WEBPACK_IMPORTED_MODULE_0___default().models).Post || mongoose__WEBPACK_IMPORTED_MODULE_0___default().model("Post", postSchema);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Post);
+
+
+/***/ }),
+
+/***/ 37245:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Z: () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var mongoose__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(11185);
+/* harmony import */ var mongoose__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(mongoose__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _city__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(62159);
+
+
+const regionSchema = mongoose__WEBPACK_IMPORTED_MODULE_0___default().Schema({
+    short: {
+        type: String,
+        required: true
+    },
+    city: {
+        type: (mongoose__WEBPACK_IMPORTED_MODULE_0___default().Schema).Types.ObjectId,
+        ref: _city__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .Z
+    },
+    name: {
+        type: String,
+        required: true
+    }
+}, {
+    timestamps: true
+});
+const Region = (mongoose__WEBPACK_IMPORTED_MODULE_0___default().models).Region || mongoose__WEBPACK_IMPORTED_MODULE_0___default().model("Region", regionSchema);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Region);
 
 
 /***/ })

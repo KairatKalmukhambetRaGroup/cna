@@ -61,8 +61,8 @@ const AdminSidebar = ()=>{
                         children: "Объявления"
                     }),
                     /*#__PURE__*/ jsx_runtime_.jsx((link_default()), {
-                        href: "/admin/regions",
-                        children: "Районы"
+                        href: "/admin/cities",
+                        children: "Города"
                     })
                 ]
             }),

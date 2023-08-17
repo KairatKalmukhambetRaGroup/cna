@@ -23,9 +23,11 @@ const AdvertisementCard = ({ ad })=>{
             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                 className: "adimage",
                 children: ad.image ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("img", {
+                    loading: "lazy",
                     src: `https://cna.kz/public/uploads/${ad.image}`,
                     alt: "preview"
                 }) : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("img", {
+                    loading: "lazy",
                     src: `/noimage.png`,
                     alt: "noimage"
                 })

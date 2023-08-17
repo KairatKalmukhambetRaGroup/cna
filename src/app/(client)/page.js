@@ -16,6 +16,7 @@ import '@/styles/post.scss';
 import draftToHtml from "draftjs-to-html";
 import { async } from "regenerator-runtime";
 import AdvertisementCard from "@/components/AdvertisementCard";
+import Menu from "@/components/Menu";
 
 function useWindowSize() {
     const [size, setSize] = useState([0, 0]);
@@ -61,10 +62,12 @@ const Home = () => {
     useEffect(()=>{
         if(width){
             if(width < 992){
-                setSize('sm');
+                if(size === 'lg')
+                    setSize('sm');
             }
             else{
-                setSize('lg');
+                if(size === 'sm')
+                    setSize('lg');
             }    
         }
     }, [width])
@@ -95,6 +98,7 @@ const Home = () => {
 
     return (
         <div id="home">
+            <Menu />
             <SimpleFilter handleSubmit={handleSubmit} />
             <div className="container">
                 <div className="medium-24-28 text-black">

@@ -8,9 +8,9 @@ const PostSmall = ({post}) => {
         <div className="postsmall" onClick={(e)=>{e.preventDefault(); router.push(`/posts/${post._id}`)}}>
             <div className="postimage">
                 {(post.images && post.images.length > 0) ? (
-                    <img src={`https://cna.kz/public/uploads/${post.images[0]}`} alt="" />
+                    <img loading='lazy' src={`https://cna.kz/public/uploads/${post.images[0]}`} alt="" />
                 ) : (
-                    <img src={`/noimage.png`} alt="noimage" />
+                    <img loading='lazy' src={`/noimage.png`} alt="noimage" />
                 )}
                 <div className="price">
                     {priceToMils(post.price) } 〒

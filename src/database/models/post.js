@@ -1,10 +1,12 @@
 import mongoose from "mongoose";
 import Region from "./region";
 import Housing from "./housing";
+import City from "./city";
 
 const postSchema = mongoose.Schema({
     housing: {type: mongoose.Schema.Types.ObjectId, ref: Housing, required: true},
-    region: {type: mongoose.Schema.Types.ObjectId, ref: Region, required: true},
+    city: {type: mongoose.Schema.Types.ObjectId, ref: City, required: true},
+    region: {type: mongoose.Schema.Types.ObjectId, ref: Region},
 
     images: [String],
 

@@ -5,10 +5,10 @@ const AdvertisementCard = ({ad}) => {
         <a className="advertcard" href={ad.link}>
             <div className="adimage">
                 {ad.image ? (
-                    <img src={`https://cna.kz/public/uploads/${ad.image}`} alt="preview" />
+                    <img loading='lazy' src={`https://cna.kz/public/uploads/${ad.image}`} alt="preview" />
                     // <img src={`/uploads/${ad.image}`} alt="preview" />
                 ) : (
-                    <img src={`/noimage.png`} alt="noimage" />
+                    <img loading='lazy' src={`/noimage.png`} alt="noimage" />
                 )}
             </div>
             <div className="info">

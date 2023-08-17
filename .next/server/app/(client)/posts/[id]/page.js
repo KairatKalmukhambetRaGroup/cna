@@ -324,7 +324,7 @@ __webpack_require__.r(__webpack_exports__);
       ]
       },
         {
-          'layout': [() => Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 30726)), "D:\\personal projects\\krisha-next\\src\\app\\(client)\\layout.js"],
+          'layout': [() => Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 43238)), "D:\\personal projects\\krisha-next\\src\\app\\(client)\\layout.js"],
           metadata: {
     icon: [(async (props) => (await Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 73881))).default(props))],
     apple: [],
@@ -570,6 +570,10 @@ const Post = ({ post })=>{
                                         /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
                                             className: "parameters",
                                             children: [
+                                                post.city && /*#__PURE__*/ jsx_runtime_.jsx(SidebarParam, {
+                                                    label: "Город",
+                                                    value: post.city.name
+                                                }),
                                                 post.region && /*#__PURE__*/ jsx_runtime_.jsx(SidebarParam, {
                                                     label: "Район",
                                                     value: post.region.name
@@ -677,6 +681,10 @@ const Post = ({ post })=>{
                                                     /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
                                                         className: "mobile",
                                                         children: [
+                                                            post.city && /*#__PURE__*/ jsx_runtime_.jsx(ContentParam, {
+                                                                label: "Город",
+                                                                value: post.city.name
+                                                            }),
                                                             post.region && /*#__PURE__*/ jsx_runtime_.jsx(ContentParam, {
                                                                 label: "Район",
                                                                 value: post.region.name
@@ -943,7 +951,7 @@ const __default__ = proxy.default;
 var __webpack_require__ = require("../../../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [2697,9021,1512,5329,8130,2062], () => (__webpack_exec__(2157)));
+var __webpack_exports__ = __webpack_require__.X(0, [2697,9021,1512,5329,2062,447], () => (__webpack_exec__(2157)));
 module.exports = __webpack_exports__;
 
 })();

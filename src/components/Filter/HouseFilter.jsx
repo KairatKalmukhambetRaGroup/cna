@@ -13,7 +13,7 @@ const housings = [
 ]
 
 
-const HouseFilter = ({formData, handleChange, regions, handleSubmit}) => {
+const HouseFilter = ({formData, handleChange, regions, handleSubmit, cities}) => {
     const handleHousingChange = (name, value) =>{
         switch(value){
             case 'Кватиры':
@@ -52,7 +52,10 @@ const HouseFilter = ({formData, handleChange, regions, handleSubmit}) => {
                             <span className="mobile">
                                 <Select name="housing" options={housings} value={'Дома'} handleChange={handleHousingChange} />
                             </span>
-                            <Select name="region" placeholder='Не важно' options={regions} value={formData.region} handleChange={handleChange} />
+                            <Select name="city" placeholder='Не важно' options={cities} value={formData.city} handleChange={handleChange} />
+                            {regions && regions.length > 0 && (
+                                <Select name="region" placeholder='Не важно' options={regions} value={formData.region} handleChange={handleChange} />
+                            )}
                             <MultiNumberInput name="rooms" label="- комн." value={formData.rooms} handleChange={handleChange} />
                             <NumberRange name="price" label="Цена" param="тг" value={formData.price} handleChange={handleChange} />
                         </div>

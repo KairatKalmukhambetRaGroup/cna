@@ -84,7 +84,7 @@ const Posts = () => {
                                 <div className='post' key={key}>
                                     <div className='image'>
                                         {(post.images && post.images.length>0) && (
-                                            <img src={`https://cna.kz/public/uploads/${post.images[0]}`} alt=""/>
+                                            <img loading='lazy' src={`https://cna.kz/public/uploads/${post.images[0]}`} alt=""/>
                                         )}
                                     </div>
                                     <div className='info'>

@@ -1,6 +1,5 @@
 import Footer from '@/components/Footer';
 import Header from '@/components/Header'
-import Menu from '@/components/Menu';
 import '@/styles/index.scss';
 
 
@@ -12,7 +11,6 @@ export default function ClientLayout({ children }) {
   return (
     <>
         <Header />
-        <Menu />
         <main>
           {children}
         </main>

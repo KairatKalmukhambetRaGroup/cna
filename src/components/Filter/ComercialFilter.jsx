@@ -11,7 +11,7 @@ const housings = [
 ]
 
 
-const ComercialFilter = ({formData, handleChange, regions, handleSubmit}) => {
+const ComercialFilter = ({formData, handleChange, regions, handleSubmit, cities}) => {
     const handleHousingChange = (name, value) =>{
         switch(value){
             case 'Кватиры':
@@ -50,7 +50,10 @@ const ComercialFilter = ({formData, handleChange, regions, handleSubmit}) => {
                                 <Select name="housing" options={housings} value={'Коммерческие недвижимости'} handleChange={handleHousingChange} />
                             </span>
                             <MultiSelect name="purpose" placeholder='Не важно' label='Назначение' options={PURPOSES} value={formData.purpose} handleChange={handleChange} />
-                            <Select name="region" placeholder='Не важно' options={regions} value={formData.region} handleChange={handleChange} />
+                            <Select name="city" placeholder='Не важно' options={cities} value={formData.city} handleChange={handleChange} />
+                            {regions && regions.length > 0 && (
+                                <Select name="region" placeholder='Не важно' options={regions} value={formData.region} handleChange={handleChange} />
+                            )}
                             <NumberRange name="price" label="Цена" param="тг" value={formData.price} handleChange={handleChange} />
                         </div>
                     </div>

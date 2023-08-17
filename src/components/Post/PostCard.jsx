@@ -10,9 +10,9 @@ const PostCard = ({post}) => {
         <div className="postcard" onClick={(e)=>{e.preventDefault(); router.push(`/posts/${post._id}`)}}>
             <div className="postimage">
                 {(post.images && post.images.length > 0) ? (
-                    <img src={`https://cna.kz/public/uploads/${post.images[0]}`} alt="preview" />
+                    <img loading="lazy" src={`https://cna.kz/public/uploads/${post.images[0]}`} alt="preview" />
                 ) : (
-                    <img src={`/noimage.png`} alt="noimage" />
+                    <img loading="lazy" src={`/noimage.png`} alt="noimage" />
                 )}
             </div>
             <div className="info">
@@ -28,7 +28,10 @@ const PostCard = ({post}) => {
                 {post.description && (
                     <div className="description" dangerouslySetInnerHTML={{__html: draftToHtml(JSON?.parse(post?.description))}} ></div>
                 )}  
-                <div className="date">{dateConvert(post.createdAt)}</div>
+                <div className="date"><span>
+                    {post.city.name} 
+                    </span>
+                    {dateConvert(post.createdAt)}</div>
             </div>
         </div>
     );

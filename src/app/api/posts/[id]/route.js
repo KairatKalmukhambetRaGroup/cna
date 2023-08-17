@@ -10,12 +10,14 @@ import mime from "mime";
 
 import Region from "@/database/models/region";
 import Housing from "@/database/models/housing";
+import City from "@/database/models/city";
 
 export async function GET(request, context) {
     const { id } = context.params;    
     try {
         await connectMongo();
         const post = await Post.findById(id)
+            .populate('city')
             .populate('region')
             .populate('housing');
         return NextResponse.json(post);
@@ -56,9 +58,12 @@ export async function PATCH(request, context) {
     if(!data.housing){
         return NextResponse.json("housing", {status: 401});
     }
-    if(!data.region){
-        return NextResponse.json("region", {status: 401});
+    if(!data.city){
+        return NextResponse.json("city", {status: 401});
     }
+    // if(!data.region){
+    //     return NextResponse.json("region", {status: 401});
+    // }
 
     
     // save to DB
@@ -66,8 +71,14 @@ export async function PATCH(request, context) {
         await connectMongo();
         const housing = await Housing.findOne({slug: data.housing});
         data.housing = housing._id;
-        const region = await Region.findOne({name: data.region});
-        data.region = region._id;
+        const city = await City.findOne({name: data.city});
+        data.city = city._id;
+        if(data.region){
+            const region = await Region.findOne({name: data.region});
+            data.region = region._id;
+        }else{
+            data.region = null;
+        }
 
         const existingPost = await Post.findById(id);
         const postImages = existingPost.images;

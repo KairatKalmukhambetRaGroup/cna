@@ -87,7 +87,10 @@ var mime_default = /*#__PURE__*/__webpack_require__.n(mime);
 var models_region = __webpack_require__(37245);
 // EXTERNAL MODULE: ./src/database/models/housing.js
 var models_housing = __webpack_require__(60113);
+// EXTERNAL MODULE: ./src/database/models/city.js
+var models_city = __webpack_require__(62159);
 ;// CONCATENATED MODULE: ./src/app/api/posts/[id]/route.js
+
 
 
 
@@ -103,7 +106,7 @@ async function GET(request, context) {
     const { id } = context.params;
     try {
         await (0,connect/* default */.Z)();
-        const post = await models_post/* default */.Z.findById(id).populate("region").populate("housing");
+        const post = await models_post/* default */.Z.findById(id).populate("city").populate("region").populate("housing");
         return next_response/* default */.Z.json(post);
     } catch (error) {
         return next_response/* default */.Z.json(null, {
@@ -143,11 +146,14 @@ async function PATCH(request, context) {
             status: 401
         });
     }
-    if (!data.region) {
-        return next_response/* default */.Z.json("region", {
+    if (!data.city) {
+        return next_response/* default */.Z.json("city", {
             status: 401
         });
     }
+    // if(!data.region){
+    //     return NextResponse.json("region", {status: 401});
+    // }
     // save to DB
     try {
         await (0,connect/* default */.Z)();
@@ -155,10 +161,18 @@ async function PATCH(request, context) {
             slug: data.housing
         });
         data.housing = housing._id;
-        const region = await models_region/* default */.Z.findOne({
-            name: data.region
+        const city = await models_city/* default */.Z.findOne({
+            name: data.city
         });
-        data.region = region._id;
+        data.city = city._id;
+        if (data.region) {
+            const region = await models_region/* default */.Z.findOne({
+                name: data.region
+            });
+            data.region = region._id;
+        } else {
+            data.region = null;
+        }
         const existingPost = await models_post/* default */.Z.findById(id);
         const postImages = existingPost.images;
         // upload Images
@@ -253,7 +267,7 @@ async function PATCH(request, context) {
 var __webpack_require__ = require("../../../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [2697,5501,9335,9402,9769,7966,3849], () => (__webpack_exec__(32710)));
+var __webpack_exports__ = __webpack_require__.X(0, [2697,5501,9335,9402,9769,3849], () => (__webpack_exec__(32710)));
 module.exports = __webpack_exports__;
 
 })();

@@ -306,7 +306,7 @@ __webpack_require__.r(__webpack_exports__);
         }]
       },
         {
-          'layout': [() => Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 30726)), "D:\\personal projects\\krisha-next\\src\\app\\(client)\\layout.js"],
+          'layout': [() => Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 43238)), "D:\\personal projects\\krisha-next\\src\\app\\(client)\\layout.js"],
           metadata: {
     icon: [(async (props) => (await Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 73881))).default(props))],
     apple: [],
@@ -426,6 +426,7 @@ var axios = __webpack_require__(93258);
 const initFormData = {
     housing: "Квартиру",
     rooms: [],
+    city: "",
     region: "",
     price: {
         from: "",
@@ -439,6 +440,14 @@ const SimpleFilter = ({ handleSubmit })=>{
             ...formData,
             [name]: value
         });
+        if (name === "city" && formData.city !== value) {
+            for(let i = 0; i < cityObjects.length; i++){
+                const city = cityObjects[i];
+                if (city.name === value) {
+                    setRegions(city.regions.map((region)=>region.short));
+                }
+            }
+        }
         if (name === "housing" && value === "Коммерческую недвижимость") {
             setFormData({
                 ...formData,
@@ -448,8 +457,10 @@ const SimpleFilter = ({ handleSubmit })=>{
         }
     };
     const [regions, setRegions] = (0,react_.useState)(null);
-    const getRegions = async ()=>{
-        const { data } = await axios/* default */.Z.get("/api/regions", {
+    const [cities, setCities] = (0,react_.useState)(null);
+    const [cityObjects, setCityObjects] = (0,react_.useState)(null);
+    const getCities = async ()=>{
+        const { data } = await axios/* default */.Z.get("/api/cities", {
             validateStatus: function(status) {
                 return true;
             },
@@ -458,12 +469,24 @@ const SimpleFilter = ({ handleSubmit })=>{
                 "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
             }
         });
-        setRegions(data.map((region)=>region.short));
+        setCityObjects(data);
+        setCities(data.map((region)=>region.name));
     };
+    // useEffect(()=>{
+    //     if(!regions)
+    //         getRegions();
+    // }, [regions]);
     (0,react_.useEffect)(()=>{
-        if (!regions) getRegions();
+        if (!cities) getCities();
+        else {
+            setFormData({
+                ...formData,
+                city: cities[0]
+            });
+            setRegions(cityObjects[0].regions.map((region)=>region.short));
+        }
     }, [
-        regions
+        cities
     ]);
     return /*#__PURE__*/ jsx_runtime_.jsx("div", {
         id: "filter",
@@ -494,6 +517,13 @@ const SimpleFilter = ({ handleSubmit })=>{
                             handleChange: handleChange
                         }),
                         /*#__PURE__*/ jsx_runtime_.jsx(Select/* default */.Z, {
+                            mobile: true,
+                            name: "city",
+                            options: cities,
+                            value: formData.city,
+                            handleChange: handleChange
+                        }),
+                        regions && regions.length > 0 && /*#__PURE__*/ jsx_runtime_.jsx(Select/* default */.Z, {
                             name: "region",
                             placeholder: "Не важно",
                             options: regions,
@@ -552,9 +582,11 @@ const PostSmall = ({ post })=>{
                 className: "postimage",
                 children: [
                     post.images && post.images.length > 0 ? /*#__PURE__*/ jsx_runtime_.jsx("img", {
+                        loading: "lazy",
                         src: `https://cna.kz/public/uploads/${post.images[0]}`,
                         alt: ""
                     }) : /*#__PURE__*/ jsx_runtime_.jsx("img", {
+                        loading: "lazy",
                         src: `/noimage.png`,
                         alt: "noimage"
                     }),
@@ -587,12 +619,15 @@ var draftjs_to_html_default = /*#__PURE__*/__webpack_require__.n(draftjs_to_html
 var runtime_module = __webpack_require__(28216);
 // EXTERNAL MODULE: ./src/components/AdvertisementCard.jsx
 var AdvertisementCard = __webpack_require__(11728);
+// EXTERNAL MODULE: ./src/components/Menu.jsx
+var Menu = __webpack_require__(28888);
 ;// CONCATENATED MODULE: ./src/app/(client)/page.js
 /* __next_internal_client_entry_do_not_use__ default auto */ 
 
 // import {useDispatch, useSelector} from 'react-redux';
 
 // import { getPosts } from "../actions/post";
+
 
 
 
@@ -674,9 +709,9 @@ const Home = ()=>{
     (0,react_.useEffect)(()=>{
         if (width) {
             if (width < 992) {
-                setSize("sm");
+                if (size === "lg") setSize("sm");
             } else {
-                setSize("lg");
+                if (size === "sm") setSize("lg");
             }
         }
     }, [
@@ -710,6 +745,7 @@ const Home = ()=>{
     return /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
         id: "home",
         children: [
+            /*#__PURE__*/ jsx_runtime_.jsx(Menu/* default */.Z, {}),
             /*#__PURE__*/ jsx_runtime_.jsx(Filter_SimpleFilter, {
                 handleSubmit: handleSubmit
             }),
@@ -862,7 +898,7 @@ const __default__ = proxy.default;
 var __webpack_require__ = require("../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [2697,9021,1512,8613,5329,8130,2062,4682,2851], () => (__webpack_exec__(54936)));
+var __webpack_exports__ = __webpack_require__.X(0, [2697,9021,1512,2234,5329,2062,447,4682,8888,2851], () => (__webpack_exec__(54936)));
 module.exports = __webpack_exports__;
 
 })();

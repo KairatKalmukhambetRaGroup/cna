@@ -8,6 +8,7 @@ import Region from "@/database/models/region";
 import { mkdir, stat, writeFile } from "fs/promises";
 import { join } from "path";
 import mime from "mime";
+import City from "@/database/models/city";
 
 export async function GET(request) {
     const params = request.nextUrl.searchParams.toString();
@@ -43,14 +44,17 @@ export async function POST(request) {
             data[key] = value;
         }     
     });
-
+    console.log(data);
 
     if(!data.housing){
         return NextResponse.json("housing", {status: 401});
     }
-    if(!data.region){
-        return NextResponse.json("region", {status: 401});
+    if(!data.city){
+        return NextResponse.json("city", {status: 401});
     }
+    // if(!data.region){
+    //     return NextResponse.json("region", {status: 401});
+    // }
 
     // upload Images
     const images = await formData.getAll('images'); 
@@ -97,8 +101,12 @@ export async function POST(request) {
         await connectMongo();
         const housing = await Housing.findOne({slug: data.housing});
         data.housing = housing._id;
-        const region = await Region.findOne({name: data.region});
-        data.region = region._id;
+        const city = await City.findOne({name: data.city});
+        data.city = city._id;
+        if(data.region){
+            const region = await Region.findOne({name: data.region});
+            data.region = region._id;
+        }
 
         const post = await Post.create(data);
 
@@ -121,10 +129,15 @@ async function getPostCounts() {
 }
 
 async function getAllPosts(request) {
+    const city = await City.findById('64db879cb7ba2c6cf87eaae2');
     const params = request.nextUrl.searchParams.toString();
     const data = queryToMongoose(params);
     if(data.size && data.size === 'sm'){
-        const posts = await Post.find()
+        const posts = await Post.find({city: city._id})
+            .populate({
+                path: 'city',
+                select: 'name'
+            })    
             .populate({
                 path: 'region',
                 select: 'name'
@@ -139,7 +152,11 @@ async function getAllPosts(request) {
         const apartment = await Housing.findOne({slug: 'apartment'});
         const house = await Housing.findOne({slug: 'house'});
         const commercial = await Housing.findOne({slug: 'commercial'});
-        const apartments = await Post.find({housing: apartment._id})
+        const apartments = await Post.find({housing: apartment._id, city: city._id})
+            .populate({
+                path: 'city',
+                select: 'name'
+            })   
             .populate({
                 path: 'region',
                 select: 'name'
@@ -148,7 +165,11 @@ async function getAllPosts(request) {
                 path: 'housing',
                 select: 'slug'
             }).limit(limit).sort('-createdAt');
-        const houses = await Post.find({housing: house._id})
+        const houses = await Post.find({housing: house._id, city: city._id})
+            .populate({
+                path: 'city',
+                select: 'name'
+            })   
             .populate({
                 path: 'region',
                 select: 'name'
@@ -157,7 +178,11 @@ async function getAllPosts(request) {
                 path: 'housing',
                 select: 'slug'
             }).limit(limit).sort('-createdAt');
-        const commercials = await Post.find({housing: commercial._id})
+        const commercials = await Post.find({housing: commercial._id, city: city._id})
+            .populate({
+                path: 'city',
+                select: 'name'
+            })   
             .populate({
                 path: 'region',
                 select: 'name'
@@ -177,6 +202,10 @@ export async function getPostsByHousing(request) {
         const housing = await Housing.findOne({slug: data.housing});
         data.housing = housing._id;
     }
+    if(data.city) {
+        const city = await City.findOne({name: data.city});
+        data.city = city._id;
+    }
     if(data.region) {
         const region = await Region.findOne({short: data.region});
         data.region = region._id;
@@ -195,6 +224,10 @@ export async function getPostsByHousing(request) {
     }
     delete data.sort;
     const post = await Post.find(data)
+        .populate({
+            path: 'city',
+            select: 'name'
+        })   
         .populate({
             path: 'region',
             select: 'name'

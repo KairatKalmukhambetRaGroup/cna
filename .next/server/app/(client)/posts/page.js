@@ -315,7 +315,7 @@ __webpack_require__.r(__webpack_exports__);
       ]
       },
         {
-          'layout': [() => Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 30726)), "D:\\personal projects\\krisha-next\\src\\app\\(client)\\layout.js"],
+          'layout': [() => Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 43238)), "D:\\personal projects\\krisha-next\\src\\app\\(client)\\layout.js"],
           metadata: {
     icon: [(async (props) => (await Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 73881))).default(props))],
     apple: [],
@@ -495,7 +495,7 @@ const housings = [
     "Дома",
     "Коммерческие недвижимости"
 ];
-const ApartmentFilter = ({ formData, handleChange, handleSubmit, regions })=>{
+const ApartmentFilter = ({ formData, handleChange, handleSubmit, regions, cities })=>{
     const handleHousingChange = (name, value)=>{
         switch(value){
             case "Кватиры":
@@ -566,6 +566,13 @@ const ApartmentFilter = ({ formData, handleChange, handleSubmit, regions })=>{
                                         })
                                     }),
                                     /*#__PURE__*/ jsx_runtime_.jsx(Select/* default */.Z, {
+                                        name: "city",
+                                        placeholder: "Не важно",
+                                        options: cities,
+                                        value: formData.city,
+                                        handleChange: handleChange
+                                    }),
+                                    regions && regions.length > 0 && /*#__PURE__*/ jsx_runtime_.jsx(Select/* default */.Z, {
                                         name: "region",
                                         placeholder: "Не важно",
                                         options: regions,
@@ -720,7 +727,7 @@ const ComercialFilter_housings = [
     "Дома",
     "Коммерческие недвижимости"
 ];
-const ComercialFilter = ({ formData, handleChange, regions, handleSubmit })=>{
+const ComercialFilter = ({ formData, handleChange, regions, handleSubmit, cities })=>{
     const handleHousingChange = (name, value)=>{
         switch(value){
             case "Кватиры":
@@ -795,6 +802,13 @@ const ComercialFilter = ({ formData, handleChange, regions, handleSubmit })=>{
                                         handleChange: handleChange
                                     }),
                                     /*#__PURE__*/ jsx_runtime_.jsx(Select/* default */.Z, {
+                                        name: "city",
+                                        placeholder: "Не важно",
+                                        options: cities,
+                                        value: formData.city,
+                                        handleChange: handleChange
+                                    }),
+                                    regions && regions.length > 0 && /*#__PURE__*/ jsx_runtime_.jsx(Select/* default */.Z, {
                                         name: "region",
                                         placeholder: "Не важно",
                                         options: regions,
@@ -892,7 +906,7 @@ const HouseFilter_housings = [
     "Дома",
     "Коммерческие недвижимости"
 ];
-const HouseFilter = ({ formData, handleChange, regions, handleSubmit })=>{
+const HouseFilter = ({ formData, handleChange, regions, handleSubmit, cities })=>{
     const handleHousingChange = (name, value)=>{
         switch(value){
             case "Кватиры":
@@ -963,6 +977,13 @@ const HouseFilter = ({ formData, handleChange, regions, handleSubmit })=>{
                                         })
                                     }),
                                     /*#__PURE__*/ jsx_runtime_.jsx(Select/* default */.Z, {
+                                        name: "city",
+                                        placeholder: "Не важно",
+                                        options: cities,
+                                        value: formData.city,
+                                        handleChange: handleChange
+                                    }),
+                                    regions && regions.length > 0 && /*#__PURE__*/ jsx_runtime_.jsx(Select/* default */.Z, {
                                         name: "region",
                                         placeholder: "Не важно",
                                         options: regions,
@@ -1114,6 +1135,8 @@ const HouseFilter = ({ formData, handleChange, regions, handleSubmit })=>{
 };
 /* harmony default export */ const Filter_HouseFilter = (HouseFilter);
 
+// EXTERNAL MODULE: ./src/components/Menu.jsx
+var Menu = __webpack_require__(28888);
 // EXTERNAL MODULE: ./src/components/Post/PostCard.jsx
 var PostCard = __webpack_require__(69476);
 // EXTERNAL MODULE: ./src/styles/post.scss
@@ -1301,11 +1324,13 @@ var navigation = __webpack_require__(57114);
 
 
 
+
 const initFormData = {
     housing: "apartments",
     rooms: [],
     purpose: [],
     placement: [],
+    city: "",
     region: "",
     price: {
         from: "",
@@ -1350,11 +1375,22 @@ const AllPosts = ()=>{
     const search = (0,navigation.useSearchParams)();
     const [formData, setFormData] = (0,react_.useState)(initFormData);
     const [regions, setRegions] = (0,react_.useState)();
+    const [cities, setCities] = (0,react_.useState)();
+    const [cityObjects, setCityObjects] = (0,react_.useState)(null);
     const handleChange = (name, value)=>{
         setFormData({
             ...formData,
             [name]: value
         });
+        if (name === "city" && formData.city !== value) {
+            if (!value) setRegions([]);
+            for(let i = 0; i < cityObjects.length; i++){
+                const city = cityObjects[i];
+                if (city.name === value) {
+                    setRegions(city.regions.map((region)=>region.short));
+                }
+            }
+        }
         if (name === "housing") {
             setFormData({
                 ...initFormData,
@@ -1388,8 +1424,8 @@ const AllPosts = ()=>{
         });
         setPosts(data);
     };
-    const getRegions = async ()=>{
-        const { data } = await axios/* default */.Z.get("/api/regions", {
+    const getCities = async ()=>{
+        const { data } = await axios/* default */.Z.get("/api/cities", {
             validateStatus: function(status) {
                 return true;
             },
@@ -1398,12 +1434,34 @@ const AllPosts = ()=>{
                 "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
             }
         });
-        setRegions(data.map((region)=>region.short));
+        setCityObjects(data);
+        setCities(data.map((region)=>region.name));
     };
+    // const getRegions = async (city) => {
+    //     const {data} = await axios.get(`/api/regions/${city}`, {validateStatus: function (status) { return true }, headers: {"Access-Control-Allow-Origin": "*", "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"}});
+    //     if(data)
+    //         setRegions(data.map((region)=>region.short));
+    //     else 
+    //         setRegions([]);
+    // }
+    // useEffect(()=>{
+    //     if(!regions)
+    //         getRegions();
+    // }, [regions]);
     (0,react_.useEffect)(()=>{
-        if (!regions) getRegions();
+        if (!cities) getCities();
+        else {
+            if (formData.city) {
+                for(let i = 0; i < cityObjects.length; i++){
+                    const city = cityObjects[i];
+                    if (city.name === formData.city) {
+                        setRegions(city.regions.map((region)=>region.short));
+                    }
+                }
+            }
+        }
     }, [
-        regions
+        cities
     ]);
     (0,react_.useEffect)(()=>{
         const query = search.toString();
@@ -1413,6 +1471,9 @@ const AllPosts = ()=>{
             ...formData,
             ...data
         });
+        // if(data.city){
+        //     getRegions(data.city);
+        // }
         getPosts(query);
     }, [
         search
@@ -1426,19 +1487,23 @@ const AllPosts = ()=>{
     return /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
         id: "allposts",
         children: [
+            /*#__PURE__*/ jsx_runtime_.jsx(Menu/* default */.Z, {}),
             formData.housing === "apartment" && /*#__PURE__*/ jsx_runtime_.jsx(Filter_ApartmentFilter, {
+                cities: cities,
                 regions: regions,
                 formData: formData,
                 handleChange: handleChange,
                 handleSubmit: handdleSubmit
             }),
             formData.housing === "house" && /*#__PURE__*/ jsx_runtime_.jsx(Filter_HouseFilter, {
+                cities: cities,
                 regions: regions,
                 formData: formData,
                 handleChange: handleChange,
                 handleSubmit: handdleSubmit
             }),
             formData.housing === "commercial" && /*#__PURE__*/ jsx_runtime_.jsx(Filter_ComercialFilter, {
+                cities: cities,
                 regions: regions,
                 formData: formData,
                 handleChange: handleChange,
@@ -1501,6 +1566,14 @@ const __default__ = proxy.default;
 
 /***/ }),
 
+/***/ 11440:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__(50954)
+
+
+/***/ }),
+
 /***/ 57114:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
@@ -1516,7 +1589,7 @@ module.exports = __webpack_require__(90696)
 var __webpack_require__ = require("../../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [2697,9021,1512,5329,8130,2062,4682,3663,2851], () => (__webpack_exec__(78774)));
+var __webpack_exports__ = __webpack_require__.X(0, [2697,9021,1512,5329,2062,447,4682,3663,8888,2851], () => (__webpack_exec__(78774)));
 module.exports = __webpack_exports__;
 
 })();

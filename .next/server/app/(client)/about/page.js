@@ -315,7 +315,7 @@ __webpack_require__.r(__webpack_exports__);
       ]
       },
         {
-          'layout': [() => Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 30726)), "D:\\personal projects\\krisha-next\\src\\app\\(client)\\layout.js"],
+          'layout': [() => Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 43238)), "D:\\personal projects\\krisha-next\\src\\app\\(client)\\layout.js"],
           metadata: {
     icon: [(async (props) => (await Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 73881))).default(props))],
     apple: [],
@@ -381,19 +381,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(56786);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(93258);
-/* harmony import */ var draftjs_to_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(21512);
-/* harmony import */ var draftjs_to_html__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(draftjs_to_html__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(18038);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _components_Menu__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(28888);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(93258);
+/* harmony import */ var draftjs_to_html__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(21512);
+/* harmony import */ var draftjs_to_html__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(draftjs_to_html__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(18038);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);
 /* __next_internal_client_entry_do_not_use__ default auto */ 
 
 
 
+
 const AboutPage = ()=>{
-    const [about, setAbout] = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(null);
+    const [about, setAbout] = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)(null);
     const getAbout = async ()=>{
-        const { data } = await axios__WEBPACK_IMPORTED_MODULE_3__/* ["default"] */ .Z.get(`/api/about`, {
+        const { data } = await axios__WEBPACK_IMPORTED_MODULE_4__/* ["default"] */ .Z.get(`/api/about`, {
             validateStatus: function(status) {
                 return true;
             },
@@ -404,31 +406,34 @@ const AboutPage = ()=>{
         });
         setAbout(data);
     };
-    (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(()=>{
+    (0,react__WEBPACK_IMPORTED_MODULE_3__.useEffect)(()=>{
         if (!about) getAbout();
     }, [
         about
     ]);
-    return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+    return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
         id: "aboutpage",
-        children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-            className: "container",
-            children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                className: "content",
-                children: [
-                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                        className: "medium-24-28 text-black",
-                        children: "О нас"
-                    }),
-                    about && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                        className: "regular-16-20 text-black",
-                        dangerouslySetInnerHTML: {
-                            __html: draftjs_to_html__WEBPACK_IMPORTED_MODULE_1___default()(JSON?.parse(about))
-                        }
-                    })
-                ]
+        children: [
+            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Menu__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .Z, {}),
+            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                className: "container",
+                children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                    className: "content",
+                    children: [
+                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                            className: "medium-24-28 text-black",
+                            children: "О нас"
+                        }),
+                        about && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                            className: "regular-16-20 text-black",
+                            dangerouslySetInnerHTML: {
+                                __html: draftjs_to_html__WEBPACK_IMPORTED_MODULE_2___default()(JSON?.parse(about))
+                            }
+                        })
+                    ]
+                })
             })
-        })
+        ]
     });
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (AboutPage);
@@ -460,6 +465,14 @@ const __default__ = proxy.default;
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__default__);
 
+/***/ }),
+
+/***/ 11440:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__(50954)
+
+
 /***/ })
 
 };
@@ -469,7 +482,7 @@ const __default__ = proxy.default;
 var __webpack_require__ = require("../../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [2697,9021,1512,5329,8130], () => (__webpack_exec__(60603)));
+var __webpack_exports__ = __webpack_require__.X(0, [2697,9021,1512,5329,447,8888], () => (__webpack_exec__(60603)));
 module.exports = __webpack_exports__;
 
 })();

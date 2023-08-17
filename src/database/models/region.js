@@ -1,13 +1,12 @@
 import mongoose from "mongoose";
-import Housing from "./housing";
+import City from "./city";
 
 const regionSchema = mongoose.Schema({
-    short: {type: String, required: true, unique: true},
-    name: {type: String, required: true},
-    housings: [{type: mongoose.Schema.Types.ObjectId, ref: Housing}]
+    short: {type: String, required: true},
+    city: {type: mongoose.Schema.Types.ObjectId, ref: City},
+    name: {type: String, required: true}
 }, {
     timestamps: true
 });
-
 const Region = mongoose.models.Region || mongoose.model('Region', regionSchema);
 export default Region;
