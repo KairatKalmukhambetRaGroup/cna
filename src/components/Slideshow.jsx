@@ -36,7 +36,7 @@ const Slideshow = ({images=null}) => {
                 <i className="crnt-left" onClick={prev}></i>
                 <i className="crnt-right" onClick={next}></i>
                 {images && images.length>0 && (
-                    <div className="crnt-count">{(Number(currentImage)+1)} / {Number(images.length)-1}</div>
+                    <div className="crnt-count">{(Number(currentImage)+1)} / {Number(images.length)}</div>
                 )}
             </div>
             {images && images.length>0 && (
@@ -83,6 +83,9 @@ const ModalSlideshow = ({images, current, setCurrent}) =>{
     return (
         <div id="modalSlideshow">
             <div className="content">
+                <div className="count">
+                {(Number(current)+1)} / {Number(images.length)}
+                </div>
                 <i className="close" onClick={close}></i>
                 <i className="prev" onClick={prev}></i>
                 <img src={`https://cna.kz/public/uploads/${images[current]}`} alt="" />

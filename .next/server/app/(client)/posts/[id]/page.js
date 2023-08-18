@@ -457,7 +457,7 @@ const Slideshow = ({ images = null })=>{
                         children: [
                             Number(currentImage) + 1,
                             " / ",
-                            Number(images.length) - 1
+                            Number(images.length)
                         ]
                     })
                 ]
@@ -507,6 +507,14 @@ const ModalSlideshow = ({ images, current, setCurrent })=>{
         children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
             className: "content",
             children: [
+                /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                    className: "count",
+                    children: [
+                        Number(current) + 1,
+                        " / ",
+                        Number(images.length)
+                    ]
+                }),
                 /*#__PURE__*/ jsx_runtime_.jsx("i", {
                     className: "close",
                     onClick: close
@@ -663,6 +671,13 @@ const Post = ({ post })=>{
                                 children: [
                                     /*#__PURE__*/ jsx_runtime_.jsx(components_Slideshow, {
                                         images: post.images
+                                    }),
+                                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                                        className: "price",
+                                        children: [
+                                            (0,dateConvert/* numberRearange */.eS)(post.price),
+                                            " 〒"
+                                        ]
                                     }),
                                     /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
                                         className: "about",

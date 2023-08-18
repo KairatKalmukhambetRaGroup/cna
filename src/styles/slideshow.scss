@@ -35,8 +35,8 @@
         i{
             position: absolute;
             cursor: pointer;
-            width: 24px;
-            height: 24px;
+            width: 40px;
+            height: 40px;
             background: rgba($color: v.$black, $alpha: .5);
             border-radius: 50%;
             overflow: hidden;
@@ -86,12 +86,23 @@
                 object-fit: contain;
                 object-position: center;
             }
-
+            .count{
+                position: absolute;
+                background: rgba($color: black, $alpha: .6);
+                color: v.$white;
+                top: 28px;
+                left: 50%;
+                transform: translateX(-50%);
+                font-size: 20px;
+                line-height: 24px;
+                padding: 4px 8px;
+                border-radius: 4px;
+            }
             i{
                 position: absolute;
                 cursor: pointer;
-                width: 32px;
-                height: 32px;
+                width: 40px;
+                height: 40px;
                 background: rgba($color: v.$black, $alpha: .5);
                 border-radius: 50%;
                 overflow: hidden;

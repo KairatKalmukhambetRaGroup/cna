@@ -45,6 +45,7 @@ const Post = ({post}) => {
                         )}
                         <div className="post-content">
                             <Slideshow images={post.images} />
+                            <div className="price">{numberRearange(post.price)} 〒</div>
                             <div className="about">
                                 <div className="title">
                                     {post.housing.slug === 'apartment' && 'О квартире'}
