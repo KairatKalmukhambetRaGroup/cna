@@ -1,8 +1,6 @@
 'use client'
 
-import ApartmentFilter from '@/components/Filter/ApartmentFilter';
-import ComercialFilter from '@/components/Filter/ComercialFilter';
-import HouseFilter from '@/components/Filter/HouseFilter';
+import Filter from '@/components/Filter';
 import Menu from '@/components/Menu';
 import Posts from '@/components/Post/Posts';
 import Sidebar from '@/components/Sidebar';
@@ -66,6 +64,14 @@ const AllPosts = () => {
     const [regions, setRegions] = useState();
     const [cities, setCities] = useState();
     const [cityObjects, setCityObjects] = useState(null);
+
+    const [totalPages, setTotalPages] = useState(1);
+    const [page, setPage] = useState(1);
+    const [loading, setLoading] = useState(true);
+    const [postCount, setPostCount] = useState(0);
+
+    const [query, setQuery] = useState('');
+
     const handleChange = (name, value) => {
         setFormData({...formData, [name]: value});
         if(name === 'city' && formData.city !== value){
@@ -81,21 +87,28 @@ const AllPosts = () => {
         
         if(name === 'housing'){
             setFormData({...initFormData, [name]: value});
-            const query = dataToQuery({[name]: value});
-            router.push(`${query}`);
-            getPosts(query);
+            const q = dataToQuery({[name]: value});
+            router.push(`${q}`);
+            setQuery(q);
         }else if(name === 'sort'){
-            const query = dataToQuery({...formData, [name]: value});
-            router.push(`${query}`);
-            getPosts(query);
+            const q = dataToQuery({...formData, [name]: value});
+            router.push(`${q}`);
+            setQuery(q);
         }
     }
     
-    const [posts, setPosts] = useState(null);
-    const getPosts = async (query) => {
-        setPosts(null)
-        const {data} = await axios.get(`/api/posts${query.includes('?') ? query : '?' + query}`, {validateStatus: function (status) { return true }, headers: {"Access-Control-Allow-Origin": "*", "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"}});
-        setPosts(data);
+    const [posts, setPosts] = useState([]);
+    const getPosts = async () => {
+        setLoading(true);
+        console.log(page, query);
+        const {data} = await axios.get(`/api/posts/sell${query.includes('?') ? query : '?' + query}&page=${page}`, {validateStatus: function (status) { return true }, headers: {"Access-Control-Allow-Origin": "*", "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"}});
+        
+        const newPosts = data.posts;
+        console.log(newPosts)
+        setTotalPages(data.totalPages);
+        setPostCount(data.count);
+        setPosts(prevPosts => [...prevPosts, ...newPosts]);
+        setLoading(false);
     }
     const getCities = async () => {
         const {data} = await axios.get('/api/cities', {validateStatus: function (status) { return true }, headers: {"Access-Control-Allow-Origin": "*", "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"}});
@@ -115,6 +128,30 @@ const AllPosts = () => {
     // }, [regions]);
 
     useEffect(()=>{
+        getPosts();
+    }, [page])
+    useEffect(()=>{
+        setPosts([]);
+        setLoading(true);
+        setPage(1);
+    }, [query])
+
+    const handleScroll = () => {
+        if(window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight || loading) 
+            return;
+        setPage(prevPage => prevPage + 1);
+    } 
+
+    useEffect(()=>{
+        if(page < totalPages){
+            window.addEventListener('scroll', handleScroll);
+        }
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        }
+    }, [loading])
+
+    useEffect(()=>{
         if(!cities)
             getCities();
         else{
@@ -130,39 +167,31 @@ const AllPosts = () => {
     }, [cities])
 
     useEffect(()=>{
-        const query = search.toString();
-        const data = queryToData(query);
+        const q = search.toString();
+        const data = queryToData(q);
         if(!data.housing)
             data.housing = 'apartment'
         setFormData({...formData, ...data});
         // if(data.city){
         //     getRegions(data.city);
         // }
-        getPosts(query);
+        setQuery(q);
     }, [search])
 
     const handdleSubmit = (e) => {
         e.preventDefault();
-        const query = dataToQuery(formData);
-        router.push(`${query}`);
-        getPosts(query);
+        const q = dataToQuery(formData);
+        router.push(`${q}`);
+        // setQuery(q);
     }
 
     return (
         <div id="allposts">
             <Menu />
-            {formData.housing === 'apartment' && (
-                <ApartmentFilter cities={cities} regions={regions} formData={formData} handleChange={handleChange} handleSubmit={handdleSubmit} />
-            )}
-            {formData.housing === 'house' && (
-                <HouseFilter cities={cities} regions={regions} formData={formData} handleChange={handleChange} handleSubmit={handdleSubmit} />
-            )}
-            {formData.housing === 'commercial' && (
-                <ComercialFilter cities={cities} regions={regions} formData={formData} handleChange={handleChange} handleSubmit={handdleSubmit} />
-            )}
+            <Filter prefix='Покупка' housing={formData.housing} cities={cities} regions={regions} formData={formData} handleChange={handleChange} handleSubmit={handdleSubmit} />
             <div className='container'>   
                 <div className='content'>                
-                    <Posts posts={posts} title={formData.housing} formData={formData} handleChange={handleChange} total={posts ? posts.length : 0} />
+                    <Posts posts={posts} loading={loading} title={formData.housing} formData={formData} handleChange={handleChange} total={postCount}  />
                     <Sidebar />
                 </div>         
             </div>

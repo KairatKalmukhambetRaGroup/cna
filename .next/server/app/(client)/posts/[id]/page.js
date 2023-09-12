@@ -558,7 +558,7 @@ const Post = ({ post })=>{
                 children: [
                     /*#__PURE__*/ jsx_runtime_.jsx("div", {
                         className: "title",
-                        children: (0,dateConvert/* createTitle */.i2)(post)
+                        children: `${(0,dateConvert/* createTitle */.i2)(post)}, ${post.adress}`
                     }),
                     /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
                         className: "info",
@@ -568,11 +568,20 @@ const Post = ({ post })=>{
                                 children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
                                     className: "sidebar-content",
                                     children: [
-                                        /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                                        post.posttype === "sell" ? /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
                                             className: "price",
                                             children: [
                                                 (0,dateConvert/* numberRearange */.eS)(post.price),
                                                 " 〒"
+                                            ]
+                                        }) : /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                                            className: "price",
+                                            children: [
+                                                (0,dateConvert/* numberRearange */.eS)(post.price),
+                                                " 〒 /",
+                                                post.rentPeriod === "По часам" && " час",
+                                                post.rentPeriod === "Посуточно" && " сутки",
+                                                post.rentPeriod === "Помесячно" && " месяц"
                                             ]
                                         }),
                                         /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {

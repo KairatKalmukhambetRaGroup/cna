@@ -8,6 +8,7 @@ import NumberRange from "../Inputs/NumberRange";
 import axios from 'axios';
 
 const initFormData = {
+    operation: 'Купить', 
     housing: 'Квартиру',
     rooms: [],
     city: '',
@@ -63,7 +64,7 @@ const SimpleFilter = ({handleSubmit}) => {
             <div className="container">
                 <div className="content">
                     <form onSubmit={(e)=>{e.preventDefault();handleSubmit(formData);}}>
-                        <div className="regular-14-16">Купить</div>
+                        <Select mobile={true} name='operation' options={['Купить', 'Арендовать']} value={formData.operation} handleChange={handleChange} />
                         <Select mobile={true} name="housing" options={['Квартиру', 'Дом', 'Коммерческую недвижимость']} value={formData.housing} handleChange={handleChange} />
                         <Select mobile={true} name="city" options={cities} value={formData.city} handleChange={handleChange} />
                         {regions && regions.length > 0 && (

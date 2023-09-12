@@ -1,8 +1,6 @@
 {
   "version": 1,
   "functions": {
-    "/api/posts/[id]": {},
-    "/admin/advertisements": {},
-    "/": {}
+    "/api/posts/[id]": {}
   }
 }

@@ -367,955 +367,33 @@ __webpack_require__.r(__webpack_exports__);
 /***/ 22240:
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
-Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 47205))
+Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 55863))
 
 /***/ }),
 
-/***/ 47205:
+/***/ 55863:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-// ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
-
-// EXPORTS
-__webpack_require__.d(__webpack_exports__, {
-  "default": () => (/* binding */ page)
-});
-
-// EXTERNAL MODULE: external "next/dist/compiled/react/jsx-runtime"
-var jsx_runtime_ = __webpack_require__(56786);
-// EXTERNAL MODULE: ./src/styles/filter.scss
-var filter = __webpack_require__(85145);
-// EXTERNAL MODULE: ./src/components/Inputs/Select.jsx
-var Select = __webpack_require__(27832);
-// EXTERNAL MODULE: ./src/components/Inputs/MultiNumberInput.jsx
-var MultiNumberInput = __webpack_require__(95618);
-// EXTERNAL MODULE: ./src/components/Inputs/NumberRange.jsx
-var NumberRange = __webpack_require__(82156);
-// EXTERNAL MODULE: ./src/constants/index.js
-var constants = __webpack_require__(28483);
-// EXTERNAL MODULE: external "next/dist/compiled/react"
-var react_ = __webpack_require__(18038);
-var react_default = /*#__PURE__*/__webpack_require__.n(react_);
-// EXTERNAL MODULE: ./src/styles/inputs.scss
-var inputs = __webpack_require__(7847);
-;// CONCATENATED MODULE: ./src/components/Inputs/MultiSelect.jsx
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(56786);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _components_Filter__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(74524);
+/* harmony import */ var _components_Menu__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(28888);
+/* harmony import */ var _components_Post_Posts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(36665);
+/* harmony import */ var _components_Sidebar__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(88169);
+/* harmony import */ var _styles_home_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(81118);
+/* harmony import */ var _styles_home_scss__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_styles_home_scss__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _utilFunctions_dateConvert__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(42062);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(93258);
+/* harmony import */ var next_navigation__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(57114);
+/* harmony import */ var next_navigation__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(next_navigation__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(18038);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_7__);
 /* __next_internal_client_entry_do_not_use__ default auto */ 
-
-
-const MultiSelect = ({ name = "", placeholder = null, label = "", value = [], options = [], handleChange, labeled = false })=>{
-    const [open, setOpen] = react_default().useState(false);
-    const onChange = (e)=>{
-        e.preventDefault();
-        const val = e.currentTarget.dataset.value;
-        if (!val) {
-            handleChange(name, []);
-        } else {
-            let tmp = [];
-            if (!Array.isArray(value)) {
-                tmp.push(value);
-            } else {
-                tmp = [
-                    ...value
-                ];
-            }
-            if (tmp.includes(val)) {
-                tmp = tmp.filter((el)=>el !== val);
-            } else {
-                tmp.push(val);
-            }
-            handleChange(name, tmp);
-        }
-        setOpen(false);
-    };
-    const toggleOptions = (e)=>{
-        setOpen(!open);
-    };
-    return /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-        className: `input multiselect ${labeled ? "labeled" : ""}`,
-        children: [
-            /*#__PURE__*/ jsx_runtime_.jsx("label", {
-                children: label
-            }),
-            /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-                className: "select",
-                children: [
-                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-                        className: "selected",
-                        onClick: toggleOptions,
-                        children: [
-                            /*#__PURE__*/ jsx_runtime_.jsx("span", {
-                                className: "val",
-                                children: value && value.length > 0 ? Array.isArray(value) ? value.join(", ") : value : placeholder
-                            }),
-                            /*#__PURE__*/ jsx_runtime_.jsx("i", {})
-                        ]
-                    }),
-                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-                        className: `options ${open ? "active" : ""}`,
-                        children: [
-                            placeholder && /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                                className: `option ${value && value.length > 0 ? "" : "active"}`,
-                                "data-value": null,
-                                onClick: onChange,
-                                children: placeholder
-                            }),
-                            options && options.length > 0 && options.map((option, key)=>/*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-                                    className: `option ${value.includes(option) ? "active" : ""}`,
-                                    "data-value": option,
-                                    onClick: onChange,
-                                    children: [
-                                        /*#__PURE__*/ jsx_runtime_.jsx("i", {
-                                            className: "checkbox"
-                                        }),
-                                        " ",
-                                        option
-                                    ]
-                                }, key))
-                        ]
-                    })
-                ]
-            })
-        ]
-    });
-};
-/* harmony default export */ const Inputs_MultiSelect = (MultiSelect);
-
-;// CONCATENATED MODULE: ./src/components/Filter/ApartmentFilter.jsx
-/* __next_internal_client_entry_do_not_use__ default auto */ 
-
-
-
-
-
-
-const housings = [
-    "Кватиры",
-    "Дома",
-    "Коммерческие недвижимости"
-];
-const ApartmentFilter = ({ formData, handleChange, handleSubmit, regions, cities })=>{
-    const handleHousingChange = (name, value)=>{
-        switch(value){
-            case "Кватиры":
-                handleChange("housing", "apartment");
-                break;
-            case "Дома":
-                handleChange("housing", "house");
-                break;
-            case "Коммерческие недвижимости":
-                handleChange("housing", "commercial");
-                break;
-        }
-    };
-    return /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-        id: "filter",
-        className: "apartment",
-        children: [
-            /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                className: "navbar",
-                children: /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                    className: "container",
-                    children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-                        className: "nav",
-                        children: [
-                            /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                                className: "active",
-                                children: "Квартиры"
-                            }),
-                            /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                                onClick: (e)=>{
-                                    e.preventDefault();
-                                    handleChange("housing", "house");
-                                },
-                                children: "Дома"
-                            }),
-                            /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                                onClick: (e)=>{
-                                    e.preventDefault();
-                                    handleChange("housing", "commercial");
-                                },
-                                children: "Коммерческая недвижимость"
-                            })
-                        ]
-                    })
-                })
-            }),
-            /*#__PURE__*/ (0,jsx_runtime_.jsxs)("form", {
-                onSubmit: handleSubmit,
-                children: [
-                    /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                        className: "top",
-                        children: /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                            className: "container",
-                            children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-                                className: "content",
-                                children: [
-                                    /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                                        className: "regular-14-16 not-mobile",
-                                        children: "Квартиры"
-                                    }),
-                                    /*#__PURE__*/ jsx_runtime_.jsx("span", {
-                                        className: "mobile",
-                                        children: /*#__PURE__*/ jsx_runtime_.jsx(Select/* default */.Z, {
-                                            name: "housing",
-                                            options: housings,
-                                            value: "Квартиры",
-                                            handleChange: handleHousingChange
-                                        })
-                                    }),
-                                    /*#__PURE__*/ jsx_runtime_.jsx(Select/* default */.Z, {
-                                        name: "city",
-                                        placeholder: "Не важно",
-                                        options: cities,
-                                        value: formData.city,
-                                        handleChange: handleChange
-                                    }),
-                                    regions && regions.length > 0 && /*#__PURE__*/ jsx_runtime_.jsx(Select/* default */.Z, {
-                                        name: "region",
-                                        placeholder: "Не важно",
-                                        options: regions,
-                                        value: formData.region,
-                                        handleChange: handleChange
-                                    }),
-                                    /*#__PURE__*/ jsx_runtime_.jsx(MultiNumberInput/* default */.Z, {
-                                        name: "rooms",
-                                        label: "- комн.",
-                                        value: formData.rooms,
-                                        handleChange: handleChange
-                                    }),
-                                    /*#__PURE__*/ jsx_runtime_.jsx(NumberRange/* default */.Z, {
-                                        name: "price",
-                                        label: "Цена",
-                                        param: "тг",
-                                        value: formData.price,
-                                        handleChange: handleChange
-                                    })
-                                ]
-                            })
-                        })
-                    }),
-                    /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                        className: "middle",
-                        children: /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                            className: "container",
-                            children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-                                className: "content",
-                                children: [
-                                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-                                        className: "col",
-                                        children: [
-                                            /*#__PURE__*/ jsx_runtime_.jsx(Inputs_MultiSelect, {
-                                                name: "material",
-                                                label: "Тип дома",
-                                                placeholder: "Не важно",
-                                                options: constants/* MATERIALS */.gU,
-                                                value: formData.material,
-                                                handleChange: handleChange,
-                                                labeled: true
-                                            }),
-                                            /*#__PURE__*/ jsx_runtime_.jsx(NumberRange/* default */.Z, {
-                                                name: "year",
-                                                label: "Год постройки",
-                                                value: formData.year,
-                                                handleChange: handleChange,
-                                                labeled: true
-                                            })
-                                        ]
-                                    }),
-                                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-                                        className: "col",
-                                        children: [
-                                            /*#__PURE__*/ jsx_runtime_.jsx(NumberRange/* default */.Z, {
-                                                name: "floors",
-                                                label: "Этажей в доме",
-                                                value: formData.floors,
-                                                handleChange: handleChange,
-                                                labeled: true
-                                            }),
-                                            /*#__PURE__*/ jsx_runtime_.jsx(NumberRange/* default */.Z, {
-                                                name: "floor",
-                                                label: "Этаж",
-                                                value: formData.floor,
-                                                handleChange: handleChange,
-                                                labeled: true
-                                            }),
-                                            /*#__PURE__*/ jsx_runtime_.jsx(Inputs_MultiSelect, {
-                                                name: "bathroom",
-                                                label: "Сан узел",
-                                                placeholder: "Не важно",
-                                                options: constants/* BATHROOMS */.fe,
-                                                value: formData.bathroom,
-                                                handleChange: handleChange,
-                                                labeled: true
-                                            })
-                                        ]
-                                    }),
-                                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-                                        className: "col",
-                                        children: [
-                                            /*#__PURE__*/ jsx_runtime_.jsx(NumberRange/* default */.Z, {
-                                                name: "total_area",
-                                                label: "Общая площадь",
-                                                param: "м2",
-                                                value: formData.total_area,
-                                                handleChange: handleChange,
-                                                labeled: true
-                                            }),
-                                            /*#__PURE__*/ jsx_runtime_.jsx(NumberRange/* default */.Z, {
-                                                name: "kitchen_area",
-                                                label: "Площадь кухни",
-                                                param: "м2",
-                                                value: formData.kitchen_area,
-                                                handleChange: handleChange,
-                                                labeled: true
-                                            }),
-                                            /*#__PURE__*/ jsx_runtime_.jsx(NumberRange/* default */.Z, {
-                                                name: "living_area",
-                                                label: "Жилая площадь",
-                                                param: "м2",
-                                                value: formData.living_area,
-                                                handleChange: handleChange,
-                                                labeled: true
-                                            })
-                                        ]
-                                    })
-                                ]
-                            })
-                        })
-                    }),
-                    /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                        className: "bottom",
-                        children: /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                            className: "container",
-                            children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-                                className: "content",
-                                children: [
-                                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-                                        className: "clear",
-                                        children: [
-                                            /*#__PURE__*/ jsx_runtime_.jsx("i", {}),
-                                            " Очистить все"
-                                        ]
-                                    }),
-                                    /*#__PURE__*/ jsx_runtime_.jsx("input", {
-                                        type: "submit",
-                                        className: "submit-btn",
-                                        value: "Показать результаты"
-                                    })
-                                ]
-                            })
-                        })
-                    })
-                ]
-            })
-        ]
-    });
-};
-/* harmony default export */ const Filter_ApartmentFilter = (ApartmentFilter);
-
-;// CONCATENATED MODULE: ./src/components/Filter/ComercialFilter.jsx
-/* __next_internal_client_entry_do_not_use__ default auto */ 
-
-
-
-
-
-const ComercialFilter_housings = [
-    "Кватиры",
-    "Дома",
-    "Коммерческие недвижимости"
-];
-const ComercialFilter = ({ formData, handleChange, regions, handleSubmit, cities })=>{
-    const handleHousingChange = (name, value)=>{
-        switch(value){
-            case "Кватиры":
-                handleChange("housing", "apartment");
-                break;
-            case "Дома":
-                handleChange("housing", "house");
-                break;
-            case "Коммерческие недвижимости":
-                handleChange("housing", "commercial");
-                break;
-        }
-    };
-    return /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-        id: "filter",
-        className: "commercial",
-        children: [
-            /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                className: "navbar",
-                children: /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                    className: "container",
-                    children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-                        className: "nav",
-                        children: [
-                            /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                                onClick: (e)=>{
-                                    e.preventDefault();
-                                    handleChange("housing", "apartment");
-                                },
-                                children: "Квартиры"
-                            }),
-                            /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                                onClick: (e)=>{
-                                    e.preventDefault();
-                                    handleChange("housing", "house");
-                                },
-                                children: "Дома"
-                            }),
-                            /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                                className: "active",
-                                children: "Коммерческая недвижимость"
-                            })
-                        ]
-                    })
-                })
-            }),
-            /*#__PURE__*/ (0,jsx_runtime_.jsxs)("form", {
-                onSubmit: handleSubmit,
-                children: [
-                    /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                        className: "top",
-                        children: /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                            className: "container",
-                            children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-                                className: "content",
-                                children: [
-                                    /*#__PURE__*/ jsx_runtime_.jsx("span", {
-                                        className: "mobile",
-                                        children: /*#__PURE__*/ jsx_runtime_.jsx(Select/* default */.Z, {
-                                            name: "housing",
-                                            options: ComercialFilter_housings,
-                                            value: "Коммерческие недвижимости",
-                                            handleChange: handleHousingChange
-                                        })
-                                    }),
-                                    /*#__PURE__*/ jsx_runtime_.jsx(Inputs_MultiSelect, {
-                                        name: "purpose",
-                                        placeholder: "Не важно",
-                                        label: "Назначение",
-                                        options: constants/* PURPOSES */.Kp,
-                                        value: formData.purpose,
-                                        handleChange: handleChange
-                                    }),
-                                    /*#__PURE__*/ jsx_runtime_.jsx(Select/* default */.Z, {
-                                        name: "city",
-                                        placeholder: "Не важно",
-                                        options: cities,
-                                        value: formData.city,
-                                        handleChange: handleChange
-                                    }),
-                                    regions && regions.length > 0 && /*#__PURE__*/ jsx_runtime_.jsx(Select/* default */.Z, {
-                                        name: "region",
-                                        placeholder: "Не важно",
-                                        options: regions,
-                                        value: formData.region,
-                                        handleChange: handleChange
-                                    }),
-                                    /*#__PURE__*/ jsx_runtime_.jsx(NumberRange/* default */.Z, {
-                                        name: "price",
-                                        label: "Цена",
-                                        param: "тг",
-                                        value: formData.price,
-                                        handleChange: handleChange
-                                    })
-                                ]
-                            })
-                        })
-                    }),
-                    /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                        className: "middle",
-                        children: /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                            className: "container",
-                            children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-                                className: "content",
-                                children: [
-                                    /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                                        className: "col",
-                                        children: /*#__PURE__*/ jsx_runtime_.jsx(Inputs_MultiSelect, {
-                                            name: "placement",
-                                            label: "Где размещен объект",
-                                            placeholder: "Не важно",
-                                            options: constants/* PLACEMENTS */.ky,
-                                            value: formData.placement,
-                                            handleChange: handleChange,
-                                            labeled: true
-                                        })
-                                    }),
-                                    /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                                        className: "col",
-                                        children: /*#__PURE__*/ jsx_runtime_.jsx(NumberRange/* default */.Z, {
-                                            name: "total_area",
-                                            label: "Общая площадь",
-                                            param: "м2",
-                                            value: formData.total_area,
-                                            handleChange: handleChange,
-                                            labeled: true
-                                        })
-                                    }),
-                                    /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                                        className: "col"
-                                    })
-                                ]
-                            })
-                        })
-                    }),
-                    /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                        className: "bottom",
-                        children: /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                            className: "container",
-                            children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-                                className: "content",
-                                children: [
-                                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-                                        className: "clear",
-                                        children: [
-                                            /*#__PURE__*/ jsx_runtime_.jsx("i", {}),
-                                            " Очистить все"
-                                        ]
-                                    }),
-                                    /*#__PURE__*/ jsx_runtime_.jsx("input", {
-                                        type: "submit",
-                                        className: "submit-btn",
-                                        value: "Показать результаты"
-                                    })
-                                ]
-                            })
-                        })
-                    })
-                ]
-            })
-        ]
-    });
-};
-/* harmony default export */ const Filter_ComercialFilter = (ComercialFilter);
-
-;// CONCATENATED MODULE: ./src/components/Filter/HouseFilter.jsx
-/* __next_internal_client_entry_do_not_use__ default auto */ 
-
-
-
-
-
-
-const HouseFilter_housings = [
-    "Кватиры",
-    "Дома",
-    "Коммерческие недвижимости"
-];
-const HouseFilter = ({ formData, handleChange, regions, handleSubmit, cities })=>{
-    const handleHousingChange = (name, value)=>{
-        switch(value){
-            case "Кватиры":
-                handleChange("housing", "apartment");
-                break;
-            case "Дома":
-                handleChange("housing", "house");
-                break;
-            case "Коммерческие недвижимости":
-                handleChange("housing", "commercial");
-                break;
-        }
-    };
-    return /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-        id: "filter",
-        className: "house",
-        children: [
-            /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                className: "navbar",
-                children: /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                    className: "container",
-                    children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-                        className: "nav",
-                        children: [
-                            /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                                onClick: (e)=>{
-                                    e.preventDefault();
-                                    handleChange("housing", "apartment");
-                                },
-                                children: "Квартиры"
-                            }),
-                            /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                                className: "active",
-                                children: "Дома"
-                            }),
-                            /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                                onClick: (e)=>{
-                                    e.preventDefault();
-                                    handleChange("housing", "commercial");
-                                },
-                                children: "Коммерческая недвижимость"
-                            })
-                        ]
-                    })
-                })
-            }),
-            /*#__PURE__*/ (0,jsx_runtime_.jsxs)("form", {
-                onSubmit: handleSubmit,
-                children: [
-                    /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                        className: "top",
-                        children: /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                            className: "container",
-                            children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-                                className: "content",
-                                children: [
-                                    /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                                        className: "regular-14-16 not-mobile",
-                                        children: "Дома"
-                                    }),
-                                    /*#__PURE__*/ jsx_runtime_.jsx("span", {
-                                        className: "mobile",
-                                        children: /*#__PURE__*/ jsx_runtime_.jsx(Select/* default */.Z, {
-                                            name: "housing",
-                                            options: HouseFilter_housings,
-                                            value: "Дома",
-                                            handleChange: handleHousingChange
-                                        })
-                                    }),
-                                    /*#__PURE__*/ jsx_runtime_.jsx(Select/* default */.Z, {
-                                        name: "city",
-                                        placeholder: "Не важно",
-                                        options: cities,
-                                        value: formData.city,
-                                        handleChange: handleChange
-                                    }),
-                                    regions && regions.length > 0 && /*#__PURE__*/ jsx_runtime_.jsx(Select/* default */.Z, {
-                                        name: "region",
-                                        placeholder: "Не важно",
-                                        options: regions,
-                                        value: formData.region,
-                                        handleChange: handleChange
-                                    }),
-                                    /*#__PURE__*/ jsx_runtime_.jsx(MultiNumberInput/* default */.Z, {
-                                        name: "rooms",
-                                        label: "- комн.",
-                                        value: formData.rooms,
-                                        handleChange: handleChange
-                                    }),
-                                    /*#__PURE__*/ jsx_runtime_.jsx(NumberRange/* default */.Z, {
-                                        name: "price",
-                                        label: "Цена",
-                                        param: "тг",
-                                        value: formData.price,
-                                        handleChange: handleChange
-                                    })
-                                ]
-                            })
-                        })
-                    }),
-                    /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                        className: "middle",
-                        children: /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                            className: "container",
-                            children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-                                className: "content",
-                                children: [
-                                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-                                        className: "col",
-                                        children: [
-                                            /*#__PURE__*/ jsx_runtime_.jsx(Inputs_MultiSelect, {
-                                                name: "material",
-                                                label: "Тип строения",
-                                                placeholder: "Не важно",
-                                                options: constants/* MATERIALS */.gU,
-                                                value: formData.material,
-                                                handleChange: handleChange,
-                                                labeled: true
-                                            }),
-                                            /*#__PURE__*/ jsx_runtime_.jsx(NumberRange/* default */.Z, {
-                                                name: "floors",
-                                                label: "Этажей в доме",
-                                                value: formData.floors,
-                                                handleChange: handleChange,
-                                                labeled: true
-                                            }),
-                                            /*#__PURE__*/ jsx_runtime_.jsx(NumberRange/* default */.Z, {
-                                                name: "year",
-                                                label: "Год постройки",
-                                                value: formData.year,
-                                                handleChange: handleChange,
-                                                labeled: true
-                                            })
-                                        ]
-                                    }),
-                                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-                                        className: "col",
-                                        children: [
-                                            /*#__PURE__*/ jsx_runtime_.jsx(NumberRange/* default */.Z, {
-                                                name: "plot",
-                                                label: "Этаж",
-                                                value: formData.plot,
-                                                handleChange: handleChange,
-                                                labeled: true
-                                            }),
-                                            /*#__PURE__*/ jsx_runtime_.jsx(Inputs_MultiSelect, {
-                                                name: "heating",
-                                                label: "Отопление",
-                                                placeholder: "Не важно",
-                                                options: constants/* HEATINGS */.uJ,
-                                                value: formData.heating,
-                                                handleChange: handleChange,
-                                                labeled: true
-                                            }),
-                                            /*#__PURE__*/ jsx_runtime_.jsx(Inputs_MultiSelect, {
-                                                name: "sewerage",
-                                                label: "Канализация",
-                                                placeholder: "Не важно",
-                                                options: constants/* SEWERAGES */.j$,
-                                                value: formData.sewerage,
-                                                handleChange: handleChange,
-                                                labeled: true
-                                            })
-                                        ]
-                                    }),
-                                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-                                        className: "col",
-                                        children: [
-                                            /*#__PURE__*/ jsx_runtime_.jsx(NumberRange/* default */.Z, {
-                                                name: "total_area",
-                                                label: "Общая площадь",
-                                                param: "м2",
-                                                value: formData.total_area,
-                                                handleChange: handleChange,
-                                                labeled: true
-                                            }),
-                                            /*#__PURE__*/ jsx_runtime_.jsx(NumberRange/* default */.Z, {
-                                                name: "kitchen_area",
-                                                label: "Площадь кухни",
-                                                param: "м2",
-                                                value: formData.kitchen_area,
-                                                handleChange: handleChange,
-                                                labeled: true
-                                            }),
-                                            /*#__PURE__*/ jsx_runtime_.jsx(NumberRange/* default */.Z, {
-                                                name: "living_area",
-                                                label: "Жилая площадь",
-                                                param: "м2",
-                                                value: formData.living_area,
-                                                handleChange: handleChange,
-                                                labeled: true
-                                            })
-                                        ]
-                                    })
-                                ]
-                            })
-                        })
-                    }),
-                    /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                        className: "bottom",
-                        children: /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                            className: "container",
-                            children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-                                className: "content",
-                                children: [
-                                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-                                        className: "clear",
-                                        children: [
-                                            /*#__PURE__*/ jsx_runtime_.jsx("i", {}),
-                                            " Очистить все"
-                                        ]
-                                    }),
-                                    /*#__PURE__*/ jsx_runtime_.jsx("input", {
-                                        type: "submit",
-                                        className: "submit-btn",
-                                        value: "Показать результаты"
-                                    })
-                                ]
-                            })
-                        })
-                    })
-                ]
-            })
-        ]
-    });
-};
-/* harmony default export */ const Filter_HouseFilter = (HouseFilter);
-
-// EXTERNAL MODULE: ./src/components/Menu.jsx
-var Menu = __webpack_require__(28888);
-// EXTERNAL MODULE: ./src/components/Post/PostCard.jsx
-var PostCard = __webpack_require__(69476);
-// EXTERNAL MODULE: ./src/styles/post.scss
-var post = __webpack_require__(1978);
-;// CONCATENATED MODULE: ./src/components/Post/Sort.jsx
-
-
-const Sort = ({ formData, handleChange })=>{
-    const handleClick = (e)=>{
-        e.preventDefault();
-        const val = e.currentTarget.dataset.value;
-        handleChange("sort", val);
-    };
-    return /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-        id: "sort",
-        children: [
-            "Сначала:",
-            /*#__PURE__*/ jsx_runtime_.jsx("span", {
-                className: `${formData.sort == "new" ? "active" : ""}`,
-                "data-value": "new",
-                onClick: handleClick,
-                children: "новые объявления"
-            }),
-            /*#__PURE__*/ jsx_runtime_.jsx("span", {
-                className: `${formData.sort == "cheap" ? "active" : ""}`,
-                "data-value": "cheap",
-                onClick: handleClick,
-                children: "дешевые"
-            }),
-            /*#__PURE__*/ jsx_runtime_.jsx("span", {
-                className: `${formData.sort == "expensive" ? "active" : ""}`,
-                "data-value": "expensive",
-                onClick: handleClick,
-                children: "дорогие"
-            })
-        ]
-    });
-};
-/* harmony default export */ const Post_Sort = (Sort);
-
-// EXTERNAL MODULE: ./src/components/Loading.jsx
-var Loading = __webpack_require__(2769);
-// EXTERNAL MODULE: ./node_modules/axios/lib/axios.js + 46 modules
-var axios = __webpack_require__(93258);
-// EXTERNAL MODULE: ./src/components/AdvertisementCard.jsx
-var AdvertisementCard = __webpack_require__(11728);
-;// CONCATENATED MODULE: ./src/components/Post/Posts.jsx
-
-
-
-
-
-
-
-
-const Posts = ({ posts, title = "", total = 0, formData, handleChange })=>{
-    const [ads, setAds] = (0,react_.useState)(null);
-    const getAds = async ()=>{
-        const { data } = await axios/* default */.Z.get(`/api/advertisements`, {
-            validateStatus: function(status) {
-                return true;
-            },
-            headers: {
-                "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
-            }
-        });
-        setAds(data);
-    };
-    (0,react_.useEffect)(()=>{
-        if (!ads) getAds();
-    }, [
-        ads
-    ]);
-    return /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-        id: "posts",
-        children: [
-            /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-                className: "heading",
-                children: [
-                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-                        className: "medium-24-28 text-black",
-                        children: [
-                            title === "apartment" && "Продажа квартир",
-                            title === "house" && "Продажа домов",
-                            title === "commercial" && "Продажа коммерческих недвижимостей"
-                        ]
-                    }),
-                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-                        className: "regular-16-20 text-black",
-                        children: [
-                            "Найдено объявлений: ",
-                            total
-                        ]
-                    })
-                ]
-            }),
-            /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-                className: "posts",
-                children: [
-                    /*#__PURE__*/ jsx_runtime_.jsx(Post_Sort, {
-                        formData: formData,
-                        handleChange: handleChange
-                    }),
-                    posts ? posts.length > 0 ? posts.map((post, key)=>/*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-                            children: [
-                                /*#__PURE__*/ jsx_runtime_.jsx(PostCard/* default */.Z, {
-                                    post: post
-                                }),
-                                Number(key + 1) % 5 === 0 && ads && ads.length > 0 && /*#__PURE__*/ jsx_runtime_.jsx(AdvertisementCard/* default */.Z, {
-                                    ad: ads[(Number(key + 1) / 5 - 1) % ads.length]
-                                })
-                            ]
-                        }, key)) : /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                        className: "none",
-                        children: "По вашему запросу ничего не найдено"
-                    }) : /*#__PURE__*/ jsx_runtime_.jsx(Loading/* default */.Z, {})
-                ]
-            })
-        ]
-    });
-};
-/* harmony default export */ const Post_Posts = (Posts);
-
-// EXTERNAL MODULE: ./src/styles/sidebar.scss
-var sidebar = __webpack_require__(75385);
-;// CONCATENATED MODULE: ./src/components/Sidebar.jsx
-
-
-const Sidebar = ()=>{
-    return /*#__PURE__*/ jsx_runtime_.jsx("div", {
-        className: "sidebar",
-        children: /*#__PURE__*/ jsx_runtime_.jsx("div", {
-            className: "content",
-            children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-                className: "banner large",
-                children: [
-                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-                        className: "text",
-                        children: [
-                            /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                                className: "medium-24-28 text-black",
-                                children: "Ищешь покупателя для квартиры?"
-                            }),
-                            /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                                className: "regular-16-20 text-black",
-                                children: "Доверь продажу профессионалам на CNA.KZ! Максимум выгоды, минимум хлопот."
-                            })
-                        ]
-                    }),
-                    /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                        className: "action",
-                        children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)("a", {
-                            href: "tel:+77055621546",
-                            target: "_blank",
-                            className: "btn",
-                            children: [
-                                /*#__PURE__*/ jsx_runtime_.jsx("i", {}),
-                                " +7 705 562 1546"
-                            ]
-                        })
-                    })
-                ]
-            })
-        })
-    });
-};
-/* harmony default export */ const components_Sidebar = (Sidebar);
-
-// EXTERNAL MODULE: ./src/styles/home.scss
-var home = __webpack_require__(81118);
-// EXTERNAL MODULE: ./src/utilFunctions/dateConvert.js
-var dateConvert = __webpack_require__(42062);
-// EXTERNAL MODULE: ./node_modules/next/navigation.js
-var navigation = __webpack_require__(57114);
-;// CONCATENATED MODULE: ./src/app/(client)/posts/page.js
-/* __next_internal_client_entry_do_not_use__ default auto */ 
-
-
 
 
 
@@ -1371,12 +449,17 @@ const initFormData = {
     sort: "new"
 };
 const AllPosts = ()=>{
-    const router = (0,navigation.useRouter)();
-    const search = (0,navigation.useSearchParams)();
-    const [formData, setFormData] = (0,react_.useState)(initFormData);
-    const [regions, setRegions] = (0,react_.useState)();
-    const [cities, setCities] = (0,react_.useState)();
-    const [cityObjects, setCityObjects] = (0,react_.useState)(null);
+    const router = (0,next_navigation__WEBPACK_IMPORTED_MODULE_6__.useRouter)();
+    const search = (0,next_navigation__WEBPACK_IMPORTED_MODULE_6__.useSearchParams)();
+    const [formData, setFormData] = (0,react__WEBPACK_IMPORTED_MODULE_7__.useState)(initFormData);
+    const [regions, setRegions] = (0,react__WEBPACK_IMPORTED_MODULE_7__.useState)();
+    const [cities, setCities] = (0,react__WEBPACK_IMPORTED_MODULE_7__.useState)();
+    const [cityObjects, setCityObjects] = (0,react__WEBPACK_IMPORTED_MODULE_7__.useState)(null);
+    const [totalPages, setTotalPages] = (0,react__WEBPACK_IMPORTED_MODULE_7__.useState)(1);
+    const [page, setPage] = (0,react__WEBPACK_IMPORTED_MODULE_7__.useState)(1);
+    const [loading, setLoading] = (0,react__WEBPACK_IMPORTED_MODULE_7__.useState)(true);
+    const [postCount, setPostCount] = (0,react__WEBPACK_IMPORTED_MODULE_7__.useState)(0);
+    const [query, setQuery] = (0,react__WEBPACK_IMPORTED_MODULE_7__.useState)("");
     const handleChange = (name, value)=>{
         setFormData({
             ...formData,
@@ -1396,24 +479,25 @@ const AllPosts = ()=>{
                 ...initFormData,
                 [name]: value
             });
-            const query = (0,dateConvert/* dataToQuery */.rW)({
+            const q = (0,_utilFunctions_dateConvert__WEBPACK_IMPORTED_MODULE_8__/* .dataToQuery */ .rW)({
                 [name]: value
             });
-            router.push(`${query}`);
-            getPosts(query);
+            router.push(`${q}`);
+            setQuery(q);
         } else if (name === "sort") {
-            const query = (0,dateConvert/* dataToQuery */.rW)({
+            const q = (0,_utilFunctions_dateConvert__WEBPACK_IMPORTED_MODULE_8__/* .dataToQuery */ .rW)({
                 ...formData,
                 [name]: value
             });
-            router.push(`${query}`);
-            getPosts(query);
+            router.push(`${q}`);
+            setQuery(q);
         }
     };
-    const [posts, setPosts] = (0,react_.useState)(null);
-    const getPosts = async (query)=>{
-        setPosts(null);
-        const { data } = await axios/* default */.Z.get(`/api/posts${query.includes("?") ? query : "?" + query}`, {
+    const [posts, setPosts] = (0,react__WEBPACK_IMPORTED_MODULE_7__.useState)([]);
+    const getPosts = async ()=>{
+        setLoading(true);
+        console.log(page, query);
+        const { data } = await axios__WEBPACK_IMPORTED_MODULE_9__/* ["default"] */ .Z.get(`/api/posts/sell${query.includes("?") ? query : "?" + query}&page=${page}`, {
             validateStatus: function(status) {
                 return true;
             },
@@ -1422,10 +506,18 @@ const AllPosts = ()=>{
                 "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
             }
         });
-        setPosts(data);
+        const newPosts = data.posts;
+        console.log(newPosts);
+        setTotalPages(data.totalPages);
+        setPostCount(data.count);
+        setPosts((prevPosts)=>[
+                ...prevPosts,
+                ...newPosts
+            ]);
+        setLoading(false);
     };
     const getCities = async ()=>{
-        const { data } = await axios/* default */.Z.get("/api/cities", {
+        const { data } = await axios__WEBPACK_IMPORTED_MODULE_9__/* ["default"] */ .Z.get("/api/cities", {
             validateStatus: function(status) {
                 return true;
             },
@@ -1448,7 +540,33 @@ const AllPosts = ()=>{
     //     if(!regions)
     //         getRegions();
     // }, [regions]);
-    (0,react_.useEffect)(()=>{
+    (0,react__WEBPACK_IMPORTED_MODULE_7__.useEffect)(()=>{
+        getPosts();
+    }, [
+        page
+    ]);
+    (0,react__WEBPACK_IMPORTED_MODULE_7__.useEffect)(()=>{
+        setPosts([]);
+        setLoading(true);
+        setPage(1);
+    }, [
+        query
+    ]);
+    const handleScroll = ()=>{
+        if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight || loading) return;
+        setPage((prevPage)=>prevPage + 1);
+    };
+    (0,react__WEBPACK_IMPORTED_MODULE_7__.useEffect)(()=>{
+        if (page < totalPages) {
+            window.addEventListener("scroll", handleScroll);
+        }
+        return ()=>{
+            window.removeEventListener("scroll", handleScroll);
+        };
+    }, [
+        loading
+    ]);
+    (0,react__WEBPACK_IMPORTED_MODULE_7__.useEffect)(()=>{
         if (!cities) getCities();
         else {
             if (formData.city) {
@@ -1463,9 +581,9 @@ const AllPosts = ()=>{
     }, [
         cities
     ]);
-    (0,react_.useEffect)(()=>{
-        const query = search.toString();
-        const data = (0,dateConvert/* queryToData */.pQ)(query);
+    (0,react__WEBPACK_IMPORTED_MODULE_7__.useEffect)(()=>{
+        const q = search.toString();
+        const data = (0,_utilFunctions_dateConvert__WEBPACK_IMPORTED_MODULE_8__/* .queryToData */ .pQ)(q);
         if (!data.housing) data.housing = "apartment";
         setFormData({
             ...formData,
@@ -1474,61 +592,50 @@ const AllPosts = ()=>{
         // if(data.city){
         //     getRegions(data.city);
         // }
-        getPosts(query);
+        setQuery(q);
     }, [
         search
     ]);
     const handdleSubmit = (e)=>{
         e.preventDefault();
-        const query = (0,dateConvert/* dataToQuery */.rW)(formData);
-        router.push(`${query}`);
-        getPosts(query);
+        const q = (0,_utilFunctions_dateConvert__WEBPACK_IMPORTED_MODULE_8__/* .dataToQuery */ .rW)(formData);
+        router.push(`${q}`);
+    // setQuery(q);
     };
-    return /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+    return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
         id: "allposts",
         children: [
-            /*#__PURE__*/ jsx_runtime_.jsx(Menu/* default */.Z, {}),
-            formData.housing === "apartment" && /*#__PURE__*/ jsx_runtime_.jsx(Filter_ApartmentFilter, {
+            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Menu__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .Z, {}),
+            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Filter__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .Z, {
+                prefix: "Покупка",
+                housing: formData.housing,
                 cities: cities,
                 regions: regions,
                 formData: formData,
                 handleChange: handleChange,
                 handleSubmit: handdleSubmit
             }),
-            formData.housing === "house" && /*#__PURE__*/ jsx_runtime_.jsx(Filter_HouseFilter, {
-                cities: cities,
-                regions: regions,
-                formData: formData,
-                handleChange: handleChange,
-                handleSubmit: handdleSubmit
-            }),
-            formData.housing === "commercial" && /*#__PURE__*/ jsx_runtime_.jsx(Filter_ComercialFilter, {
-                cities: cities,
-                regions: regions,
-                formData: formData,
-                handleChange: handleChange,
-                handleSubmit: handdleSubmit
-            }),
-            /*#__PURE__*/ jsx_runtime_.jsx("div", {
+            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                 className: "container",
-                children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                     className: "content",
                     children: [
-                        /*#__PURE__*/ jsx_runtime_.jsx(Post_Posts, {
+                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Post_Posts__WEBPACK_IMPORTED_MODULE_3__/* ["default"] */ .Z, {
                             posts: posts,
+                            loading: loading,
                             title: formData.housing,
                             formData: formData,
                             handleChange: handleChange,
-                            total: posts ? posts.length : 0
+                            total: postCount
                         }),
-                        /*#__PURE__*/ jsx_runtime_.jsx(components_Sidebar, {})
+                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Sidebar__WEBPACK_IMPORTED_MODULE_4__/* ["default"] */ .Z, {})
                     ]
                 })
             })
         ]
     });
 };
-/* harmony default export */ const page = (AllPosts);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (AllPosts);
 
 
 /***/ }),
@@ -1557,29 +664,6 @@ const __default__ = proxy.default;
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__default__);
 
-/***/ }),
-
-/***/ 75385:
-/***/ (() => {
-
-
-
-/***/ }),
-
-/***/ 11440:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-module.exports = __webpack_require__(50954)
-
-
-/***/ }),
-
-/***/ 57114:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-module.exports = __webpack_require__(90696)
-
-
 /***/ })
 
 };
@@ -1589,7 +673,7 @@ module.exports = __webpack_require__(90696)
 var __webpack_require__ = require("../../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [2697,9021,1512,5329,2062,447,4682,3663,8888,2851], () => (__webpack_exec__(78774)));
+var __webpack_exports__ = __webpack_require__.X(0, [2697,9021,1512,5329,2062,447,3663,8888,7416,9890], () => (__webpack_exec__(78774)));
 module.exports = __webpack_exports__;
 
 })();

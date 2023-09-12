@@ -154,6 +154,7 @@ const createTitle = (post)=>{
         default:
             break;
     }
+    if (post.posttype === "rent") title += ", " + post.rentPeriod.toLowerCase();
     return title;
 };
 

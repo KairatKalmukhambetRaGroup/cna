@@ -9,6 +9,7 @@ const Header = () => {
                     <Link href="/" className="logo">CNA</Link>
                     <div className="nav">
                         <Link href="/posts" >Продажа</Link>
+                        <Link href="/rent" >Аренда</Link>
                         <Link href="/#about" >О нас</Link>
                         <Link href="/#contacts" >Контакты</Link>
                         <a href="tel:+77055621546" target='_blank' className="btn" ><i></i> Подать объявление</a>

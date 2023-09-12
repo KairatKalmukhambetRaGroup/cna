@@ -48,7 +48,10 @@ const postSchema = mongoose.Schema({
     commercial: {
         purpose: String,
         placement: String,
-    }
+    },
+
+    posttype: String,
+    rentPeriod: String,
 },{
     timestamps: true
 });

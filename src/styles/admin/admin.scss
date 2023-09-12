@@ -8,10 +8,10 @@
     height: 100%;
     .cards{
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         gap: 16px;
         .card{
-            width: calc((100% - 32px) / 3);
+            width: 100%;
             background: v.$white;
             padding: 24px;
             border-radius: 8px;
@@ -45,6 +45,9 @@
             justify-content: flex-end;
             gap: 16px;
             .btn{
+                height: 100%;
+                display: flex;
+                align-items: center;
                 cursor: pointer;
                 padding: 8px 16px;
                 font-size: 16px;
@@ -60,6 +63,71 @@
                 &.save{
                     color: v.$white;
                     background: v.$blue;
+                }
+            }
+        }
+    }
+
+    @include _md{
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+        height: 100%;
+        .cards{
+            display: flex;
+            flex-direction: row;
+            gap: 16px;
+            .card{
+                width: calc((100% - 32px) / 3);
+                background: v.$white;
+                padding: 24px;
+                border-radius: 8px;
+                display: flex;
+                flex-direction: column;
+                gap: 16px;
+                .title{
+                    font-size: 16px;
+                    line-height: 20px;
+                }
+                .number{
+                    font-size: 32px;
+                    font-weight: 600;
+                    line-height: 36px;
+                }
+            }
+        }
+        .about-content{
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            .heading{
+                font-weight: 600;
+                font-size: 24px;
+                line-height: 30px;
+            }
+            .btns{
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: flex-end;
+                gap: 16px;
+                .btn{
+                    cursor: pointer;
+                    padding: 8px 16px;
+                    font-size: 16px;
+                    font-weight: 500;
+                    line-height: 20px;
+                    border-radius: 4px;
+                    border: none;
+                    &.reset{
+                        color: v.$blue;
+                        background: v.$white;
+                        border: 1px solid v.$blue;
+                    }
+                    &.save{
+                        color: v.$white;
+                        background: v.$blue;
+                    }
                 }
             }
         }

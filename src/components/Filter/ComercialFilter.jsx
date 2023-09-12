@@ -11,7 +11,7 @@ const housings = [
 ]
 
 
-const ComercialFilter = ({formData, handleChange, regions, handleSubmit, cities}) => {
+const ComercialFilter = ({prefix, formData, handleChange, regions, handleSubmit, cities}) => {
     const handleHousingChange = (name, value) =>{
         switch(value){
             case 'Кватиры':
@@ -29,7 +29,7 @@ const ComercialFilter = ({formData, handleChange, regions, handleSubmit, cities}
         <div id="filter" className="commercial">
             <div className="navbar">
                 <div className="container">
-                <div className="nav">
+                    <div className="nav">
                         <div onClick={(e)=>{e.preventDefault(); handleChange('housing', 'apartment')}}>
                         Квартиры
                         </div>
@@ -46,6 +46,9 @@ const ComercialFilter = ({formData, handleChange, regions, handleSubmit, cities}
                 <div className="top">
                     <div className="container">
                         <div className="content">
+                            <div className="regular-14-16">
+                                {prefix} 
+                            </div>
                             <span className='mobile'>
                                 <Select name="housing" options={housings} value={'Коммерческие недвижимости'} handleChange={handleHousingChange} />
                             </span>

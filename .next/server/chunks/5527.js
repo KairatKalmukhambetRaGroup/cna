@@ -31,45 +31,68 @@ var sidebar = __webpack_require__(25241);
 // EXTERNAL MODULE: ./node_modules/next/link.js
 var next_link = __webpack_require__(11440);
 var link_default = /*#__PURE__*/__webpack_require__.n(next_link);
+// EXTERNAL MODULE: external "next/dist/compiled/react"
+var react_ = __webpack_require__(18038);
+var react_default = /*#__PURE__*/__webpack_require__.n(react_);
 ;// CONCATENATED MODULE: ./src/components/Admin/Sidebar.jsx
+
 
 
 
 
 const AdminSidebar = ()=>{
     const { logout } = useUserContext();
+    const [showMenu, setShowMenu] = (0,react_.useState)(true);
+    const toggleMenu = (e)=>{
+        e.preventDefault();
+        setShowMenu(!showMenu);
+    };
     return /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
         id: "sidebar",
+        className: `${showMenu ? "" : "hide"}`,
         children: [
-            /*#__PURE__*/ (0,jsx_runtime_.jsxs)("nav", {
+            /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                className: "header",
                 children: [
                     /*#__PURE__*/ jsx_runtime_.jsx((link_default()), {
                         href: "/",
                         className: "logo",
                         children: "CNA"
                     }),
-                    /*#__PURE__*/ jsx_runtime_.jsx((link_default()), {
-                        href: "/admin",
-                        children: "Панель администратора"
-                    }),
-                    /*#__PURE__*/ jsx_runtime_.jsx((link_default()), {
-                        href: "/admin/advertisements",
-                        children: "Рекламные баннеры"
-                    }),
-                    /*#__PURE__*/ jsx_runtime_.jsx((link_default()), {
-                        href: "/admin/posts",
-                        children: "Объявления"
-                    }),
-                    /*#__PURE__*/ jsx_runtime_.jsx((link_default()), {
-                        href: "/admin/cities",
-                        children: "Города"
+                    /*#__PURE__*/ jsx_runtime_.jsx("i", {
+                        onClick: toggleMenu
                     })
                 ]
             }),
-            /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                className: "logout",
-                onClick: logout,
-                children: "Выйти"
+            /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                className: "content",
+                children: [
+                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)("nav", {
+                        children: [
+                            /*#__PURE__*/ jsx_runtime_.jsx((link_default()), {
+                                href: "/admin",
+                                children: "Панель администратора"
+                            }),
+                            /*#__PURE__*/ jsx_runtime_.jsx((link_default()), {
+                                href: "/admin/advertisements",
+                                children: "Рекламные баннеры"
+                            }),
+                            /*#__PURE__*/ jsx_runtime_.jsx((link_default()), {
+                                href: "/admin/posts",
+                                children: "Объявления"
+                            }),
+                            /*#__PURE__*/ jsx_runtime_.jsx((link_default()), {
+                                href: "/admin/cities",
+                                children: "Города"
+                            })
+                        ]
+                    }),
+                    /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                        className: "logout",
+                        onClick: logout,
+                        children: "Выйти"
+                    })
+                ]
             })
         ]
     });
@@ -80,9 +103,6 @@ const AdminSidebar = ()=>{
 var admin = __webpack_require__(73231);
 // EXTERNAL MODULE: ./node_modules/next/navigation.js
 var navigation = __webpack_require__(57114);
-// EXTERNAL MODULE: external "next/dist/compiled/react"
-var react_ = __webpack_require__(18038);
-var react_default = /*#__PURE__*/__webpack_require__.n(react_);
 // EXTERNAL MODULE: ./src/styles/admin/login.scss
 var login = __webpack_require__(10751);
 // EXTERNAL MODULE: ./node_modules/axios/lib/axios.js + 46 modules

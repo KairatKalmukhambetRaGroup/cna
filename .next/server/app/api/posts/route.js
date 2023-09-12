@@ -12,24 +12,10 @@ module.exports = require("mongoose");
 
 /***/ }),
 
-/***/ 73292:
-/***/ ((module) => {
-
-module.exports = require("fs/promises");
-
-/***/ }),
-
 /***/ 22037:
 /***/ ((module) => {
 
 module.exports = require("os");
-
-/***/ }),
-
-/***/ 71017:
-/***/ ((module) => {
-
-module.exports = require("path");
 
 /***/ }),
 
@@ -50,7 +36,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var next_dist_server_node_polyfill_headers__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(next_dist_server_node_polyfill_headers__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var next_dist_server_future_route_modules_app_route_module__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(69692);
 /* harmony import */ var next_dist_server_future_route_modules_app_route_module__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(next_dist_server_future_route_modules_app_route_module__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var D_personal_projects_krisha_next_src_app_api_posts_route_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(13849);
+/* harmony import */ var D_personal_projects_krisha_next_src_app_api_posts_route_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(12398);
 
     
 
@@ -88,7 +74,7 @@ __webpack_require__.r(__webpack_exports__);
 var __webpack_require__ = require("../../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [2697,5501,9335,9402,3849], () => (__webpack_exec__(70074)));
+var __webpack_exports__ = __webpack_require__.X(0, [2697,5501,9335,9081,2398], () => (__webpack_exec__(70074)));
 module.exports = __webpack_exports__;
 
 })();

@@ -1,6 +1,20 @@
 'use client'
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import '@/styles/inputs.scss';
+
+const useOutsideClick = (ref, setShowLangs) => {
+    useEffect(() => {
+        function handleClickOutside(event) {
+        if (ref.current && !ref.current.contains(event.target)) {
+            setShowLangs(false);
+        }
+        }
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [ref]);
+}
 
 const Select = ({mobile=false, name='', placeholder=null, label='', value='', options=[], handleChange, labeled=false}) => {
     const [open, setOpen] = React.useState(false);
@@ -13,10 +27,18 @@ const Select = ({mobile=false, name='', placeholder=null, label='', value='', op
     const toggleOptions = (e) => {
         setOpen(!open);
     }
+
+    const ref = useRef(null);
+    useOutsideClick(ref, setOpen);
+
+
+
     return (
         <div className={`input select ${labeled ? 'labeled' : ''} ${mobile ? 'mobile' : ''}`}>
-            <label>{label}</label>
-            <div className="select">
+            {label && (
+                <label>{label}</label>
+            )}
+            <div className="select" ref={ref}>
                 <div className="selected" onClick={toggleOptions}>
                     <span className='val'>
                         {value ? value : placeholder}

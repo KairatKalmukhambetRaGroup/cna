@@ -5,7 +5,6 @@ import { useEffect, useState } from 'react';
 import '@/styles/admin/advertisements.scss';
 import Loading from '@/components/Loading';
 import Link from 'next/link';
-import { async } from 'regenerator-runtime';
 
 
 const Advertisements = () => {
@@ -56,7 +55,8 @@ const Advertisements = () => {
                     ads.length > 0 ? 
                         ads.map((ad, key)=> (
                             <div className='ad' key={key}>
-                                <div className='image'>
+                                <div className='ad-content'>
+                                    <div className='image'>
                                         {ad.image && (
                                             <img src={`https://cna.kz/public/uploads/${ad.image}`} alt=""/>
                                             // <img src={`/uploads/${ad.image}`} alt=""/>
@@ -68,14 +68,15 @@ const Advertisements = () => {
                                             <div className="description">{ad.description}</div>
                                         )}
                                     </div>
-                                    <div className='actions'>
-                                        <Link href={`/admin/advertisements/${ad._id}`} className='btn edit'>
-                                            Изменить
-                                        </Link>
-                                        <div className='btn delete' onClick={(e)=>{e.preventDefault(); setDeleteId(ad._id)}}>
-                                            Удалить
-                                        </div>
+                                </div>
+                                <div className='actions'>
+                                    <Link href={`/admin/advertisements/${ad._id}`} className='btn edit'>
+                                        Изменить
+                                    </Link>
+                                    <div className='btn delete' onClick={(e)=>{e.preventDefault(); setDeleteId(ad._id)}}>
+                                        Удалить
                                     </div>
+                                </div>
                             </div>
                         )) : (
                             <div className='none'>

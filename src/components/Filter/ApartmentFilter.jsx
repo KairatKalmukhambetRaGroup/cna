@@ -12,7 +12,7 @@ const housings = [
     'Коммерческие недвижимости'
 ]
 
-const ApartmentFilter = ({formData, handleChange, handleSubmit, regions, cities}) => {
+const ApartmentFilter = ({prefix, formData, handleChange, handleSubmit, regions, cities}) => {
     const handleHousingChange = (name, value) =>{
         switch(value){
             case 'Кватиры':
@@ -47,6 +47,7 @@ const ApartmentFilter = ({formData, handleChange, handleSubmit, regions, cities}
                 <div className="top">
                     <div className="container">
                         <div className="content">
+                            <div className="regular-14-16">{prefix}</div>
                             <div className="regular-14-16 not-mobile">Квартиры</div>
                             <span className="mobile">
                                 <Select name="housing" options={housings} value={'Квартиры'} handleChange={handleHousingChange} />

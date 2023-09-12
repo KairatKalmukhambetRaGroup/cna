@@ -65,7 +65,9 @@ const initFormData = {
     commercial: {
         purpose: "",
         placement: ""
-    }
+    },
+    posttype: "sell",
+    rentPeriod: "По часам"
 };
 const modalSuccessCreation = {
     type: "success",
@@ -434,6 +436,31 @@ const PostForm = ({ post = null })=>{
                                                 className: "form-group",
                                                 children: [
                                                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("label", {
+                                                        children: "Категория"
+                                                    }),
+                                                    /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("select", {
+                                                        disabled: post && post._id,
+                                                        name: "posttype",
+                                                        value: formData.posttype,
+                                                        required: true,
+                                                        onChange: handleChange,
+                                                        children: [
+                                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("option", {
+                                                                value: "sell",
+                                                                children: "Продажа"
+                                                            }),
+                                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("option", {
+                                                                value: "rent",
+                                                                children: "Аренда"
+                                                            })
+                                                        ]
+                                                    })
+                                                ]
+                                            }),
+                                            /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                                                className: "form-group",
+                                                children: [
+                                                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("label", {
                                                         children: "Тип недвижимости"
                                                     }),
                                                     /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("select", {
@@ -454,6 +481,34 @@ const PostForm = ({ post = null })=>{
                                                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("option", {
                                                                 value: "commercial",
                                                                 children: "Коммерческая недвижимость"
+                                                            })
+                                                        ]
+                                                    })
+                                                ]
+                                            }),
+                                            formData.posttype === "rent" && /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                                                className: "form-group",
+                                                children: [
+                                                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("label", {
+                                                        children: "Периодичность"
+                                                    }),
+                                                    /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("select", {
+                                                        name: "rentPeriod",
+                                                        value: formData.rentPeriod,
+                                                        required: true,
+                                                        onChange: handleChange,
+                                                        children: [
+                                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("option", {
+                                                                value: "По часам",
+                                                                children: "По часам"
+                                                            }),
+                                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("option", {
+                                                                value: "Посуточно",
+                                                                children: "Посуточно"
+                                                            }),
+                                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("option", {
+                                                                value: "Помесячно",
+                                                                children: "Помесячно"
                                                             })
                                                         ]
                                                     })

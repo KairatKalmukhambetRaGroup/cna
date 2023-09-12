@@ -1,32 +1,10 @@
-import mongoose from "mongoose";
+import Post from '@/database/models/post';
 import connectMongo from "@/database/connect";
-import Post from "@/database/models/post";
-import { NextResponse } from "next/server";
 import Housing from "@/database/models/housing";
+import City from '@/database/models/city';
+import Region from '@/database/models/region';
 import { queryToMongoose } from "@/utilFunctions/dateConvert";
-import Region from "@/database/models/region";
-import { mkdir, stat, writeFile } from "fs/promises";
-import { join } from "path";
-import mime from "mime";
-import City from "@/database/models/city";
-
-export async function GET(request) {
-    const params = request.nextUrl.searchParams.toString();
-    const data = queryToMongoose(params)
-    try {
-        await connectMongo();
-
-        if(data.count)
-            return getPostCounts();
-        if(data.size)
-            return getAllPosts(request);
-        else
-            return getPostsByHousing(request);
-    } catch (error) {
-        console.log(error);
-        return NextResponse.json(null, {status: 500});
-    }
-}
+import { NextResponse } from "next/server";
 
 export async function POST(request) {
 
@@ -44,7 +22,6 @@ export async function POST(request) {
             data[key] = value;
         }     
     });
-    console.log(data);
 
     if(!data.housing){
         return NextResponse.json("housing", {status: 401});
@@ -108,6 +85,10 @@ export async function POST(request) {
             data.region = region._id;
         }
 
+        if(data.posttype === 'sell'){
+            data.rentPeriod = null;
+        }
+
         const post = await Post.create(data);
 
         return NextResponse.json(post);
@@ -118,21 +99,31 @@ export async function POST(request) {
     }
 }
 
-async function getPostCounts() {
-    const apartment = await Housing.findOne({slug: 'apartment'});
-    const house = await Housing.findOne({slug: 'house'});
-    const commercial = await Housing.findOne({slug: 'commercial'});
-    const apartments = await Post.countDocuments({housing: apartment._id});
-    const houses = await Post.countDocuments({housing: house._id});
-    const commercials = await Post.countDocuments({housing: commercial._id});
-    return NextResponse.json({apartments, houses, commercials});
+export async function GET(request) {
+    const params = request.nextUrl.searchParams.toString();
+    const data = queryToMongoose(params)
+    try {
+        await connectMongo();
+        if(data.size)
+            return getAllPosts(data);
+        else
+            return getPostsByHousing(data);
+    } catch (error) {
+        console.log(error);
+        return NextResponse.json(null, {status: 500});
+    }
 }
 
-async function getAllPosts(request) {
+async function getAllPosts(data) {
     const city = await City.findById('64db879cb7ba2c6cf87eaae2');
-    const params = request.nextUrl.searchParams.toString();
-    const data = queryToMongoose(params);
+
+
     if(data.size && data.size === 'sm'){
+        
+        const page = parseInt(data.page) || 1;
+        const limit = 5;
+        const skip = (page - 1) * limit;   
+        
         const posts = await Post.find({city: city._id})
             .populate({
                 path: 'city',
@@ -145,8 +136,9 @@ async function getAllPosts(request) {
             .populate({
                 path: 'housing',
                 select: 'slug'
-            }).sort('-createdAt');
-        return NextResponse.json(posts);
+            }).sort('-createdAt').skip(skip).limit(limit);
+        const total = Math.ceil((await Post.countDocuments({city: city._id})) / limit);
+        return NextResponse.json({posts, currentPage: page, totalPages: total});
     }else{
         let limit = 8;
         const apartment = await Housing.findOne({slug: 'apartment'});
@@ -195,9 +187,8 @@ async function getAllPosts(request) {
     }
 }
 
-export async function getPostsByHousing(request) {
-    const params = request.nextUrl.searchParams.toString();
-    const data = queryToMongoose(params);
+
+export async function getPostsByHousing(data) {
     if(data.housing){
         const housing = await Housing.findOne({slug: data.housing});
         data.housing = housing._id;
@@ -223,6 +214,7 @@ export async function getPostsByHousing(request) {
             sort = '-createdAt';
     }
     delete data.sort;
+    
     const post = await Post.find(data)
         .populate({
             path: 'city',

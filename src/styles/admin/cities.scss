@@ -28,6 +28,7 @@
         .inputs{
             display: flex;
             flex-direction: row;
+            flex-wrap: wrap;
             align-items: flex-end;
             gap: 16px;
             .form-group{
@@ -109,6 +110,14 @@
                         background: rgba($color: v.$light_grey, $alpha: .4);
                     }
                 }
+            }
+        }
+    }
+
+    @include _md{
+        #cityForm{
+            .inputs{
+                flex-direction: row;
             }
         }
     }

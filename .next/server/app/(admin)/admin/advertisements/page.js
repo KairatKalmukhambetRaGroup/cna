@@ -390,7 +390,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(56786);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(93258);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(93258);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(18038);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _styles_admin_advertisements_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(92063);
@@ -398,10 +398,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Loading__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(2769);
 /* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(11440);
 /* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var regenerator_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(28216);
-/* harmony import */ var regenerator_runtime__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(regenerator_runtime__WEBPACK_IMPORTED_MODULE_5__);
 /* __next_internal_client_entry_do_not_use__ default auto */ 
-
 
 
 
@@ -410,7 +407,7 @@ __webpack_require__.r(__webpack_exports__);
 const Advertisements = ()=>{
     const [ads, setAds] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null);
     const getAds = async ()=>{
-        const { data } = await axios__WEBPACK_IMPORTED_MODULE_6__/* ["default"] */ .Z.get("/api/advertisements", {
+        const { data } = await axios__WEBPACK_IMPORTED_MODULE_5__/* ["default"] */ .Z.get("/api/advertisements", {
             validateStatus: function(status) {
                 return true;
             },
@@ -430,7 +427,7 @@ const Advertisements = ()=>{
     const deleteAdvertisement = async (e)=>{
         e.preventDefault();
         if (deleteId) {
-            const { data } = await axios__WEBPACK_IMPORTED_MODULE_6__/* ["default"] */ .Z.delete(`/api/advertisements/${deleteId}`, {
+            const { data } = await axios__WEBPACK_IMPORTED_MODULE_5__/* ["default"] */ .Z.delete(`/api/advertisements/${deleteId}`, {
                 validateStatus: function(status) {
                     return true;
                 },
@@ -497,23 +494,28 @@ const Advertisements = ()=>{
                 children: ads ? ads.length > 0 ? ads.map((ad, key)=>/*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                         className: "ad",
                         children: [
-                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                                className: "image",
-                                children: ad.image && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("img", {
-                                    src: `https://cna.kz/public/uploads/${ad.image}`,
-                                    alt: ""
-                                })
-                            }),
                             /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                                className: "info",
+                                className: "ad-content",
                                 children: [
                                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                                        className: "title",
-                                        children: ad.name
+                                        className: "image",
+                                        children: ad.image && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("img", {
+                                            src: `https://cna.kz/public/uploads/${ad.image}`,
+                                            alt: ""
+                                        })
                                     }),
-                                    ad.description && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                                        className: "description",
-                                        children: ad.description
+                                    /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                                        className: "info",
+                                        children: [
+                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                                                className: "title",
+                                                children: ad.name
+                                            }),
+                                            ad.description && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                                                className: "description",
+                                                children: ad.description
+                                            })
+                                        ]
                                     })
                                 ]
                             }),
@@ -623,6 +625,22 @@ const __default__ = proxy.default;
 
 
 
+/***/ }),
+
+/***/ 11440:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__(50954)
+
+
+/***/ }),
+
+/***/ 57114:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__(90696)
+
+
 /***/ })
 
 };
@@ -632,7 +650,7 @@ const __default__ = proxy.default;
 var __webpack_require__ = require("../../../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [2697,9021,2234,5329,5527], () => (__webpack_exec__(58269)));
+var __webpack_exports__ = __webpack_require__.X(0, [2697,9021,5329,5527], () => (__webpack_exec__(58269)));
 module.exports = __webpack_exports__;
 
 })();

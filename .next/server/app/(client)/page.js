@@ -358,11 +358,11 @@ __webpack_require__.r(__webpack_exports__);
 /***/ 39236:
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
-Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 12010))
+Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 59439))
 
 /***/ }),
 
-/***/ 12010:
+/***/ 59439:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -424,6 +424,7 @@ var axios = __webpack_require__(93258);
 
 
 const initFormData = {
+    operation: "Купить",
     housing: "Квартиру",
     rooms: [],
     city: "",
@@ -501,9 +502,15 @@ const SimpleFilter = ({ handleSubmit })=>{
                         handleSubmit(formData);
                     },
                     children: [
-                        /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                            className: "regular-14-16",
-                            children: "Купить"
+                        /*#__PURE__*/ jsx_runtime_.jsx(Select/* default */.Z, {
+                            mobile: true,
+                            name: "operation",
+                            options: [
+                                "Купить",
+                                "Арендовать"
+                            ],
+                            value: formData.operation,
+                            handleChange: handleChange
                         }),
                         /*#__PURE__*/ jsx_runtime_.jsx(Select/* default */.Z, {
                             mobile: true,
@@ -558,12 +565,108 @@ const SimpleFilter = ({ handleSubmit })=>{
 
 // EXTERNAL MODULE: ./src/styles/home.scss
 var home = __webpack_require__(81118);
-// EXTERNAL MODULE: ./src/styles/post.scss
-var post = __webpack_require__(1978);
-// EXTERNAL MODULE: ./src/utilFunctions/dateConvert.js
-var dateConvert = __webpack_require__(42062);
 // EXTERNAL MODULE: ./node_modules/next/navigation.js
 var navigation = __webpack_require__(57114);
+// EXTERNAL MODULE: ./src/utilFunctions/dateConvert.js
+var dateConvert = __webpack_require__(42062);
+// EXTERNAL MODULE: ./src/styles/post.scss
+var post = __webpack_require__(1978);
+// EXTERNAL MODULE: ./src/components/Menu.jsx
+var Menu = __webpack_require__(28888);
+// EXTERNAL MODULE: ./src/components/AdvertisementCard.jsx
+var AdvertisementCard = __webpack_require__(11728);
+// EXTERNAL MODULE: ./src/components/Loading.jsx
+var Loading = __webpack_require__(2769);
+// EXTERNAL MODULE: ./src/components/Post/PostCard.jsx
+var PostCard = __webpack_require__(69476);
+;// CONCATENATED MODULE: ./src/components/HomePage/MobilePosts.jsx
+
+
+
+
+
+
+const MobilePosts = ()=>{
+    const [ads, setAds] = (0,react_.useState)(null);
+    const [posts, setPosts] = (0,react_.useState)([]);
+    const [page, setPage] = (0,react_.useState)(1);
+    const [loading, setLoading] = (0,react_.useState)(true);
+    const [totalPages, setTotalPages] = (0,react_.useState)(1);
+    const getAds = async ()=>{
+        const { data } = await axios/* default */.Z.get(`/api/advertisements`, {
+            validateStatus: function(status) {
+                return true;
+            },
+            headers: {
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
+            }
+        });
+        setAds(data);
+    };
+    const getPosts = async ()=>{
+        setLoading(true);
+        const { data } = await axios/* default */.Z.get(`/api/posts?size=sm&page=${page}`, {
+            validateStatus: function(status) {
+                return true;
+            },
+            headers: {
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
+            }
+        });
+        const newPosts = data.posts;
+        setTotalPages(data.totalPages);
+        setPosts((prevPosts)=>[
+                ...prevPosts,
+                ...newPosts
+            ]);
+        setLoading(false);
+    };
+    (0,react_.useEffect)(()=>{
+        if (!ads) getAds();
+    }, [
+        ads
+    ]);
+    (0,react_.useEffect)(()=>{
+        getPosts();
+    }, [
+        page
+    ]);
+    const handleScroll = ()=>{
+        if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight || loading) return;
+        setPage((prevPage)=>prevPage + 1);
+    };
+    (0,react_.useEffect)(()=>{
+        if (page < totalPages) {
+            window.addEventListener("scroll", handleScroll);
+        }
+        return ()=>{
+            window.removeEventListener("scroll", handleScroll);
+        };
+    }, [
+        loading
+    ]);
+    return /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+        className: "mobileposts",
+        children: [
+            posts.map((post, key)=>/*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                    className: "col",
+                    children: [
+                        /*#__PURE__*/ jsx_runtime_.jsx(PostCard/* default */.Z, {
+                            post: post
+                        }),
+                        Number(key + 1) % 5 === 0 && ads && ads.length > 0 && /*#__PURE__*/ jsx_runtime_.jsx(AdvertisementCard/* default */.Z, {
+                            ad: ads[(Number(key + 1) / 5 - 1) % ads.length]
+                        })
+                    ]
+                }, key)),
+            loading && /*#__PURE__*/ jsx_runtime_.jsx(Loading/* default */.Z, {})
+        ]
+    });
+};
+/* harmony default export */ const HomePage_MobilePosts = (MobilePosts);
+
 ;// CONCATENATED MODULE: ./src/components/Post/PostSmall.jsx
 
 
@@ -608,30 +711,133 @@ const PostSmall = ({ post })=>{
 };
 /* harmony default export */ const Post_PostSmall = (PostSmall);
 
-// EXTERNAL MODULE: ./src/components/Loading.jsx
-var Loading = __webpack_require__(2769);
-// EXTERNAL MODULE: ./src/components/Post/PostCard.jsx
-var PostCard = __webpack_require__(69476);
 // EXTERNAL MODULE: ./node_modules/draftjs-to-html/lib/draftjs-to-html.js
 var draftjs_to_html = __webpack_require__(21512);
 var draftjs_to_html_default = /*#__PURE__*/__webpack_require__.n(draftjs_to_html);
-// EXTERNAL MODULE: ./node_modules/regenerator-runtime/runtime-module.js
-var runtime_module = __webpack_require__(28216);
-// EXTERNAL MODULE: ./src/components/AdvertisementCard.jsx
-var AdvertisementCard = __webpack_require__(11728);
-// EXTERNAL MODULE: ./src/components/Menu.jsx
-var Menu = __webpack_require__(28888);
+;// CONCATENATED MODULE: ./src/components/HomePage/LargePosts.jsx
+
+
+
+
+
+
+const LargePosts = ()=>{
+    const [posts, setPosts] = (0,react_.useState)(null);
+    const [about, setAbout] = (0,react_.useState)(null);
+    const getPosts = async ()=>{
+        const { data } = await axios/* default */.Z.get("/api/posts?size=lg", {
+            validateStatus: function(status) {
+                return true;
+            },
+            headers: {
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
+            }
+        });
+        setPosts(data);
+        const { data: aboutText } = await axios/* default */.Z.get(`/api/about`, {
+            validateStatus: function(status) {
+                return true;
+            },
+            headers: {
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
+            }
+        });
+        setAbout(aboutText);
+    };
+    (0,react_.useEffect)(()=>{
+        if (!posts) getPosts();
+    }, [
+        posts
+    ]);
+    return /*#__PURE__*/ (0,jsx_runtime_.jsxs)(jsx_runtime_.Fragment, {
+        children: [
+            /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                className: "smallposts",
+                children: [
+                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                        className: "apartments",
+                        children: [
+                            /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                                className: "medium-24-28 text-black",
+                                children: "Квартиры"
+                            }),
+                            /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                                className: "row",
+                                children: posts && posts.apartments ? posts.apartments.map((post, key)=>/*#__PURE__*/ jsx_runtime_.jsx("div", {
+                                        className: "col",
+                                        children: /*#__PURE__*/ jsx_runtime_.jsx(Post_PostSmall, {
+                                            post: post
+                                        })
+                                    }, key)) : /*#__PURE__*/ jsx_runtime_.jsx(Loading/* default */.Z, {})
+                            })
+                        ]
+                    }),
+                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                        className: "houses",
+                        children: [
+                            /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                                className: "medium-24-28 text-black",
+                                children: "Дома"
+                            }),
+                            /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                                className: "row",
+                                children: posts && posts.houses ? posts.houses.map((post, key)=>/*#__PURE__*/ jsx_runtime_.jsx("div", {
+                                        className: "col",
+                                        children: /*#__PURE__*/ jsx_runtime_.jsx(Post_PostSmall, {
+                                            post: post
+                                        })
+                                    }, key)) : /*#__PURE__*/ jsx_runtime_.jsx(Loading/* default */.Z, {})
+                            })
+                        ]
+                    }),
+                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                        className: "commercials",
+                        children: [
+                            /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                                className: "medium-24-28 text-black",
+                                children: "Коммерческие недвижимости"
+                            }),
+                            /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                                className: "row",
+                                children: posts && posts.commercials ? posts.commercials.map((post, key)=>/*#__PURE__*/ jsx_runtime_.jsx("div", {
+                                        className: "col",
+                                        children: /*#__PURE__*/ jsx_runtime_.jsx(Post_PostSmall, {
+                                            post: post
+                                        })
+                                    }, key)) : /*#__PURE__*/ jsx_runtime_.jsx(Loading/* default */.Z, {})
+                            })
+                        ]
+                    })
+                ]
+            }),
+            about && /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                id: "about",
+                children: [
+                    /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                        className: "medium-24-28 text-black",
+                        children: "О нас"
+                    }),
+                    /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                        className: "regular-16-20 text-black",
+                        dangerouslySetInnerHTML: {
+                            __html: draftjs_to_html_default()(JSON?.parse(about))
+                        }
+                    })
+                ]
+            })
+        ]
+    });
+};
+/* harmony default export */ const HomePage_LargePosts = (LargePosts);
+
 ;// CONCATENATED MODULE: ./src/app/(client)/page.js
 /* __next_internal_client_entry_do_not_use__ default auto */ 
 
 // import {useDispatch, useSelector} from 'react-redux';
 
 // import { getPosts } from "../actions/post";
-
-
-
-
-
 
 
 
@@ -659,53 +865,8 @@ function useWindowSize() {
 }
 const Home = ()=>{
     const [width, height] = useWindowSize();
-    // const {posts} = useSelector((state) => state.posts);
-    // const dispatch = useDispatch();
     const [size, setSize] = (0,react_.useState)("sm");
-    const [ads, setAds] = (0,react_.useState)(null);
     const router = (0,navigation.useRouter)();
-    const [posts, setPosts] = (0,react_.useState)(null);
-    const [about, setAbout] = (0,react_.useState)(null);
-    const getPosts = async ()=>{
-        const { data } = await axios/* default */.Z.get(`/api/posts?size=${size}`, {
-            validateStatus: function(status) {
-                return true;
-            },
-            headers: {
-                "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
-            }
-        });
-        setPosts(data);
-        const { data: aboutText } = await axios/* default */.Z.get(`/api/about`, {
-            validateStatus: function(status) {
-                return true;
-            },
-            headers: {
-                "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
-            }
-        });
-        setAbout(aboutText);
-    };
-    (0,react_.useEffect)(()=>{
-        if (!posts) getPosts();
-        if (!ads) getAds();
-    }, [
-        posts
-    ]);
-    const getAds = async ()=>{
-        const { data } = await axios/* default */.Z.get(`/api/advertisements`, {
-            validateStatus: function(status) {
-                return true;
-            },
-            headers: {
-                "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
-            }
-        });
-        setAds(data);
-    };
     (0,react_.useEffect)(()=>{
         if (width) {
             if (width < 992) {
@@ -716,11 +877,6 @@ const Home = ()=>{
         }
     }, [
         width
-    ]);
-    (0,react_.useEffect)(()=>{
-        if (size) getPosts();
-    }, [
-        size
     ]);
     const handleSubmit = async (formData)=>{
         // e.preventDefault();
@@ -736,11 +892,14 @@ const Home = ()=>{
                 housing = "apartment";
                 break;
         }
+        const opt = formData.operation ? formData.operation : "Купить";
         const query = (0,dateConvert/* dataToQuery */.rW)({
             ...formData,
-            housing: housing
+            housing: housing,
+            operation: null
         });
-        router.push(`/posts${query}`);
+        if (opt === "Купить") router.push(`/posts${query}`);
+        else router.push(`/rent${query}`);
     };
     return /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
         id: "home",
@@ -756,98 +915,8 @@ const Home = ()=>{
                         className: "medium-24-28 text-black",
                         children: "Последние предложения недвижимости"
                     }),
-                    size === "lg" && /*#__PURE__*/ (0,jsx_runtime_.jsxs)(jsx_runtime_.Fragment, {
-                        children: [
-                            /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-                                className: "smallposts",
-                                children: [
-                                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-                                        className: "apartments",
-                                        children: [
-                                            /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                                                className: "medium-24-28 text-black",
-                                                children: "Квартиры"
-                                            }),
-                                            /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                                                className: "row",
-                                                children: posts && posts.apartments ? posts.apartments.map((post, key)=>/*#__PURE__*/ jsx_runtime_.jsx("div", {
-                                                        className: "col",
-                                                        children: /*#__PURE__*/ jsx_runtime_.jsx(Post_PostSmall, {
-                                                            post: post
-                                                        })
-                                                    }, key)) : /*#__PURE__*/ jsx_runtime_.jsx(Loading/* default */.Z, {})
-                                            })
-                                        ]
-                                    }),
-                                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-                                        className: "houses",
-                                        children: [
-                                            /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                                                className: "medium-24-28 text-black",
-                                                children: "Дома"
-                                            }),
-                                            /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                                                className: "row",
-                                                children: posts && posts.houses ? posts.houses.map((post, key)=>/*#__PURE__*/ jsx_runtime_.jsx("div", {
-                                                        className: "col",
-                                                        children: /*#__PURE__*/ jsx_runtime_.jsx(Post_PostSmall, {
-                                                            post: post
-                                                        })
-                                                    }, key)) : /*#__PURE__*/ jsx_runtime_.jsx(Loading/* default */.Z, {})
-                                            })
-                                        ]
-                                    }),
-                                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-                                        className: "commercials",
-                                        children: [
-                                            /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                                                className: "medium-24-28 text-black",
-                                                children: "Коммерческие недвижимости"
-                                            }),
-                                            /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                                                className: "row",
-                                                children: posts && posts.commercials ? posts.commercials.map((post, key)=>/*#__PURE__*/ jsx_runtime_.jsx("div", {
-                                                        className: "col",
-                                                        children: /*#__PURE__*/ jsx_runtime_.jsx(Post_PostSmall, {
-                                                            post: post
-                                                        })
-                                                    }, key)) : /*#__PURE__*/ jsx_runtime_.jsx(Loading/* default */.Z, {})
-                                            })
-                                        ]
-                                    })
-                                ]
-                            }),
-                            about && /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-                                id: "about",
-                                children: [
-                                    /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                                        className: "medium-24-28 text-black",
-                                        children: "О нас"
-                                    }),
-                                    /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                                        className: "regular-16-20 text-black",
-                                        dangerouslySetInnerHTML: {
-                                            __html: draftjs_to_html_default()(JSON?.parse(about))
-                                        }
-                                    })
-                                ]
-                            })
-                        ]
-                    }),
-                    size === "sm" && /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                        className: "mobileposts",
-                        children: posts && posts.length > 0 ? posts.map((post, key)=>/*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-                                className: "col",
-                                children: [
-                                    /*#__PURE__*/ jsx_runtime_.jsx(PostCard/* default */.Z, {
-                                        post: post
-                                    }),
-                                    Number(key + 1) % 5 === 0 && ads && ads.length > 0 && /*#__PURE__*/ jsx_runtime_.jsx(AdvertisementCard/* default */.Z, {
-                                        ad: ads[(Number(key + 1) / 5 - 1) % ads.length]
-                                    })
-                                ]
-                            }, key)) : /*#__PURE__*/ jsx_runtime_.jsx(Loading/* default */.Z, {})
-                    })
+                    size === "lg" && /*#__PURE__*/ jsx_runtime_.jsx(HomePage_LargePosts, {}),
+                    size === "sm" && /*#__PURE__*/ jsx_runtime_.jsx(HomePage_MobilePosts, {})
                 ]
             })
         ]
@@ -898,7 +967,7 @@ const __default__ = proxy.default;
 var __webpack_require__ = require("../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [2697,9021,1512,2234,5329,2062,447,4682,8888,2851], () => (__webpack_exec__(54936)));
+var __webpack_exports__ = __webpack_require__.X(0, [2697,9021,1512,5329,2062,447,8888,7416], () => (__webpack_exec__(54936)));
 module.exports = __webpack_exports__;
 
 })();

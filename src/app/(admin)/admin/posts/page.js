@@ -1,7 +1,6 @@
 'use client'
 
 import Loading from '@/components/Loading';
-import PostCard from '@/components/Post/PostCard';
 import '@/styles/admin/posts.scss';
 import { dateConvert, numberRearange } from '@/utilFunctions/dateConvert';
 import axios from 'axios';
@@ -72,35 +71,37 @@ const Posts = () => {
                     <div data-value="commercial" onClick={changePostType} className={`tab-item ${postType === 'commercial' ? 'active' : ''}`}>
                         Коммерческая недвижимость
                     </div>
+
                     <Link href="/admin/posts/new" className='add-post'>
                         Добавить объявление
                     </Link>                    
-
                 </div>
                 <div className={`tab-content ${postType === 'apartment' ? 'btl-0' : ''}`}>
                     {posts ? 
                         posts.length > 0 ? 
                             posts.map((post, key) => (
                                 <div className='post' key={key}>
-                                    <div className='image'>
-                                        {(post.images && post.images.length>0) && (
-                                            <img loading='lazy' src={`https://cna.kz/public/uploads/${post.images[0]}`} alt=""/>
-                                        )}
-                                    </div>
-                                    <div className='info'>
-                                        <div className='top'>
-                                            {post.housing.slug === 'apartment' && (
-                                                <div className="title">{post.rooms}-комнатная квартира{post.area && post.area.total && <>, {post.area.total} м<sup>2</sup></>}{post.floor && `, ${post.floor}/${post.floors} этаж`}</div>
+                                    <div className='post-content'>
+                                        <div className='image'>
+                                            {(post.images && post.images.length>0) && (
+                                                <img loading='lazy' src={`https://cna.kz/public/uploads/${post.images[0]}`} alt=""/>
                                             )}
-                                            <div className="price">{numberRearange(post.price)} 〒</div>
                                         </div>
-                                        <div className="addres">
-                                            {post.region.name}, {post.adress}
+                                        <div className='info'>
+                                            <div className='top'>
+                                                {post.housing.slug === 'apartment' && (
+                                                    <div className="title">{post.rooms}-комнатная квартира{post.area && post.area.total && <>, {post.area.total} м<sup>2</sup></>}{post.floor && `, ${post.floor}/${post.floors} этаж`}</div>
+                                                )}
+                                                <div className="price">{numberRearange(post.price)} 〒</div>
+                                            </div>
+                                            <div className="addres">
+                                                {post.region.name}, {post.adress}
+                                            </div>
+                                            {post.description && (
+                                                <div className="description" dangerouslySetInnerHTML={{__html: draftToHtml(JSON.parse(post.description))}} ></div>
+                                            )}
+                                            <div className="date">{dateConvert(post.createdAt)}</div>
                                         </div>
-                                        {post.description && (
-                                            <div className="description" dangerouslySetInnerHTML={{__html: draftToHtml(JSON.parse(post.description))}} ></div>
-                                        )}
-                                        <div className="date">{dateConvert(post.createdAt)}</div>
                                     </div>
                                     <div className='actions'>
                                         <Link href={`/admin/posts/${post._id}`} className='btn edit'>

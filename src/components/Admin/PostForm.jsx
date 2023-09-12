@@ -45,7 +45,11 @@ const initFormData = {
     commercial: {
         purpose: '',
         placement: ''
-    }
+    },
+
+
+    posttype: 'sell',
+    rentPeriod: 'По часам'
 };
 
 
@@ -286,6 +290,13 @@ const PostForm = ({post=null}) => {
                                 <input type="text" name="realtor_phone" value={formData.realtor.phone} onChange={handleChange} required/>
                             </div>
                             <div className="form-group">
+                                <label>Категория</label>
+                                <select disabled={post && post._id} name="posttype" value={formData.posttype} required onChange={handleChange}>
+                                    <option value="sell">Продажа</option>
+                                    <option value="rent">Аренда</option>
+                                </select>
+                            </div>
+                            <div className="form-group">
                                 <label>Тип недвижимости</label>
                                 <select disabled={post && post._id} name="housing" value={formData.housing} required  onChange={handleChange}>
                                     <option value="apartment">Квартира</option>
@@ -293,6 +304,16 @@ const PostForm = ({post=null}) => {
                                     <option value="commercial">Коммерческая недвижимость</option>
                                 </select>
                             </div>
+                            {formData.posttype === 'rent' && (
+                                <div className="form-group">
+                                    <label>Периодичность</label>
+                                    <select name="rentPeriod" value={formData.rentPeriod} required onChange={handleChange}>
+                                        <option value="По часам">По часам</option>
+                                        <option value="Посуточно">Посуточно</option>
+                                        <option value="Помесячно">Помесячно</option>
+                                    </select>
+                                </div>
+                            )}
                             <div className="form-group">
                                 <label>Город</label>
                                 <select name="city" value={formData.city} onChange={handleChange} required >

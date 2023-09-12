@@ -98,6 +98,10 @@ const Header = ()=>{
                                 children: "Продажа"
                             }),
                             /*#__PURE__*/ jsx_runtime_.jsx((link_default()), {
+                                href: "/rent",
+                                children: "Аренда"
+                            }),
+                            /*#__PURE__*/ jsx_runtime_.jsx((link_default()), {
                                 href: "/#about",
                                 children: "О нас"
                             }),

@@ -2,30 +2,169 @@
 @import '../adaptive';
 
 #sidebar{
-    width: 300px;
-    min-width: 300px;
-    background: v.$dark_blue;
-    display: flex;
-    flex-direction: column;
-    padding: 24px;
-    gap: 24px;
-    justify-content: space-between;
-    nav{
+    position: relative;
+    width: 0;
+    padding-top: 60px;
+    .header{
+        position: fixed;
+        width: 100vw;
+        background: v.$dark_blue;
+        top: 0;
+        left: 0;
+        // height: 40px;
+        padding: 16px 24px;
         display: flex;
-        flex-direction: column;
-        padding: 0;
-        margin: 0;
-        gap: 16px;
-        width: 100%;
+        align-items: center;
+        gap: 24px;
         a{
-            width: 100%;
-            padding: 8px 0;
-            border-bottom: 1px solid v.$light_grey;
+            width: 200px;
             text-decoration: none;
             color: v.$white;
+            font-size: 24px;
+            font-weight: 500;
+            line-height: 28px;
+        }
+        i{
+            cursor: pointer;
+            height: 21px;
+            width: 24px;
+
+            content: url('../../assets/svg/bars-solid.svg');
         }
     }
-    .logout{
-        color: v.$light_grey;
+    .content{   
+        position: fixed;
+        top: 60px;
+        left: 0;
+        width: 0;
+
+        overflow: hidden;
+        height: 100%;
+        max-height: calc(100vh - 60px) ;
+        background: v.$dark_blue;
+        z-index: 100;
+        display: flex;
+        flex-direction: column;
+        padding: 24px 0;
+        gap: 24px;
+        justify-content: space-between;
+        transition: all .3s ease-in-out;
+
+        nav{
+            display: flex;
+            flex-direction: column;
+            padding: 0 24px;
+            margin: 0;
+            gap: 16px;
+            width: 100%;
+            a{
+                width: 100%;
+                padding: 8px 0;
+                border-bottom: 1px solid v.$light_grey;
+                text-decoration: none;
+                color: v.$white;
+                white-space:nowrap;
+            }
+        }
+        .logout{
+            padding: 0 24px;
+            cursor: pointer;
+            color: v.$light_grey;
+        }
+    }
+
+    transition: all .3s ease-in-out;
+
+    &.hide{
+        .content{
+            overflow: hidden;
+        width: 100%;
+
+            padding: 24px 0;
+        }
+    }
+    @include _lg{
+        background: v.$dark_blue;
+        position: relative;
+        width: 300px;
+        min-width: 300px;
+        padding-top: 60px;
+        .header{
+            position: fixed;
+            width: 100vw;
+            background: v.$dark_blue;
+            top: 0;
+            left: 0;
+            // height: 40px;
+            padding: 16px 24px;
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            a{
+                width: 200px;
+                text-decoration: none;
+                color: v.$white;
+                font-size: 24px;
+                font-weight: 500;
+                line-height: 28px;
+            }
+            i{
+                cursor: pointer;
+                height: 21px;
+                width: 24px;
+    
+                content: url('../../assets/svg/bars-solid.svg');
+            }
+        }
+        .content{   
+            position: fixed;
+            top: 60px;
+            left: 0;
+            overflow: hidden;
+            width: 300px;
+            height: 100%;
+            max-height: calc(100vh - 60px) ;
+            display: flex;
+            flex-direction: column;
+            padding: 24px 0;
+            gap: 24px;
+            justify-content: space-between;
+            transition: all .3s ease-in-out;
+    
+            nav{
+                display: flex;
+                flex-direction: column;
+                padding: 0 24px;
+                margin: 0;
+                gap: 16px;
+                width: 100%;
+                a{
+                    width: 100%;
+                    padding: 8px 0;
+                    border-bottom: 1px solid v.$light_grey;
+                    text-decoration: none;
+                    color: v.$white;
+                    white-space:nowrap;
+                }
+            }
+            .logout{
+                padding: 0 24px;
+                cursor: pointer;
+                color: v.$light_grey;
+            }
+        }
+    
+        transition: all .3s ease-in-out;
+    
+        &.hide{
+            width: 0;
+            min-width: 0;
+            max-width: 0;
+            .content{
+                overflow: hidden;
+                width: 0;
+                padding: 24px 0;
+            }
+        }    
     }
 }

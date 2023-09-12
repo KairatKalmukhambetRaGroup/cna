@@ -13,13 +13,19 @@ body{
     display: flex;
     flex-direction: row;
     main{
+        margin-top: 60px;
         flex-grow: 1;
-        padding: 24px;
+        padding: 24px 16px;
         background: rgba($color: v.$light_grey, $alpha: .4);
-        min-height: 100vh;
+        // min-height: 100vh;
     }
     *{
         box-sizing:border-box;
         text-decoration: none;
+    }
+    @include _lg{
+        main{
+            padding: 24px;
+        }
     }
 }

@@ -11,12 +11,20 @@ const Post = ({post}) => {
             <div className="container">
                 <div className="content">
                     <div className="title">
-                        {createTitle(post)}
+                        {`${createTitle(post)}, ${post.adress}`}
                     </div>
                     <div className="info">
                         <div className="sidebar">
                             <div className="sidebar-content">
-                                <div className="price">{numberRearange(post.price)} 〒</div>
+                                {post.posttype === 'sell' ? 
+                                    <div className="price">{numberRearange(post.price)} 〒</div>
+                                    :
+                                    <div className="price">{numberRearange(post.price)} 〒 / 
+                                        {post.rentPeriod === 'По часам' && ' час'}
+                                        {post.rentPeriod === 'Посуточно' && ' сутки'}
+                                        {post.rentPeriod === 'Помесячно' && ' месяц'}
+                                    </div>
+                                }
                                 <div className="parameters">
                                     {post.city && <SidebarParam label="Город" value={post.city.name} />}
                                     {post.region && <SidebarParam label="Район" value={post.region.name} />}
