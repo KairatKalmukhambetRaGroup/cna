@@ -1,0 +1,70 @@
+@use '../variables' as v;
+@import '../adaptive';
+
+#applications{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+
+    .heading{
+        font-weight: 600;
+        font-size: 24px;
+        line-height: 30px;
+    }
+
+    .tab{
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        .tab-items{
+            display: flex;
+            flex-direction: row;
+            gap: 8px;
+            .tab-item{
+                padding: 8px 16px;
+                background: v.$light_grey;
+                border-radius: 8px;
+                color: v.$black;
+                cursor: pointer;
+                &.active{
+                    background: v.$white;
+                    color: v.$blue;
+                }
+            }
+        }
+        table{
+            width: 100%;
+            border-spacing: 0;
+
+            background: v.$white;
+            // padding: 16px;
+            border-radius: 8px;
+            thead th{
+                text-align: left;
+                padding: 8px 16px;
+                border-bottom: 1px solid v.$light_grey;
+            }
+            tbody{
+                tr{
+                    td{
+                        padding: 8px 16px;
+                        border-bottom: 1px solid v.$light_grey;
+                        &.center{
+                            text-align: center;
+                            vertical-align: middle;
+                            padding: 36px;
+                        }
+                        .action{
+                            cursor: pointer;
+                            color: v.$blue;
+                        }
+                    }
+                    &:last-of-type td{
+                        border-bottom: none;
+                    }
+                }
+            }
+        }
+    }
+}

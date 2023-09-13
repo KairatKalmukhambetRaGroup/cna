@@ -109,14 +109,11 @@ const Header = ()=>{
                                 href: "/#contacts",
                                 children: "Контакты"
                             }),
-                            /*#__PURE__*/ (0,jsx_runtime_.jsxs)("a", {
-                                href: "tel:+77055621546",
+                            /*#__PURE__*/ jsx_runtime_.jsx((link_default()), {
+                                href: "/application",
                                 target: "_blank",
                                 className: "btn",
-                                children: [
-                                    /*#__PURE__*/ jsx_runtime_.jsx("i", {}),
-                                    " Подать объявление"
-                                ]
+                                children: "Подать объявление"
                             })
                         ]
                     })

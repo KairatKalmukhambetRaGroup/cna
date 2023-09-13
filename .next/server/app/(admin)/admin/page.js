@@ -367,37 +367,202 @@ __webpack_require__.r(__webpack_exports__);
 /***/ 37988:
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
-Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 83104))
+Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 46695))
 
 /***/ }),
 
-/***/ 83104:
+/***/ 46695:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
+// ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(56786);
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _components_Inputs_RichText__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(15863);
-/* harmony import */ var _components_Loading__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(2769);
-/* harmony import */ var _styles_admin_admin_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(95139);
-/* harmony import */ var _styles_admin_admin_scss__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_styles_admin_admin_scss__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(93258);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(18038);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_4__);
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, {
+  "default": () => (/* binding */ page)
+});
+
+// EXTERNAL MODULE: external "next/dist/compiled/react/jsx-runtime"
+var jsx_runtime_ = __webpack_require__(56786);
+// EXTERNAL MODULE: ./src/styles/admin/applications.scss
+var applications = __webpack_require__(61088);
+// EXTERNAL MODULE: ./node_modules/axios/lib/axios.js + 46 modules
+var axios = __webpack_require__(93258);
+// EXTERNAL MODULE: external "next/dist/compiled/react"
+var react_ = __webpack_require__(18038);
+// EXTERNAL MODULE: ./src/components/Loading.jsx
+var Loading = __webpack_require__(2769);
+// EXTERNAL MODULE: ./node_modules/regenerator-runtime/runtime-module.js
+var runtime_module = __webpack_require__(28216);
+// EXTERNAL MODULE: ./src/utilFunctions/dateConvert.js
+var dateConvert = __webpack_require__(42062);
+;// CONCATENATED MODULE: ./src/components/Admin/Applications.jsx
+
+
+
+
+
+
+
+const Applications = ()=>{
+    const [applications, setApplications] = (0,react_.useState)(null);
+    const [isArchive, setIsArchive] = (0,react_.useState)(false);
+    const getApplications = async ()=>{
+        const { data } = await axios/* default */.Z.get(`/api/applications?archive=${isArchive}`, {
+            validateStatus: function(status) {
+                return true;
+            },
+            headers: {
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
+            }
+        });
+        setApplications(data);
+    };
+    (0,react_.useEffect)(()=>{
+        setApplications(null);
+        getApplications();
+    }, [
+        isArchive
+    ]);
+    const archive = async (id)=>{
+        const { data } = await axios/* default */.Z.patch(`/api/applications`, {
+            id,
+            archive: isArchive
+        }, {
+            validateStatus: function(status) {
+                return true;
+            },
+            headers: {
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
+            }
+        });
+        setApplications(data);
+    };
+    return /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+        id: "applications",
+        children: [
+            /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                className: "heading",
+                children: "Заявки"
+            }),
+            /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                className: "tab",
+                children: [
+                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                        className: "tab-items",
+                        children: [
+                            /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                                className: `tab-item ${isArchive ? "" : "active"}`,
+                                onClick: (e)=>{
+                                    e.preventDefault();
+                                    setIsArchive(false);
+                                },
+                                children: "Новые"
+                            }),
+                            /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                                className: `tab-item ${isArchive ? "active" : ""}`,
+                                onClick: (e)=>{
+                                    e.preventDefault();
+                                    setIsArchive(true);
+                                },
+                                children: "Архив"
+                            })
+                        ]
+                    }),
+                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)("table", {
+                        className: "tab-content",
+                        children: [
+                            /*#__PURE__*/ jsx_runtime_.jsx("thead", {
+                                children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)("tr", {
+                                    children: [
+                                        /*#__PURE__*/ jsx_runtime_.jsx("th", {
+                                            children: "№"
+                                        }),
+                                        /*#__PURE__*/ jsx_runtime_.jsx("th", {
+                                            children: "Имя"
+                                        }),
+                                        /*#__PURE__*/ jsx_runtime_.jsx("th", {
+                                            children: "Телефон"
+                                        }),
+                                        /*#__PURE__*/ jsx_runtime_.jsx("th", {
+                                            children: "Дата"
+                                        }),
+                                        !isArchive && /*#__PURE__*/ jsx_runtime_.jsx("th", {
+                                            children: "Действие"
+                                        })
+                                    ]
+                                })
+                            }),
+                            /*#__PURE__*/ jsx_runtime_.jsx("tbody", {
+                                children: applications ? applications.length > 0 ? applications.map((item, key)=>/*#__PURE__*/ (0,jsx_runtime_.jsxs)("tr", {
+                                        children: [
+                                            /*#__PURE__*/ jsx_runtime_.jsx("td", {
+                                                children: Number(key) + 1
+                                            }),
+                                            /*#__PURE__*/ jsx_runtime_.jsx("td", {
+                                                children: item.name
+                                            }),
+                                            /*#__PURE__*/ jsx_runtime_.jsx("td", {
+                                                children: item.phone
+                                            }),
+                                            /*#__PURE__*/ jsx_runtime_.jsx("td", {
+                                                children: (0,dateConvert/* dateConvertWithTime */.nu)(item.createdAt)
+                                            }),
+                                            !isArchive && /*#__PURE__*/ jsx_runtime_.jsx("td", {
+                                                children: /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                                                    className: "action",
+                                                    onClick: (e)=>{
+                                                        e.preventDefault();
+                                                        archive(item._id);
+                                                    },
+                                                    children: "Архивировать"
+                                                })
+                                            })
+                                        ]
+                                    }, key)) : /*#__PURE__*/ jsx_runtime_.jsx("tr", {
+                                    children: /*#__PURE__*/ jsx_runtime_.jsx("td", {
+                                        className: "center",
+                                        colSpan: 5,
+                                        children: "Нет заявок"
+                                    })
+                                }) : /*#__PURE__*/ jsx_runtime_.jsx("tr", {
+                                    children: /*#__PURE__*/ jsx_runtime_.jsx("td", {
+                                        className: "center",
+                                        colSpan: 5,
+                                        children: /*#__PURE__*/ jsx_runtime_.jsx(Loading/* default */.Z, {
+                                            small: true
+                                        })
+                                    })
+                                })
+                            })
+                        ]
+                    })
+                ]
+            })
+        ]
+    });
+};
+/* harmony default export */ const Admin_Applications = (Applications);
+
+// EXTERNAL MODULE: ./src/components/Inputs/RichText.jsx
+var RichText = __webpack_require__(15863);
+// EXTERNAL MODULE: ./src/styles/admin/admin.scss
+var admin = __webpack_require__(95139);
+;// CONCATENATED MODULE: ./src/app/(admin)/admin/page.js
 /* __next_internal_client_entry_do_not_use__ default auto */ 
 
 
 
 
 
+
 const Admin = ()=>{
-    const [posts, setPosts] = (0,react__WEBPACK_IMPORTED_MODULE_4__.useState)();
+    const [posts, setPosts] = (0,react_.useState)();
     const getPosts = async ()=>{
-        const { data } = await axios__WEBPACK_IMPORTED_MODULE_5__/* ["default"] */ .Z.get(`/api/posts?count=true`, {
+        const { data } = await axios/* default */.Z.get(`/api/posts?count=true`, {
             validateStatus: function(status) {
                 return true;
             },
@@ -409,7 +574,7 @@ const Admin = ()=>{
         setPosts(data);
     };
     const getAbout = async ()=>{
-        const { data } = await axios__WEBPACK_IMPORTED_MODULE_5__/* ["default"] */ .Z.get("/api/about", {
+        const { data } = await axios/* default */.Z.get("/api/about", {
             validateStatus: function(status) {
                 return true;
             },
@@ -420,7 +585,7 @@ const Admin = ()=>{
         });
         setAbout(data);
     };
-    (0,react__WEBPACK_IMPORTED_MODULE_4__.useEffect)(()=>{
+    (0,react_.useEffect)(()=>{
         if (!posts) {
             getPosts();
             getAbout();
@@ -428,13 +593,13 @@ const Admin = ()=>{
     }, [
         posts
     ]);
-    const [about, setAbout] = (0,react__WEBPACK_IMPORTED_MODULE_4__.useState)("");
+    const [about, setAbout] = (0,react_.useState)("");
     const handleChange = (value)=>{
         setAbout(value);
     };
     const handleSubmit = async (e)=>{
         e.preventDefault();
-        const { data, status } = await axios__WEBPACK_IMPORTED_MODULE_5__/* ["default"] */ .Z.post(`/api/about`, {
+        const { data, status } = await axios/* default */.Z.post(`/api/about`, {
             text: about
         }, {
             validateStatus: function(status) {
@@ -454,52 +619,52 @@ const Admin = ()=>{
     //     setModalText(modalFail)
     // }
     };
-    return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+    return /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
         id: "admin",
         children: [
-            /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+            /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
                 className: "cards",
                 children: [
-                    /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
                         className: "card",
                         children: [
-                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                            /*#__PURE__*/ jsx_runtime_.jsx("div", {
                                 className: "title",
                                 children: "Квартиры"
                             }),
-                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                            /*#__PURE__*/ jsx_runtime_.jsx("div", {
                                 className: "number",
-                                children: posts ? posts.apartments > 0 ? posts.apartments : 0 : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Loading__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .Z, {
+                                children: posts ? posts.apartments > 0 ? posts.apartments : 0 : /*#__PURE__*/ jsx_runtime_.jsx(Loading/* default */.Z, {
                                     small: true
                                 })
                             })
                         ]
                     }),
-                    /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
                         className: "card",
                         children: [
-                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                            /*#__PURE__*/ jsx_runtime_.jsx("div", {
                                 className: "title",
                                 children: "Дома"
                             }),
-                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                            /*#__PURE__*/ jsx_runtime_.jsx("div", {
                                 className: "number",
-                                children: posts ? posts.houses > 0 ? posts.houses : 0 : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Loading__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .Z, {
+                                children: posts ? posts.houses > 0 ? posts.houses : 0 : /*#__PURE__*/ jsx_runtime_.jsx(Loading/* default */.Z, {
                                     small: true
                                 })
                             })
                         ]
                     }),
-                    /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
                         className: "card",
                         children: [
-                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                            /*#__PURE__*/ jsx_runtime_.jsx("div", {
                                 className: "title",
                                 children: "Коммерческие недвижимости"
                             }),
-                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                            /*#__PURE__*/ jsx_runtime_.jsx("div", {
                                 className: "number",
-                                children: posts ? posts.commercials > 0 ? posts.commercials : 0 : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Loading__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .Z, {
+                                children: posts ? posts.commercials > 0 ? posts.commercials : 0 : /*#__PURE__*/ jsx_runtime_.jsx(Loading/* default */.Z, {
                                     small: true
                                 })
                             })
@@ -507,21 +672,21 @@ const Admin = ()=>{
                     })
                 ]
             }),
-            /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+            /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
                 className: "about-content",
                 children: [
-                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                    /*#__PURE__*/ jsx_runtime_.jsx("div", {
                         className: "heading",
                         children: "О нас"
                     }),
-                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Inputs_RichText__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .Z, {
+                    /*#__PURE__*/ jsx_runtime_.jsx(RichText/* default */.Z, {
                         value: about,
                         handleChange: handleChange
                     }, "rich1"),
-                    /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
                         className: "btns",
                         children: [
-                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                            /*#__PURE__*/ jsx_runtime_.jsx("div", {
                                 className: "btn reset",
                                 onClick: (e)=>{
                                     e.preventDefault();
@@ -529,7 +694,7 @@ const Admin = ()=>{
                                 },
                                 children: "Сбросить изменения"
                             }),
-                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                            /*#__PURE__*/ jsx_runtime_.jsx("div", {
                                 className: "btn save",
                                 onClick: handleSubmit,
                                 children: "Сохранить"
@@ -537,11 +702,12 @@ const Admin = ()=>{
                         ]
                     })
                 ]
-            })
+            }),
+            /*#__PURE__*/ jsx_runtime_.jsx(Admin_Applications, {})
         ]
     });
 };
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Admin);
+/* harmony default export */ const page = (Admin);
 
 
 /***/ }),
@@ -615,6 +781,13 @@ const __default__ = proxy.default;
 
 /***/ }),
 
+/***/ 61088:
+/***/ (() => {
+
+
+
+/***/ }),
+
 /***/ 7847:
 /***/ (() => {
 
@@ -636,7 +809,7 @@ const __default__ = proxy.default;
 var __webpack_require__ = require("../../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [2697,9021,7061,5329,5527,5863], () => (__webpack_exec__(56287)));
+var __webpack_exports__ = __webpack_require__.X(0, [2697,9021,7061,8216,5329,5527,2062,5863], () => (__webpack_exec__(56287)));
 module.exports = __webpack_exports__;
 
 })();

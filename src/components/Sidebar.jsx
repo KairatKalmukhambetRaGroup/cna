@@ -1,4 +1,5 @@
 import '@/styles/sidebar.scss';
+import Link from 'next/link';
 
 const Sidebar = () => {
     return (
@@ -10,7 +11,10 @@ const Sidebar = () => {
                         <div className="regular-16-20 text-black">Доверь продажу профессионалам на CNA.KZ! Максимум выгоды, минимум хлопот.</div>
                     </div>
                     <div className="action">
-                        <a href="tel:+77055621546" target='_blank' className='btn'><i></i> +7 705 562 1546</a>            
+                        <Link href="/applications" target='_blank' className='btn'>
+                            Оставить заявку
+                        </Link>
+                        {/* <a href="tel:+77055621546" target='_blank' className='btn'><i></i> +7 705 562 1546</a>             */}
                         {/* <div className="regular-14-16">Подать объявление</div>              */}
                     </div>
                 </div>

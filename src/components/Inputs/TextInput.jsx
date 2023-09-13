@@ -2,7 +2,7 @@
 const TextInput = ({name='', placeholder='', label='', value='', handleChange}) => {
     const onChange = (e) => {
         e.preventDefault();
-        handleChange(name, value);
+        handleChange(e.currentTarget.name, e.currentTarget.value);
     }
     return (
         <div className="input text-input">

@@ -8,7 +8,6 @@ export async function GET() {
         const regions = await Region.find().sort('name');
         return NextResponse.json(regions);
     } catch (error) {
-        console.log(error);
         return NextResponse.json(null, {status: 500})
     }
 }

@@ -1,0 +1,194 @@
+@use './variables' as v;
+@import './adaptive';
+
+#application{
+    .content{
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+    
+        padding-top: 48px;
+        padding-bottom: 96px;
+
+        .heading{
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            gap: 16px;
+            .title{
+                font-size: 24px;
+                line-height: 28px;
+                font-weight: 600;
+                text-align: center;
+            }
+            .subtitle{
+                font-size: 20px;
+                line-height: 24px;
+                font-weight: 500;
+                text-align: center;
+            }
+
+            @include _lg{
+                .title{
+                    font-size: 28px;
+                    line-height: 32px;
+                }
+                .subtitle{
+                    font-size: 20px;
+                    line-height: 24px;
+                }   
+            }
+        }
+
+
+        .form{
+            display: flex;
+            flex-direction: column-reverse;
+            gap: 16px;
+
+            .description{
+                ol{
+                    padding: 20px;
+                    margin: 0;
+                }
+            }
+
+            form{
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                gap: 16px;
+
+                padding: 32px;
+                border-radius: 8px;
+
+                background: v.$yellow;
+
+                p{
+                    margin: 0;
+                    font-weight: 500;
+                }
+
+                .inputs{
+                    display: flex;
+                    flex-direction: column;
+                    gap: 16px;
+                    .input{
+                        display: flex;
+                        flex-direction: column;
+                        gap: 8px;
+                        label{
+                            font-size: 14px;
+                            font-weight: 500;
+                        }
+                        input{
+                            padding: 8px 16px;
+                            border-radius: 4px;
+                            border: none;
+                            outline: none;
+
+                            font-size: 16px;
+                            line-height: 20px;
+                            &:focus{
+                                outline: none;
+                            }
+                        }
+                    }
+                }
+
+                .btn{
+                    width: 100%;
+                    background: v.$blue;
+                    color: v.$white;
+                    outline: none;
+                    border: none;
+                    border-radius: 4px;
+                    padding: 8px 16px;
+                    margin-top: auto;
+                    cursor: pointer;
+                    &:focus{
+                        outline: none;
+                    }
+                }
+                
+            }
+            
+            @include _lg{
+                flex-direction: row;
+                form{
+                    min-width: 400px;
+                }
+            }
+        }
+    }
+
+
+    .modal{
+        position: fixed;
+        inset: 0;
+        z-index: 1000;
+        background: rgba($color: v.$black, $alpha: .3);
+        padding: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .content{
+            max-width: 500px;
+            width: 100%;
+            background: v.$white;
+            padding: 24px;
+            border-radius: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+            .text{
+                display: flex;
+                flex-direction: column;
+                gap: 16px;
+                align-items: center;
+                .title{
+                    font-size: 20px;
+                    font-weight: 500;
+                    line-height: 24px;
+                    text-align: center;
+
+                }
+                .subtitle{
+                    font-size: 16px;
+                    font-weight: 400;
+                    line-height: 20px;
+                    text-align: center;
+                }
+            }
+            .btn{
+                width: 100%;
+                padding: 8px;
+                text-align: center;
+                border-radius: 8px;
+                font-size: 16px;
+                line-height: 20px;
+                font-weight: 400;
+                color: v.$white;
+                background: v.$blue;
+                cursor: pointer;
+            }
+            i{
+                width: 64px;
+                height: 64px;
+            }
+            &.success{
+                i{
+                    content: url('../assets/svg/circle-check-solid.svg');
+                }
+            }
+            &.fail{
+                i{
+                    content: url('../assets/svg/circle-exclamation-solid.svg');
+                }
+            }
+        }   
+    }
+
+}

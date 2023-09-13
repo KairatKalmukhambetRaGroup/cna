@@ -66,7 +66,6 @@ async function GET() {
         const regions = await region/* default */.Z.find().sort("name");
         return next_response/* default */.Z.json(regions);
     } catch (error) {
-        console.log(error);
         return next_response/* default */.Z.json(null, {
             status: 500
         });

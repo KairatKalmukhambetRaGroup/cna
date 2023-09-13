@@ -12,7 +12,8 @@ const Header = () => {
                         <Link href="/rent" >Аренда</Link>
                         <Link href="/#about" >О нас</Link>
                         <Link href="/#contacts" >Контакты</Link>
-                        <a href="tel:+77055621546" target='_blank' className="btn" ><i></i> Подать объявление</a>
+                        <Link href="/application" target='_blank' className="btn" >Подать объявление</Link>
+                        {/* <a href="tel:+77055621546" target='_blank' className="btn" ><i></i> Подать объявление</a> */}
                     </div>
                 </div>
             </div>

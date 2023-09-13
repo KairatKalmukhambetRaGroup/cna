@@ -16,10 +16,14 @@ const Menu = () => {
                     <i className="home"></i>
                     Главная
                 </Link>
-                <a href='tel:+77055621546' className="menu-item new">
+                <Link href='/application' target="_blank" className="menu-item new">
                     <i className="new"></i>
                     Подать
-                </a>
+                </Link>
+                {/* <a href='tel:+77055621546' className="menu-item new">
+                    <i className="new"></i>
+                    Подать
+                </a> */}
                 <Link href='/about' className="menu-item">
                     <i className="about"></i>
                     О нас

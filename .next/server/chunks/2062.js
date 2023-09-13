@@ -10,6 +10,7 @@ exports.modules = {
 /* harmony export */   ce: () => (/* binding */ dateConvert),
 /* harmony export */   eS: () => (/* binding */ numberRearange),
 /* harmony export */   i2: () => (/* binding */ createTitle),
+/* harmony export */   nu: () => (/* binding */ dateConvertWithTime),
 /* harmony export */   pQ: () => (/* binding */ queryToData),
 /* harmony export */   rW: () => (/* binding */ dataToQuery),
 /* harmony export */   yN: () => (/* binding */ priceToMils)
@@ -36,6 +37,17 @@ const dateConvert = (dateString)=>{
     const month = date.getMonth();
     const year = date.getFullYear();
     if (year === thisYear) return day + " " + months[month];
+    return day + " " + months[month] + " " + year;
+};
+const dateConvertWithTime = (dateString)=>{
+    const thisYear = new Date().getFullYear();
+    const date = new Date(dateString);
+    const day = date.getDate();
+    const month = date.getMonth();
+    const year = date.getFullYear();
+    const h = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
+    const m = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+    if (year === thisYear) return day + " " + months[month] + " " + h + ":" + m;
     return day + " " + months[month] + " " + year;
 };
 const priceToMils = (price)=>{

@@ -1,5 +1,6 @@
 'use client'
 
+import Applications from '@/components/Admin/Applications';
 import RichText from '@/components/Inputs/RichText';
 import Loading from '@/components/Loading';
 import '@/styles/admin/admin.scss';
@@ -95,6 +96,9 @@ const Admin = () => {
                     </div>
                 </div>
             </div>
+
+            <Applications />
+            
         </div>
     );
 }
