@@ -496,7 +496,6 @@ const AllPosts = ()=>{
     const [posts, setPosts] = (0,react__WEBPACK_IMPORTED_MODULE_7__.useState)([]);
     const getPosts = async ()=>{
         setLoading(true);
-        console.log(page, query);
         const { data } = await axios__WEBPACK_IMPORTED_MODULE_9__/* ["default"] */ .Z.get(`/api/posts/sell${query.includes("?") ? query : "?" + query}&page=${page}`, {
             validateStatus: function(status) {
                 return true;
@@ -507,10 +506,10 @@ const AllPosts = ()=>{
             }
         });
         const newPosts = data.posts;
-        console.log(newPosts);
         setTotalPages(data.totalPages);
         setPostCount(data.count);
-        setPosts((prevPosts)=>[
+        if (Number(data.currentPage) === Number(1)) setPosts(newPosts);
+        else setPosts((prevPosts)=>[
                 ...prevPosts,
                 ...newPosts
             ]);
@@ -549,6 +548,7 @@ const AllPosts = ()=>{
         setPosts([]);
         setLoading(true);
         setPage(1);
+        getPosts();
     }, [
         query
     ]);
@@ -584,15 +584,20 @@ const AllPosts = ()=>{
     (0,react__WEBPACK_IMPORTED_MODULE_7__.useEffect)(()=>{
         const q = search.toString();
         const data = (0,_utilFunctions_dateConvert__WEBPACK_IMPORTED_MODULE_8__/* .queryToData */ .pQ)(q);
-        if (!data.housing) data.housing = "apartment";
-        setFormData({
-            ...formData,
-            ...data
-        });
-        // if(data.city){
-        //     getRegions(data.city);
-        // }
-        setQuery(q);
+        if (!data.housing) {
+            data.housing = "apartment";
+            const newQ = (0,_utilFunctions_dateConvert__WEBPACK_IMPORTED_MODULE_8__/* .dataToQuery */ .rW)(data);
+            router.push(`${newQ}`);
+        } else {
+            setFormData({
+                ...formData,
+                ...data
+            });
+            // if(data.city){
+            //     getRegions(data.city);
+            // }
+            setQuery(q);
+        }
     }, [
         search
     ]);

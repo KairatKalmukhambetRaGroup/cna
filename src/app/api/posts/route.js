@@ -4,6 +4,9 @@ import Housing from "@/database/models/housing";
 import City from '@/database/models/city';
 import Region from '@/database/models/region';
 import { queryToMongoose } from "@/utilFunctions/dateConvert";
+import { mkdir, stat, writeFile } from "fs/promises";
+import { join } from "path";
+import mime from "mime";
 import { NextResponse } from "next/server";
 
 export async function POST(request) {
@@ -104,6 +107,8 @@ export async function GET(request) {
     const data = queryToMongoose(params)
     try {
         await connectMongo();
+        if(data.count)
+            return getPostCounts();
         if(data.size)
             return getAllPosts(data);
         else
@@ -112,6 +117,16 @@ export async function GET(request) {
         console.log(error);
         return NextResponse.json(null, {status: 500});
     }
+}
+
+async function getPostCounts() {
+    const apartment = await Housing.findOne({slug: 'apartment'});
+    const house = await Housing.findOne({slug: 'house'});
+    const commercial = await Housing.findOne({slug: 'commercial'});
+    const apartments = await Post.countDocuments({housing: apartment._id});
+    const houses = await Post.countDocuments({housing: house._id});
+    const commercials = await Post.countDocuments({housing: commercial._id});
+    return NextResponse.json({apartments, houses, commercials});
 }
 
 async function getAllPosts(data) {

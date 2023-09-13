@@ -498,7 +498,6 @@ const AllRentPosts = ()=>{
     const [posts, setPosts] = (0,react__WEBPACK_IMPORTED_MODULE_7__.useState)([]);
     const getPosts = async ()=>{
         setLoading(true);
-        console.log(page, query);
         const { data } = await axios__WEBPACK_IMPORTED_MODULE_10__/* ["default"] */ .Z.get(`/api/posts/rent${query.includes("?") ? query : "?" + query}`, {
             validateStatus: function(status) {
                 return true;
@@ -509,10 +508,10 @@ const AllRentPosts = ()=>{
             }
         });
         const newPosts = data.posts;
-        console.log(newPosts);
         setTotalPages(data.totalPages);
         setPostCount(data.count);
-        setPosts((prevPosts)=>[
+        if (Number(data.currentPage) === Number(1)) setPosts(newPosts);
+        else setPosts((prevPosts)=>[
                 ...prevPosts,
                 ...newPosts
             ]);
@@ -540,6 +539,7 @@ const AllRentPosts = ()=>{
         setPosts([]);
         setLoading(true);
         setPage(1);
+        getPosts();
     }, [
         query
     ]);
@@ -575,15 +575,20 @@ const AllRentPosts = ()=>{
     (0,react__WEBPACK_IMPORTED_MODULE_7__.useEffect)(()=>{
         const q = search.toString();
         const data = (0,_utilFunctions_dateConvert__WEBPACK_IMPORTED_MODULE_9__/* .queryToData */ .pQ)(q);
-        if (!data.housing) data.housing = "apartment";
-        setFormData({
-            ...formData,
-            ...data
-        });
-        // if(data.city){
-        //     getRegions(data.city);
-        // }
-        setQuery(q);
+        if (!data.housing) {
+            data.housing = "apartment";
+            const newQ = (0,_utilFunctions_dateConvert__WEBPACK_IMPORTED_MODULE_9__/* .dataToQuery */ .rW)(data);
+            router.push(`${newQ}`);
+        } else {
+            setFormData({
+                ...formData,
+                ...data
+            });
+            // if(data.city){
+            //     getRegions(data.city);
+            // }
+            setQuery(q);
+        }
     }, [
         search
     ]);

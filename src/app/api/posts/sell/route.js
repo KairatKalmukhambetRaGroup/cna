@@ -164,7 +164,8 @@ async function getPostsByHousing(request) {
     delete data.page;
     data.posttype='sell';
 
-    const posts = await Post.find(data)
+
+    const posts = await Post.find({...data})
         .populate({
             path: 'city',
             select: 'name'

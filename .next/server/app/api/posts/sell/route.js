@@ -271,7 +271,9 @@ async function getPostsByHousing(request) {
     delete data.sort;
     delete data.page;
     data.posttype = "sell";
-    const posts = await models_post/* default */.Z.find(data).populate({
+    const posts = await models_post/* default */.Z.find({
+        ...data
+    }).populate({
         path: "city",
         select: "name"
     }).populate({

@@ -100,13 +100,14 @@ const AllRentPosts = () => {
     const [posts, setPosts] = useState([]);
     const getPosts = async () => {
         setLoading(true);
-        console.log(page, query);
         const {data} = await axios.get(`/api/posts/rent${query.includes('?') ? query : '?' + query}`, {validateStatus: function (status) { return true }, headers: {"Access-Control-Allow-Origin": "*", "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"}});
         const newPosts = data.posts;
-        console.log(newPosts)
         setTotalPages(data.totalPages);
         setPostCount(data.count);
-        setPosts(prevPosts => [...prevPosts, ...newPosts]);
+        if(Number(data.currentPage) === Number(1))
+            setPosts(newPosts);
+        else
+            setPosts(prevPosts => [...prevPosts, ...newPosts]);
         setLoading(false);
     }
     const getCities = async () => {
@@ -122,6 +123,7 @@ const AllRentPosts = () => {
         setPosts([]);
         setLoading(true);
         setPage(1);
+        getPosts();
     }, [query])
 
     const handleScroll = () => {
@@ -157,13 +159,17 @@ const AllRentPosts = () => {
     useEffect(()=>{
         const q = search.toString();
         const data = queryToData(q);
-        if(!data.housing)
+        if(!data.housing){
             data.housing = 'apartment'
-        setFormData({...formData, ...data});
-        // if(data.city){
-        //     getRegions(data.city);
-        // }
-        setQuery(q);
+            const newQ = dataToQuery(data);
+            router.push(`${newQ}`);
+        }else{
+            setFormData({...formData, ...data});
+            // if(data.city){
+            //     getRegions(data.city);
+            // }
+            setQuery(q);
+        }
     }, [search])
 
     const handdleSubmit = (e) => {
