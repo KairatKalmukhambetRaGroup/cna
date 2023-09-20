@@ -11,6 +11,7 @@ import mime from "mime";
 import Region from "@/database/models/region";
 import Housing from "@/database/models/housing";
 import City from "@/database/models/city";
+import { queryToMongoose } from "@/utilFunctions/dateConvert";
 
 export async function GET(request, context) {
     const { id } = context.params;    
@@ -31,7 +32,11 @@ export async function DELETE(request, context) {
     try {
         await connectMongo();
         await Post.findByIdAndDelete(id)
-        return getPostsByHousing(request);
+
+        const params = request.nextUrl.searchParams.toString();
+        const data = queryToMongoose(params)
+
+        return getPostsByHousing(data);
     } catch (error) {
         return NextResponse.json(null, {status: 500});
     }

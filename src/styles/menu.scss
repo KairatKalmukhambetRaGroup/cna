@@ -41,15 +41,23 @@
                 &.about{
                     content: url('../assets/svg/lightbulb-solid.svg');
                 }
+                &.phonebook{
+                    content: url('../assets/svg/address-book-solid.svg');
+                }
             }
         }
         &.top{
             padding: 8px 16px;
-            border-bottom: solid 1px v.$light_grey;
+            // border-bottom: solid 1px v.$light_grey;
+            background-color: v.$yellow;
             .menu-item{
                 width: 50%;
                 font-size: 14px;
-                
+                font-weight: 500;
+                color: v.$black;
+                &:first-of-type{
+                    border-right: 1px solid v.$black;
+                }
             }
         }
     }

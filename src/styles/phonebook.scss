@@ -1,0 +1,284 @@
+@use './variables' as v;
+@import './adaptive';
+
+#phonebook{
+    .wrapper{
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        width: 100%;
+        .heading{
+            font-weight: 600;
+            font-size: 24px;
+            line-height: 30px;
+        }
+        .content{
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            width: 100%;
+            .contacts{
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                // justify-content: flex-start;
+                gap: 16px;
+                .card{
+                    width: 100%;
+                    border: 1px solid v.$light_grey;
+                    border-radius: 8px;
+                    padding: 8px 16px;
+
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    gap: 16px;
+
+                    .card-body{
+                        display: flex;
+                        flex-direction: column;
+                        gap: 4px;
+                        .name{
+                            font-size: 16px;
+                            line-height: 20px;
+                            font-weight: 500;
+                        }
+                        .profession{
+                            font-size: 14px;
+                            line-height: 16px;
+                            font-weight: 400;
+                        }
+                    }
+                    .card-footer{
+                        .btn{
+                            display: block;
+                            width: 100%;
+                            background: v.$blue;
+                            color: v.$white;
+                            border-radius: 4px;
+                            padding: 4px 8px;
+                            text-align: center;
+                            cursor: pointer;
+                        }
+                    }
+                }
+
+            }
+        }
+    }
+    #phonebookfilter{
+        width: 100%;
+        min-width: 300px;
+        padding: 24px 16px;
+        background: v.$yellow;
+        border-radius: 8px;
+        border: none;
+    
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+    
+        .heading{
+            font-size: 16px;
+            line-height: 20px;
+            font-weight: 500;
+            text-align: center;
+        }
+    
+        .inputs{
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            .form-group{
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+                label{
+                    font-size: 16px;
+                    line-height: 20px;
+                    font-weight: 400;
+                }
+                input, select{
+                    font-size: 14px;
+                    line-height: 16px;
+                    font-weight: 400;
+                    padding: 8px 16px;
+                    border-radius: 8px;
+                    border: none;
+                    outline: none;
+                    &:focus{
+                        outline: none;
+                    }
+                }
+                select{
+                    cursor: pointer;
+                }
+            }
+        }
+
+        .btns{
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+
+            .btn{
+                cursor: pointer;
+                padding: 8px 16px;
+                font-size: 14px;
+                line-height: 16px;
+                font-weight: 400;
+                color: v.$white;
+                background: v.$blue;
+                text-align: center;
+                border: none;
+                border-radius: 8px;
+                &.clear{
+                    padding: 0;
+                    background: none;
+                    color: v.$black;
+                }
+            }
+        }
+    }   
+    @include _lg{
+        .wrapper{
+            .content{
+                flex-direction: row;
+                #phonebookfilter{
+                    width: 33%;
+                }
+                .contacts{
+                    flex-direction: row;
+                    flex-wrap: wrap;
+                    width: 66%;
+                    .card{
+                        width: calc(50% - 8px);
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+#phonebookcontact{
+    background: rgba($color: v.$light_grey, $alpha: .3);
+    height: 100vh;
+    .heading{
+        background: v.$white;
+
+        .content{
+            display: flex;
+            flex-direction: row;
+            align-items: end;
+            justify-content: space-between;
+            gap: 24px;
+    
+            padding: 24px 0 16px;
+    
+            .name{
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+
+                font-size: 32px;
+                line-height: 40px;
+                font-weight: 500;
+                
+                .sub{
+                    font-size: 20px;
+                    line-height: 20px;
+                    font-weight: 400;
+                }
+            }
+    
+            .phone{
+                font-size: 16px;
+                line-height: 20px;
+                font-weight: 400;
+    
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                gap: 8px;
+    
+                background: v.$yellow;
+                border-radius: 4px;
+    
+                padding: 4px 8px;
+                color: v.$black;
+    
+                i{
+                    width: 16px;
+                    height: 16px;
+                    content: url('../assets/svg/phone-black.svg');
+                }
+            }
+        }
+    }
+    .content{
+        width: 100%;
+        padding-top: 36px;
+
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+
+        .contacts{
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 16px;
+            .contact{
+                width: calc(50% - 8px);
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+                
+                padding: 16px;
+
+                background: v.$white;
+                border-radius: 4px;
+
+                label{
+                    font-size: 16px;
+                    line-height: 20px;
+                    font-weight: 500;
+                    color: v.$black
+                }
+                .data{
+                    font-size: 16px;
+                    line-height: 20px;
+                    font-weight: 400;
+                    color: v.$black;
+                }
+                a.data{
+                    color: v.$blue;
+                    text-decoration: underline;
+                }
+            }
+        }
+        .description{
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+
+            background: v.$white;
+            padding: 16px;
+            border-radius: 4px;
+
+            label{
+                font-size: 16px;
+                line-height: 20px;
+                font-weight: 500;
+                color: v.$black
+            }
+            .data{
+                font-size: 16px;
+                line-height: 20px;
+                font-weight: 400;
+                color: v.$black;
+            }
+        }
+    }
+}

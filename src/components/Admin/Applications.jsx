@@ -2,7 +2,6 @@ import '@/styles/admin/applications.scss';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import Loading from '../Loading';
-import { async } from 'regenerator-runtime';
 import { dateConvertWithTime } from '@/utilFunctions/dateConvert';
 
 const Applications = () => {

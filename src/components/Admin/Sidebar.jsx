@@ -32,6 +32,9 @@ const AdminSidebar = () => {
                     <Link href="/admin/cities">
                         Города
                     </Link>
+                    <Link href="/admin/phonebook">
+                        Справочник
+                    </Link>
                 </nav>
                 <div className="logout" onClick={logout}>
                     Выйти

@@ -1,0 +1,47 @@
+@use './variables' as v;
+@import './adaptive';
+
+.pagination{
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+    margin: 24px auto 48px;
+    .pagination-item{
+        border-radius: 4px;
+        min-width: 32px;
+        min-height: 32px;
+        padding: 6px 8px;
+        font-size: 12px;
+        font-weight: 500;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        &:hover{
+            background: rgba($color: v.$light_grey, $alpha: .3);
+        }
+        &.current{
+            background: v.$blue;
+            color: v.$white;
+        }
+        i{
+            width: 12px;
+            height: 12px;
+        }
+        &.prev i{
+            content: url('../assets/svg/chevron-left-black.svg');
+        }
+        &.next i{
+            content: url('../assets/svg/chevron-right-black.svg');
+        }
+        &.ellipsis{
+            &:hover{
+                background: none;
+            }
+            i{
+                content: url('../assets/svg/ellipsis-black.svg');
+            }
+        } 
+    }
+}

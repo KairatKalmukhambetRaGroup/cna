@@ -20,10 +20,10 @@ const Menu = () => {
                     <i className="new"></i>
                     Подать
                 </Link>
-                {/* <a href='tel:+77055621546' className="menu-item new">
-                    <i className="new"></i>
-                    Подать
-                </a> */}
+                <Link href='/phonebook' className="menu-item">
+                    <i className="phonebook"></i>
+                    Справочник
+                </Link>
                 <Link href='/about' className="menu-item">
                     <i className="about"></i>
                     О нас
