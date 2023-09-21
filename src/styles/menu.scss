@@ -44,6 +44,12 @@
                 &.phonebook{
                     content: url('../assets/svg/address-book-solid.svg');
                 }
+                &.post{
+                    content: url('../assets/svg/money-bill-wave-solid.svg');
+                }
+                &.rent{
+                    content: url('../assets/svg/key-solid.svg');
+                }
             }
         }
         &.top{

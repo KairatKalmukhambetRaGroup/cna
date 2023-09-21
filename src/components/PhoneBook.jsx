@@ -48,7 +48,7 @@ const PhoneBook = ({query}) => {
                                     ))
                                     : (
                                         <div className="none">
-                                            none
+                                            По вашему запосу не найдено контактов
                                         </div>
                                     ) 
                                 : <Loading />
@@ -124,13 +124,33 @@ const PhoneBookCard = ({contact}) => {
                     {contact.name}
                 </div>
                 <div className="profession">
+                    <i></i>
                     {contact.category.name}
+                </div>
+                <div className="address">
+                    <i></i> {contact.address}
                 </div>
             </div>
             <div className="card-footer">
-                <Link href={`/phonebook/${contact._id}`} className='btn' >
+                {contact.phone && 
+                    <a href={`tel:${contact.phone}`} className='phone'>
+                        <i></i>
+                        {contact.phone}
+                    </a>
+                }
+                {contact.telegram && 
+                    <a href={`${contact.telegram}`} className='telegram'>
+                        <i></i>
+                    </a>
+                } 
+                {contact.whatsapp && 
+                    <a href={`${contact.whatsapp}`} className='whatsapp'>
+                        <i></i>
+                    </a>
+                }
+                {/* <Link href={`/phonebook/${contact._id}`} className='btn' >
                     Подробнее
-                </Link>
+                </Link> */}
             </div>
         </div>
     );

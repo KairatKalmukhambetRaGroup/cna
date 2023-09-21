@@ -37,28 +37,91 @@
                     .card-body{
                         display: flex;
                         flex-direction: column;
-                        gap: 4px;
+                        gap: 8px;
                         .name{
                             font-size: 16px;
                             line-height: 20px;
                             font-weight: 500;
                         }
                         .profession{
+                            display: flex;
+                            flex-direction: row;
+                            align-items: end;
+                            gap: 8px;
+
                             font-size: 14px;
                             line-height: 16px;
                             font-weight: 400;
+                            i{
+                                width: 16px;
+                                height: 16px;
+                                content: url('../assets/svg/user-tie-solid.svg');
+                            }
+                        }
+                        .address{
+                            display: flex;
+                            flex-direction: row;
+                            align-items: end;
+                            gap: 8px;
+
+                            font-size: 14px;
+                            line-height: 16px;
+                            font-weight: 400;
+                            i{
+                                width: 16px;
+                                height: 16px;
+                                content: url('../assets/svg/location-dot-solid.svg');
+                            }
                         }
                     }
                     .card-footer{
-                        .btn{
-                            display: block;
-                            width: 100%;
-                            background: v.$blue;
-                            color: v.$white;
+                        // .btn{
+                        //     display: block;
+                        //     width: 100%;
+                        //     background: v.$blue;
+                        //     color: v.$white;
+                        //     border-radius: 4px;
+                        //     padding: 4px 8px;
+                        //     text-align: center;
+                        //     cursor: pointer;
+                        // }
+                        width: 100%;
+                        display: flex;
+                        flex-direction: row;
+                        // justify-content: space-between;
+                        gap: 8px;
+                        a{
+                            padding: 8px 16px;
+                            background: green;
                             border-radius: 4px;
-                            padding: 4px 8px;
-                            text-align: center;
-                            cursor: pointer;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            color: v.$white;
+                            font-size: 16px;
+                            line-height: 20px;
+                            i{
+                                width: 20px;
+                                height: 20px;
+                            }
+                            &.phone{
+                                gap: 16px;
+                                flex-grow: 2;
+                                i{
+                                    width: 14px;
+                                    height: 14px;
+                                    content: url('../assets/svg/phone.svg');
+                                }
+                            } 
+                            &.telegram{
+                                background: v.$blue;
+                                i{
+                                    content: url('../assets/svg/telegram.svg');
+                                }
+                            }
+                            &.whatsapp i{
+                                content: url('../assets/svg/whatsapp.svg');
+                            }
                         }
                     }
                 }
@@ -67,28 +130,26 @@
         }
     }
     #phonebookfilter{
-        width: 100%;
+        width: calc(100% + 32px) ;
         min-width: 300px;
-        padding: 24px 16px;
+        padding: 16px;
         background: v.$yellow;
-        border-radius: 8px;
+        // border-radius: 8px;
         border: none;
+        margin: 0 -16px;
     
         display: flex;
         flex-direction: column;
-        gap: 24px;
+        gap: 16px;
     
         .heading{
-            font-size: 16px;
-            line-height: 20px;
-            font-weight: 500;
-            text-align: center;
+            display: none;
         }
     
         .inputs{
             display: flex;
             flex-direction: column;
-            gap: 16px;
+            gap: 8px;
             .form-group{
                 display: flex;
                 flex-direction: column;
@@ -145,7 +206,23 @@
             .content{
                 flex-direction: row;
                 #phonebookfilter{
+                    margin: 0;
+                    border-radius: 8px;
                     width: 33%;
+                    padding: 24px 16px;
+                    gap: 24px;
+
+                    .heading{
+                        display: block;
+                        font-size: 16px;
+                        line-height: 20px;
+                        font-weight: 500;
+                        text-align: center;
+                    }
+                    .inputs{
+                        gap: 16px;
+
+                    }
                 }
                 .contacts{
                     flex-direction: row;

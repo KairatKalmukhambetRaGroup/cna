@@ -395,7 +395,6 @@ var react_ = __webpack_require__(18038);
 var Loading = __webpack_require__(2769);
 // EXTERNAL MODULE: ./node_modules/next/link.js
 var next_link = __webpack_require__(11440);
-var link_default = /*#__PURE__*/__webpack_require__.n(next_link);
 // EXTERNAL MODULE: ./node_modules/next/navigation.js
 var navigation = __webpack_require__(57114);
 // EXTERNAL MODULE: ./src/components/Menu.jsx
@@ -470,7 +469,7 @@ const PhoneBook = ({ query })=>{
                                             contact: contact
                                         }, key)) : /*#__PURE__*/ jsx_runtime_.jsx("div", {
                                         className: "none",
-                                        children: "none"
+                                        children: "По вашему запосу не найдено контактов"
                                     }) : /*#__PURE__*/ jsx_runtime_.jsx(Loading/* default */.Z, {})
                                 })
                             ]
@@ -590,19 +589,45 @@ const PhoneBookCard = ({ contact })=>{
                         className: "name",
                         children: contact.name
                     }),
-                    /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
                         className: "profession",
-                        children: contact.category.name
+                        children: [
+                            /*#__PURE__*/ jsx_runtime_.jsx("i", {}),
+                            contact.category.name
+                        ]
+                    }),
+                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                        className: "address",
+                        children: [
+                            /*#__PURE__*/ jsx_runtime_.jsx("i", {}),
+                            " ",
+                            contact.address
+                        ]
                     })
                 ]
             }),
-            /*#__PURE__*/ jsx_runtime_.jsx("div", {
+            /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
                 className: "card-footer",
-                children: /*#__PURE__*/ jsx_runtime_.jsx((link_default()), {
-                    href: `/phonebook/${contact._id}`,
-                    className: "btn",
-                    children: "Подробнее"
-                })
+                children: [
+                    contact.phone && /*#__PURE__*/ (0,jsx_runtime_.jsxs)("a", {
+                        href: `tel:${contact.phone}`,
+                        className: "phone",
+                        children: [
+                            /*#__PURE__*/ jsx_runtime_.jsx("i", {}),
+                            contact.phone
+                        ]
+                    }),
+                    contact.telegram && /*#__PURE__*/ jsx_runtime_.jsx("a", {
+                        href: `${contact.telegram}`,
+                        className: "telegram",
+                        children: /*#__PURE__*/ jsx_runtime_.jsx("i", {})
+                    }),
+                    contact.whatsapp && /*#__PURE__*/ jsx_runtime_.jsx("a", {
+                        href: `${contact.whatsapp}`,
+                        className: "whatsapp",
+                        children: /*#__PURE__*/ jsx_runtime_.jsx("i", {})
+                    })
+                ]
             })
         ]
     });
