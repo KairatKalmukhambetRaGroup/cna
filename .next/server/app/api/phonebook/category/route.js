@@ -66,7 +66,7 @@ async function GET() {
         const categories = await phonebookcategory/* default */.Z.find().sort("name");
         return next_response/* default */.Z.json(categories);
     } catch (error) {
-        return (0,next_response/* default */.Z)(null, {
+        return next_response/* default */.Z.json(null, {
             status: 500
         });
     }
@@ -79,13 +79,14 @@ async function POST(request) {
         const categories = await phonebookcategory/* default */.Z.find().sort("name");
         return next_response/* default */.Z.json(categories);
     } catch (error) {
-        return (0,next_response/* default */.Z)(null, {
+        return next_response/* default */.Z.json(null, {
             status: 500
         });
     }
 }
 async function PATCH(request) {
-    const { data } = await request.json();
+    const data = await request.json();
+    console.log(data);
     try {
         await (0,connect/* default */.Z)();
         await phonebookcategory/* default */.Z.findByIdAndUpdate(data._id, {
@@ -94,7 +95,8 @@ async function PATCH(request) {
         const categories = await phonebookcategory/* default */.Z.find().sort("name");
         return next_response/* default */.Z.json(categories);
     } catch (error) {
-        return (0,next_response/* default */.Z)(null, {
+        console.log(error);
+        return next_response/* default */.Z.json(null, {
             status: 500
         });
     }

@@ -8,7 +8,7 @@ export async function GET() {
         const categories = await PhoneBookCategory.find().sort('name');
         return NextResponse.json(categories);
     } catch (error) {
-        return NextResponse(null, {status: 500});
+        return NextResponse.json(null, {status: 500})
     }
 }
 
@@ -21,18 +21,20 @@ export async function POST(request) {
         const categories = await PhoneBookCategory.find().sort('name');
         return NextResponse.json(categories);
     } catch (error) {
-        return NextResponse(null, {status: 500});
+        return NextResponse.json(null, {status: 500})
     }
 }
 
 export async function PATCH(request){
-    const {data} = await request.json();
+    const data = await request.json();
+    console.log(data);
     try {
         await connectMongo();
         await PhoneBookCategory.findByIdAndUpdate(data._id, {...data});
         const categories = await PhoneBookCategory.find().sort('name');
         return NextResponse.json(categories);
     } catch (error) {
-        return NextResponse(null, {status: 500});
+        console.log(error);
+        return NextResponse.json(null, {status: 500})
     }
 }
