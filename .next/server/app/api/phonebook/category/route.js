@@ -41,6 +41,7 @@ var route_namespaceObject = {};
 __webpack_require__.r(route_namespaceObject);
 __webpack_require__.d(route_namespaceObject, {
   GET: () => (GET),
+  PATCH: () => (PATCH),
   POST: () => (POST)
 });
 
@@ -75,6 +76,21 @@ async function POST(request) {
     try {
         await (0,connect/* default */.Z)();
         await phonebookcategory/* default */.Z.create(data);
+        const categories = await phonebookcategory/* default */.Z.find().sort("name");
+        return next_response/* default */.Z.json(categories);
+    } catch (error) {
+        return (0,next_response/* default */.Z)(null, {
+            status: 500
+        });
+    }
+}
+async function PATCH(request) {
+    const { data } = await request.json();
+    try {
+        await (0,connect/* default */.Z)();
+        await phonebookcategory/* default */.Z.findByIdAndUpdate(data._id, {
+            ...data
+        });
         const categories = await phonebookcategory/* default */.Z.find().sort("name");
         return next_response/* default */.Z.json(categories);
     } catch (error) {
