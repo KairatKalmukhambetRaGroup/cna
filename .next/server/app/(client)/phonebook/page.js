@@ -393,10 +393,6 @@ var axios = __webpack_require__(93258);
 var react_ = __webpack_require__(18038);
 // EXTERNAL MODULE: ./src/components/Loading.jsx
 var Loading = __webpack_require__(2769);
-// EXTERNAL MODULE: ./node_modules/next/link.js
-var next_link = __webpack_require__(11440);
-// EXTERNAL MODULE: ./node_modules/next/navigation.js
-var navigation = __webpack_require__(57114);
 // EXTERNAL MODULE: ./src/components/Menu.jsx
 var Menu = __webpack_require__(28888);
 ;// CONCATENATED MODULE: ./src/components/PhoneBook.jsx
@@ -406,13 +402,12 @@ var Menu = __webpack_require__(28888);
 
 
 
-
-
-const PhoneBook = ({ query })=>{
+const PhoneBook = ()=>{
     const [contacts, setContacts] = (0,react_.useState)(null);
     const [categories, setCategories] = (0,react_.useState)([]);
+    const [formData, setFormData] = (0,react_.useState)(initFormData);
     const getContacts = async ()=>{
-        const { data } = await axios/* default */.Z.get(`/api/phonebook?q=${query.q ? query.q : ""}&category=${query.category ? query.category : ""}`, {
+        const { data } = await axios/* default */.Z.get(`/api/phonebook`, {
             validateStatus: function(status) {
                 return true;
             },
@@ -425,12 +420,8 @@ const PhoneBook = ({ query })=>{
     };
     (0,react_.useEffect)(()=>{
         getCategories();
-    }, []);
-    (0,react_.useEffect)(()=>{
         getContacts();
-    }, [
-        query
-    ]);
+    }, []);
     const getCategories = async ()=>{
         const { data } = await axios/* default */.Z.get("/api/phonebook/category", {
             validateStatus: function(status) {
@@ -461,11 +452,12 @@ const PhoneBook = ({ query })=>{
                             children: [
                                 /*#__PURE__*/ jsx_runtime_.jsx(PhoneBookFilter, {
                                     categories: categories,
-                                    query: query
+                                    formData: formData,
+                                    setFormData: setFormData
                                 }),
                                 /*#__PURE__*/ jsx_runtime_.jsx("div", {
                                     className: "contacts",
-                                    children: contacts ? contacts.length > 0 ? contacts.map((contact, key)=>/*#__PURE__*/ jsx_runtime_.jsx(PhoneBookCard, {
+                                    children: contacts ? contacts.length > 0 ? contacts.filter((item)=>item.name.toLowerCase().includes(formData.q.toLowerCase()) && (formData.category ? item.category._id === formData.category : true)).map((contact, key)=>/*#__PURE__*/ jsx_runtime_.jsx(PhoneBookCard, {
                                             contact: contact
                                         }, key)) : /*#__PURE__*/ jsx_runtime_.jsx("div", {
                                         className: "none",
@@ -485,17 +477,8 @@ const initFormData = {
     q: "",
     category: ""
 };
-const PhoneBookFilter = ({ categories, query })=>{
-    const router = (0,navigation.useRouter)();
-    const [formData, setFormData] = (0,react_.useState)(initFormData);
-    (0,react_.useEffect)(()=>{
-        setFormData({
-            ...formData,
-            ...query
-        });
-    }, [
-        query
-    ]);
+const PhoneBookFilter = ({ categories, formData, setFormData })=>{
+    // const [formData, setFormData] = useState(initFormData);
     const handleChange = (e)=>{
         const { name, value } = e.currentTarget;
         setFormData({
@@ -505,11 +488,9 @@ const PhoneBookFilter = ({ categories, query })=>{
     };
     const clear = ()=>{
         setFormData(initFormData);
-        router.push("?q=&category=");
     };
     const handleSubmit = (e)=>{
         e.preventDefault();
-        router.push(`?q=${formData.q}&category=${formData.category}`);
     };
     return /*#__PURE__*/ (0,jsx_runtime_.jsxs)("form", {
         id: "phonebookfilter",
@@ -519,61 +500,31 @@ const PhoneBookFilter = ({ categories, query })=>{
                 className: "heading",
                 children: "Фильтр"
             }),
-            /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+            /*#__PURE__*/ jsx_runtime_.jsx("div", {
                 className: "inputs",
-                children: [
-                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-                        className: "form-group",
-                        children: [
-                            /*#__PURE__*/ jsx_runtime_.jsx("label", {
-                                children: "Поиск"
-                            }),
-                            /*#__PURE__*/ jsx_runtime_.jsx("input", {
-                                type: "text",
-                                name: "q",
-                                onChange: handleChange
-                            })
-                        ]
-                    }),
-                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-                        className: "form-group",
-                        children: [
-                            /*#__PURE__*/ jsx_runtime_.jsx("label", {
-                                children: "Специализация"
-                            }),
-                            /*#__PURE__*/ (0,jsx_runtime_.jsxs)("select", {
-                                name: "category",
-                                onChange: handleChange,
-                                value: formData.category,
-                                children: [
-                                    /*#__PURE__*/ jsx_runtime_.jsx("option", {
-                                        value: "",
-                                        children: "Неважно"
-                                    }),
-                                    categories.map((category, key)=>/*#__PURE__*/ jsx_runtime_.jsx("option", {
-                                            value: category._id,
-                                            children: category.name
-                                        }, key))
-                                ]
-                            })
-                        ]
-                    })
-                ]
-            }),
-            /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-                className: "btns",
-                children: [
-                    /*#__PURE__*/ jsx_runtime_.jsx("input", {
-                        className: "btn",
-                        type: "submit",
-                        value: "Искать"
-                    }),
-                    /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                        className: "btn clear",
-                        onClick: clear,
-                        children: "Сбросить"
-                    })
-                ]
+                children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                    className: "form-group",
+                    children: [
+                        /*#__PURE__*/ jsx_runtime_.jsx("label", {
+                            children: "Специализация"
+                        }),
+                        /*#__PURE__*/ (0,jsx_runtime_.jsxs)("select", {
+                            name: "category",
+                            onChange: handleChange,
+                            value: formData.category,
+                            children: [
+                                /*#__PURE__*/ jsx_runtime_.jsx("option", {
+                                    value: "",
+                                    children: "Выберите специализацию"
+                                }),
+                                categories.map((category, key)=>/*#__PURE__*/ jsx_runtime_.jsx("option", {
+                                        value: category._id,
+                                        children: category.name
+                                    }, key))
+                            ]
+                        })
+                    ]
+                })
             })
         ]
     });
@@ -636,10 +587,8 @@ const PhoneBookCard = ({ contact })=>{
 ;// CONCATENATED MODULE: ./src/app/(client)/phonebook/page.js
 /* __next_internal_client_entry_do_not_use__ default auto */ 
 
-const PhoneBookPage = ({ searchParams })=>{
-    return /*#__PURE__*/ jsx_runtime_.jsx(components_PhoneBook, {
-        query: searchParams
-    });
+const PhoneBookPage = ()=>{
+    return /*#__PURE__*/ jsx_runtime_.jsx(components_PhoneBook, {});
 };
 /* harmony default export */ const page = (PhoneBookPage);
 
@@ -718,14 +667,6 @@ const __default__ = proxy.default;
 /***/ 24305:
 /***/ (() => {
 
-
-
-/***/ }),
-
-/***/ 57114:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-module.exports = __webpack_require__(90696)
 
 
 /***/ })

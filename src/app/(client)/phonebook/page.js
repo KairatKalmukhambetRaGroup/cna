@@ -2,8 +2,8 @@
 
 import PhoneBook from "@/components/PhoneBook";
 
-const PhoneBookPage = ({searchParams}) => {
-    return <PhoneBook query={searchParams} />
+const PhoneBookPage = () => {
+    return <PhoneBook />
 };
 
 export default PhoneBookPage;

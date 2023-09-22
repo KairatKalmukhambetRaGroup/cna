@@ -530,7 +530,7 @@ const SimpleFilter = ({ handleSubmit })=>{
                         /*#__PURE__*/ jsx_runtime_.jsx("input", {
                             type: "submit",
                             className: "submit-btn",
-                            value: "Найти"
+                            value: "Фильтр"
                         })
                     ]
                 })

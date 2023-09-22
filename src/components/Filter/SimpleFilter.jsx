@@ -74,7 +74,7 @@ const SimpleFilter = ({handleSubmit}) => {
                             <MultiNumberInput name="rooms" label="- комн." value={formData.rooms} handleChange={handleChange} />
                         )}
                         <NumberRange name="price" label="Цена" param="тг" value={formData.price} handleChange={handleChange} />
-                        <input type="submit" className="submit-btn" value="Найти" />
+                        <input type="submit" className="submit-btn" value="Фильтр" />
                     </form>
                 </div>
             </div> 

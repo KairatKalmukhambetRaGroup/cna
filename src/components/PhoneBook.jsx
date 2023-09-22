@@ -2,33 +2,32 @@ import '@/styles/phonebook.scss';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import Loading from './Loading';
-import Link from 'next/link';
-import { useRouter, useSearchParams } from 'next/navigation';
 import Menu from './Menu';
 
 
-const PhoneBook = ({query}) => {
+const PhoneBook = () => {
 
     const [contacts, setContacts] = useState(null);
     const [categories, setCategories] = useState([]);
+    const [formData, setFormData] = useState(initFormData);
 
     const getContacts = async () => {
-        const {data} = await axios.get(`/api/phonebook?q=${query.q ? query.q : ''}&category=${query.category ? query.category : ''}`, {validateStatus: function (status) { return true }, headers: {"Access-Control-Allow-Origin": "*", "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"}});
+        const {data} = await axios.get(`/api/phonebook`, {validateStatus: function (status) { return true }, headers: {"Access-Control-Allow-Origin": "*", "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"}});
         setContacts(data);
     }
 
     useEffect(()=>{
         getCategories();
-    },[])
-    useEffect(()=>{
         getContacts();
-    },[query])
+    },[])
 
 
     const getCategories = async () => {
         const {data} = await axios.get('/api/phonebook/category', {validateStatus: function (status) { return true }, headers: {"Access-Control-Allow-Origin": "*", "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"}});
         setCategories(data);
     }
+
+
 
     return (
         <div id="phonebook">
@@ -39,11 +38,14 @@ const PhoneBook = ({query}) => {
                         Справочник специалистов
                     </div>
                     <div className="content">
-                        <PhoneBookFilter categories={categories} query={query}/>
+                        <PhoneBookFilter categories={categories} formData={formData} setFormData={setFormData}/>
                         <div className="contacts">
                             {contacts ? 
                                 contacts.length > 0 ? 
-                                    contacts.map((contact, key) => (
+                                    contacts.filter(item => item.name.toLowerCase().includes(
+                                            formData.q.toLowerCase()) && 
+                                            (formData.category ? item.category._id === formData.category : true)
+                                        ).map((contact, key) => (
                                         <PhoneBookCard contact={contact} key={key} />
                                     ))
                                     : (
@@ -64,13 +66,8 @@ const PhoneBook = ({query}) => {
 export default PhoneBook;
 
 const initFormData = {q: '', category: ''};
-const PhoneBookFilter = ({categories, query}) => {
-    const router = useRouter();
-    const [formData, setFormData] = useState(initFormData);
-
-    useEffect(()=>{
-        setFormData({...formData, ...query});
-    }, [query])
+const PhoneBookFilter = ({categories, formData, setFormData}) => {
+    // const [formData, setFormData] = useState(initFormData);
 
     const handleChange = (e) => {
         const {name, value} = e.currentTarget;
@@ -79,12 +76,10 @@ const PhoneBookFilter = ({categories, query}) => {
 
     const clear = () => {
         setFormData(initFormData);
-        router.push('?q=&category=');
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        router.push(`?q=${formData.q}&category=${formData.category}`);
     }
 
     return (
@@ -93,24 +88,24 @@ const PhoneBookFilter = ({categories, query}) => {
                 Фильтр
             </div>
             <div className="inputs">
-                <div className="form-group">
+                {/* <div className="form-group">
                     <label>Поиск</label>
                     <input type="text" name='q' onChange={handleChange} />
-                </div>
+                </div> */}
                 <div className="form-group">
                     <label>Специализация</label>
                     <select name="category" onChange={handleChange} value={formData.category}>
-                        <option value="">Неважно</option>
+                        <option value="">Выберите специализацию</option>
                         {categories.map((category, key)=> (
                             <option value={category._id} key={key}>{category.name}</option>
                         ))}
                     </select>
                 </div>
             </div>
-            <div className="btns">
+            {/* <div className="btns">
                 <input className='btn' type="submit" value="Искать" />
                 <div className="btn clear" onClick={clear}>Сбросить</div>
-            </div>
+            </div> */}
         </form>
     );
 }

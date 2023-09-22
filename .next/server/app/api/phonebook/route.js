@@ -129,16 +129,21 @@ async function PATCH(request) {
     const data = await request.json();
     try {
         await (0,connect/* default */.Z)();
-        let category = await phonebookcategory/* default */.Z.findById(data.category);
-        await phonebook/* default */.Z.create({
-            ...data,
-            category: category._id
+        // let category = await PhoneBookCategory.findById(data.category);
+        const exists = await phonebook/* default */.Z.findById(data._id);
+        if (!exists) return next_response/* default */.Z.json(null, {
+            status: 404
         });
+        await phonebook/* default */.Z.findByIdAndUpdate(exists._id, {
+            ...data
+        });
+        // await PhoneBook.create({...data, category: category._id});
         const phonebooks = await phonebook/* default */.Z.find({
-            category: category._id
+            category: data.category
         }).sort("name");
         return next_response/* default */.Z.json(phonebooks);
     } catch (error) {
+        console.log(error);
         return next_response/* default */.Z.json(null, {
             status: 500
         });

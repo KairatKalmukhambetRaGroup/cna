@@ -53,13 +53,19 @@ export async function PATCH(request) {
     try {
         await connectMongo();
 
-        let category = await PhoneBookCategory.findById(data.category);
+        // let category = await PhoneBookCategory.findById(data.category);
 
-        await PhoneBook.create({...data, category: category._id});
+        const exists = await PhoneBook.findById(data._id);
+        if(!exists)
+            return NextResponse.json(null, {status: 404});
+        await PhoneBook.findByIdAndUpdate(exists._id, {...data});
 
-        const phonebooks = await PhoneBook.find({category: category._id}).sort('name'); 
+        // await PhoneBook.create({...data, category: category._id});
+
+        const phonebooks = await PhoneBook.find({category: data.category}).sort('name'); 
         return NextResponse.json(phonebooks);
     } catch (error) {
+        console.log(error);
         return NextResponse.json(null, {status: 500});
     }
 }
