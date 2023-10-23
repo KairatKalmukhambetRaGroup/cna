@@ -58,7 +58,7 @@ const Advertisements = () => {
                                 <div className='ad-content'>
                                     <div className='image'>
                                         {ad.image && (
-                                            <img src={`https://cna.kz/public/uploads/${ad.image}`} alt=""/>
+                                            <img src={`https://cna.kz/uploads/${ad.image}`} alt=""/>
                                             // <img src={`/uploads/${ad.image}`} alt=""/>
                                         )}
                                     </div>
