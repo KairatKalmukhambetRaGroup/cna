@@ -24,7 +24,7 @@ const AdvertisementCard = ({ ad })=>{
                 className: "adimage",
                 children: ad.image ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("img", {
                     loading: "lazy",
-                    src: `https://cna.kz/public/uploads/${ad.image}`,
+                    src: `https://cna.kz/uploads/${ad.image}`,
                     alt: "preview"
                 }) : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("img", {
                     loading: "lazy",
@@ -461,7 +461,7 @@ const PostCard = ({ post })=>{
                 className: "postimage",
                 children: post.images && post.images.length > 0 ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("img", {
                     loading: "lazy",
-                    src: `https://cna.kz/public/uploads/${post.images[0]}`,
+                    src: `https://cna.kz/uploads/${post.images[0]}`,
                     alt: "preview"
                 }) : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("img", {
                     loading: "lazy",

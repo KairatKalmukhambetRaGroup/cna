@@ -437,7 +437,7 @@ const Slideshow = ({ images = null })=>{
                 className: "current",
                 children: [
                     images && images.length > 0 && /*#__PURE__*/ jsx_runtime_.jsx("img", {
-                        src: `https://cna.kz/public/uploads/${images[currentImage]}`,
+                        src: `https://cna.kz/uploads/${images[currentImage]}`,
                         alt: "currentimage",
                         onClick: (e)=>{
                             e.preventDefault();
@@ -475,7 +475,7 @@ const Slideshow = ({ images = null })=>{
                             setCurrentModal(key);
                         },
                         children: /*#__PURE__*/ jsx_runtime_.jsx("img", {
-                            src: `https://cna.kz/public/uploads/${img}`,
+                            src: `https://cna.kz/uploads/${img}`,
                             alt: `imgpreview-${key}`
                         })
                     }, key))
@@ -524,7 +524,7 @@ const ModalSlideshow = ({ images, current, setCurrent })=>{
                     onClick: prev
                 }),
                 /*#__PURE__*/ jsx_runtime_.jsx("img", {
-                    src: `https://cna.kz/public/uploads/${images[current]}`,
+                    src: `https://cna.kz/uploads/${images[current]}`,
                     alt: ""
                 }),
                 /*#__PURE__*/ jsx_runtime_.jsx("i", {

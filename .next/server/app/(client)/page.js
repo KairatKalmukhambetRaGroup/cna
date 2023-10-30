@@ -667,7 +667,7 @@ const PostSmall = ({ post })=>{
                 children: [
                     post.images && post.images.length > 0 ? /*#__PURE__*/ jsx_runtime_.jsx("img", {
                         loading: "lazy",
-                        src: `https://cna.kz/public/uploads/${post.images[0]}`,
+                        src: `https://cna.kz/uploads/${post.images[0]}`,
                         alt: ""
                     }) : /*#__PURE__*/ jsx_runtime_.jsx("img", {
                         loading: "lazy",

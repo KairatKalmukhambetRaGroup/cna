@@ -747,11 +747,21 @@ const PhoneBookForm = ({ formData, setFormData, clear, handleSubmit })=>{
                                     /*#__PURE__*/ jsx_runtime_.jsx("label", {
                                         children: "Whatsapp"
                                     }),
-                                    /*#__PURE__*/ jsx_runtime_.jsx("input", {
-                                        type: "text",
-                                        name: "whatsapp",
-                                        value: formData.whatsapp,
-                                        onChange: handleChange
+                                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                                        className: "input",
+                                        children: [
+                                            /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                                                className: "prefix",
+                                                children: "wa.me/"
+                                            }),
+                                            /*#__PURE__*/ jsx_runtime_.jsx("input", {
+                                                type: "text",
+                                                name: "whatsapp",
+                                                value: formData.whatsapp,
+                                                onChange: handleChange,
+                                                placeholder: "77771234567"
+                                            })
+                                        ]
                                     })
                                 ]
                             }),
@@ -761,11 +771,21 @@ const PhoneBookForm = ({ formData, setFormData, clear, handleSubmit })=>{
                                     /*#__PURE__*/ jsx_runtime_.jsx("label", {
                                         children: "Telegram"
                                     }),
-                                    /*#__PURE__*/ jsx_runtime_.jsx("input", {
-                                        type: "email",
-                                        name: "telegram",
-                                        value: formData.telegram,
-                                        onChange: handleChange
+                                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                                        className: "input",
+                                        children: [
+                                            /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                                                className: "prefix",
+                                                children: "t.me/"
+                                            }),
+                                            /*#__PURE__*/ jsx_runtime_.jsx("input", {
+                                                type: "email",
+                                                name: "telegram",
+                                                value: formData.telegram,
+                                                onChange: handleChange,
+                                                placeholder: "username"
+                                            })
+                                        ]
                                     })
                                 ]
                             })

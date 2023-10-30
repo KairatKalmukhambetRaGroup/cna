@@ -184,13 +184,19 @@ const PhoneBookForm = ({formData, setFormData, clear, handleSubmit}) => {
                         <label>
                             Whatsapp
                         </label>
-                        <input type="text" name="whatsapp" value={formData.whatsapp} onChange={handleChange} />
+                        <div className="input">
+                            <div className="prefix">wa.me/</div>
+                            <input type="text" name="whatsapp" value={formData.whatsapp} onChange={handleChange} placeholder="77771234567" />
+                        </div>
                     </div>
                     <div className="form-group">
                         <label>
                             Telegram
                         </label>
-                        <input type="email" name="telegram" value={formData.telegram} onChange={handleChange} />
+                        <div className="input">
+                            <div className="prefix">t.me/</div>
+                            <input type="email" name="telegram" value={formData.telegram} onChange={handleChange} placeholder="username" />
+                        </div>
                     </div>
                 </div>
                 <div className="form-group">

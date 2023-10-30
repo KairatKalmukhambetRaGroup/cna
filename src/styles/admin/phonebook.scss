@@ -150,6 +150,9 @@
                 flex-direction: row;
                 flex-wrap: wrap;
                 gap: 16px;
+                &>.form-group{
+                    width: calc((100% - 32px) / 3);
+                }
             }
             .form-group{
                 flex-grow: 1;
@@ -161,6 +164,7 @@
                     line-height: 20px;
                 }
                 &>input, &>textarea{
+                    font-family: "Montserrat", sans-serif;
                     padding: 8px 16px;
                     border-radius: 8px;
                     border: 1px solid v.$dark_grey;
@@ -168,6 +172,34 @@
                     line-height: 20px;
                     &:focus{
                         outline-color: v.$blue;
+                    }
+                }
+                .input{
+                    padding: 8px 16px;
+                    border-radius: 8px;
+                    border: 1px solid v.$dark_grey;
+                    font-size: 16px;
+                    line-height: 20px;
+                    display: flex;
+                    gap: 8px;
+                    overflow: hidden;
+                    &:focus-within{
+                        outline-color: v.$blue;
+                    }
+                    .prefix{
+                        background: v.$light_grey;
+                        padding: 8px;
+                        margin: -8px 0 -8px -16px;
+                        border-right: 1px solid v.$dark_grey;
+                    }   
+                    input{
+                        border: none;
+                        padding: 0;
+                        font-size: 16px;
+                        line-height: 20px;
+                        &:focus{
+                            outline: none;
+                        }
                     }
                 }
             }

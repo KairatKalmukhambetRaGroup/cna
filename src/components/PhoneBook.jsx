@@ -84,28 +84,30 @@ const PhoneBookFilter = ({categories, formData, setFormData}) => {
 
     return (
         <form id="phonebookfilter" onSubmit={handleSubmit}>
-            <div className="heading">
-                Фильтр
-            </div>
-            <div className="inputs">
-                {/* <div className="form-group">
-                    <label>Поиск</label>
-                    <input type="text" name='q' onChange={handleChange} />
-                </div> */}
-                <div className="form-group">
-                    <label>Специализация</label>
-                    <select name="category" onChange={handleChange} value={formData.category}>
-                        <option value="">Выберите специализацию</option>
-                        {categories.map((category, key)=> (
-                            <option value={category._id} key={key}>{category.name}</option>
-                        ))}
-                    </select>
+            <div className="filter">
+                <div className="heading">
+                    Фильтр
+                </div>
+                <div className="inputs">
+                    {/* <div className="form-group">
+                        <label>Поиск</label>
+                        <input type="text" name='q' onChange={handleChange} />
+                    </div> */}
+                    <div className="form-group">
+                        <label>Категория</label>
+                        <select name="category" onChange={handleChange} value={formData.category}>
+                            <option value="">Выберите категорию</option>
+                            {categories.map((category, key)=> (
+                                <option value={category._id} key={key}>{category.name}</option>
+                            ))}
+                        </select>
+                    </div>
+                </div>
+                <div className="btns">
+                    {/* <input className='btn' type="submit" value="Искать" /> */}
+                    <div className="btn clear" onClick={clear}>Сбросить</div>
                 </div>
             </div>
-            {/* <div className="btns">
-                <input className='btn' type="submit" value="Искать" />
-                <div className="btn clear" onClick={clear}>Сбросить</div>
-            </div> */}
         </form>
     );
 }
@@ -122,9 +124,16 @@ const PhoneBookCard = ({contact}) => {
                     <i></i>
                     {contact.category.name}
                 </div>
-                <div className="address">
-                    <i></i> {contact.address}
-                </div>
+                {contact.address && 
+                    <div className="address">
+                        <i></i> {contact.address}
+                    </div>
+                }
+                {contact.description && 
+                    <div className="description">
+                        {contact.description}
+                    </div>
+                }                
             </div>
             <div className="card-footer">
                 {contact.phone && 
@@ -134,12 +143,12 @@ const PhoneBookCard = ({contact}) => {
                     </a>
                 }
                 {contact.telegram && 
-                    <a href={`${contact.telegram}`} className='telegram'>
+                    <a href={`https://t.me/${contact.telegram}`} className='telegram'>
                         <i></i>
                     </a>
                 } 
                 {contact.whatsapp && 
-                    <a href={`${contact.whatsapp}`} className='whatsapp'>
+                    <a href={`https://wa.me/${contact.whatsapp}`} className='whatsapp'>
                         <i></i>
                     </a>
                 }

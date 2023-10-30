@@ -500,7 +500,7 @@ const Advertisements = ()=>{
                                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                                         className: "image",
                                         children: ad.image && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("img", {
-                                            src: `https://cna.kz/public/uploads/${ad.image}`,
+                                            src: `https://cna.kz/uploads/${ad.image}`,
                                             alt: ""
                                         })
                                     }),
