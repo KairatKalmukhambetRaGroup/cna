@@ -48,7 +48,7 @@ const PhoneBook = () => {
                                                 ||
                                                 item.description.toLowerCase().includes(formData.q.toLowerCase()) 
                                                 ||
-                                                item.phone.toLowerCase().includes(formData.q.toLowerCase()) 
+                                                item.phone.find((el)=>el.toLowerCase().includes(formData.q.toLowerCase())) 
                                                 ||
                                                 item.address.toLowerCase().includes(formData.q.toLowerCase()) 
                                                 ||

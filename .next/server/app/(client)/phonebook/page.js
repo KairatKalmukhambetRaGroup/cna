@@ -460,7 +460,7 @@ const PhoneBook = ()=>{
                                 }),
                                 /*#__PURE__*/ jsx_runtime_.jsx("div", {
                                     className: "contacts",
-                                    children: contacts ? contacts.length > 0 ? contacts.filter((item)=>(item.name.toLowerCase().includes(formData.q.toLowerCase()) || item.description.toLowerCase().includes(formData.q.toLowerCase()) || item.phone.toLowerCase().includes(formData.q.toLowerCase()) || item.address.toLowerCase().includes(formData.q.toLowerCase()) || item.category.name.toLowerCase().includes(formData.q.toLowerCase())) && (formData.subcategory ? item.category._id == formData.subcategory : formData.category ? subcategories.map((sub)=>sub._id).includes(item.category._id) : true)).map((contact, key)=>/*#__PURE__*/ jsx_runtime_.jsx(PhoneBookCard, {
+                                    children: contacts ? contacts.length > 0 ? contacts.filter((item)=>(item.name.toLowerCase().includes(formData.q.toLowerCase()) || item.description.toLowerCase().includes(formData.q.toLowerCase()) || item.phone.find((el)=>el.toLowerCase().includes(formData.q.toLowerCase())) || item.address.toLowerCase().includes(formData.q.toLowerCase()) || item.category.name.toLowerCase().includes(formData.q.toLowerCase())) && (formData.subcategory ? item.category._id == formData.subcategory : formData.category ? subcategories.map((sub)=>sub._id).includes(item.category._id) : true)).map((contact, key)=>/*#__PURE__*/ jsx_runtime_.jsx(PhoneBookCard, {
                                             contact: contact
                                         }, key)) : /*#__PURE__*/ jsx_runtime_.jsx("div", {
                                         className: "none",
