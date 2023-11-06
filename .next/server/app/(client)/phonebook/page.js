@@ -406,6 +406,7 @@ const PhoneBook = ()=>{
     const [contacts, setContacts] = (0,react_.useState)(null);
     const [categories, setCategories] = (0,react_.useState)([]);
     const [formData, setFormData] = (0,react_.useState)(initFormData);
+    const [subcategories, setSubcategories] = (0,react_.useState)(null);
     const getContacts = async ()=>{
         const { data } = await axios/* default */.Z.get(`/api/phonebook`, {
             validateStatus: function(status) {
@@ -453,11 +454,13 @@ const PhoneBook = ()=>{
                                 /*#__PURE__*/ jsx_runtime_.jsx(PhoneBookFilter, {
                                     categories: categories,
                                     formData: formData,
-                                    setFormData: setFormData
+                                    setFormData: setFormData,
+                                    setSubcategories: setSubcategories,
+                                    subcategories: subcategories
                                 }),
                                 /*#__PURE__*/ jsx_runtime_.jsx("div", {
                                     className: "contacts",
-                                    children: contacts ? contacts.length > 0 ? contacts.filter((item)=>item.name.toLowerCase().includes(formData.q.toLowerCase()) && (formData.category ? item.category._id === formData.category : true)).map((contact, key)=>/*#__PURE__*/ jsx_runtime_.jsx(PhoneBookCard, {
+                                    children: contacts ? contacts.length > 0 ? contacts.filter((item)=>(item.name.toLowerCase().includes(formData.q.toLowerCase()) || item.description.toLowerCase().includes(formData.q.toLowerCase()) || item.phone.toLowerCase().includes(formData.q.toLowerCase()) || item.address.toLowerCase().includes(formData.q.toLowerCase()) || item.category.name.toLowerCase().includes(formData.q.toLowerCase())) && (formData.subcategory ? item.category._id == formData.subcategory : formData.category ? subcategories.map((sub)=>sub._id).includes(item.category._id) : true)).map((contact, key)=>/*#__PURE__*/ jsx_runtime_.jsx(PhoneBookCard, {
                                             contact: contact
                                         }, key)) : /*#__PURE__*/ jsx_runtime_.jsx("div", {
                                         className: "none",
@@ -475,19 +478,35 @@ const PhoneBook = ()=>{
 /* harmony default export */ const components_PhoneBook = (PhoneBook);
 const initFormData = {
     q: "",
-    category: ""
+    category: "",
+    subcategory: ""
 };
-const PhoneBookFilter = ({ categories, formData, setFormData })=>{
-    // const [formData, setFormData] = useState(initFormData);
+const PhoneBookFilter = ({ categories, formData, setFormData, subcategories, setSubcategories })=>{
     const handleChange = (e)=>{
         const { name, value } = e.currentTarget;
-        setFormData({
-            ...formData,
-            [name]: value
-        });
+        if (name == "category") {
+            setFormData({
+                ...formData,
+                [name]: value,
+                subcategory: ""
+            });
+            if (value) {
+                categories.forEach((category)=>{
+                    if (category._id === value) setSubcategories(category.sub);
+                });
+            } else {
+                setSubcategories(null);
+            }
+        } else {
+            setFormData({
+                ...formData,
+                [name]: value
+            });
+        }
     };
     const clear = ()=>{
         setFormData(initFormData);
+        setSubcategories(null);
     };
     const handleSubmit = (e)=>{
         e.preventDefault();
@@ -502,31 +521,70 @@ const PhoneBookFilter = ({ categories, formData, setFormData })=>{
                     className: "heading",
                     children: "Фильтр"
                 }),
-                /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
                     className: "inputs",
-                    children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-                        className: "form-group",
-                        children: [
-                            /*#__PURE__*/ jsx_runtime_.jsx("label", {
-                                children: "Категория"
-                            }),
-                            /*#__PURE__*/ (0,jsx_runtime_.jsxs)("select", {
-                                name: "category",
-                                onChange: handleChange,
-                                value: formData.category,
-                                children: [
-                                    /*#__PURE__*/ jsx_runtime_.jsx("option", {
-                                        value: "",
-                                        children: "Выберите категорию"
-                                    }),
-                                    categories.map((category, key)=>/*#__PURE__*/ jsx_runtime_.jsx("option", {
-                                            value: category._id,
-                                            children: category.name
-                                        }, key))
-                                ]
-                            })
-                        ]
-                    })
+                    children: [
+                        /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                            className: "form-group",
+                            children: [
+                                /*#__PURE__*/ jsx_runtime_.jsx("label", {
+                                    children: "Поиск"
+                                }),
+                                /*#__PURE__*/ jsx_runtime_.jsx("input", {
+                                    type: "text",
+                                    name: "q",
+                                    onChange: handleChange,
+                                    placeholder: "Имя, адрес или номер телефона"
+                                })
+                            ]
+                        }),
+                        /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                            className: "form-group",
+                            children: [
+                                /*#__PURE__*/ jsx_runtime_.jsx("label", {
+                                    children: "Раздел"
+                                }),
+                                /*#__PURE__*/ (0,jsx_runtime_.jsxs)("select", {
+                                    name: "category",
+                                    onChange: handleChange,
+                                    value: formData.category,
+                                    children: [
+                                        /*#__PURE__*/ jsx_runtime_.jsx("option", {
+                                            value: "",
+                                            children: "Выберите раздел"
+                                        }),
+                                        categories.map((category, key)=>/*#__PURE__*/ jsx_runtime_.jsx("option", {
+                                                value: category._id,
+                                                children: category.name
+                                            }, key))
+                                    ]
+                                })
+                            ]
+                        }),
+                        subcategories && /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                            className: "form-group",
+                            children: [
+                                /*#__PURE__*/ jsx_runtime_.jsx("label", {
+                                    children: "Категория"
+                                }),
+                                /*#__PURE__*/ (0,jsx_runtime_.jsxs)("select", {
+                                    name: "subcategory",
+                                    onChange: handleChange,
+                                    value: formData.subcategory,
+                                    children: [
+                                        /*#__PURE__*/ jsx_runtime_.jsx("option", {
+                                            value: "",
+                                            children: "Выберите категорию"
+                                        }),
+                                        subcategories.map((sub, key)=>/*#__PURE__*/ jsx_runtime_.jsx("option", {
+                                                value: sub._id,
+                                                children: sub.name
+                                            }, key))
+                                    ]
+                                })
+                            ]
+                        })
+                    ]
                 }),
                 /*#__PURE__*/ jsx_runtime_.jsx("div", {
                     className: "btns",
@@ -575,24 +633,31 @@ const PhoneBookCard = ({ contact })=>{
             /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
                 className: "card-footer",
                 children: [
-                    contact.phone && /*#__PURE__*/ (0,jsx_runtime_.jsxs)("a", {
-                        href: `tel:${contact.phone}`,
-                        className: "phone",
+                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                        className: "social",
                         children: [
-                            /*#__PURE__*/ jsx_runtime_.jsx("i", {}),
-                            contact.phone
+                            contact.telegram && /*#__PURE__*/ jsx_runtime_.jsx("a", {
+                                href: `https://t.me/${contact.telegram}`,
+                                target: "_blank",
+                                className: "telegram",
+                                children: /*#__PURE__*/ jsx_runtime_.jsx("i", {})
+                            }),
+                            contact.whatsapp && /*#__PURE__*/ jsx_runtime_.jsx("a", {
+                                href: `https://wa.me/${contact.whatsapp}`,
+                                target: "_blank",
+                                className: "whatsapp",
+                                children: /*#__PURE__*/ jsx_runtime_.jsx("i", {})
+                            })
                         ]
                     }),
-                    contact.telegram && /*#__PURE__*/ jsx_runtime_.jsx("a", {
-                        href: `https://t.me/${contact.telegram}`,
-                        className: "telegram",
-                        children: /*#__PURE__*/ jsx_runtime_.jsx("i", {})
-                    }),
-                    contact.whatsapp && /*#__PURE__*/ jsx_runtime_.jsx("a", {
-                        href: `https://wa.me/${contact.whatsapp}`,
-                        className: "whatsapp",
-                        children: /*#__PURE__*/ jsx_runtime_.jsx("i", {})
-                    })
+                    contact.phone.map((phone, key)=>/*#__PURE__*/ (0,jsx_runtime_.jsxs)("a", {
+                            href: `tel:${contact.phone}`,
+                            className: "phone",
+                            children: [
+                                /*#__PURE__*/ jsx_runtime_.jsx("i", {}),
+                                contact.phone[0]
+                            ]
+                        }))
                 ]
             })
         ]

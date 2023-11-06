@@ -79,19 +79,6 @@ const PhoneBookCategory = ({id}) => {
             )}
             <PhoneBookForm formData={formData} setFormData={setFormData} clear={clear} handleSubmit={handleSubmit}/>
 
-            {deleteId && (
-                <div className='deleteModal'>
-                    <div className='modal'>
-                        <div className='h1'>Удалить Контакт</div>
-                        <div className='p'>Вы уверены что хотите удалить этот контакт?  После удаления его будет невозможно востановить!</div>
-                        <div className='btns'>
-                            <div className='btn delete' onClick={deleteNumber}>Удалить</div>
-                            <div className='btn' onClick={(e)=>{e.preventDefault(); setDeleteId(null)}}>Отмена</div>
-                        </div>
-                    </div>
-                </div>
-            )}
-
             <table className="phonenumbers">
                 <thead>
                     <tr>
@@ -141,14 +128,45 @@ const PhoneBookCategory = ({id}) => {
 export default PhoneBookCategory;
 
 
-const PhoneBookForm = ({formData, setFormData, clear, handleSubmit}) => {
+export const DeleteContactModal = ({deleteContact, setDeleteId, deleteId}) => {
+    if(!deleteId)
+    return ;
+    return (
+        <div id='deleteModal'>
+            <div className='modal'>
+                <div className='h1'>Удалить Контакт</div>
+                <div className='p'>Вы уверены что хотите удалить этот контакт?  После удаления его будет невозможно востановить!</div>
+                <div className='btns'>
+                    <div className='btn delete' onClick={deleteContact}>Удалить</div>
+                    <div className='btn' onClick={(e)=>{e.preventDefault(); setDeleteId(null)}}>Отмена</div>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+export const PhoneBookForm = ({activeCategory,formData, setFormData, clear, handleSubmit}) => {
     const handleChange = (e) => {
         const {name, value} = e.currentTarget;
         setFormData({...formData, [name]: value});
     }
 
+    const incrementPhone = ()=>{
+        setFormData({...formData, phone: [...formData.phone, '']});
+    }
+
+    const changePhoneNumber = (index, value) => {
+        const updatedPhone = [...formData.phone];
+        updatedPhone[index] = value;
+      
+        setFormData({
+          ...formData,
+          phone: updatedPhone,
+        });
+    };
+
     return (
-        <form id="phoneBookForm" className={formData._id ? 'edit' : ''} onSubmit={handleSubmit}>
+        <form id="phoneBookForm" className={`${formData._id ? 'edit' : ''}  ${activeCategory ? 'disable' : ''}`} onSubmit={handleSubmit}>
             <div className="heading">
                 {formData._id ? 'Изменить Контакт' : 'Добавить Контакт'}
             </div>
@@ -160,26 +178,27 @@ const PhoneBookForm = ({formData, setFormData, clear, handleSubmit}) => {
                         </label>
                         <input type="text" name="name" required value={formData.name} onChange={handleChange} />
                     </div>
-                    <div className="form-group">
+                    {/* <div className="form-group">
                         <label>
                             Номер телефона
                         </label>
-                        <input type="text" name="phone" required value={formData.phone} onChange={handleChange} />
-                    </div>
+                        <input type="text" name="phone0" required value={formData.phone[0]} onChange={(e)=>changePhoneNumber(0, e.target.value)} />
+                    </div> */}
                     <div className="form-group">
                         <label>
                             Э-почта
                         </label>
                         <input type="email" name="email" value={formData.email} onChange={handleChange} />
                     </div>
-                </div>
-                <div className="row">
                     <div className="form-group">
                         <label>
                             Адрес
                         </label>
                         <input type="text" name="address" value={formData.address} onChange={handleChange} />
                     </div>
+                </div>
+                <div className="row">
+                    
                     <div className="form-group">
                         <label>
                             Whatsapp
@@ -195,8 +214,21 @@ const PhoneBookForm = ({formData, setFormData, clear, handleSubmit}) => {
                         </label>
                         <div className="input">
                             <div className="prefix">t.me/</div>
-                            <input type="email" name="telegram" value={formData.telegram} onChange={handleChange} placeholder="username" />
+                            <input type="text" name="telegram" value={formData.telegram} onChange={handleChange} placeholder="username" />
                         </div>
+                    </div>
+                </div>
+                <div className="phones">
+                    {formData.phone.map((phone, key)=> (
+                        <div className="form-group" key={key}>
+                            <label>
+                                Номер телефона
+                            </label>
+                            <input type="text" name={`phone${key}`} required value={phone} onChange={(e)=>changePhoneNumber(key, e.target.value)}/>
+                        </div>
+                    ))}
+                    <div className="add-phone" onClick={incrementPhone}>
+                        Добавить номер телефона <i></i>
                     </div>
                 </div>
                 <div className="form-group">

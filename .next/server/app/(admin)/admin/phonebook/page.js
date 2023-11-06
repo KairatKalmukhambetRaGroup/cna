@@ -376,11 +376,11 @@ __webpack_require__.r(__webpack_exports__);
 /***/ 61758:
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
-Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 87703))
+Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 92817))
 
 /***/ }),
 
-/***/ 87703:
+/***/ 92817:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -402,45 +402,33 @@ var react_ = __webpack_require__(18038);
 var Loading = __webpack_require__(2769);
 // EXTERNAL MODULE: ./node_modules/next/link.js
 var next_link = __webpack_require__(11440);
-var link_default = /*#__PURE__*/__webpack_require__.n(next_link);
 // EXTERNAL MODULE: ./src/styles/admin/phonebook.scss
 var phonebook = __webpack_require__(15149);
-;// CONCATENATED MODULE: ./src/components/Admin/PhoneBook/Categories.jsx
-
-
-
+// EXTERNAL MODULE: ./src/components/Admin/PhoneBook/Category.jsx
+var Category = __webpack_require__(66285);
+;// CONCATENATED MODULE: ./src/components/Admin/PhoneBook/CategoryForm.jsx
 
 
 
 const initFormData = {
-    name: ""
+    name: "",
+    parent: ""
 };
-const PhoneBookCategories = ()=>{
+const CategoryForm = ({ category, setCategory, setCategories })=>{
     const [formData, setFormData] = (0,react_.useState)(initFormData);
-    const [categories, setCategories] = (0,react_.useState)(null);
-    const getCategories = async ()=>{
-        const { data } = await axios/* default */.Z.get("/api/phonebook/category", {
-            validateStatus: function(status) {
-                return true;
-            },
-            headers: {
-                "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
-            }
-        });
-        setCategories(data);
-    };
     (0,react_.useEffect)(()=>{
-        if (!categories) getCategories();
+        if (category) {
+            setFormData(category);
+        }
     }, [
-        categories
+        category
     ]);
-    const editCategory = (category)=>{
-        setFormData(category);
-    };
-    const clear = (e)=>{
-        e.preventDefault();
-        setFormData(initFormData);
+    const handleChange = (e)=>{
+        const { name, value } = e.currentTarget;
+        setFormData({
+            ...formData,
+            [name]: value
+        });
     };
     const handleSubmit = async (e)=>{
         e.preventDefault();
@@ -454,6 +442,7 @@ const PhoneBookCategories = ()=>{
                     "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
                 }
             });
+            // setCategories(data)
             setCategories(data);
         } else {
             const { data } = await axios/* default */.Z.post("/api/phonebook/category", formData, {
@@ -465,86 +454,404 @@ const PhoneBookCategories = ()=>{
                     "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
                 }
             });
+            // setCategories(data);
             setCategories(data);
         }
         clear(e);
     };
+    const clear = (e)=>{
+        e.preventDefault();
+        setFormData(initFormData);
+        setCategory(null);
+    };
+    if (!category) return;
+    return /*#__PURE__*/ jsx_runtime_.jsx("div", {
+        id: "categoryForm",
+        children: /*#__PURE__*/ jsx_runtime_.jsx("div", {
+            className: "container",
+            children: /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                className: "content",
+                children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)("form", {
+                    className: formData._id ? "edit" : "",
+                    onSubmit: handleSubmit,
+                    children: [
+                        /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                            className: "heading",
+                            children: `${formData._id ? "Изменить" : "Добавить"} ${formData.parent ? "Категорию" : "Раздел"}`
+                        }),
+                        /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                            className: "inputs",
+                            children: [
+                                /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                                    className: "form-group",
+                                    children: [
+                                        /*#__PURE__*/ jsx_runtime_.jsx("label", {
+                                            children: "Название"
+                                        }),
+                                        /*#__PURE__*/ jsx_runtime_.jsx("input", {
+                                            type: "text",
+                                            name: "name",
+                                            value: formData.name,
+                                            onChange: handleChange
+                                        })
+                                    ]
+                                }),
+                                /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                                    className: "btns",
+                                    children: [
+                                        /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                                            className: "btn clear",
+                                            onClick: clear,
+                                            children: "Отмена"
+                                        }),
+                                        /*#__PURE__*/ jsx_runtime_.jsx("input", {
+                                            className: "btn save",
+                                            type: "submit",
+                                            value: `${formData._id ? "Изменить" : "Добавить"}`
+                                        })
+                                    ]
+                                })
+                            ]
+                        })
+                    ]
+                })
+            })
+        })
+    });
+};
+/* harmony default export */ const PhoneBook_CategoryForm = (CategoryForm);
+
+;// CONCATENATED MODULE: ./src/components/Admin/PhoneBook/Categories.jsx
+
+
+
+
+
+
+
+
+const initContactFormData = {
+    name: "",
+    phone: [
+        ""
+    ],
+    whatsapp: "",
+    telegram: "",
+    email: "",
+    address: "",
+    description: "",
+    category: ""
+};
+const PhoneBookCategories = ()=>{
+    const [contactFormData, setContactFormData] = (0,react_.useState)(initContactFormData);
+    const [categories, setCategories] = (0,react_.useState)(null);
+    const [contacts, setContacts] = (0,react_.useState)(null);
+    const [activeCategory, setActiveCategory] = (0,react_.useState)(null);
+    const [categoryForm, setCategoryForm] = (0,react_.useState)(null);
+    const [deleteId, setDeleteId] = (0,react_.useState)(null);
+    const getCategories = async ()=>{
+        const { data } = await axios/* default */.Z.get("/api/phonebook/category", {
+            validateStatus: function(status) {
+                return true;
+            },
+            headers: {
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
+            }
+        });
+        setCategories(data);
+    };
+    const getContacts = async ()=>{
+        const { data } = await axios/* default */.Z.get(`/api/phonebook`, {
+            validateStatus: function(status) {
+                return true;
+            },
+            headers: {
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
+            }
+        });
+        setContacts(data);
+        console.log(data);
+    };
+    const editContact = (contact)=>{
+        setContactFormData(contact);
+    };
+    (0,react_.useEffect)(()=>{
+        getContacts();
+        if (!categories) getCategories();
+    }, [
+        categories
+    ]);
+    (0,react_.useEffect)(()=>{
+        // if(!activeCategory){
+        setContactFormData(initContactFormData);
+    // }
+    }, [
+        activeCategory
+    ]);
+    const handleContactSubmit = async (e)=>{
+        e.preventDefault();
+        if (contactFormData._id) {
+            console.log(contactFormData._id);
+            const { data } = await axios/* default */.Z.patch("/api/phonebook", contactFormData, {
+                validateStatus: function(status) {
+                    return true;
+                },
+                headers: {
+                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
+                }
+            });
+            setContacts(data);
+        } else {
+            let d = {
+                ...contactFormData,
+                category: activeCategory
+            };
+            const { data } = await axios/* default */.Z.post("/api/phonebook", d, {
+                validateStatus: function(status) {
+                    return true;
+                },
+                headers: {
+                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
+                }
+            });
+            setContacts(data);
+        }
+        clearContactForm();
+    };
+    const clearContactForm = ()=>{
+        setContactFormData(initContactFormData);
+    };
+    const deleteContact = async (e)=>{
+        e.preventDefault();
+        if (deleteId) {
+            const { data } = await axios/* default */.Z.delete(`/api/phonebook/${deleteId}`, {
+                validateStatus: function(status) {
+                    return true;
+                },
+                headers: {
+                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
+                }
+            });
+            setDeleteId(null);
+            setContacts(data);
+        }
+    };
     return /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
         id: "phonebookcategories",
         children: [
-            /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                className: "heading",
-                children: "Справочник - Категории"
+            /*#__PURE__*/ jsx_runtime_.jsx(Category/* DeleteContactModal */.Ju, {
+                deleteId: deleteId,
+                setDeleteId: setDeleteId,
+                deleteContact: deleteContact
             }),
-            /*#__PURE__*/ jsx_runtime_.jsx(CategoryForm, {
-                formData: formData,
-                setFormData: setFormData,
-                clear: clear,
-                handleSubmit: handleSubmit
+            /*#__PURE__*/ jsx_runtime_.jsx(PhoneBook_CategoryForm, {
+                category: categoryForm,
+                setCategory: setCategoryForm,
+                setCategories: setCategories
             }),
-            /*#__PURE__*/ (0,jsx_runtime_.jsxs)("table", {
-                className: "categories",
+            /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                className: "content",
                 children: [
-                    /*#__PURE__*/ jsx_runtime_.jsx("thead", {
-                        children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)("tr", {
+                    /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                        className: "sidebar",
+                        children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                            className: "wrapper",
                             children: [
-                                /*#__PURE__*/ jsx_runtime_.jsx("th", {
-                                    children: "№"
+                                /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                                    className: "heading",
+                                    children: "Справочник"
                                 }),
-                                /*#__PURE__*/ jsx_runtime_.jsx("th", {
-                                    children: "Название"
+                                /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                                    className: "btn create-section",
+                                    onClick: (e)=>{
+                                        setCategoryForm({
+                                            name: ""
+                                        });
+                                    },
+                                    children: [
+                                        "Добавить раздел ",
+                                        /*#__PURE__*/ jsx_runtime_.jsx("i", {})
+                                    ]
                                 }),
-                                /*#__PURE__*/ jsx_runtime_.jsx("th", {
-                                    children: "Действие"
+                                /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                                    className: "categories",
+                                    children: categories ? categories.length > 0 ? categories.map((item, key)=>/*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                                            className: "category",
+                                            children: [
+                                                /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                                                    className: "category-name",
+                                                    children: [
+                                                        item.name,
+                                                        /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                                                            className: "actions",
+                                                            children: [
+                                                                /*#__PURE__*/ jsx_runtime_.jsx("i", {
+                                                                    className: "edit",
+                                                                    onClick: (e)=>{
+                                                                        setCategoryForm({
+                                                                            _id: item._id,
+                                                                            name: item.name
+                                                                        });
+                                                                    }
+                                                                }),
+                                                                /*#__PURE__*/ jsx_runtime_.jsx("i", {
+                                                                    className: "add",
+                                                                    onClick: (e)=>{
+                                                                        setCategoryForm({
+                                                                            parent: item._id
+                                                                        });
+                                                                    }
+                                                                })
+                                                            ]
+                                                        })
+                                                    ]
+                                                }),
+                                                item.sub.length > 0 && /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                                                    className: "subcategories",
+                                                    children: item.sub.map((sub, j)=>/*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                                                            className: `subcategory ${activeCategory === sub._id ? "active" : ""}`,
+                                                            onClick: (e)=>setActiveCategory(sub._id),
+                                                            children: [
+                                                                sub.name,
+                                                                activeCategory === sub._id && /*#__PURE__*/ jsx_runtime_.jsx("i", {
+                                                                    className: "edit",
+                                                                    onClick: (e)=>{
+                                                                        setCategoryForm({
+                                                                            _id: sub._id,
+                                                                            name: sub.name,
+                                                                            parent: item._id
+                                                                        });
+                                                                    }
+                                                                })
+                                                            ]
+                                                        }, j))
+                                                })
+                                            ]
+                                        }, key)) : "Нет категории" : /*#__PURE__*/ jsx_runtime_.jsx(Loading/* default */.Z, {})
                                 })
                             ]
                         })
                     }),
-                    /*#__PURE__*/ jsx_runtime_.jsx("tbody", {
-                        children: categories ? categories.length > 0 ? categories.map((item, key)=>/*#__PURE__*/ (0,jsx_runtime_.jsxs)("tr", {
+                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                        className: "contacts",
+                        children: [
+                            activeCategory && /*#__PURE__*/ jsx_runtime_.jsx(Category/* PhoneBookForm */.fJ, {
+                                activeCategory: activeCategory,
+                                formData: contactFormData,
+                                setFormData: setContactFormData,
+                                clear: clearContactForm,
+                                handleSubmit: handleContactSubmit
+                            }),
+                            /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                                className: "phonenumbers",
                                 children: [
-                                    /*#__PURE__*/ jsx_runtime_.jsx("td", {
-                                        children: Number(key) + 1
+                                    contacts ? contacts.length > 0 ? contacts.filter((item)=>item.category._id === activeCategory).map((item, key)=>/*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                                            className: "phonenumber",
+                                            children: [
+                                                /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                                                    className: "body",
+                                                    children: [
+                                                        /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                                                            className: "name",
+                                                            children: item.name
+                                                        }),
+                                                        item.description && /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                                                            className: "description",
+                                                            children: item.description
+                                                        }),
+                                                        /*#__PURE__*/ (0,jsx_runtime_.jsxs)("nav", {
+                                                            className: "info",
+                                                            children: [
+                                                                /*#__PURE__*/ (0,jsx_runtime_.jsxs)("li", {
+                                                                    children: [
+                                                                        /*#__PURE__*/ jsx_runtime_.jsx("span", {
+                                                                            className: "title",
+                                                                            children: "Телефон:"
+                                                                        }),
+                                                                        item.phone ? item.phone.join(", ") : "Нет"
+                                                                    ]
+                                                                }),
+                                                                /*#__PURE__*/ (0,jsx_runtime_.jsxs)("li", {
+                                                                    children: [
+                                                                        /*#__PURE__*/ jsx_runtime_.jsx("span", {
+                                                                            className: "title",
+                                                                            children: "Э-почта:"
+                                                                        }),
+                                                                        item.email || "Нет"
+                                                                    ]
+                                                                }),
+                                                                /*#__PURE__*/ (0,jsx_runtime_.jsxs)("li", {
+                                                                    children: [
+                                                                        /*#__PURE__*/ jsx_runtime_.jsx("span", {
+                                                                            className: "title",
+                                                                            children: "Адрес:"
+                                                                        }),
+                                                                        item.address || "Нет"
+                                                                    ]
+                                                                }),
+                                                                /*#__PURE__*/ (0,jsx_runtime_.jsxs)("li", {
+                                                                    children: [
+                                                                        /*#__PURE__*/ jsx_runtime_.jsx("span", {
+                                                                            className: "title",
+                                                                            children: "Whatsapp:"
+                                                                        }),
+                                                                        item.whatsapp ? `wa.me/${item.whatsapp}` : "Нет"
+                                                                    ]
+                                                                }),
+                                                                /*#__PURE__*/ (0,jsx_runtime_.jsxs)("li", {
+                                                                    children: [
+                                                                        /*#__PURE__*/ jsx_runtime_.jsx("span", {
+                                                                            className: "title",
+                                                                            children: "Telegram:"
+                                                                        }),
+                                                                        item.telegram ? `t.me/${item.telegram}` : "Нет"
+                                                                    ]
+                                                                })
+                                                            ]
+                                                        })
+                                                    ]
+                                                }),
+                                                /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                                                    className: "actions",
+                                                    children: [
+                                                        /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                                                            className: "action",
+                                                            onClick: (e)=>{
+                                                                e.preventDefault();
+                                                                editContact(item);
+                                                            },
+                                                            children: "Изменить"
+                                                        }),
+                                                        /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                                                            className: "action delete",
+                                                            onClick: (e)=>{
+                                                                e.preventDefault();
+                                                                setDeleteId(item._id);
+                                                            },
+                                                            children: "Удалить"
+                                                        })
+                                                    ]
+                                                })
+                                            ]
+                                        }, key)) : /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                                        className: "center",
+                                        children: "Нет категории"
+                                    }) : /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                                        className: "center",
+                                        children: /*#__PURE__*/ jsx_runtime_.jsx(Loading/* default */.Z, {})
                                     }),
-                                    /*#__PURE__*/ jsx_runtime_.jsx("td", {
-                                        children: item.name
-                                    }),
-                                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)("td", {
-                                        className: "actions",
-                                        children: [
-                                            /*#__PURE__*/ jsx_runtime_.jsx((link_default()), {
-                                                className: "action",
-                                                href: `/admin/phonebook/category/${item._id}`,
-                                                children: "Контакты"
-                                            }),
-                                            /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                                                className: "action",
-                                                onClick: (e)=>{
-                                                    e.preventDefault();
-                                                    editCategory(item);
-                                                },
-                                                children: "Изменить"
-                                            })
-                                        ]
+                                    !activeCategory && /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                                        className: "center",
+                                        children: "Выберите категорию"
                                     })
                                 ]
-                            }, key)) : /*#__PURE__*/ jsx_runtime_.jsx("tr", {
-                            children: /*#__PURE__*/ jsx_runtime_.jsx("td", {
-                                className: "center",
-                                colSpan: 3,
-                                children: " Нет категории "
                             })
-                        }) : /*#__PURE__*/ jsx_runtime_.jsx("tr", {
-                            children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)("td", {
-                                className: "center",
-                                colSpan: 3,
-                                children: [
-                                    " ",
-                                    /*#__PURE__*/ jsx_runtime_.jsx(Loading/* default */.Z, {}),
-                                    " "
-                                ]
-                            })
-                        })
+                        ]
                     })
                 ]
             })
@@ -552,55 +859,6 @@ const PhoneBookCategories = ()=>{
     });
 };
 /* harmony default export */ const Categories = (PhoneBookCategories);
-const CategoryForm = ({ formData, setFormData, clear, handleSubmit })=>{
-    const handleChange = (e)=>{
-        const { name, value } = e.currentTarget;
-        setFormData({
-            ...formData,
-            [name]: value
-        });
-    };
-    return /*#__PURE__*/ (0,jsx_runtime_.jsxs)("form", {
-        id: "categoryForm",
-        className: formData._id ? "edit" : "",
-        onSubmit: handleSubmit,
-        children: [
-            /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                className: "heading",
-                children: formData._id ? "Изменить Категорию" : "Добавить Категорию"
-            }),
-            /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-                className: "inputs",
-                children: [
-                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-                        className: "form-group",
-                        children: [
-                            /*#__PURE__*/ jsx_runtime_.jsx("label", {
-                                children: "Название"
-                            }),
-                            /*#__PURE__*/ jsx_runtime_.jsx("input", {
-                                type: "text",
-                                name: "name",
-                                value: formData.name,
-                                onChange: handleChange
-                            })
-                        ]
-                    }),
-                    /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                        className: "btn clear",
-                        onClick: clear,
-                        children: formData._id ? "Отменить" : "Очистить"
-                    }),
-                    /*#__PURE__*/ jsx_runtime_.jsx("input", {
-                        className: "btn save",
-                        type: "submit",
-                        value: `${formData._id ? "Изменить" : "Добавить"}`
-                    })
-                ]
-            })
-        ]
-    });
-};
 
 ;// CONCATENATED MODULE: ./src/app/(admin)/admin/phonebook/page.js
 /* __next_internal_client_entry_do_not_use__ default auto */ 
@@ -609,42 +867,6 @@ const PhoneBookPage = ()=>{
     return /*#__PURE__*/ jsx_runtime_.jsx(Categories, {});
 };
 /* harmony default export */ const page = (PhoneBookPage);
-
-
-/***/ }),
-
-/***/ 2769:
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   Z: () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(56786);
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _styles_loading_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(82787);
-/* harmony import */ var _styles_loading_scss__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_styles_loading_scss__WEBPACK_IMPORTED_MODULE_1__);
-
-
-const Loading = ({ small = false })=>{
-    return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-        className: `loading ${small ? "small" : ""}`,
-        children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-            className: "lds-roller",
-            children: [
-                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {}),
-                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {}),
-                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {}),
-                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {}),
-                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {}),
-                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {}),
-                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {}),
-                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {})
-            ]
-        })
-    });
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Loading);
 
 
 /***/ }),
@@ -673,36 +895,6 @@ const __default__ = proxy.default;
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__default__);
 
-/***/ }),
-
-/***/ 15149:
-/***/ (() => {
-
-
-
-/***/ }),
-
-/***/ 82787:
-/***/ (() => {
-
-
-
-/***/ }),
-
-/***/ 11440:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-module.exports = __webpack_require__(50954)
-
-
-/***/ }),
-
-/***/ 57114:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-module.exports = __webpack_require__(90696)
-
-
 /***/ })
 
 };
@@ -712,7 +904,7 @@ module.exports = __webpack_require__(90696)
 var __webpack_require__ = require("../../../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [2697,9021,5329,5527], () => (__webpack_exec__(18721)));
+var __webpack_exports__ = __webpack_require__.X(0, [2697,9021,5329,5527,589], () => (__webpack_exec__(18721)));
 module.exports = __webpack_exports__;
 
 })();

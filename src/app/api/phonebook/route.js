@@ -8,7 +8,7 @@ export async function GET(request) {
     const params = request.nextUrl.searchParams.toString();
     const data = queryToMongoose(params);
     try {
-        await connectMongo();
+        await connectMongo();        
         if(data.category){
             const phonebooks = await PhoneBook.find({
                 $or:[
@@ -28,7 +28,8 @@ export async function GET(request) {
         const phonebooks = await PhoneBook.find().sort('name').populate('category'); 
         return NextResponse.json(phonebooks);
     } catch (error) {
-        return NextResponse.json(null, {status: 500});
+        console.log(error)
+        return NextResponse.json(error, {status: 500});
     }
 }
 
@@ -41,7 +42,8 @@ export async function POST(request) {
 
         await PhoneBook.create({...data, category: category._id});
 
-        const phonebooks = await PhoneBook.find({category: category._id}).sort('name'); 
+        // const phonebooks = await PhoneBook.find({category: category._id}).sort('name'); 
+        const phonebooks = await PhoneBook.find().sort('name').populate('category'); 
         return NextResponse.json(phonebooks);
     } catch (error) {
         return NextResponse.json(null, {status: 500});
@@ -62,7 +64,8 @@ export async function PATCH(request) {
 
         // await PhoneBook.create({...data, category: category._id});
 
-        const phonebooks = await PhoneBook.find({category: data.category}).sort('name'); 
+        // const phonebooks = await PhoneBook.find({category: data.category}).sort('name'); 
+        const phonebooks = await PhoneBook.find().sort('name').populate('category'); 
         return NextResponse.json(phonebooks);
     } catch (error) {
         console.log(error);

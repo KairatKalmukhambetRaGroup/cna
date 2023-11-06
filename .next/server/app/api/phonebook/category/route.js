@@ -19,7 +19,7 @@ module.exports = require("os");
 
 /***/ }),
 
-/***/ 30195:
+/***/ 23995:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 // ESM COMPAT FLAG
@@ -54,16 +54,38 @@ var module_default = /*#__PURE__*/__webpack_require__.n(app_route_module);
 var connect = __webpack_require__(8000);
 // EXTERNAL MODULE: ./src/database/models/phonebookcategory.js
 var phonebookcategory = __webpack_require__(59227);
+// EXTERNAL MODULE: external "mongoose"
+var external_mongoose_ = __webpack_require__(11185);
+var external_mongoose_default = /*#__PURE__*/__webpack_require__.n(external_mongoose_);
+;// CONCATENATED MODULE: ./src/database/models/phonebookupcategory.js
+
+
+const phonebookupcategorySchema = external_mongoose_default().Schema({
+    name: String,
+    sub: [
+        {
+            type: (external_mongoose_default()).Schema.Types.ObjectId,
+            ref: phonebookcategory/* default */.Z
+        }
+    ]
+}, {
+    timestamps: true
+});
+const PhoneBookUpcategory = (external_mongoose_default()).models.PhoneBookUpcategory || external_mongoose_default().model("PhoneBookUpcategory", phonebookupcategorySchema);
+/* harmony default export */ const phonebookupcategory = (PhoneBookUpcategory);
+
 // EXTERNAL MODULE: ./node_modules/next/dist/server/web/exports/next-response.js
 var next_response = __webpack_require__(89335);
 ;// CONCATENATED MODULE: ./src/app/api/phonebook/category/route.js
 
 
 
+
 async function GET() {
     try {
         await (0,connect/* default */.Z)();
-        const categories = await phonebookcategory/* default */.Z.find().sort("name");
+        const categories = await phonebookupcategory.find().populate("sub").sort("name");
+        // const categories = await PhoneBookCategory.find().sort('name');
         return next_response/* default */.Z.json(categories);
     } catch (error) {
         return next_response/* default */.Z.json(null, {
@@ -75,8 +97,20 @@ async function POST(request) {
     const data = await request.json();
     try {
         await (0,connect/* default */.Z)();
-        await phonebookcategory/* default */.Z.create(data);
-        const categories = await phonebookcategory/* default */.Z.find().sort("name");
+        if (data.parent) {
+            const upcategory = await phonebookupcategory.findById(data.parent);
+            if (upcategory) {
+                const newcategory = await phonebookcategory/* default */.Z.create(data);
+                await phonebookupcategory.findByIdAndUpdate(upcategory._id, {
+                    $push: {
+                        sub: newcategory._id
+                    }
+                });
+            }
+        } else {
+            await phonebookupcategory.create(data);
+        }
+        const categories = await phonebookupcategory.find().populate("sub").sort("name");
         return next_response/* default */.Z.json(categories);
     } catch (error) {
         return next_response/* default */.Z.json(null, {
@@ -86,13 +120,25 @@ async function POST(request) {
 }
 async function PATCH(request) {
     const data = await request.json();
-    console.log(data);
     try {
         await (0,connect/* default */.Z)();
-        await phonebookcategory/* default */.Z.findByIdAndUpdate(data._id, {
-            ...data
-        });
-        const categories = await phonebookcategory/* default */.Z.find().sort("name");
+        console.log(data);
+        const category = await phonebookcategory/* default */.Z.findById(data._id);
+        if (category) {
+            await phonebookcategory/* default */.Z.findByIdAndUpdate(category._id, {
+                ...data
+            });
+            console.log("category");
+        } else {
+            const upcategory = await phonebookupcategory.findById(data._id);
+            if (upcategory) {
+                await phonebookupcategory.findByIdAndUpdate(upcategory._id, {
+                    ...data
+                });
+                console.log("upcategory");
+            }
+        }
+        const categories = await phonebookupcategory.find().populate("sub").sort("name");
         return next_response/* default */.Z.json(categories);
     } catch (error) {
         console.log(error);
@@ -175,7 +221,7 @@ const PhoneBookCategory = (mongoose__WEBPACK_IMPORTED_MODULE_0___default().model
 var __webpack_require__ = require("../../../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [2697,5501,9335], () => (__webpack_exec__(30195)));
+var __webpack_exports__ = __webpack_require__.X(0, [2697,5501,9335], () => (__webpack_exec__(23995)));
 module.exports = __webpack_exports__;
 
 })();

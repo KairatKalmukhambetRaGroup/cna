@@ -11,73 +11,310 @@
         font-size: 24px;
         line-height: 30px;
     }
-    #categoryForm{
-        width: 100%;
-        background: v.$white;
-        padding: 16px;
-        border-radius: 8px;
+    
+
+    .content{
+        all: unset;
+        flex-grow: 1;
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         gap: 16px;
-        border: 1px solid v.$white;
-        .heading{
-            font-weight: 500;
-            font-size: 20px;
-            line-height: 24px;
-        }
-        .inputs{
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-            align-items: flex-end;
-            gap: 16px;
-            .form-group{
-                flex-grow: 1;
+
+        .sidebar{
+            all: unset;
+            min-width: 300px;
+            width: 300px;
+            position: relative;
+            height: 100%;
+            .wrapper{
+                position: sticky;
+                top: 84px;
+                // padding: 16px 20px;
                 display: flex;
                 flex-direction: column;
                 gap: 8px;
-                label{
-                    font-size: 16px;
-                    line-height: 20px;
+                max-height: calc(100vh - 108px);
+
+    
+                .btn.create-section{
+                    background: v.$blue;
+                    padding: 4px 8px;
+                    color: v.$white;
+                    border-radius: 4px;
+                    display: flex;
+                    flex-direction: row;
+                    flex-wrap: nowrap;
+                    white-space: nowrap;
+                    gap: 8px;
+                    cursor: pointer;
+                    justify-content: space-between;
+                    i{
+                        content: url('../../assets/svg/plus-solid.svg');
+                        width: 16px;
+                    }
                 }
-                &>input{
-                    padding: 8px 16px;
+    
+                .categories{
+                    all:unset;
+
+                    background: v.$white;
+                    padding: 8px 0;
                     border-radius: 8px;
-                    border: 1px solid v.$dark_grey;
-                    font-size: 16px;
-                    line-height: 20px;
-                    &:focus{
-                        outline-color: v.$blue;
+
+
+                    display: flex;
+                    flex-direction: column;
+                    gap: 4px;
+                    overflow: hidden;
+                    overflow-y: auto;
+                    .category{
+                        .category-name{
+                            padding: 0 20px;
+                            display: flex;
+                            flex-direction: row;
+                            align-items: center;
+                            gap: 8px;
+                            font-size: 16px;
+                            line-height: 20px;
+                            font-weight: 500;
+                            justify-content: space-between;
+        
+                            border-bottom: 1px solid rgba($color: v.$light_grey, $alpha: .6);
+                            .actions{
+                                display: flex;
+                                flex-direction: row;
+                                gap: 4px;
+                                align-items: center;
+                                i{
+                                    cursor: pointer;
+                                    width: 16px;
+                                    &.edit{
+                                        content: url('../../assets/svg/pen-solid-blue.svg');
+                                    }
+                                    &.add{
+                                        content: url('../../assets/svg/plus-solid-blue.svg');
+                                    }
+                                }
+                            }
+                        }
+                        .subcategories{
+                            display: flex;
+                            flex-direction: column;
+                            .subcategory{
+                                padding: 4px 20px 4px 40px;
+                                // padding-left: 40px;
+                                // padding-right: 20px;
+                                display: flex;
+                                flex-direction: row;
+                                justify-content: space-between;
+                                font-weight: 400;
+                                cursor: pointer;
+                                &.active{
+                                    // background: rgba($color: v.$light_grey, $alpha: .6);
+                                    background: v.$blue;
+                                    color: v.$white;
+                                }
+        
+                                i{
+                                    cursor: pointer;
+                                    width: 16px;
+                                    &.edit{
+                                        content: url('../../assets/svg/pen-solid.svg');
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
-            .btn{
-                cursor: pointer;
-                padding: 8px 16px;
-                border-radius: 8px;
-                border: none;
-                font-size: 16px;
-                line-height: 20px;
-                &:focus{
-                    outline: none;
+        }
+        .contacts{
+            flex-grow: 1;
+
+            display: flex;
+            flex-direction: column;
+            gap: 16px;            
+
+            .phonenumbers{
+                width: 100%;
+                display: flex;
+                flex-wrap: wrap;
+                gap: 16px;
+                .phonenumber{
+                    width: 100%;
+                    border-radius: 8px;
+                    background: v.$white;
+                    overflow: hidden;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    @include _lg{
+                        width: calc(50% - 8px);
+                    }
+                    .body{
+                        padding: 16px;
+                        display: flex;
+                        flex-direction: column;
+                        gap: 16px;
+                        .name{
+                            font-size: 18px;
+                            font-weight: 500;
+                        }
+                        .info{
+                            display: flex;
+                            flex-direction: column;
+                            gap: 8px;
+                            padding: 0;
+                            list-style: none;
+                            li{
+                                display: flex;
+                                flex-direction: row;
+                                gap: 4px;
+                                .title{
+                                    font-weight: 500;
+                                }
+                            }
+                        }
+                    }
+                    .actions{
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        border-top: 1px solid v.$light_grey;
+                        .action{
+                            width: calc(50%);
+                            padding: 8px;
+                            text-align: center;
+                            color: v.$blue;
+                            cursor: pointer;
+                            &.delete{
+                                color: v.$red;
+                            }
+                        }
+                    }
                 }
-                &.clear{
-                    border: 1px solid v.$blue;
-                    color: v.$blue;
-                }
-                &.save{
-                    background: v.$blue;
-                    color: v.$white;
+                .center{
+                    width: 100%;
+                    text-align: center;
+                    font-size: 18px;
+                    font-weight: 500;
                 }
             }
-        }
 
-        &.edit{
-            border: 1px solid v.$blue;
         }
     }
+}
 
-    .categories{
+#categoryForm{
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    background: rgba($color: v.$black, $alpha: .6);
+    
+    z-index: 100;
+    
+    .container{
+        height: 100%;
+    }
+    .content{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+
+        form{
+            width: 500px;
+            max-width: calc(100% - 32px);
+            background: v.$white;
+            padding: 16px;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            border: 1px solid v.$white;
+            .heading{
+                font-weight: 500;
+                font-size: 20px;
+                line-height: 24px;
+            }
+            .inputs{
+                display: flex;
+                flex-direction: column;
+                gap: 16px;
+                .form-group{
+                    flex-grow: 1;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 8px;
+                    label{
+                        font-size: 16px;
+                        line-height: 20px;
+                    }
+                    &>input{
+                        padding: 8px 16px;
+                        border-radius: 8px;
+                        border: 1px solid v.$dark_grey;
+                        font-size: 16px;
+                        line-height: 20px;
+                        &:focus{
+                            outline-color: v.$blue;
+                        }
+                    }
+                }
+                .btns{
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    gap: 16px;
+                    .btn{
+                        text-align: center;
+                        width: calc(50% - 8px);
+                        cursor: pointer;
+                        padding: 8px 16px;
+                        border-radius: 8px;
+                        border: none;
+                        font-size: 16px;
+                        line-height: 20px;
+                        &:focus{
+                            outline: none;
+                        }
+                        &.clear{
+                            border: 1px solid v.$blue;
+                            color: v.$blue;
+                        }
+                        &.save{
+                            background: v.$blue;
+                            color: v.$white;
+                        }
+                    }
+                }
+            }
+        
+            &.edit{
+                border: 1px solid v.$blue;
+            }
+        }
+    }
+    
+}
+
+#categoryNumbers{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    .heading{
+        font-weight: 600;
+        font-size: 24px;
+        line-height: 30px;
+    }
+
+
+
+
+    
+
+    .phonenumbers{
         width: 100%;
         border-spacing: 0;
 
@@ -105,6 +342,9 @@
                         .action{
                             cursor: pointer;
                             color: v.$blue;
+                            &.delete{
+                                color: v.$red;
+                            }
                         }
                     }
                 }
@@ -116,18 +356,184 @@
     }
 }
 
-#categoryNumbers{
+#deleteModal{
+    position: fixed;
+    inset: 0;
+    background: rgba($color: v.$black, $alpha: .6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    z-index: 100;
+    .modal{
+        max-width: 400px;
+        background: v.$white;
+        padding: 20px;
+        border-radius: 16px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 24px;
+        .h1{
+            font-size: 24px;
+            line-height: 28px;
+            font-weight: 500;
+        }
+        .p{
+            font-size: 16px;
+            line-height: 20px;
+        }
+        .btns{
+            display: flex;
+            flex-direction: row;
+            gap: 16px;
+            width: 100%;
+            .btn{
+                border-radius: 4px;
+                text-align: center;
+                flex-grow: 1;
+                padding: 4px;
+                font-size: 16px;
+                line-height: 20px;
+                border: 1px solid v.$dark_blue;
+                color: v.$dark_blue;
+                cursor: pointer;
+                &.delete{
+                    background: v.$dark_blue;
+                    color: v.$white;
+                }
+            }
+        }
+    }
+}
+
+#phoneBookForm{
+    width: 100%;
+    background: v.$white;
+    padding: 16px;
+    border-radius: 8px;
     display: flex;
     flex-direction: column;
     gap: 16px;
-
+    border: 1px solid v.$white;
     .heading{
-        font-weight: 600;
-        font-size: 24px;
-        line-height: 30px;
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 24px;
+    }
+    .inputs{
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        .row, .phones{
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            // &>.form-group{
+
+            // }
+        }
+        .form-group{
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            label{
+                font-size: 16px;
+                line-height: 20px;
+            }
+            &>input, &>textarea{
+                font-family: "Montserrat", sans-serif;
+                padding: 8px 16px;
+                border-radius: 8px;
+                border: 1px solid v.$dark_grey;
+                font-size: 16px;
+                line-height: 20px;
+                &:focus{
+                    outline-color: v.$blue;
+                }
+            }
+            .input{
+                padding: 8px 16px;
+                border-radius: 8px;
+                border: 1px solid v.$dark_grey;
+                font-size: 16px;
+                line-height: 20px;
+                display: flex;
+                gap: 8px;
+                overflow: hidden;
+                &:focus-within{
+                    outline-color: v.$blue;
+                }
+                .prefix{
+                    background: v.$light_grey;
+                    padding: 8px;
+                    margin: -8px 0 -8px -16px;
+                    border-right: 1px solid v.$dark_grey;
+                }   
+                input{
+                    border: none;
+                    padding: 0;
+                    font-size: 16px;
+                    line-height: 20px;
+                    &:focus{
+                        outline: none;
+                    }
+                }
+            }
+        }
+        .add-phone{
+            cursor: pointer;
+            align-self: flex-end;
+            background: v.$blue;
+            color: v.$white;
+            width: 100%;
+            padding: 4px 8px;
+            border-radius: 8px;
+
+            display: flex;
+            flex-direction: row;
+            gap: 8px;
+            font-size: 14px;
+
+            i{
+                content: url('../../assets/svg/plus-solid.svg');
+                width: 16px;
+            }
+        }
+    }
+    .bottom{
+        display: flex;
+        flex-direction: row;
+        gap: 16px;
+        justify-content: flex-end;
+        .btn{
+            cursor: pointer;
+            padding: 8px 16px;
+            border-radius: 8px;
+            border: none;
+            font-size: 16px;
+            line-height: 20px;
+            &:focus{
+                outline: none;
+            }
+            &.clear{
+                border: 1px solid v.$blue;
+                color: v.$blue;
+            }
+            &.save{
+                background: v.$blue;
+                color: v.$white;
+            }
+        }
     }
 
-    #phoneBookForm{
+    &.edit{
+        border: 1px solid v.$blue;
+    }
+
+
+    @include _lg{
         width: 100%;
         background: v.$white;
         padding: 16px;
@@ -145,13 +551,14 @@
             display: flex;
             flex-direction: column;
             gap: 16px;
-            .row{
+            .row, .phones{
                 display: flex;
                 flex-direction: row;
                 flex-wrap: wrap;
                 gap: 16px;
-                &>.form-group{
+                &>.form-group, &>.add-phone{
                     width: calc((100% - 32px) / 3);
+                    max-width: calc((100% - 32px) / 3);
                 }
             }
             .form-group{
@@ -232,98 +639,6 @@
 
         &.edit{
             border: 1px solid v.$blue;
-        }
-    }
-
-
-    .deleteModal{
-        position: fixed;
-        inset: 0;
-        background: rgba($color: v.$light_grey, $alpha: .6);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 16px;
-        .modal{
-            max-width: 400px;
-            background: v.$white;
-            padding: 20px;
-            border-radius: 16px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 24px;
-            .h1{
-                font-size: 24px;
-                line-height: 28px;
-                font-weight: 500;
-            }
-            .p{
-                font-size: 16px;
-                line-height: 20px;
-            }
-            .btns{
-                display: flex;
-                flex-direction: row;
-                gap: 16px;
-                width: 100%;
-                .btn{
-                    border-radius: 4px;
-                    text-align: center;
-                    flex-grow: 1;
-                    padding: 4px;
-                    font-size: 16px;
-                    line-height: 20px;
-                    border: 1px solid v.$dark_blue;
-                    color: v.$dark_blue;
-                    cursor: pointer;
-                    &.delete{
-                        background: v.$dark_blue;
-                        color: v.$white;
-                    }
-                }
-            }
-        }
-    }
-
-    .phonenumbers{
-        width: 100%;
-        border-spacing: 0;
-
-        background: v.$white;
-        // padding: 16px;
-        border-radius: 8px;
-        thead th{
-            text-align: left;
-            padding: 8px 16px;
-            border-bottom: 1px solid v.$light_grey;
-        }
-        tbody{
-            tr{
-                td{
-                    padding: 8px 16px;
-                    border-bottom: 1px solid v.$light_grey;
-                    &.center{
-                        text-align: center;
-                        vertical-align: middle;
-                        padding: 36px;
-                    }
-                    &.actions{
-                        display: flex;
-                        gap: 8px;
-                        .action{
-                            cursor: pointer;
-                            color: v.$blue;
-                            &.delete{
-                                color: v.$red;
-                            }
-                        }
-                    }
-                }
-                &:last-of-type td{
-                    border-bottom: none;
-                }
-            }
-        }
+        }   
     }
 }

@@ -54,13 +54,13 @@ const AdminSidebar = ()=>{
             /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
                 className: "header",
                 children: [
-                    /*#__PURE__*/ jsx_runtime_.jsx((link_default()), {
-                        href: "/",
-                        className: "logo",
-                        children: "CNA"
-                    }),
                     /*#__PURE__*/ jsx_runtime_.jsx("i", {
                         onClick: toggleMenu
+                    }),
+                    /*#__PURE__*/ jsx_runtime_.jsx("a", {
+                        href: "https://cna.kz",
+                        className: "logo",
+                        children: "CNA"
                     })
                 ]
             }),

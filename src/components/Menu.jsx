@@ -16,14 +16,14 @@ const Menu = () => {
                     <i className="home"></i>
                     Главная
                 </Link>
-                <Link href='/posts'  className="menu-item">
+                {/* <Link href='/posts'  className="menu-item">
                     <i className="post"></i>
                     Купить
                 </Link>
                 <Link href='/rent'  className="menu-item">
                     <i className="rent"></i>
                     Арендовать
-                </Link>
+                </Link> */}
                 {/* <Link href='/application' target="_blank" className="menu-item new">
                     <i className="new"></i>
                     Подать

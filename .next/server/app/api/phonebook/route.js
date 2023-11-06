@@ -101,7 +101,8 @@ async function GET(request) {
         const phonebooks = await phonebook/* default */.Z.find().sort("name").populate("category");
         return next_response/* default */.Z.json(phonebooks);
     } catch (error) {
-        return next_response/* default */.Z.json(null, {
+        console.log(error);
+        return next_response/* default */.Z.json(error, {
             status: 500
         });
     }
@@ -115,9 +116,8 @@ async function POST(request) {
             ...data,
             category: category._id
         });
-        const phonebooks = await phonebook/* default */.Z.find({
-            category: category._id
-        }).sort("name");
+        // const phonebooks = await PhoneBook.find({category: category._id}).sort('name'); 
+        const phonebooks = await phonebook/* default */.Z.find().sort("name").populate("category");
         return next_response/* default */.Z.json(phonebooks);
     } catch (error) {
         return next_response/* default */.Z.json(null, {
@@ -138,9 +138,8 @@ async function PATCH(request) {
             ...data
         });
         // await PhoneBook.create({...data, category: category._id});
-        const phonebooks = await phonebook/* default */.Z.find({
-            category: data.category
-        }).sort("name");
+        // const phonebooks = await PhoneBook.find({category: data.category}).sort('name'); 
+        const phonebooks = await phonebook/* default */.Z.find().sort("name").populate("category");
         return next_response/* default */.Z.json(phonebooks);
     } catch (error) {
         console.log(error);
@@ -194,7 +193,9 @@ async function PATCH(request) {
 
 const phonebookSchema = mongoose__WEBPACK_IMPORTED_MODULE_0___default().Schema({
     name: String,
-    phone: String,
+    phone: [
+        String
+    ],
     whatsapp: String,
     telegram: String,
     email: String,

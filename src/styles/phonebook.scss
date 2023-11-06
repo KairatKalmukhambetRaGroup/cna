@@ -93,9 +93,10 @@
                         // }
                         width: 100%;
                         display: flex;
-                        flex-direction: row;
+                        flex-direction: column;
                         // justify-content: space-between;
-                        gap: 8px;
+                        gap: 4px;
+                        
                         a{
                             padding: 8px 16px;
                             background: green;
@@ -127,6 +128,14 @@
                             }
                             &.whatsapp i{
                                 content: url('../assets/svg/whatsapp.svg');
+                            }
+                        }
+                        .social{
+                            display: flex;
+                            flex-direction: row;
+                            gap: 4px;
+                            a{
+                                flex-grow: 1;
                             }
                         }
                     }

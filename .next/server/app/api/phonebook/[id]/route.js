@@ -72,10 +72,7 @@ async function DELETE(request, context) {
     try {
         await (0,connect/* default */.Z)();
         await phonebook/* default */.Z.findByIdAndDelete(id);
-        let category = await phonebookcategory/* default */.Z.findById(data.category);
-        const phonebooks = await phonebook/* default */.Z.find({
-            category: category._id
-        }).sort("name");
+        const phonebooks = await phonebook/* default */.Z.find().sort("name").populate("category");
         return next_response/* default */.Z.json(phonebooks);
     } catch (error) {
         return next_response/* default */.Z.json(null, {
@@ -140,7 +137,9 @@ async function GET(request, context) {
 
 const phonebookSchema = mongoose__WEBPACK_IMPORTED_MODULE_0___default().Schema({
     name: String,
-    phone: String,
+    phone: [
+        String
+    ],
     whatsapp: String,
     telegram: String,
     email: String,

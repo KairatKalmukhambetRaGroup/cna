@@ -139,7 +139,9 @@ const connectMongo = async ()=>mongoose__WEBPACK_IMPORTED_MODULE_0___default().c
 
 const phonebookSchema = mongoose__WEBPACK_IMPORTED_MODULE_0___default().Schema({
     name: String,
-    phone: String,
+    phone: [
+        String
+    ],
     whatsapp: String,
     telegram: String,
     email: String,

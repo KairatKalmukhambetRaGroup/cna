@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const phonebookCategorySchema = mongoose.Schema({
-    name: String
+    name: String,
 }, {
     timestamps: true
 });

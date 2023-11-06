@@ -3,7 +3,7 @@ import PhoneBookCategory from './phonebookcategory';
 
 const phonebookSchema = mongoose.Schema({
     name: String,
-    phone: String,
+    phone: [String],
     whatsapp: String,
     telegram: String,
     email: String,

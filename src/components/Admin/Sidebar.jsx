@@ -13,10 +13,10 @@ const AdminSidebar = () => {
     return (
         <div id="sidebar" className={`${showMenu ? '' : 'hide'}`}>
             <div className="header">
-                    <Link href="/" className='logo'>
-                        CNA
-                    </Link>
                     <i onClick={toggleMenu}></i>
+                    <a href="https://cna.kz" className='logo'>
+                        CNA
+                    </a>
             </div>
             <div className="content">
                 <nav>

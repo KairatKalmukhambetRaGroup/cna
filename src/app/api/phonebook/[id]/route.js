@@ -14,9 +14,7 @@ export async function DELETE(request, context) {
         
         await PhoneBook.findByIdAndDelete(id);
 
-        let category = await PhoneBookCategory.findById(data.category);
-
-        const phonebooks = await PhoneBook.find({category: category._id}).sort('name'); 
+        const phonebooks = await PhoneBook.find().sort('name').populate('category'); 
         return NextResponse.json(phonebooks);
     } catch (error) {
         return NextResponse.json(null, {status: 500});
