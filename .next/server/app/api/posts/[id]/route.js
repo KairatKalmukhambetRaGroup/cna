@@ -64,16 +64,12 @@ var node_polyfill_headers = __webpack_require__(42394);
 // EXTERNAL MODULE: ./node_modules/next/dist/server/future/route-modules/app-route/module.js
 var app_route_module = __webpack_require__(69692);
 var module_default = /*#__PURE__*/__webpack_require__.n(app_route_module);
-// EXTERNAL MODULE: external "mongoose"
-var external_mongoose_ = __webpack_require__(11185);
 // EXTERNAL MODULE: ./src/database/connect.js
 var connect = __webpack_require__(8000);
 // EXTERNAL MODULE: ./src/database/models/post.js
 var models_post = __webpack_require__(96784);
 // EXTERNAL MODULE: ./node_modules/next/dist/server/web/exports/next-response.js
 var next_response = __webpack_require__(89335);
-// EXTERNAL MODULE: ./node_modules/regenerator-runtime/runtime-module.js
-var runtime_module = __webpack_require__(39769);
 // EXTERNAL MODULE: ./src/app/api/posts/route.js
 var route = __webpack_require__(12398);
 // EXTERNAL MODULE: external "fs/promises"
@@ -103,13 +99,15 @@ var dateConvert = __webpack_require__(25509);
 
 
 
-
-
 async function GET(request, context) {
     const { id } = context.params;
+    // const ip = (request.headers.get('x-forwarded-for') ?? '127.0.0.1').split(',')[0]
+    const ip = request.query?.clientIp ?? "127.0.0.1";
+    // console.log(ip);
     try {
         await (0,connect/* default */.Z)();
         const post = await models_post/* default */.Z.findById(id).populate("city").populate("region").populate("housing");
+        post.ip = ip;
         return next_response/* default */.Z.json(post);
     } catch (error) {
         return next_response/* default */.Z.json(null, {
@@ -272,7 +270,7 @@ async function PATCH(request, context) {
 var __webpack_require__ = require("../../../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [2697,5501,9335,9402,9769,6772,6784,2398], () => (__webpack_exec__(32710)));
+var __webpack_exports__ = __webpack_require__.X(0, [2697,5501,9335,9402,6772,6784,2398], () => (__webpack_exec__(32710)));
 module.exports = __webpack_exports__;
 
 })();

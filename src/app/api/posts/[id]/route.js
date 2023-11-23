@@ -1,12 +1,11 @@
-import mongoose from "mongoose";
 import connectMongo from "@/database/connect";
 import Post from "@/database/models/post";
 import { NextResponse } from "next/server";
-import { async } from "regenerator-runtime";
 import { getPostsByHousing } from "../route";
 import { mkdir, stat, writeFile } from "fs/promises";
 import { join } from "path";
 import mime from "mime";
+
 
 import Region from "@/database/models/region";
 import Housing from "@/database/models/housing";
@@ -15,12 +14,17 @@ import { queryToMongoose } from "@/utilFunctions/dateConvert";
 
 export async function GET(request, context) {
     const { id } = context.params;    
+    // const ip = (request.headers.get('x-forwarded-for') ?? '127.0.0.1').split(',')[0]
+    const ip = request.query?.clientIp ?? "127.0.0.1";
+    // console.log(ip);
+
     try {
         await connectMongo();
         const post = await Post.findById(id)
             .populate('city')
             .populate('region')
             .populate('housing');
+            post.ip = ip;
         return NextResponse.json(post);
     } catch (error) {
         return NextResponse.json(null, {status: 500});

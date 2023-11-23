@@ -910,6 +910,7 @@ const PostContent = ({ params })=>{
                 "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
             }
         });
+        console.log(data.ip);
         setPost(data);
     };
     (0,react_.useEffect)(()=>{
