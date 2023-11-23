@@ -1,12 +1,24 @@
 import connectMongo from "@/database/connect";
 import PhoneBook from "@/database/models/phonebook";
 import PhoneBookCategory from "@/database/models/phonebookcategory";
+import UserPhonebookVisit from "@/database/models/userphonebookvisit";
 import { queryToMongoose } from "@/utilFunctions/dateConvert";
 import { NextResponse } from "next/server";
 
 export async function GET(request) {
     const params = request.nextUrl.searchParams.toString();
     const data = queryToMongoose(params);
+
+    let ipAddress = request.headers.get('x-real-ip');
+    const forwardedFor = (request.headers.get('x-forwarded-for') ?? '127.0.0.1').split(',')[0]
+    if(!ipAddress && forwardedFor){
+        ipAddress = forwardedFor;
+    }else{
+        ipAddress = null;
+    }
+    const today = new Date().setUTCHours(0,0,0,0); 
+
+
     try {
         await connectMongo();        
         if(data.category){
@@ -26,6 +38,13 @@ export async function GET(request) {
             return NextResponse.json(phonebooks);
         }
         const phonebooks = await PhoneBook.find().sort('name').populate('category'); 
+        if(ipAddress){
+            const existingUserVisit = await UserPhonebookVisit.findOne({ip: ipAddress, timestamp: today});
+            if(!existingUserVisit){
+                await UserPhonebookVisit.create({ip: ipAddress, timestamp: today});
+            }
+        }
+        
         return NextResponse.json(phonebooks);
     } catch (error) {
         console.log(error)

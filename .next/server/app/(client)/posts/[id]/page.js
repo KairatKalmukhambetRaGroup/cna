@@ -373,6 +373,17 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ 69428:
+/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
+
+Promise.resolve(/* import() eager */).then(__webpack_require__.t.bind(__webpack_require__, 31232, 23));
+Promise.resolve(/* import() eager */).then(__webpack_require__.t.bind(__webpack_require__, 52987, 23));
+Promise.resolve(/* import() eager */).then(__webpack_require__.t.bind(__webpack_require__, 50831, 23));
+Promise.resolve(/* import() eager */).then(__webpack_require__.t.bind(__webpack_require__, 56926, 23));
+Promise.resolve(/* import() eager */).then(__webpack_require__.t.bind(__webpack_require__, 44282, 23))
+
+/***/ }),
+
 /***/ 77157:
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
@@ -547,8 +558,7 @@ var dateConvert = __webpack_require__(42062);
 
 
 
-
-const Post = ({ post })=>{
+const Post = ({ post, visits })=>{
     return post && /*#__PURE__*/ jsx_runtime_.jsx("div", {
         id: "post",
         children: /*#__PURE__*/ jsx_runtime_.jsx("div", {
@@ -845,6 +855,22 @@ const Post = ({ post })=>{
                                                 children: "Специалист"
                                             })
                                         ]
+                                    }),
+                                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                                        className: "additional-info",
+                                        children: [
+                                            /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                                                className: "date",
+                                                children: (0,dateConvert/* dateConvert */.ce)(post.createdAt)
+                                            }),
+                                            /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                                                className: "visits",
+                                                children: [
+                                                    /*#__PURE__*/ jsx_runtime_.jsx("i", {}),
+                                                    visits
+                                                ]
+                                            })
+                                        ]
                                     })
                                 ]
                             })
@@ -900,6 +926,7 @@ const ContentParam = ({ label, value })=>{
 const PostContent = ({ params })=>{
     const { id } = params;
     const [post, setPost] = (0,react_.useState)(null);
+    const [visits, setVisits] = (0,react_.useState)(0);
     const getPost = async ()=>{
         const { data } = await axios/* default */.Z.get(`/api/posts/${id}`, {
             validateStatus: function(status) {
@@ -910,8 +937,8 @@ const PostContent = ({ params })=>{
                 "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
             }
         });
-        console.log(data.ip, data.ip2, data.ip3);
         setPost(data.post);
+        setVisits(data.visits);
     };
     (0,react_.useEffect)(()=>{
         if (id && !post) {
@@ -921,7 +948,8 @@ const PostContent = ({ params })=>{
         id
     ]);
     return /*#__PURE__*/ jsx_runtime_.jsx(Post_Post, {
-        post: post
+        post: post,
+        visits: visits
     });
 };
 /* harmony default export */ const page = (PostContent);
@@ -976,7 +1004,7 @@ const __default__ = proxy.default;
 var __webpack_require__ = require("../../../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [2697,9021,1512,5329,447,2062], () => (__webpack_exec__(2157)));
+var __webpack_exports__ = __webpack_require__.X(0, [2697,2862,1512,254,3523,2062], () => (__webpack_exec__(2157)));
 module.exports = __webpack_exports__;
 
 })();

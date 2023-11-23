@@ -11,20 +11,37 @@ import Region from "@/database/models/region";
 import Housing from "@/database/models/housing";
 import City from "@/database/models/city";
 import { queryToMongoose } from "@/utilFunctions/dateConvert";
+import UserPostVisit from "@/database/models/userpostvisit";
 
 export async function GET(request, context) {
     const { id } = context.params;    
-    const ip = (request.headers.get('x-real-ip') ?? '127.0.0.1').split(',')[0]
-    const ip2 = (request.headers.get('x-forwarded-for') ?? '127.0.0.1').split(',')[0]
-    const ip3 = request.query?.clientIp ?? "127.0.0.1";
-
+    let ipAddress = request.headers.get('x-real-ip');
+    const forwardedFor = (request.headers.get('x-forwarded-for') ?? '127.0.0.1').split(',')[0]
+    if(!ipAddress && forwardedFor){
+        ipAddress = forwardedFor;
+    }else{
+        ipAddress = null;
+    }
+    const today = new Date().setUTCHours(0,0,0,0); 
+    
+    
     try {
         await connectMongo();
+        
         const post = await Post.findById(id)
             .populate('city')
             .populate('region')
             .populate('housing');
-        return NextResponse.json({post, ip, ip2, ip3});
+
+        if(ipAddress){
+            const existingUserVisit = await UserPostVisit.findOne({ip: ipAddress, postId: id, timestamp: today});
+            if(!existingUserVisit){
+                await UserPostVisit.create({ip: ipAddress, postId: id, timestamp: today});
+            }
+        }
+
+        const visits = await UserPostVisit.countDocuments({postId: id});
+        return NextResponse.json({post, visits});
     } catch (error) {
         return NextResponse.json(null, {status: 500});
     }

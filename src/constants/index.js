@@ -107,3 +107,10 @@ export const WATER = [
     'скважина',
     'нет'
 ];
+
+
+
+
+export const LAST_WEEK = 'lastWeek';
+export const LAST_MONTH = 'lastMonth';
+export const LAST_YEAR = 'lastYear';

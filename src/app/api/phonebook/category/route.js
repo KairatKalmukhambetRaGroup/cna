@@ -41,16 +41,13 @@ export async function PATCH(request){
     const data = await request.json();
     try {
         await connectMongo();
-        console.log(data);
         const category = await PhoneBookCategory.findById(data._id);
         if(category){
             await PhoneBookCategory.findByIdAndUpdate(category._id, {...data});
-            console.log('category')
         }else{
             const upcategory = await PhoneBookUpcategory.findById(data._id)
             if(upcategory){
                 await PhoneBookUpcategory.findByIdAndUpdate(upcategory._id, {...data});
-                console.log('upcategory')
             }
         }
 

@@ -87,7 +87,10 @@ var mime = __webpack_require__(99402);
 var mime_default = /*#__PURE__*/__webpack_require__.n(mime);
 // EXTERNAL MODULE: ./src/database/models/city.js
 var models_city = __webpack_require__(62159);
+// EXTERNAL MODULE: ./src/database/models/userpostvisit.js
+var userpostvisit = __webpack_require__(91708);
 ;// CONCATENATED MODULE: ./src/app/api/posts/rent/route.js
+
 
 
 
@@ -279,7 +282,33 @@ async function getPostsByHousing(request) {
     }).populate({
         path: "housing",
         select: "slug"
-    }).sort(sort).skip(skip).limit(limit);
+    }).sort(sort).skip(skip).limit(limit).lean();
+    const postIds = posts.map((post)=>post._id);
+    const visits = await userpostvisit/* default */.Z.aggregate([
+        {
+            $match: {
+                postId: {
+                    $in: postIds
+                } // Match visits with the extracted post IDs
+            }
+        },
+        {
+            $group: {
+                _id: "$postId",
+                visits: {
+                    $sum: 1
+                } // Calculate the count of visits
+            }
+        }
+    ]);
+    // Map the visit count to each post
+    const postsWithVisits = posts.map((post)=>{
+        const matchingVisit = visits.find((visit)=>visit._id.equals(post._id));
+        return {
+            ...post,
+            visits: matchingVisit ? matchingVisit.visits : 0
+        };
+    });
     const count = await models_post/* default */.Z.countDocuments(data);
     const total = Math.ceil(count / limit);
     return next_response/* default */.Z.json({
@@ -318,6 +347,38 @@ async function getPostsByHousing(request) {
     const originalPathname = "/api/posts/rent/route"
 
     
+
+/***/ }),
+
+/***/ 91708:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Z: () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var mongoose__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(11185);
+/* harmony import */ var mongoose__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(mongoose__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _post__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(96784);
+
+
+const userPostVisit = mongoose__WEBPACK_IMPORTED_MODULE_0___default().Schema({
+    ip: {
+        type: String,
+        required: true
+    },
+    postId: {
+        type: (mongoose__WEBPACK_IMPORTED_MODULE_0___default().Schema).Types.ObjectId,
+        ref: _post__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .Z,
+        required: true
+    },
+    timestamp: {
+        type: Date,
+        required: true
+    }
+});
+const UserPostVisit = (mongoose__WEBPACK_IMPORTED_MODULE_0___default().models).UserPostVisit || mongoose__WEBPACK_IMPORTED_MODULE_0___default().model("UserPostVisit", userPostVisit);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (UserPostVisit);
+
 
 /***/ })
 

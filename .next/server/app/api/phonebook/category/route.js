@@ -122,20 +122,17 @@ async function PATCH(request) {
     const data = await request.json();
     try {
         await (0,connect/* default */.Z)();
-        console.log(data);
         const category = await phonebookcategory/* default */.Z.findById(data._id);
         if (category) {
             await phonebookcategory/* default */.Z.findByIdAndUpdate(category._id, {
                 ...data
             });
-            console.log("category");
         } else {
             const upcategory = await phonebookupcategory.findById(data._id);
             if (upcategory) {
                 await phonebookupcategory.findByIdAndUpdate(upcategory._id, {
                     ...data
                 });
-                console.log("upcategory");
             }
         }
         const categories = await phonebookupcategory.find().populate("sub").sort("name");

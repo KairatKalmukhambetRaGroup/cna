@@ -23,6 +23,9 @@ const AdminSidebar = () => {
                     <Link href="/admin">
                         Панель администратора
                     </Link>
+                    <Link href="/admin/applications">
+                        Заявки
+                    </Link>
                     <Link href="/admin/advertisements">
                         Рекламные баннеры
                     </Link>

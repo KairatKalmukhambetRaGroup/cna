@@ -58,14 +58,6 @@ const Menu = ()=>{
 
 
 
-/***/ }),
-
-/***/ 11440:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-module.exports = __webpack_require__(50954)
-
-
 /***/ })
 
 };

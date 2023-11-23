@@ -367,11 +367,11 @@ __webpack_require__.r(__webpack_exports__);
 /***/ 37988:
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
-Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 46695))
+Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 3624))
 
 /***/ }),
 
-/***/ 46695:
+/***/ 3624:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -385,169 +385,123 @@ __webpack_require__.d(__webpack_exports__, {
 
 // EXTERNAL MODULE: external "next/dist/compiled/react/jsx-runtime"
 var jsx_runtime_ = __webpack_require__(56786);
-// EXTERNAL MODULE: ./src/styles/admin/applications.scss
-var applications = __webpack_require__(61088);
+// EXTERNAL MODULE: ./src/constants/index.js
+var constants = __webpack_require__(28483);
+// EXTERNAL MODULE: ./node_modules/chart.js/dist/chart.js + 2 modules
+var chart = __webpack_require__(69127);
+// EXTERNAL MODULE: ./node_modules/react-chartjs-2/dist/index.js
+var dist = __webpack_require__(43223);
+;// CONCATENATED MODULE: ./src/components/CustomLineChart.jsx
+/* __next_internal_client_entry_do_not_use__ default auto */ 
+
+
+
+chart/* Chart */.kL.register(chart/* CategoryScale */.uw, chart/* LinearScale */.f$, chart/* PointElement */.od, chart/* LineElement */.jn, chart/* Tooltip */.u);
+const CustomLineChart = ({ data, data2, timePeriod })=>{
+    return /*#__PURE__*/ jsx_runtime_.jsx("div", {
+        className: "chart-item",
+        children: /*#__PURE__*/ jsx_runtime_.jsx(dist/* Line */.x1, {
+            data: {
+                labels: data.map((i)=>convert(i._id, timePeriod)),
+                datasets: [
+                    {
+                        id: 1,
+                        label: "Посещения сайта",
+                        data: data.map((i)=>i.count),
+                        borderColor: "#121e2d",
+                        backgroundColor: "#121e2d"
+                    },
+                    {
+                        id: 2,
+                        label: "Посещения справочника",
+                        data: data2.map((i)=>i.count),
+                        borderColor: "#2a81dd",
+                        backgroundColor: "#2a81dd"
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: "Посещяемость сайта"
+                    }
+                },
+                aspectRatio: 3 / 1,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        min: 0,
+                        ticks: {
+                            callback: function(value) {
+                                if (value % 1 === 0) {
+                                    return value;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        })
+    });
+};
+/* harmony default export */ const components_CustomLineChart = (CustomLineChart);
+const months = [
+    "",
+    "янв",
+    "фев",
+    "мар",
+    "апр",
+    "май",
+    "июн",
+    "июл",
+    "авг",
+    "сен",
+    "окт",
+    "ноя",
+    "дек"
+];
+function convert(dt, timePeriod) {
+    let d = dt.split(".");
+    const thisYear = new Date().getFullYear();
+    switch(timePeriod){
+        case constants/* LAST_MONTH */.ly:
+            let year = d[1];
+            let week = d[0];
+            // first date of year
+            let firstDateOfYear = new Date(year, 0, 1);
+            // get the day of first date in the year
+            let firstDayOfYear = firstDateOfYear.getDay();
+            let timeofOneDay = 60 * 60 * 24 * 1000;
+            let timeofOneWeek = 60 * 60 * 24 * 7 * 1000;
+            // last day of the week, 6 days later
+            let timeof6Day = 60 * 60 * 24 * 6 * 1000;
+            // if week start from Monday
+            let timeOfFirstDay = firstDateOfYear.getTime() - timeofOneDay * (firstDayOfYear - 1) + timeofOneWeek * (week - 1);
+            let timeOfLastDay = timeOfFirstDay + timeof6Day;
+            let start = new Date(timeOfFirstDay);
+            start = `${start.getDate()}.${start.getMonth()}${start.getFullYear() === thisYear ? "" : `.${start.getFullYear()}`}`;
+            let end = new Date(timeOfLastDay);
+            end = `${end.getDate()}.${end.getMonth()}${end.getFullYear() === thisYear ? "" : `.${end.getFullYear()}`}`;
+            return `${start} - ${end}`;
+        case constants/* LAST_YEAR */.GG:
+            return `${months[Number(d[0])]} ${thisYear == d[1] ? "" : d[1]}`;
+        default:
+            return dt;
+    }
+}
+
+// EXTERNAL MODULE: ./src/components/Inputs/RichText.jsx
+var RichText = __webpack_require__(15863);
+// EXTERNAL MODULE: ./src/components/Loading.jsx
+var Loading = __webpack_require__(2769);
+// EXTERNAL MODULE: ./src/styles/admin/admin.scss
+var admin = __webpack_require__(95139);
 // EXTERNAL MODULE: ./node_modules/axios/lib/axios.js + 46 modules
 var axios = __webpack_require__(93258);
 // EXTERNAL MODULE: external "next/dist/compiled/react"
 var react_ = __webpack_require__(18038);
-// EXTERNAL MODULE: ./src/components/Loading.jsx
-var Loading = __webpack_require__(2769);
-// EXTERNAL MODULE: ./src/utilFunctions/dateConvert.js
-var dateConvert = __webpack_require__(42062);
-;// CONCATENATED MODULE: ./src/components/Admin/Applications.jsx
-
-
-
-
-
-
-const Applications = ()=>{
-    const [applications, setApplications] = (0,react_.useState)(null);
-    const [isArchive, setIsArchive] = (0,react_.useState)(false);
-    const getApplications = async ()=>{
-        const { data } = await axios/* default */.Z.get(`/api/applications?archive=${isArchive}`, {
-            validateStatus: function(status) {
-                return true;
-            },
-            headers: {
-                "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
-            }
-        });
-        setApplications(data);
-    };
-    (0,react_.useEffect)(()=>{
-        setApplications(null);
-        getApplications();
-    }, [
-        isArchive
-    ]);
-    const archive = async (id)=>{
-        const { data } = await axios/* default */.Z.patch(`/api/applications`, {
-            id,
-            archive: isArchive
-        }, {
-            validateStatus: function(status) {
-                return true;
-            },
-            headers: {
-                "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
-            }
-        });
-        setApplications(data);
-    };
-    return /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-        id: "applications",
-        children: [
-            /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                className: "heading",
-                children: "Заявки"
-            }),
-            /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-                className: "tab",
-                children: [
-                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-                        className: "tab-items",
-                        children: [
-                            /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                                className: `tab-item ${isArchive ? "" : "active"}`,
-                                onClick: (e)=>{
-                                    e.preventDefault();
-                                    setIsArchive(false);
-                                },
-                                children: "Новые"
-                            }),
-                            /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                                className: `tab-item ${isArchive ? "active" : ""}`,
-                                onClick: (e)=>{
-                                    e.preventDefault();
-                                    setIsArchive(true);
-                                },
-                                children: "Архив"
-                            })
-                        ]
-                    }),
-                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)("table", {
-                        className: "tab-content",
-                        children: [
-                            /*#__PURE__*/ jsx_runtime_.jsx("thead", {
-                                children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)("tr", {
-                                    children: [
-                                        /*#__PURE__*/ jsx_runtime_.jsx("th", {
-                                            children: "№"
-                                        }),
-                                        /*#__PURE__*/ jsx_runtime_.jsx("th", {
-                                            children: "Имя"
-                                        }),
-                                        /*#__PURE__*/ jsx_runtime_.jsx("th", {
-                                            children: "Телефон"
-                                        }),
-                                        /*#__PURE__*/ jsx_runtime_.jsx("th", {
-                                            children: "Дата"
-                                        }),
-                                        !isArchive && /*#__PURE__*/ jsx_runtime_.jsx("th", {
-                                            children: "Действие"
-                                        })
-                                    ]
-                                })
-                            }),
-                            /*#__PURE__*/ jsx_runtime_.jsx("tbody", {
-                                children: applications ? applications.length > 0 ? applications.map((item, key)=>/*#__PURE__*/ (0,jsx_runtime_.jsxs)("tr", {
-                                        children: [
-                                            /*#__PURE__*/ jsx_runtime_.jsx("td", {
-                                                children: Number(key) + 1
-                                            }),
-                                            /*#__PURE__*/ jsx_runtime_.jsx("td", {
-                                                children: item.name
-                                            }),
-                                            /*#__PURE__*/ jsx_runtime_.jsx("td", {
-                                                children: item.phone
-                                            }),
-                                            /*#__PURE__*/ jsx_runtime_.jsx("td", {
-                                                children: (0,dateConvert/* dateConvertWithTime */.nu)(item.createdAt)
-                                            }),
-                                            !isArchive && /*#__PURE__*/ jsx_runtime_.jsx("td", {
-                                                children: /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                                                    className: "action",
-                                                    onClick: (e)=>{
-                                                        e.preventDefault();
-                                                        archive(item._id);
-                                                    },
-                                                    children: "Архивировать"
-                                                })
-                                            })
-                                        ]
-                                    }, key)) : /*#__PURE__*/ jsx_runtime_.jsx("tr", {
-                                    children: /*#__PURE__*/ jsx_runtime_.jsx("td", {
-                                        className: "center",
-                                        colSpan: 5,
-                                        children: "Нет заявок"
-                                    })
-                                }) : /*#__PURE__*/ jsx_runtime_.jsx("tr", {
-                                    children: /*#__PURE__*/ jsx_runtime_.jsx("td", {
-                                        className: "center",
-                                        colSpan: 5,
-                                        children: /*#__PURE__*/ jsx_runtime_.jsx(Loading/* default */.Z, {
-                                            small: true
-                                        })
-                                    })
-                                })
-                            })
-                        ]
-                    })
-                ]
-            })
-        ]
-    });
-};
-/* harmony default export */ const Admin_Applications = (Applications);
-
-// EXTERNAL MODULE: ./src/components/Inputs/RichText.jsx
-var RichText = __webpack_require__(15863);
-// EXTERNAL MODULE: ./src/styles/admin/admin.scss
-var admin = __webpack_require__(95139);
 ;// CONCATENATED MODULE: ./src/app/(admin)/admin/page.js
 /* __next_internal_client_entry_do_not_use__ default auto */ 
 
@@ -556,8 +510,11 @@ var admin = __webpack_require__(95139);
 
 
 
+
 const Admin = ()=>{
     const [posts, setPosts] = (0,react_.useState)();
+    const [visits, setVisits] = (0,react_.useState)(null);
+    const [timePeriod, setTimePeriod] = (0,react_.useState)(constants/* LAST_WEEK */.ao);
     const getPosts = async ()=>{
         const { data } = await axios/* default */.Z.get(`/api/posts?count=true`, {
             validateStatus: function(status) {
@@ -582,6 +539,18 @@ const Admin = ()=>{
         });
         setAbout(data);
     };
+    const getVisits = async ()=>{
+        const { data } = await axios/* default */.Z.get(`/api/visits?timeperiod=${timePeriod}`, {
+            validateStatus: function(status) {
+                return true;
+            },
+            headers: {
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
+            }
+        });
+        setVisits(data);
+    };
     (0,react_.useEffect)(()=>{
         if (!posts) {
             getPosts();
@@ -589,6 +558,12 @@ const Admin = ()=>{
         }
     }, [
         posts
+    ]);
+    (0,react_.useEffect)(()=>{
+        setVisits("loading");
+        getVisits();
+    }, [
+        timePeriod
     ]);
     const [about, setAbout] = (0,react_.useState)("");
     const handleChange = (value)=>{
@@ -619,6 +594,39 @@ const Admin = ()=>{
     return /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
         id: "admin",
         children: [
+            visits ? /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                className: "chart",
+                children: [
+                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)("select", {
+                        defaultValue: constants/* LAST_WEEK */.ao,
+                        onChange: (e)=>{
+                            setTimePeriod(e.target.value);
+                        },
+                        children: [
+                            /*#__PURE__*/ jsx_runtime_.jsx("option", {
+                                value: constants/* LAST_WEEK */.ao,
+                                children: "Последняя неделея"
+                            }),
+                            /*#__PURE__*/ jsx_runtime_.jsx("option", {
+                                value: constants/* LAST_MONTH */.ly,
+                                children: "Последний месяц"
+                            }),
+                            /*#__PURE__*/ jsx_runtime_.jsx("option", {
+                                value: constants/* LAST_YEAR */.GG,
+                                children: "Последний год"
+                            })
+                        ]
+                    }),
+                    visits.visitCounts ? /*#__PURE__*/ jsx_runtime_.jsx(components_CustomLineChart, {
+                        data: visits.visitCounts,
+                        data2: visits.phonebookVisits,
+                        timePeriod: timePeriod
+                    }) : /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                        className: "loading",
+                        children: "LOADING"
+                    })
+                ]
+            }) : /*#__PURE__*/ jsx_runtime_.jsx(jsx_runtime_.Fragment, {}),
             /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
                 className: "cards",
                 children: [
@@ -699,8 +707,7 @@ const Admin = ()=>{
                         ]
                     })
                 ]
-            }),
-            /*#__PURE__*/ jsx_runtime_.jsx(Admin_Applications, {})
+            })
         ]
     });
 };
@@ -778,20 +785,6 @@ const __default__ = proxy.default;
 
 /***/ }),
 
-/***/ 61088:
-/***/ (() => {
-
-
-
-/***/ }),
-
-/***/ 7847:
-/***/ (() => {
-
-
-
-/***/ }),
-
 /***/ 82787:
 /***/ (() => {
 
@@ -806,7 +799,7 @@ const __default__ = proxy.default;
 var __webpack_require__ = require("../../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [2697,9021,7061,5329,5527,2062,5863], () => (__webpack_exec__(56287)));
+var __webpack_exports__ = __webpack_require__.X(0, [2697,2862,5563,3223,254,7145,3663,5863], () => (__webpack_exec__(56287)));
 module.exports = __webpack_exports__;
 
 })();

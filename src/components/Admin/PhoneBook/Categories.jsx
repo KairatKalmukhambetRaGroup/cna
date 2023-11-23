@@ -35,7 +35,6 @@ const PhoneBookCategories = () => {
     const getContacts = async () => {
         const {data} = await axios.get(`/api/phonebook`, {validateStatus: function (status) { return true }, headers: {"Access-Control-Allow-Origin": "*", "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"}});
         setContacts(data);
-        console.log(data);
     }
 
 
@@ -59,7 +58,6 @@ const PhoneBookCategories = () => {
     const handleContactSubmit = async (e) => {
         e.preventDefault();
         if(contactFormData._id){
-            console.log(contactFormData._id)
             const {data} = await axios.patch('/api/phonebook', contactFormData, {validateStatus: function (status) { return true }, headers: {"Access-Control-Allow-Origin": "*", "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"}});
             setContacts(data);
         }else{

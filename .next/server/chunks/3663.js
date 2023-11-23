@@ -9,15 +9,18 @@ exports.modules = {
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   $5: () => (/* binding */ ELECTRICITY),
 /* harmony export */   Dl: () => (/* binding */ TELEPHONE),
+/* harmony export */   GG: () => (/* binding */ LAST_YEAR),
 /* harmony export */   Kp: () => (/* binding */ PURPOSES),
 /* harmony export */   OV: () => (/* binding */ GAS),
 /* harmony export */   PO: () => (/* binding */ STATES),
 /* harmony export */   Yf: () => (/* binding */ BALCONY),
 /* harmony export */   aU: () => (/* binding */ WATER),
+/* harmony export */   ao: () => (/* binding */ LAST_WEEK),
 /* harmony export */   fe: () => (/* binding */ BATHROOMS),
 /* harmony export */   gU: () => (/* binding */ MATERIALS),
 /* harmony export */   j$: () => (/* binding */ SEWERAGES),
 /* harmony export */   ky: () => (/* binding */ PLACEMENTS),
+/* harmony export */   ly: () => (/* binding */ LAST_MONTH),
 /* harmony export */   pd: () => (/* binding */ FURNISHED),
 /* harmony export */   rS: () => (/* binding */ INTERNET),
 /* harmony export */   uJ: () => (/* binding */ HEATINGS)
@@ -118,6 +121,9 @@ const WATER = [
     "скважина",
     "нет"
 ];
+const LAST_WEEK = "lastWeek";
+const LAST_MONTH = "lastMonth";
+const LAST_YEAR = "lastYear";
 
 
 /***/ }),

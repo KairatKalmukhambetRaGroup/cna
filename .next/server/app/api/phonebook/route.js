@@ -56,6 +56,8 @@ var connect = __webpack_require__(8000);
 var phonebook = __webpack_require__(20575);
 // EXTERNAL MODULE: ./src/database/models/phonebookcategory.js
 var phonebookcategory = __webpack_require__(59227);
+// EXTERNAL MODULE: ./src/database/models/userphonebookvisit.js
+var userphonebookvisit = __webpack_require__(15942);
 // EXTERNAL MODULE: ./src/utilFunctions/dateConvert.js
 var dateConvert = __webpack_require__(25509);
 // EXTERNAL MODULE: ./node_modules/next/dist/server/web/exports/next-response.js
@@ -66,9 +68,18 @@ var next_response = __webpack_require__(89335);
 
 
 
+
 async function GET(request) {
     const params = request.nextUrl.searchParams.toString();
     const data = (0,dateConvert/* queryToMongoose */.hY)(params);
+    let ipAddress = request.headers.get("x-real-ip");
+    const forwardedFor = (request.headers.get("x-forwarded-for") ?? "127.0.0.1").split(",")[0];
+    if (!ipAddress && forwardedFor) {
+        ipAddress = forwardedFor;
+    } else {
+        ipAddress = null;
+    }
+    const today = new Date().setUTCHours(0, 0, 0, 0);
     try {
         await (0,connect/* default */.Z)();
         if (data.category) {
@@ -99,6 +110,18 @@ async function GET(request) {
             return next_response/* default */.Z.json(phonebooks);
         }
         const phonebooks = await phonebook/* default */.Z.find().sort("name").populate("category");
+        if (ipAddress) {
+            const existingUserVisit = await userphonebookvisit/* default */.Z.findOne({
+                ip: ipAddress,
+                timestamp: today
+            });
+            if (!existingUserVisit) {
+                await userphonebookvisit/* default */.Z.create({
+                    ip: ipAddress,
+                    timestamp: today
+                });
+            }
+        }
         return next_response/* default */.Z.json(phonebooks);
     } catch (error) {
         console.log(error);
@@ -230,6 +253,33 @@ const phonebookCategorySchema = mongoose__WEBPACK_IMPORTED_MODULE_0___default().
 });
 const PhoneBookCategory = (mongoose__WEBPACK_IMPORTED_MODULE_0___default().models).PhoneBookCategory || mongoose__WEBPACK_IMPORTED_MODULE_0___default().model("PhoneBookCategory", phonebookCategorySchema);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PhoneBookCategory);
+
+
+/***/ }),
+
+/***/ 15942:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Z: () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var mongoose__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(11185);
+/* harmony import */ var mongoose__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(mongoose__WEBPACK_IMPORTED_MODULE_0__);
+
+// import Post from "./post";
+const userPhonebookVisit = mongoose__WEBPACK_IMPORTED_MODULE_0___default().Schema({
+    ip: {
+        type: String,
+        required: true
+    },
+    // postId: {type: mongoose.Schema.Types.ObjectId, ref: Post, required: true},
+    timestamp: {
+        type: Date,
+        required: true
+    }
+});
+const UserPhonebookVisit = (mongoose__WEBPACK_IMPORTED_MODULE_0___default().models).UserPhonebookVisit || mongoose__WEBPACK_IMPORTED_MODULE_0___default().model("UserPhonebookVisit", userPhonebookVisit);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (UserPhonebookVisit);
 
 
 /***/ })

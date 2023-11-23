@@ -1,22 +1,28 @@
 'use client'
 
-import Applications from '@/components/Admin/Applications';
+import CustomLineChart from '@/components/CustomLineChart';
 import RichText from '@/components/Inputs/RichText';
 import Loading from '@/components/Loading';
+import { LAST_MONTH, LAST_WEEK, LAST_YEAR } from '@/constants';
 import '@/styles/admin/admin.scss';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 
 const Admin = () => {
     const [posts, setPosts] = useState();
+    const [visits, setVisits] = useState(null);
+    const [timePeriod, setTimePeriod] = useState(LAST_WEEK)
     const getPosts = async () => {
         const {data} = await axios.get(`/api/posts?count=true`, {validateStatus: function (status) { return true }, headers: {"Access-Control-Allow-Origin": "*", "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"}});
         setPosts(data);
     }
-    
     const getAbout = async () => {
         const {data} = await axios.get('/api/about',  {validateStatus: function (status) { return true }, headers: {"Access-Control-Allow-Origin": "*", "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"}});
         setAbout(data);
+    }
+    const getVisits = async () => {
+        const {data} = await axios.get(`/api/visits?timeperiod=${timePeriod}`,  {validateStatus: function (status) { return true }, headers: {"Access-Control-Allow-Origin": "*", "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"}});
+        setVisits(data);
     }
 
     useEffect(()=>{
@@ -25,6 +31,12 @@ const Admin = () => {
             getAbout();
         }
     }, [posts])
+
+    useEffect(()=>{
+        setVisits('loading');
+        getVisits();
+    },[timePeriod])
+
 
 
 
@@ -47,6 +59,25 @@ const Admin = () => {
     }
     return (
         <div id="admin">
+            {visits ? 
+                <div className='chart'> 
+                    <select defaultValue={LAST_WEEK} onChange={(e)=>{setTimePeriod(e.target.value)}}>
+                        <option value={LAST_WEEK}>Последняя неделея</option>
+                        <option value={LAST_MONTH}>Последний месяц</option>
+                        <option value={LAST_YEAR}>Последний год</option>
+                    </select>
+                        {visits.visitCounts ? 
+                            <CustomLineChart data={visits.visitCounts} data2={visits.phonebookVisits} timePeriod={timePeriod} />
+                        :
+                        <div className='loading'>
+                            LOADING
+                        </div>
+                    }
+                </div>
+                :
+                <>
+                </>
+            }
             <div className='cards'>
                 <div className='card'>
                     <div className='title'>
@@ -97,7 +128,6 @@ const Admin = () => {
                 </div>
             </div>
 
-            <Applications />
             
         </div>
     );

@@ -104,9 +104,7 @@ const PostForm = ({post=null}) => {
     
     useEffect(() => {
         if(post && post._id){
-            console.log(post.city);
             setFormData({...formData,...post, region: post.region.name, housing: post.housing.slug});
-            console.log(post.city)
             // setFormData({...formData,...post, city: post.city.name, region: post.region.name, housing: post.housing.slug});
             let prevs = [];
             for (let i = 0; i < post.images.length; i++) {
@@ -126,7 +124,6 @@ const PostForm = ({post=null}) => {
                     setRegions(city.regions);
                 }
             }
-            console.log(name, value);
             setFormData({...formData, [name]: value, region: null});
         }
         else if(name.includes('_')){

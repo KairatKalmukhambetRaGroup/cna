@@ -8,10 +8,11 @@ import Post from "@/components/Post/Post";
 const PostContent = ({params}) => {
     const {id} = params;
     const [post, setPost] = useState(null);
+    const [visits, setVisits] = useState(0);
     const getPost = async ()=> {
         const {data} = await axios.get(`/api/posts/${id}`, {validateStatus: function (status) { return true }, headers: {"Access-Control-Allow-Origin": "*", "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"}});
-        console.log(data.ip, data.ip2, data.ip3)
         setPost(data.post);
+        setVisits(data.visits);
     }
 
     useEffect(()=>{
@@ -21,7 +22,7 @@ const PostContent = ({params}) => {
     }, [id])
 
     return (
-        <Post post={post} />
+        <Post post={post} visits={visits} />
     )
 };
 

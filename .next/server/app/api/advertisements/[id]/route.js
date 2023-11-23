@@ -117,8 +117,6 @@ async function PATCH(request, context) {
     formData.forEach(function(value, key) {
         data[key] = value;
     });
-    console.log(formData);
-    console.log(data);
     // save to DB
     try {
         await (0,connect/* default */.Z)();
@@ -128,7 +126,6 @@ async function PATCH(request, context) {
         const image = data.image;
         if (adImage === image) {
             data.image = adImage;
-            console.log(image);
         } else {
             let imgUrl = null;
             const buffer = Buffer.from(await image.arrayBuffer());

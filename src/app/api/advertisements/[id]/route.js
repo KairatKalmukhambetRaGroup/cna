@@ -36,8 +36,6 @@ export async function PATCH(request, context) {
     formData.forEach(function(value, key){
         data[key] = value;
     });
-    console.log(formData);
-    console.log(data);
 
     
     // save to DB
@@ -52,7 +50,6 @@ export async function PATCH(request, context) {
         const image = data.image; 
         if(adImage === image){
             data.image = adImage;
-            console.log(image)
         }else{
             let imgUrl = null;
             const buffer = Buffer.from(await image.arrayBuffer());

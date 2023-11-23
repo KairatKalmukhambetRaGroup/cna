@@ -101,12 +101,28 @@
                     padding-top: 20px;
                     width: 100%;
                     display: flex;
-                    justify-content: space-between;
+                    // justify-content: space-between;
                     align-items: center;
+                    gap: 16px;
                     margin-top: auto;
                     font-weight: 400;
-                    font-size: 13px;
-                    line-height: 14px;
+                    font-size: 14px;
+                    line-height: 16px;
+
+                    color: v.$dark_grey;
+
+                    .visits{
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        gap: 8px;
+        
+                        i{
+                            width: 14px;
+                            height: 14px;
+                            content: url('../assets/svg/eye-regular.svg');
+                        }
+                    }
                 }
             }
         }
@@ -447,8 +463,32 @@
                     }
                 }
 
+
+                .additional-info{
+                    margin-top: 32px;
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    align-items: center;
+                    gap: 16px;
+                    font-size: 16px;
+                    color: v.$dark_grey;
+                    .visits{
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        gap: 8px;
+        
+                        i{
+                            width: 16px;
+                            height: 16px;
+                            content: url('../assets/svg/eye-regular.svg');
+                        }
+                    }
+                }
             }
         }
+        
     }
 
     @include _lg{

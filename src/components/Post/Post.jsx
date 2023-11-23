@@ -1,10 +1,9 @@
 import '@/styles/post.scss';
 import Slideshow from '../Slideshow';
 import draftToHtml from 'draftjs-to-html';
-import { createTitle, numberRearange } from '@/utilFunctions/dateConvert';
-import { useEffect } from 'react';
+import { createTitle, dateConvert, numberRearange } from '@/utilFunctions/dateConvert';
 
-const Post = ({post}) => {
+const Post = ({post, visits}) => {
 
     return post && (
         <div id="post">
@@ -106,8 +105,19 @@ const Post = ({post}) => {
                                     </div>
                                 </div>
                             )}
+                            <div className="additional-info">
+                                <div className="date">
+                                    {dateConvert(post.createdAt)}
+                                </div>
+                                <div className="visits">
+                                    <i></i>
+                                    {visits}
+                                </div>
+                            </div>
                         </div>
                     </div>
+
+
                 </div>
             </div>
         </div>

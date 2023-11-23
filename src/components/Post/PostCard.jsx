@@ -31,7 +31,14 @@ const PostCard = ({post}) => {
                 <div className="date"><span>
                     {post.city.name} 
                     </span>
-                    {dateConvert(post.createdAt)}</div>
+                    {dateConvert(post.createdAt)}
+                    {post.visits ? (
+                        <div className="visits">
+                            <i></i>
+                            {post.visits}
+                        </div>
+                    ) : ''}
+                </div>
             </div>
         </div>
     );

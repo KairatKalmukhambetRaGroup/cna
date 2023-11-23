@@ -610,42 +610,6 @@ const ApplicationPage = ()=>{
 
 /***/ }),
 
-/***/ 77512:
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   Z: () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(56786);
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
-
-const TextInput = ({ name = "", placeholder = "", label = "", value = "", handleChange })=>{
-    const onChange = (e)=>{
-        e.preventDefault();
-        handleChange(e.currentTarget.name, e.currentTarget.value);
-    };
-    return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-        className: "input text-input",
-        children: [
-            label && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("label", {
-                children: label
-            }),
-            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("input", {
-                type: "text",
-                name: name,
-                placeholder: placeholder,
-                value: value,
-                onChange: onChange
-            })
-        ]
-    });
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (TextInput);
-
-
-/***/ }),
-
 /***/ 2769:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -729,7 +693,7 @@ const __default__ = proxy.default;
 var __webpack_require__ = require("../../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [2697,9021,5329,447,8888], () => (__webpack_exec__(58955)));
+var __webpack_exports__ = __webpack_require__.X(0, [2697,2862,254,3523,8888,2674], () => (__webpack_exec__(58955)));
 module.exports = __webpack_exports__;
 
 })();

@@ -9,6 +9,7 @@ import { mkdir, stat, writeFile } from "fs/promises";
 import { join } from "path";
 import mime from "mime";
 import City from "@/database/models/city";
+import UserPostVisit from "@/database/models/userpostvisit";
 
 export async function GET(request) {
     const params = request.nextUrl.searchParams.toString();
@@ -178,8 +179,32 @@ async function getPostsByHousing(request) {
             path: 'housing',
             select: 'slug'
         })
-        .sort(sort).skip(skip).limit(limit);
+        .sort(sort).skip(skip).limit(limit).lean();
+    const postIds = posts.map((post) => post._id);
+    const visits = await UserPostVisit.aggregate([
+        {
+            $match: {
+            postId: { $in: postIds } // Match visits with the extracted post IDs
+            }
+        },
+        {
+            $group: {
+            _id: '$postId', // Group visits by postId
+            visits: { $sum: 1 } // Calculate the count of visits
+            }
+        }
+        ]);
+        
+        // Map the visit count to each post
+        const postsWithVisits = posts.map((post) => {
+        const matchingVisit = visits.find((visit) => visit._id.equals(post._id));
+        
+        return {
+            ...post,
+            visits: matchingVisit ? matchingVisit.visits : 0
+        };
+    });
     const count = await Post.countDocuments(data);
     const total = Math.ceil(count / limit);
-    return NextResponse.json({posts, currentPage: page, totalPages: total, count});
+    return NextResponse.json({posts: postsWithVisits, currentPage: page, totalPages: total, count});
 }

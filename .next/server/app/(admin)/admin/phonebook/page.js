@@ -572,7 +572,6 @@ const PhoneBookCategories = ()=>{
             }
         });
         setContacts(data);
-        console.log(data);
     };
     const editContact = (contact)=>{
         setContactFormData(contact);
@@ -593,7 +592,6 @@ const PhoneBookCategories = ()=>{
     const handleContactSubmit = async (e)=>{
         e.preventDefault();
         if (contactFormData._id) {
-            console.log(contactFormData._id);
             const { data } = await axios/* default */.Z.patch("/api/phonebook", contactFormData, {
                 validateStatus: function(status) {
                     return true;
@@ -904,7 +902,7 @@ const __default__ = proxy.default;
 var __webpack_require__ = require("../../../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [2697,9021,5329,5527,589], () => (__webpack_exec__(18721)));
+var __webpack_exports__ = __webpack_require__.X(0, [2697,2862,254,7145,589], () => (__webpack_exec__(18721)));
 module.exports = __webpack_exports__;
 
 })();

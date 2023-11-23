@@ -87,7 +87,10 @@ var models_housing = __webpack_require__(60113);
 var models_city = __webpack_require__(62159);
 // EXTERNAL MODULE: ./src/utilFunctions/dateConvert.js
 var dateConvert = __webpack_require__(25509);
+// EXTERNAL MODULE: ./src/database/models/userpostvisit.js
+var userpostvisit = __webpack_require__(91708);
 ;// CONCATENATED MODULE: ./src/app/api/posts/[id]/route.js
+
 
 
 
@@ -101,17 +104,37 @@ var dateConvert = __webpack_require__(25509);
 
 async function GET(request, context) {
     const { id } = context.params;
-    const ip = (request.headers.get("x-real-ip") ?? "127.0.0.1").split(",")[0];
-    const ip2 = (request.headers.get("x-forwarded-for") ?? "127.0.0.1").split(",")[0];
-    const ip3 = request.query?.clientIp ?? "127.0.0.1";
+    let ipAddress = request.headers.get("x-real-ip");
+    const forwardedFor = (request.headers.get("x-forwarded-for") ?? "127.0.0.1").split(",")[0];
+    if (!ipAddress && forwardedFor) {
+        ipAddress = forwardedFor;
+    } else {
+        ipAddress = null;
+    }
+    const today = new Date().setUTCHours(0, 0, 0, 0);
     try {
         await (0,connect/* default */.Z)();
         const post = await models_post/* default */.Z.findById(id).populate("city").populate("region").populate("housing");
+        if (ipAddress) {
+            const existingUserVisit = await userpostvisit/* default */.Z.findOne({
+                ip: ipAddress,
+                postId: id,
+                timestamp: today
+            });
+            if (!existingUserVisit) {
+                await userpostvisit/* default */.Z.create({
+                    ip: ipAddress,
+                    postId: id,
+                    timestamp: today
+                });
+            }
+        }
+        const visits = await userpostvisit/* default */.Z.countDocuments({
+            postId: id
+        });
         return next_response/* default */.Z.json({
             post,
-            ip,
-            ip2,
-            ip3
+            visits
         });
     } catch (error) {
         return next_response/* default */.Z.json(null, {
@@ -264,6 +287,38 @@ async function PATCH(request, context) {
     const originalPathname = "/api/posts/[id]/route"
 
     
+
+/***/ }),
+
+/***/ 91708:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Z: () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var mongoose__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(11185);
+/* harmony import */ var mongoose__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(mongoose__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _post__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(96784);
+
+
+const userPostVisit = mongoose__WEBPACK_IMPORTED_MODULE_0___default().Schema({
+    ip: {
+        type: String,
+        required: true
+    },
+    postId: {
+        type: (mongoose__WEBPACK_IMPORTED_MODULE_0___default().Schema).Types.ObjectId,
+        ref: _post__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .Z,
+        required: true
+    },
+    timestamp: {
+        type: Date,
+        required: true
+    }
+});
+const UserPostVisit = (mongoose__WEBPACK_IMPORTED_MODULE_0___default().models).UserPostVisit || mongoose__WEBPACK_IMPORTED_MODULE_0___default().model("UserPostVisit", userPostVisit);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (UserPostVisit);
+
 
 /***/ })
 
