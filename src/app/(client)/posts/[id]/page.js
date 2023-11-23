@@ -10,8 +10,8 @@ const PostContent = ({params}) => {
     const [post, setPost] = useState(null);
     const getPost = async ()=> {
         const {data} = await axios.get(`/api/posts/${id}`, {validateStatus: function (status) { return true }, headers: {"Access-Control-Allow-Origin": "*", "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"}});
-        console.log(data.ip)
-        setPost(data);
+        console.log(data.ip, data.ip2)
+        setPost(data.post);
     }
 
     useEffect(()=>{

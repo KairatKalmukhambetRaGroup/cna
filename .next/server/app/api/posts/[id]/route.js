@@ -101,14 +101,16 @@ var dateConvert = __webpack_require__(25509);
 
 async function GET(request, context) {
     const { id } = context.params;
-    // const ip = (request.headers.get('x-forwarded-for') ?? '127.0.0.1').split(',')[0]
-    const ip = request.query?.clientIp ?? "127.0.0.1";
-    // console.log(ip);
+    const ip = (request.headers.get("x-forwarded-for") ?? "127.0.0.1").split(",")[0];
+    const ip2 = request.query?.clientIp ?? "127.0.0.1";
     try {
         await (0,connect/* default */.Z)();
         const post = await models_post/* default */.Z.findById(id).populate("city").populate("region").populate("housing");
-        post.ip = ip;
-        return next_response/* default */.Z.json(post);
+        return next_response/* default */.Z.json({
+            post,
+            ip,
+            ip2
+        });
     } catch (error) {
         return next_response/* default */.Z.json(null, {
             status: 500

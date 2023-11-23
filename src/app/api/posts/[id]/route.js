@@ -14,9 +14,8 @@ import { queryToMongoose } from "@/utilFunctions/dateConvert";
 
 export async function GET(request, context) {
     const { id } = context.params;    
-    // const ip = (request.headers.get('x-forwarded-for') ?? '127.0.0.1').split(',')[0]
-    const ip = request.query?.clientIp ?? "127.0.0.1";
-    // console.log(ip);
+    const ip = (request.headers.get('x-forwarded-for') ?? '127.0.0.1').split(',')[0]
+    const ip2 = request.query?.clientIp ?? "127.0.0.1";
 
     try {
         await connectMongo();
@@ -24,8 +23,7 @@ export async function GET(request, context) {
             .populate('city')
             .populate('region')
             .populate('housing');
-            post.ip = ip;
-        return NextResponse.json(post);
+        return NextResponse.json({post, ip, ip2});
     } catch (error) {
         return NextResponse.json(null, {status: 500});
     }

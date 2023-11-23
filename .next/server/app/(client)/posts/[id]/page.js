@@ -910,8 +910,8 @@ const PostContent = ({ params })=>{
                 "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
             }
         });
-        console.log(data.ip);
-        setPost(data);
+        console.log(data.ip, data.ip2);
+        setPost(data.post);
     };
     (0,react_.useEffect)(()=>{
         if (id && !post) {
