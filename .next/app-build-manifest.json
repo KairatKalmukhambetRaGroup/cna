@@ -92,8 +92,8 @@
       "static/css/25052955582576a1.css",
       "static/chunks/910-20e194109789c53c.js",
       "static/chunks/247-ad00e5e92fd2dd9e.js",
-      "static/css/53017810525faefd.css",
-      "static/chunks/app/(client)/rent/page-f036af532e146220.js"
+      "static/chunks/app/(client)/rent/page-f036af532e146220.js",
+      "static/css/53017810525faefd.css"
     ],
     "/(admin)/admin/layout": [
       "static/chunks/webpack-9dfa25e54cfcad3a.js",
@@ -147,6 +147,17 @@
       "static/css/09f0281180945887.css",
       "static/chunks/app/(admin)/admin/phonebook/page-6b00c0142523395a.js"
     ],
+    "/(admin)/admin/posts/page": [
+      "static/chunks/webpack-9dfa25e54cfcad3a.js",
+      "static/chunks/fd9d1056-a13422dc6358acc1.js",
+      "static/chunks/596-41f618d0d712d085.js",
+      "static/chunks/main-app-685a15c32b9ca9f7.js",
+      "static/chunks/750-b8c2fcc087d3c425.js",
+      "static/chunks/685-6269dd347dbd545e.js",
+      "static/chunks/330-6a27df9cc94670df.js",
+      "static/css/b8a7a34c4f95b76b.css",
+      "static/chunks/app/(admin)/admin/posts/page-6e95800f10ccef39.js"
+    ],
     "/(client)/phonebook/[id]/page": [
       "static/chunks/webpack-9dfa25e54cfcad3a.js",
       "static/chunks/fd9d1056-a13422dc6358acc1.js",
@@ -164,18 +175,7 @@
       "static/chunks/750-b8c2fcc087d3c425.js",
       "static/chunks/330-6a27df9cc94670df.js",
       "static/css/5292ec3db801b86f.css",
-      "static/chunks/app/(client)/posts/[id]/page-807c45ab82879c93.js"
-    ],
-    "/(admin)/admin/posts/page": [
-      "static/chunks/webpack-9dfa25e54cfcad3a.js",
-      "static/chunks/fd9d1056-a13422dc6358acc1.js",
-      "static/chunks/596-41f618d0d712d085.js",
-      "static/chunks/main-app-685a15c32b9ca9f7.js",
-      "static/chunks/750-b8c2fcc087d3c425.js",
-      "static/chunks/685-6269dd347dbd545e.js",
-      "static/chunks/330-6a27df9cc94670df.js",
-      "static/css/b8a7a34c4f95b76b.css",
-      "static/chunks/app/(admin)/admin/posts/page-6e95800f10ccef39.js"
+      "static/chunks/app/(client)/posts/[id]/page-b66bc9986bdb63bd.js"
     ],
     "/(admin)/admin/advertisements/[id]/page": [
       "static/chunks/webpack-9dfa25e54cfcad3a.js",
