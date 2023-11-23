@@ -1,8 +1,8 @@
-exports.id = 3523;
-exports.ids = [3523];
+exports.id = 2254;
+exports.ids = [2254];
 exports.modules = {
 
-/***/ 81390:
+/***/ 18998:
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
 Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 85589))
