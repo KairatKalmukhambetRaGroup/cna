@@ -32,7 +32,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const Header = ()=>{
-    const [lastVisit, setLastVisit] = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)(localStorage.getItem("lastvisit"));
+    const [lastVisit, setLastVisit] = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)(null);
     const today = new Date().setUTCHours(0, 0, 0, 0);
     const saveUserVisit = async ()=>{
         const { data } = await axios__WEBPACK_IMPORTED_MODULE_4__/* ["default"] */ .Z.get(`/api`, {
@@ -48,12 +48,15 @@ const Header = ()=>{
         setLastVisit(data);
     };
     (0,react__WEBPACK_IMPORTED_MODULE_3__.useEffect)(()=>{
-        if (lastVisit != today) {
-            saveUserVisit();
-        }
+        if (false) {}
     }, [
         lastVisit
     ]);
+    // useEffect(()=>{
+    //     if(lastVisit != today){
+    //         saveUserVisit();
+    //     }
+    // }, [lastVisit])
     return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("header", {
         className: (_styles_header_scss__WEBPACK_IMPORTED_MODULE_1___default().header),
         children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
