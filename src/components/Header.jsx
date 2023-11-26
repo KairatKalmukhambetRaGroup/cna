@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 const Header = () => {
-    const [lastVisit, setLastVisit] = useState(localStorage.getItem('lastvisit'));
+    const [lastVisit, setLastVisit] = useState(null);
     const today = new Date().setUTCHours(0,0,0,0);
 
     const saveUserVisit = async () => {
@@ -16,8 +16,13 @@ const Header = () => {
     }
     
     useEffect(()=>{
-        if(lastVisit != today){
-            saveUserVisit();
+        if(typeof window != 'undefined'){
+            let ls = localStorage.getItem('lastvisit')
+            if(!ls || ls != today){
+                saveUserVisit();
+            }else{
+                setLastVisit(ls);
+            }
         }
     }, [lastVisit])
 
