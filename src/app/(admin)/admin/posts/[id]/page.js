@@ -13,7 +13,7 @@ const EditPost = ({params}) => {
 
     const getPost = async ()=> {
         const {data} = await axios.get(`/api/posts/${id}`, {validateStatus: function (status) { return true }, headers: {"Access-Control-Allow-Origin": "*", "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"}});
-        setPost(data);
+        setPost(data.post);
     }
 
     useEffect(()=>{

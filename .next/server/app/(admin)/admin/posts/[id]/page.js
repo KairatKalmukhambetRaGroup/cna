@@ -423,7 +423,7 @@ const EditPost = ({ params })=>{
                 "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
             }
         });
-        setPost(data);
+        setPost(data.post);
     };
     (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(()=>{
         if (id && !post) {
