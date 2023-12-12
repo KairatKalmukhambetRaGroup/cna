@@ -1,6 +1,7 @@
 'use client'
 
 import styles from '@/styles/header.scss';
+import { useUserIp } from '@/utilFunctions/useUserIp';
 import axios from 'axios';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
@@ -14,6 +15,7 @@ const Header = () => {
         localStorage.setItem('lastvisit',data);
         setLastVisit(data);
     }
+    console.log(useUserIp());
     
     useEffect(()=>{
         if(typeof window != 'undefined'){

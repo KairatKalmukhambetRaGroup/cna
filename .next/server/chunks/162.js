@@ -1,41 +1,75 @@
-exports.id = 2254;
-exports.ids = [2254];
+exports.id = 162;
+exports.ids = [162];
 exports.modules = {
 
-/***/ 18998:
+/***/ 69428:
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
-Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 85589))
+Promise.resolve(/* import() eager */).then(__webpack_require__.t.bind(__webpack_require__, 31232, 23));
+Promise.resolve(/* import() eager */).then(__webpack_require__.t.bind(__webpack_require__, 52987, 23));
+Promise.resolve(/* import() eager */).then(__webpack_require__.t.bind(__webpack_require__, 50831, 23));
+Promise.resolve(/* import() eager */).then(__webpack_require__.t.bind(__webpack_require__, 56926, 23));
+Promise.resolve(/* import() eager */).then(__webpack_require__.t.bind(__webpack_require__, 44282, 23))
 
 /***/ }),
 
-/***/ 85589:
+/***/ 81390:
+/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
+
+Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 58412))
+
+/***/ }),
+
+/***/ 58412:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
+// ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(56786);
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _styles_header_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(40365);
-/* harmony import */ var _styles_header_scss__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_styles_header_scss__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(93258);
-/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(11440);
-/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(18038);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, {
+  "default": () => (/* binding */ components_Header)
+});
+
+// EXTERNAL MODULE: external "next/dist/compiled/react/jsx-runtime"
+var jsx_runtime_ = __webpack_require__(56786);
+// EXTERNAL MODULE: ./src/styles/header.scss
+var header = __webpack_require__(40365);
+var header_default = /*#__PURE__*/__webpack_require__.n(header);
+// EXTERNAL MODULE: external "next/dist/compiled/react"
+var react_ = __webpack_require__(18038);
+// EXTERNAL MODULE: ./node_modules/browser-cookies/src/browser-cookies.js
+var browser_cookies = __webpack_require__(21041);
+;// CONCATENATED MODULE: ./src/utilFunctions/useUserIp.js
+
+
+const useUserIp = ()=>{
+    const [ip, setUserIp] = (0,react_.useState)("");
+    (0,react_.useEffect)(()=>{
+        const userIp = browser_cookies.get("user-ip") ?? "";
+        setUserIp(userIp);
+    }, []);
+    return ip;
+};
+
+// EXTERNAL MODULE: ./node_modules/axios/lib/axios.js + 46 modules
+var axios = __webpack_require__(93258);
+// EXTERNAL MODULE: ./node_modules/next/link.js
+var next_link = __webpack_require__(11440);
+var link_default = /*#__PURE__*/__webpack_require__.n(next_link);
+;// CONCATENATED MODULE: ./src/components/Header.jsx
 /* __next_internal_client_entry_do_not_use__ default auto */ 
 
 
 
 
+
 const Header = ()=>{
-    const [lastVisit, setLastVisit] = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)(null);
+    const [lastVisit, setLastVisit] = (0,react_.useState)(null);
     const today = new Date().setUTCHours(0, 0, 0, 0);
     const saveUserVisit = async ()=>{
-        const { data } = await axios__WEBPACK_IMPORTED_MODULE_4__/* ["default"] */ .Z.get(`/api`, {
+        const { data } = await axios/* default */.Z.get(`/api`, {
             validateStatus: function(status) {
                 return true;
             },
@@ -47,47 +81,48 @@ const Header = ()=>{
         localStorage.setItem("lastvisit", data);
         setLastVisit(data);
     };
-    (0,react__WEBPACK_IMPORTED_MODULE_3__.useEffect)(()=>{
+    console.log(useUserIp());
+    (0,react_.useEffect)(()=>{
         if (false) {}
     }, [
         lastVisit
     ]);
-    return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("header", {
-        className: (_styles_header_scss__WEBPACK_IMPORTED_MODULE_1___default().header),
-        children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+    return /*#__PURE__*/ jsx_runtime_.jsx("header", {
+        className: (header_default()).header,
+        children: /*#__PURE__*/ jsx_runtime_.jsx("div", {
             className: "container",
-            children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+            children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
                 className: "navbar",
                 children: [
-                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_2___default()), {
+                    /*#__PURE__*/ jsx_runtime_.jsx((link_default()), {
                         href: "/",
                         className: "logo",
                         children: "CNA"
                     }),
-                    /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
                         className: "nav",
                         children: [
-                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_2___default()), {
+                            /*#__PURE__*/ jsx_runtime_.jsx((link_default()), {
                                 href: "/posts",
                                 children: "Продажа"
                             }),
-                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_2___default()), {
+                            /*#__PURE__*/ jsx_runtime_.jsx((link_default()), {
                                 href: "/rent",
                                 children: "Аренда"
                             }),
-                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_2___default()), {
+                            /*#__PURE__*/ jsx_runtime_.jsx((link_default()), {
                                 href: "/#about",
                                 children: "О нас"
                             }),
-                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_2___default()), {
+                            /*#__PURE__*/ jsx_runtime_.jsx((link_default()), {
                                 href: "/phonebook",
                                 children: "Справочник"
                             }),
-                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_2___default()), {
+                            /*#__PURE__*/ jsx_runtime_.jsx((link_default()), {
                                 href: "/#contacts",
                                 children: "Контакты"
                             }),
-                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_2___default()), {
+                            /*#__PURE__*/ jsx_runtime_.jsx((link_default()), {
                                 href: "/application",
                                 target: "_blank",
                                 className: "btn",
@@ -100,7 +135,7 @@ const Header = ()=>{
         })
     });
 };
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Header);
+/* harmony default export */ const components_Header = (Header);
 
 
 /***/ }),

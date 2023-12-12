@@ -1,7 +1,7 @@
 // runtime can't be in strict mode because a global variable is assign and maybe created.
 (self["webpackChunk_N_E"] = self["webpackChunk_N_E"] || []).push([[727],{
 
-/***/ 619:
+/***/ 197:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -1354,21 +1354,26 @@ async function adapter(params) {
     };
 } //# sourceMappingURL=adapter.js.map
 
-;// CONCATENATED MODULE: ./node_modules/next/dist/esm/server/web/exports/next-request.js
-// This file is for modularized imports for next/server to get fully-treeshaking.
- //# sourceMappingURL=next-request.js.map
-
 ;// CONCATENATED MODULE: ./node_modules/next/dist/esm/server/web/exports/next-response.js
 // This file is for modularized imports for next/server to get fully-treeshaking.
  //# sourceMappingURL=next-response.js.map
 
 ;// CONCATENATED MODULE: ./src/middleware.js
 
-
-async function middleware(req) {
-    const { ip, nextUrl } = req;
-    nextUrl.searchParams.set("clientIp", ip);
-    return NextResponse.rewrite(nextUrl);
+async function middleware(request) {
+    const res = NextResponse.next();
+    let ip = request.ip ?? request.headers.get("x-real-ip");
+    const forwardedFor = request.headers.get("x-forwarded-for");
+    console.log(ip, forwardedFor);
+    if (!ip && forwardedFor) {
+        ip = forwardedFor.split(",").at(0) ?? "Unknown";
+    }
+    if (ip) {
+        res.cookies.set("user-ip", ip, {
+            httpOnly: false
+        });
+    }
+    return res;
 }
 
 ;// CONCATENATED MODULE: ./node_modules/next/dist/build/webpack/loaders/next-middleware-loader.js?absolutePagePath=private-next-root-dir%2Fsrc%2Fmiddleware.js&page=%2Fsrc%2Fmiddleware&rootDir=D%3A%5Cpersonal%20projects%5Ckrisha-next&matchers=&preferredRegion=&middlewareConfig=e30%3D!
@@ -1738,7 +1743,7 @@ function splitCookiesString(cookiesString) {
 },
 /******/ __webpack_require__ => { // webpackRuntimeModules
 /******/ var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-/******/ var __webpack_exports__ = (__webpack_exec__(619));
+/******/ var __webpack_exports__ = (__webpack_exec__(197));
 /******/ (_ENTRIES = typeof _ENTRIES === "undefined" ? {} : _ENTRIES)["middleware_src/middleware"] = __webpack_exports__;
 /******/ }
 ]);
