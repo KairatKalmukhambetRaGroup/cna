@@ -15,10 +15,13 @@ import UserPostVisit from "@/database/models/userpostvisit";
 
 export async function GET(request, context) {
     const { id } = context.params;    
-    let ipAddress = request.headers.get('x-real-ip');
-    const forwardedFor = (request.headers.get('x-forwarded-for') ?? '127.0.0.1').split(',')[0]
-    if(!ipAddress && forwardedFor){
-        ipAddress = forwardedFor;
+
+    const {searchParams} = new URL(request.url);
+    let ipAddress = searchParams.get("ip");
+    const ipX = request.headers.get('X-Real-IP');
+    
+    if(!ipAddress && ipX){
+        ipAddress = ipX;
     }else{
         ipAddress = null;
     }
@@ -106,53 +109,52 @@ export async function PATCH(request, context) {
         }
 
         const existingPost = await Post.findById(id);
-        const postImages = existingPost.images;
         // upload Images
         const images = await formData.getAll('images'); 
-        let imgUrls = [];
-        for (let i = 0; i < images.length; i++) {
-            const image = images[i];
-            if(postImages.includes(image)){
-                imgUrls.push(image);
-                continue;
-            }
+        // let imgUrls = [];
+        // for (let i = 0; i < images.length; i++) {
+        //     const image = images[i];
+        //     if(postImages.includes(image)){
+        //         imgUrls.push(image);
+        //         continue;
+        //     }
 
 
 
-            const buffer = Buffer.from(await image.arrayBuffer());
+        //     const buffer = Buffer.from(await image.arrayBuffer());
             
-            const relativeUploadDir = `/uploads`;
-            const uploadDir = join(process.cwd(), "public", relativeUploadDir);
-            try {
-                await stat(uploadDir);
-              } catch (e) {
-                if (e.code === "ENOENT") {
-                  await mkdir(uploadDir, { recursive: true });
-                } else {
-                  console.error(e);
-                  return NextResponse.json("Something went wrong.",
-                    { status: 500 }
-                  );
-                }
-              }
-            try {
-                const uniqueSuffix = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
-                const filename = `${image.name.replace(
-                  /\.[^/.]+$/,
-                  ""
-                )}-${uniqueSuffix}.${mime.getExtension(image.type)}`;
-                await writeFile(`${uploadDir}/${filename}`, buffer);
-                imgUrls.push(filename);
-                // return NextResponse.json({ fileUrl: `${relativeUploadDir}/${filename}` });
-            } catch (e) {
-                console.error("Error while trying to upload a file\n", e);
-                return NextResponse.json("Something went wrong.",
-                    { status: 500 }
-                );
-            }
-        }
+        //     const relativeUploadDir = `/uploads`;
+        //     const uploadDir = join(process.cwd(), "public", relativeUploadDir);
+        //     try {
+        //         await stat(uploadDir);
+        //       } catch (e) {
+        //         if (e.code === "ENOENT") {
+        //           await mkdir(uploadDir, { recursive: true });
+        //         } else {
+        //           console.error(e);
+        //           return NextResponse.json("Something went wrong.",
+        //             { status: 500 }
+        //           );
+        //         }
+        //       }
+        //     try {
+        //         const uniqueSuffix = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
+        //         const filename = `${image.name.replace(
+        //           /\.[^/.]+$/,
+        //           ""
+        //         )}-${uniqueSuffix}.${mime.getExtension(image.type)}`;
+        //         await writeFile(`${uploadDir}/${filename}`, buffer);
+        //         imgUrls.push(filename);
+        //         // return NextResponse.json({ fileUrl: `${relativeUploadDir}/${filename}` });
+        //     } catch (e) {
+        //         console.error("Error while trying to upload a file\n", e);
+        //         return NextResponse.json("Something went wrong.",
+        //             { status: 500 }
+        //         );
+        //     }
+        // }
         
-        data.images = imgUrls;
+        data.images = images;
 
 
         

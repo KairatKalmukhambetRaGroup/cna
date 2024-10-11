@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import Loading from './Loading';
 import Menu from './Menu';
+import { useUserIp } from '@/utilFunctions/useUserIp';
 
 
 const PhoneBook = () => {
@@ -12,8 +13,10 @@ const PhoneBook = () => {
     const [formData, setFormData] = useState(initFormData);
     const [subcategories, setSubcategories] = useState(null);
 
+    const userip = useUserIp();
+
     const getContacts = async () => {
-        const {data} = await axios.get(`/api/phonebook`, {validateStatus: function (status) { return true }, headers: {"Access-Control-Allow-Origin": "*", "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"}});
+        const {data} = await axios.get(`/api/phonebook?ip=${userip}`, {validateStatus: function (status) { return true }, headers: {"Access-Control-Allow-Origin": "*", "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"}});
         setContacts(data);
     }
 

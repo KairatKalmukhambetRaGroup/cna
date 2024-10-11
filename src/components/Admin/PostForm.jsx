@@ -72,7 +72,6 @@ const PostForm = ({post=null}) => {
     const [regions, setRegions] = useState(null);
     const [cities, setCities] = useState(null);
     const [cityObjects, setCityObjects] = useState(null);
-    const [previews, setPreviews] = useState([]);
 
     const [modalText, setModalText] = useState(null);
 
@@ -106,12 +105,7 @@ const PostForm = ({post=null}) => {
         if(post && post._id){
             setFormData({...formData,...post, region: post.region.name, housing: post.housing.slug});
             // setFormData({...formData,...post, city: post.city.name, region: post.region.name, housing: post.housing.slug});
-            let prevs = [];
-            for (let i = 0; i < post.images.length; i++) {
-                prevs.push('/uploads/'+post.images[i]);
-                
-            }
-            setPreviews([...prevs]);
+            setImages(post.images);
         }
     }, [post])
 
@@ -167,12 +161,6 @@ const PostForm = ({post=null}) => {
                 fd.append(i, value);
             }
         }
-        for (let i = 0; i < previews.length; i++) {
-            const prev = previews[i].split('/uploads/')[1];
-            if(post && post.images.includes(prev)){
-                fd.append('images', prev);
-            }
-        }
         images.map((img)=>{
             fd.append('images', img);
         })
@@ -203,40 +191,41 @@ const PostForm = ({post=null}) => {
     const [images, setImages] = useState([]);
     const [currentImage, setCurrentImage] = useState(0);
 
-    const handleImageUpload = (e) => {
+    const handleImageUpload = async (e) => {
         const files = e.target.files;
         let imgList = [];
-        let prevList = [];
+        const promises = [];
+
         for (let i = 0; i < files.length; i++) {
             const file = files[i];
             const fileType = file['type'];
             const validImageTypes = ['image/jpeg', 'image/png', 'image/webp'];
+
             if (validImageTypes.includes(fileType)) {
+                const reader = new FileReader();
+
+                promises.push(new Promise((resolve) => {
+                    reader.onloadend = () => {
+                        resolve(reader.result)
+                    };
+                    reader.readAsDataURL(file);
+                }))
                 imgList.push(file);
-                prevList.push(URL.createObjectURL(file))
             } 
         }
-        setImages([...images, ...imgList]);
-        setPreviews([...previews, ...prevList]);
+        Promise.all(promises).then((base64Strings) => {
+            setImages([...images, ...base64Strings]);
+        });
     }
 
     const deleteImage = (index) => {
-        let inImages = false;
-        const tmpPrev = previews[index];
-        const tmpPrevI = previews[index].split('/uploads/')[1];
-        if(post.images && post.images.includes(tmpPrevI))
-            inImages = true;
-        if(!inImages){
-            const tmpImg = images[index];
-            setImages(images.filter(img=>img != tmpImg));
-        }
-        setPreviews(previews.filter(prev=>prev != tmpPrev));    
+        const tmpImg = images[index];
+        setImages(prev => prev.filter(img=>img != tmpImg));
         setCurrentImage(Math.max(0, index - 1));
     }
     const clearImages = (e) => {
         e.preventDefault();
         setImages([]);
-        setPreviews([]);
         setCurrentImage(0);
     }
 
@@ -249,9 +238,9 @@ const PostForm = ({post=null}) => {
                         <div className="col">
                             <div className="images-container">
                                 <div className="current-image">
-                                    {(previews && previews.length > 0 && previews[currentImage]) ? (
+                                    {(images && images.length > 0 && images[currentImage]) ? (
                                         <>
-                                            <img src={previews[currentImage]} alt='prev'/>
+                                            <img src={images[currentImage]} alt='prev'/>
 
                                             <i className="delete" onClick={(e)=>{e.preventDefault(); deleteImage(currentImage)}}></i>
                                         </>
@@ -260,7 +249,7 @@ const PostForm = ({post=null}) => {
                                     )}
                                 </div>
                                 <div className="images">
-                                    {previews && previews.map((image, key) => (
+                                    {images && images.map((image, key) => (
                                         <div className={`img ${currentImage === key ? 'active' : ''} `} key={key} onClick={(e)=>{e.preventDefault(); setCurrentImage(key)}}>
                                             <img src={image} alt={`prev${key}`}/>
                                         </div>

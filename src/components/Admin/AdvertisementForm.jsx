@@ -24,14 +24,13 @@ const modalFail = {
 
 const AdvertisementForm = ({ad=null}) => {
     const [formData, setFormData] = useState(initFormData);
-    const [preview, setPreview] = useState(null);
     const [image, setImage] = useState(null);
     const [modalText, setModalText] = useState(null);
 
     useEffect(()=>{
         if(ad && ad._id){
             setFormData({...formData, ...ad});
-            setPreview(`/uploads/${ad.image}`);
+            setImage(ad.image)
         }
     }, [ad]);
 
@@ -51,7 +50,6 @@ const AdvertisementForm = ({ad=null}) => {
         e.preventDefault();
         save();
     }
-    const delay = ms => new Promise(res => setTimeout(res, ms));
     const save = async () => {
         const fd = new FormData();
         for(let i in formData){
@@ -85,19 +83,22 @@ const AdvertisementForm = ({ad=null}) => {
 
     }
 
-    const handleImageUpload = (e) => {
+    const handleImageUpload = async (e) => {
         const file = e.target.files[0];
         const fileType = file['type'];
         const validImageTypes = ['image/jpeg', 'image/png', 'image/webp'];
+
         if (validImageTypes.includes(fileType)) {
-            setImage(file);
-            setPreview(URL.createObjectURL(file));
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setImage(reader.result);
+            }
+            reader.readAsDataURL(file)
         } 
     }
     const deleteImage = (e) => {
         e.preventDefault();
         setImage(null);
-        setPreview(null);    
     }
 
     return (
@@ -109,8 +110,8 @@ const AdvertisementForm = ({ad=null}) => {
                         <div className="col">
                             <div className="image-container">
                                 <div className="preview">
-                                    {preview ? (
-                                        <img src={preview} alt='prev'/>
+                                    {image ? (
+                                        <img src={image} alt='prev'/>
                                     ) : (
                                         <div className="noimage">Нет изображения</div>
                                     )}

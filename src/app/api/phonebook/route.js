@@ -9,10 +9,12 @@ export async function GET(request) {
     const params = request.nextUrl.searchParams.toString();
     const data = queryToMongoose(params);
 
-    let ipAddress = request.headers.get('x-real-ip');
-    const forwardedFor = (request.headers.get('x-forwarded-for') ?? '127.0.0.1').split(',')[0]
-    if(!ipAddress && forwardedFor){
-        ipAddress = forwardedFor;
+    const {searchParams} = new URL(request.url);
+    let ipAddress = searchParams.get("ip");
+    const ipX = request.headers.get('X-Real-IP');
+    
+    if(!ipAddress && ipX){
+        ipAddress = ipX;
     }else{
         ipAddress = null;
     }

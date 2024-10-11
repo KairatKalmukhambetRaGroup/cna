@@ -8,7 +8,7 @@ const PostSmall = ({post}) => {
         <div className="postsmall" onClick={(e)=>{e.preventDefault(); router.push(`/posts/${post._id}`)}}>
             <div className="postimage">
                 {(post.images && post.images.length > 0) ? (
-                    <img loading='lazy' src={`https://cna.kz/uploads/${post.images[0]}`} alt="" />
+                    <img loading='lazy' src={post.images[0]} alt="" />
                 ) : (
                     <img loading='lazy' src={`/noimage.png`} alt="noimage" />
                 )}

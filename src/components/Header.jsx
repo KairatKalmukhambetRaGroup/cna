@@ -9,13 +9,13 @@ import { useEffect, useState } from 'react';
 const Header = () => {
     const [lastVisit, setLastVisit] = useState(null);
     const today = new Date().setUTCHours(0,0,0,0);
+    const userip = useUserIp();
 
     const saveUserVisit = async () => {
-        const {data} = await axios.get(`/api`, {validateStatus: function (status) { return true }, headers: {"Access-Control-Allow-Origin": "*", "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"}});
+        const {data} = await axios.get(`/api?ip=${userip}`, {validateStatus: function (status) { return true }, headers: {"Access-Control-Allow-Origin": "*", "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"}});
         localStorage.setItem('lastvisit',data);
         setLastVisit(data);
     }
-    console.log(useUserIp());
     
     useEffect(()=>{
         if(typeof window != 'undefined'){

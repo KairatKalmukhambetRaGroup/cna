@@ -30,7 +30,7 @@ const Slideshow = ({images=null}) => {
             <ModalSlideshow images={images} current={currentModal} setCurrent={setCurrentModal} />
             <div className="current">
                 {images && images.length>0 && (
-                    <img src={`https://cna.kz/uploads/${images[currentImage]}`} alt="currentimage" 
+                    <img src={images[currentImage]} alt="currentimage" 
                     onClick={(e)=>{e.preventDefault(); setCurrentModal(currentImage)}} />
                 )}
                 <i className="crnt-left" onClick={prev}></i>
@@ -45,7 +45,7 @@ const Slideshow = ({images=null}) => {
                         <div className={`preview ${currentImage===key ? 'active': ''}`} key={key} 
                             onMouseEnter={(e)=>{e.preventDefault(); changeCurrent(key);}} 
                             onClick={(e)=>{e.preventDefault(); setCurrentModal(key)}}>
-                            <img src={`https://cna.kz/uploads/${img}`} alt={`imgpreview-${key}`}/>
+                            <img src={img} alt={`imgpreview-${key}`}/>
                         </div>
                     ))}
                 </div>
@@ -88,7 +88,7 @@ const ModalSlideshow = ({images, current, setCurrent}) =>{
                 </div>
                 <i className="close" onClick={close}></i>
                 <i className="prev" onClick={prev}></i>
-                <img src={`https://cna.kz/uploads/${images[current]}`} alt="" />
+                <img src={images[current]} alt="" />
                 <i className="next" onClick={next}></i>
             </div>
         </div>

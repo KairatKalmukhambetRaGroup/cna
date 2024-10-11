@@ -10,7 +10,7 @@ const PostCard = ({post}) => {
         <div className="postcard" onClick={(e)=>{e.preventDefault(); router.push(`/posts/${post._id}`)}}>
             <div className="postimage">
                 {(post.images && post.images.length > 0) ? (
-                    <img loading="lazy" src={`https://cna.kz/uploads/${post.images[0]}`} alt="preview" />
+                    <img loading="lazy" src={post.images[0]} alt="preview" />
                 ) : (
                     <img loading="lazy" src={`/noimage.png`} alt="noimage" />
                 )}

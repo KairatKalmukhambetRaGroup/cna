@@ -38,43 +38,43 @@ export async function POST(request) {
 
     // upload Images
     const images = await formData.getAll('images'); 
-    let imgUrls = [];
-    for (let i = 0; i < images.length; i++) {
-        const image = images[i];
-        const buffer = Buffer.from(await image.arrayBuffer());
+    // let imgUrls = [];
+    // for (let i = 0; i < images.length; i++) {
+    //     const image = images[i];
+    //     const buffer = Buffer.from(await image.arrayBuffer());
         
-        const relativeUploadDir = `/uploads`;
-        const uploadDir = join(process.cwd(), "public", relativeUploadDir);
-        try {
-            await stat(uploadDir);
-          } catch (e) {
-            if (e.code === "ENOENT") {
-              await mkdir(uploadDir, { recursive: true });
-            } else {
-              console.error(e);
-              return NextResponse.json("Something went wrong.",
-                { status: 500 }
-              );
-            }
-          }
-        try {
-            const uniqueSuffix = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
-            const filename = `${image.name.replace(
-              /\.[^/.]+$/,
-              ""
-            )}-${uniqueSuffix}.${mime.getExtension(image.type)}`;
-            await writeFile(`${uploadDir}/${filename}`, buffer);
-            imgUrls.push(filename);
-            // return NextResponse.json({ fileUrl: `${relativeUploadDir}/${filename}` });
-        } catch (e) {
-            console.error("Error while trying to upload a file\n", e);
-            return NextResponse.json("Something went wrong.",
-                { status: 500 }
-            );
-        }
-    }
+    //     const relativeUploadDir = `/uploads`;
+    //     const uploadDir = join(process.cwd(), "public", relativeUploadDir);
+    //     try {
+    //         await stat(uploadDir);
+    //       } catch (e) {
+    //         if (e.code === "ENOENT") {
+    //           await mkdir(uploadDir, { recursive: true });
+    //         } else {
+    //           console.error(e);
+    //           return NextResponse.json("Something went wrong.",
+    //             { status: 500 }
+    //           );
+    //         }
+    //       }
+    //     try {
+    //         const uniqueSuffix = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
+    //         const filename = `${image.name.replace(
+    //           /\.[^/.]+$/,
+    //           ""
+    //         )}-${uniqueSuffix}.${mime.getExtension(image.type)}`;
+    //         await writeFile(`${uploadDir}/${filename}`, buffer);
+    //         imgUrls.push(filename);
+    //         // return NextResponse.json({ fileUrl: `${relativeUploadDir}/${filename}` });
+    //     } catch (e) {
+    //         console.error("Error while trying to upload a file\n", e);
+    //         return NextResponse.json("Something went wrong.",
+    //             { status: 500 }
+    //         );
+    //     }
+    // }
     
-    data.images = imgUrls;
+    data.images = images;
 
     // save to DB
     try {

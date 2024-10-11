@@ -3,10 +3,12 @@ import UserVisit from "@/database/models/uservisit";
 import { NextResponse } from "next/server";
 
 export async function GET(request){
-    let ip = request.headers.get('x-real-ip');
-    const forwardedFor = (request.headers.get('x-forwarded-for') ?? '127.0.0.1').split(',')[0]
-    if(!ip && forwardedFor){
-        ip = forwardedFor;
+    const {searchParams} = new URL(request.url);
+    let ip = searchParams.get("ip");
+    const ipX = request.headers.get('X-Real-IP');
+    // const forwardedFor = (request.headers.get('x-forwarded-for') ?? '127.0.0.1').split(',')[0]
+    if(!ip && ipX){
+        ip = ipX;
     }else{
         ip = null;
     }

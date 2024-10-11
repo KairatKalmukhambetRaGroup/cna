@@ -1,0 +1,375 @@
+/*!***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[5].oneOf[13].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[5].oneOf[13].use[3]!./node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[5].oneOf[13].use[4]!./node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[5].oneOf[13].use[5]!./src/styles/admin/index.scss ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+.container {
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto;
+  display: flex;
+  padding: 0 16px;
+}
+
+.text-black {
+  color: #010101;
+}
+
+.text-white {
+  color: #ffffff;
+}
+
+.text-blue {
+  color: #2a81dd;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.ligth-12-14 {
+  font-weight: 300;
+  font-size: 12px;
+  line-height: 14px;
+}
+
+.ligth-16-20 {
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.regular-12-14 {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+}
+
+.regular-14-16 {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+}
+
+.regular-16-20 {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.medium-16-20 {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.regular-20-24 {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+}
+
+.regular-24-28 {
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 28px;
+}
+
+.medium-24-28 {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 28px;
+}
+
+.medium-32-36 {
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 36px;
+}
+
+.semi-36-44 {
+  font-weight: 600;
+  font-size: 36px;
+  line-height: 44px;
+}
+
+.semi-24-28 {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 28px;
+}
+
+.bold-36-44 {
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 44px;
+}
+
+.bold-40-48 {
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 48px;
+}
+
+.bold-48-56 {
+  font-weight: 700;
+  font-size: 48px;
+  line-height: 56px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Montserrat", sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: row;
+}
+body main {
+  margin-top: 60px;
+  flex-grow: 1;
+  padding: 24px 16px;
+  background: rgba(204, 204, 204, 0.4);
+}
+body * {
+  box-sizing: border-box;
+  text-decoration: none;
+}
+@media (min-width: 992px) {
+  body main {
+    padding: 24px;
+  }
+}
+/*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[5].oneOf[13].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[5].oneOf[13].use[3]!./node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[5].oneOf[13].use[4]!./node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[5].oneOf[13].use[5]!./src/styles/admin/sidebar.scss ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+#sidebar {
+  position: relative;
+  width: 0;
+  padding-top: 60px;
+  transition: all 0.3s ease-in-out;
+}
+#sidebar .header {
+  position: fixed;
+  width: 100vw;
+  background: #121e2d;
+  top: 0;
+  left: 0;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+#sidebar .header a {
+  width: 200px;
+  text-decoration: none;
+  color: #ffffff;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 28px;
+}
+#sidebar .header i {
+  cursor: pointer;
+  height: 21px;
+  width: 24px;
+  content: url(/_next/static/media/bars-solid.0e46acfc.svg);
+}
+#sidebar .content {
+  position: fixed;
+  top: 60px;
+  left: 0;
+  width: 0;
+  overflow: hidden;
+  height: 100%;
+  max-height: calc(100vh - 60px);
+  background: #121e2d;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  padding: 24px 0;
+  gap: 24px;
+  justify-content: space-between;
+  transition: all 0.3s ease-in-out;
+}
+#sidebar .content nav {
+  display: flex;
+  flex-direction: column;
+  padding: 0 24px;
+  margin: 0;
+  gap: 16px;
+  width: 100%;
+}
+#sidebar .content nav a {
+  width: 100%;
+  padding: 8px 0;
+  border-bottom: 1px solid #CCCCCC;
+  text-decoration: none;
+  color: #ffffff;
+  white-space: nowrap;
+}
+#sidebar .content .logout {
+  padding: 0 24px;
+  cursor: pointer;
+  color: #CCCCCC;
+}
+#sidebar.hide .content {
+  overflow: hidden;
+  width: 100%;
+  padding: 24px 0;
+}
+@media (min-width: 992px) {
+  #sidebar {
+    background: #121e2d;
+    position: relative;
+    width: 300px;
+    min-width: 300px;
+    padding-top: 60px;
+    transition: all 0.3s ease-in-out;
+  }
+  #sidebar .header {
+    position: fixed;
+    width: 100vw;
+    background: #121e2d;
+    top: 0;
+    left: 0;
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+  #sidebar .header a {
+    width: 200px;
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 28px;
+  }
+  #sidebar .header i {
+    cursor: pointer;
+    height: 21px;
+    width: 24px;
+    content: url(/_next/static/media/bars-solid.0e46acfc.svg);
+  }
+  #sidebar .content {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    overflow: hidden;
+    width: 300px;
+    height: 100%;
+    max-height: calc(100vh - 60px);
+    display: flex;
+    flex-direction: column;
+    padding: 24px 0;
+    gap: 24px;
+    justify-content: space-between;
+    transition: all 0.3s ease-in-out;
+  }
+  #sidebar .content nav {
+    display: flex;
+    flex-direction: column;
+    padding: 0 24px;
+    margin: 0;
+    gap: 16px;
+    width: 100%;
+  }
+  #sidebar .content nav a {
+    width: 100%;
+    padding: 8px 0;
+    border-bottom: 1px solid #CCCCCC;
+    text-decoration: none;
+    color: #ffffff;
+    white-space: nowrap;
+  }
+  #sidebar .content .logout {
+    padding: 0 24px;
+    cursor: pointer;
+    color: #CCCCCC;
+  }
+  #sidebar.hide {
+    width: 0;
+    min-width: 0;
+    max-width: 0;
+  }
+  #sidebar.hide .content {
+    overflow: hidden;
+    width: 0;
+    padding: 24px 0;
+  }
+}
+/*!***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[5].oneOf[13].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[5].oneOf[13].use[3]!./node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[5].oneOf[13].use[4]!./node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[5].oneOf[13].use[5]!./src/styles/admin/login.scss ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+#login {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #121e2d;
+}
+#login form {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding: 40px 24px;
+  background: #ffffff;
+  border-radius: 16px;
+}
+#login form .title {
+  font-size: 24px;
+  text-align: center;
+  font-weight: 500;
+  color: #121e2d;
+}
+#login form .inputs {
+  width: 300px;
+  max-width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+#login form .inputs .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+#login form .inputs .form-group label {
+  font-size: 16px;
+  line-height: 20px;
+}
+#login form .inputs .form-group input {
+  font-size: 16px;
+  line-height: 20px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background: #ffffff;
+  border: 1px solid #CCCCCC;
+}
+#login form .inputs .form-group input:focus {
+  outline: none;
+}
+#login form .inputs .error {
+  font-size: 14px;
+  line-height: 16px;
+  color: #FF0000;
+}
+#login form .submit {
+  width: 100%;
+  padding: 8px;
+  font-size: 16px;
+  line-height: 20px;
+  background: #121e2d;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
